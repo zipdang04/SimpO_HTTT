@@ -37,25 +37,7 @@ namespace Client.PlayerClient.GamesControl
 			Dispatcher.Invoke(() => { 
 				lblQuestion.Content = question.question;
 			});
-			UnlockButton();
 		}
 
-		public void LockButton()
-		{
-			Dispatcher.Invoke(() =>{
-				btnBell.IsEnabled = false;
-			});
-		}
-		public void UnlockButton()
-		{
-			Dispatcher.Invoke(() =>{
-				btnBell.IsEnabled = true;
-			});
-		}
-
-		private void btnBell_Click(object sender, RoutedEventArgs e)
-		{
-			client.SendMessage("OLPA KD BELL");
-		}
 	}
 }

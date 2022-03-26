@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="PlayerClient\vyfactraw - Copy.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="SimpleSockets" Version="1.2.20" />
   </ItemGroup>
 
@@ -16,9 +20,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="PlayerClient\vyfactraw - Copy.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Resources\OExam.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\ZipProcessing\" />
   </ItemGroup>
 
 </Project>

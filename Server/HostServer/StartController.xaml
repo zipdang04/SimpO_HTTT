@@ -14,14 +14,14 @@
         <Grid>
             <Button x:Name="btnStartTurn1" Content="Lượt 1" HorizontalAlignment="Left" Margin="18,10,0,0" VerticalAlignment="Top" Click="btnStartTurn1_Click"/>
             <Button x:Name="btnStartTurn2" Content="Lượt 2" HorizontalAlignment="Left" Margin="73,10,0,0" VerticalAlignment="Top" Click="btnStartTurn2_Click"/>
-            <Button x:Name="btnStartTurn3" Content="Lượt 3" HorizontalAlignment="Left" Margin="129,10,0,0" VerticalAlignment="Top" Click="btnStartTurn3_Click"/>
+            <Button x:Name="btnStartTurn3" Content="Lượt 3" HorizontalAlignment="Left" Margin="128,10,0,0" VerticalAlignment="Top" Click="btnStartTurn3_Click"/>
+            <Button x:Name="btnStartTurn4" Content="Lượt 4" HorizontalAlignment="Left" Margin="183,10,0,0" VerticalAlignment="Top" Click="btnStartTurn4_Click"/>
             <Label HorizontalAlignment="Left" Margin="18,44,0,0" VerticalAlignment="Top">Câu hỏi</Label>
             <Label HorizontalAlignment="Left" Margin="18,74,0,0" VerticalAlignment="Top">Trả lời</Label>
             <Label x:Name="lblStartQuestion" HorizontalAlignment="Left" Margin="90,44,0,0" VerticalAlignment="Top">0</Label>
             <Label x:Name="lblStartAnswer" HorizontalAlignment="Left" Margin="90,74,0,0" VerticalAlignment="Top">1</Label>
             <Button x:Name="btnCorrect" Content="Đúng" HorizontalAlignment="Left" Margin="16,120,0,0" VerticalAlignment="Top" Width="50" Background="Lime" Click="btnCorrect_Click"/>
             <Button x:Name="btnWrong" Content="Sai" HorizontalAlignment="Left" Margin="73,120,0,0" VerticalAlignment="Top" Width="50" Background="Red" Click="btnWrong_Click"/>
-            <Button x:Name="btn3s" Content="3s" HorizontalAlignment="Left" Margin="129,120,0,0" VerticalAlignment="Top" Width="50" Background="Yellow" Click="btn3s_Click"/>
             <Label x:Name="lblTime" Content="0" HorizontalAlignment="Left" Height="60" Margin="722,10,0,0" VerticalAlignment="Top" Width="68"/>
         </Grid>
         <Grid x:Name="gridPoint" Grid.Row="1"/>

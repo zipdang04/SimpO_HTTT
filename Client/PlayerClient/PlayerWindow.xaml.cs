@@ -108,9 +108,6 @@ namespace Client.PlayerClient
 					break;
 				case "KD":
 					switch (tokens[2]) {
-						case "DIS":
-							startPlayerControl.LockButton();
-							break;
 						case "QUES":
 							string question = tokens[3], attach = tokens[4];
 							startPlayerControl.ShowQuestion(new OQuestion(question, "", attach));

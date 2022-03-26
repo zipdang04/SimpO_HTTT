@@ -29,10 +29,6 @@ namespace Server.ExamMaker
 			InitializeComponent();
 			this.obsta = obsta;
 
-			QuestionControl secret = new QuestionControl(obsta.secretQuestion);
-			secret.lblQ.Content = "OBM";
-			stackPanel.Children.Add(secret);
-
 			for (int i = 0; i < ObstacleClass.QUES_NO; i++) {
 				QuestionControl tmp = new QuestionControl(obsta.questions[i]);
 				tmp.lblQ.Content = i + 1;

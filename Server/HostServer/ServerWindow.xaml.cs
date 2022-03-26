@@ -112,10 +112,6 @@ namespace Server.HostServer
 						listener.SendMessage(id, "OLPA FAILED");
 					break;
 				case "KD":
-					if (tokens[2] == "BELL") {
-						int player = playerNetwork.findPositionFromId(client);
-						startController.SomeoneBelling(player);
-					}
 					break;
 			}
 		}
