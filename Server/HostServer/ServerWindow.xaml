@@ -1,0 +1,37 @@
+﻿<Window x:Class="Server.HostServer.ServerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Server.HostServer"
+        mc:Ignorable="d"
+        Title="Server" MinHeight="700" MinWidth="1000" Unloaded="Window_Unloaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="1">
+            <TabItem x:Name="tabGeneral" Header="Thông tin thí sinh" GotFocus="tabGeneral_GotFocus">
+                <Grid x:Name="gridGeneral"/>
+            </TabItem>
+            <TabItem x:Name="tabStart" Header="Khởi động" GotFocus="tabStart_GotFocus">
+                <Grid x:Name="gridStart"/>
+            </TabItem>
+            <TabItem x:Name="tabObsta" GotFocus="tabObsta_GotFocus"  Header="VCNV">
+                <Grid x:Name="gridObsta"/>
+            </TabItem>
+            <TabItem x:Name="tabAccel" GotFocus="tabAccel_GotFocus" Header="Tăng tốc">
+                <Grid x:Name="gridAccel"/>
+            </TabItem>
+            <TabItem x:Name="tabFinish" GotFocus="tabFinish_GotFocus" Header="Về đích">
+                <Grid x:Name="gridFinish"/>
+            </TabItem>
+        </TabControl>
+        <Label x:Name="lblIP" Content="IP: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPort" Content="Cổng: " HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
+        
+        <TextBox x:Name="txtPort" HorizontalAlignment="Left" Margin="59,45,0,0" TextWrapping="Wrap" Text="6996" VerticalAlignment="Top" Width="120" InputScope="Number"/>
+        <Button x:Name="btnStart" Content="Khởi chạy server" HorizontalAlignment="Left" Height="80" Margin="827,0,0,0" VerticalAlignment="Center" Width="163" Click="btnStart_Click"/>
+    </Grid>
+</Window>
