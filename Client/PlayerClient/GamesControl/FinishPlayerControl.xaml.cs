@@ -20,13 +20,12 @@ using Server.Information;
 namespace Client.PlayerClient.GamesControl
 {
 	/// <summary>
-	/// Interaction logic for StartPlayerControl.xaml
+	/// Interaction logic for FinishPlayerControl.xaml
 	/// </summary>
-	public partial class StartPlayerControl : UserControl
+	public partial class FinishPlayerControl : UserControl
 	{
 		SimpleSocketClient client;
-
-		public StartPlayerControl(SimpleSocketClient client)
+		public FinishPlayerControl(SimpleSocketClient client)
 		{
 			InitializeComponent();
 			this.client = client;
@@ -34,7 +33,7 @@ namespace Client.PlayerClient.GamesControl
 
 		public void ShowQuestion(OQuestion question)
 		{
-			Dispatcher.Invoke(() => { 
+			Dispatcher.Invoke(() => {
 				lblQuestion.Content = question.question;
 				try {
 					image.Source = new BitmapImage(new Uri(question.attach));
@@ -43,7 +42,26 @@ namespace Client.PlayerClient.GamesControl
 					image = new Image();
 				}
 			});
+			LockButton();
 		}
 
+		public void LockButton()
+		{
+			Dispatcher.Invoke(() => {
+				btnBell.IsEnabled = false;
+			});
+		}
+		public void UnlockButton()
+		{
+			Dispatcher.Invoke(() => {
+				btnBell.IsEnabled = true;
+			});
+		}
+
+		private void btnBell_Click(object sender, RoutedEventArgs e)
+		{
+			client.SendMessage("OLPA VD BELL");
+			btnBell.IsEnabled = false;
+		}
 	}
 }

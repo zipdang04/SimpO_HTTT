@@ -28,15 +28,33 @@ namespace Client.PlayerClient.GamesControl
 		SimpleSocketClient client;
 		DispatcherTimer timer;
 
+		ImageControl imageControl;
+		string imagePath;
+
 		int time;
 
-		public ObstaPlayerControl(SimpleSocketClient client)
+		public ObstaPlayerControl(SimpleSocketClient client, string imagePath = null)
 		{
 			InitializeComponent();
 			this.client = client;
 			timer = new DispatcherTimer();
 			timer.Interval = TimeSpan.FromSeconds(1);
 			timer.Tick += timer_Tick;
+
+			imageControl = new ImageControl();
+			this.imagePath = imagePath;
+			quesGrid.Children.Add(imageControl);
+			Grid.SetColumn(imageControl, 1);
+
+			setImage();
+		}
+
+		void setImage()
+		{
+			imageControl.setImage(imagePath);
+		}
+		void erase(int idx) {
+			imageControl.erase(idx);
 		}
 
 		void timer_Tick(object? sender, EventArgs e)
@@ -74,6 +92,7 @@ namespace Client.PlayerClient.GamesControl
 			txtAnswer.IsEnabled = false;
 			timer.Stop();
 			lblAnswer.Content = "";
+			setImage();
 		}
 
 		private void btnBell_Click(object sender, RoutedEventArgs e)

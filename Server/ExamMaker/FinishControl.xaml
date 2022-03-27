@@ -8,17 +8,17 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <TabControl x:Name="tabControl">
-            <TabItem Header="20 điểm">
+            <TabItem Header="10 điểm">
                 <ScrollViewer>
                     <StackPanel x:Name="st1"/>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="30 điểm">
+            <TabItem Header="20 điểm">
                 <ScrollViewer>
                     <StackPanel x:Name="st2"/>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="40 điểm">
+            <TabItem Header="30 điểm">
                 <ScrollViewer>
                     <StackPanel x:Name="st3"/>
                 </ScrollViewer>

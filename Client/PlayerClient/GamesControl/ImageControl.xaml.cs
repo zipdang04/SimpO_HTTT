@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Client.PlayerClient
+namespace Client.PlayerClient.GamesControl
 {
 	/// <summary>
 	/// Interaction logic for ImageControl.xaml
@@ -23,6 +23,7 @@ namespace Client.PlayerClient
 		string path;
 		double width, height;
 		List<Rectangle> rects;
+
 		public ImageControl(string path = "")
 		{
 			InitializeComponent();
@@ -48,6 +49,7 @@ namespace Client.PlayerClient
 				for (int i = 0; i < 5; i++) {
 					rects[i].Width = width;
 					rects[i].Height = height;
+					rects[i].Visibility = Visibility.Visible;
 				}
 				for (int i = 0; i < 4; i++) {
 					double addW = width, addH = height;
@@ -59,6 +61,11 @@ namespace Client.PlayerClient
 			catch {
 				this.path = "";
 			};
+		}
+
+		public void erase(int index)
+		{
+			rects[index].Visibility = Visibility.Hidden;
 		}
 	}
 }

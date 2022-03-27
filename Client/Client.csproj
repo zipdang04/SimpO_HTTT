@@ -8,19 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="PlayerClient\vyfactraw - Copy.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="SimpleSockets" Version="1.2.20" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Server\Server.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="PlayerClient\vyfactraw - Copy.png" />
   </ItemGroup>
 
   <ItemGroup>

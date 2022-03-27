@@ -38,7 +38,7 @@ namespace Server.ExamMaker
 				for (int player = 0; player < 4; player++)
 					for (int turn = 0; turn < 3; turn++) {
 						QuestionControl ques = new QuestionControl(finish.questions[player][pts_type][turn]);
-						string label = player.ToString() + "-" + turn.ToString();
+						string label = "TS" + (player + 1).ToString() + "-" + (turn + 1).ToString();
 						ques.lblQ.Content = label;
 						stackQues[pts_type].Children.Add(ques);
 					}

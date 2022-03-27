@@ -36,6 +36,7 @@ namespace Client.PlayerClient
 		public StartPlayerControl startPlayerControl;
 		public PointsControl pointsControl;
 		public ObstaPlayerControl obstaPlayerControl;
+		public FinishPlayerControl finishPlayerControl;
 		WholeExamClass? wholeExam;
 		public PlayerWindow(SimpleSocketClient client)
 		{
@@ -50,6 +51,7 @@ namespace Client.PlayerClient
 					wholeExam = new WholeExamClass();
 			}
 			catch {
+				wholeExam = new WholeExamClass();
 				MessageBox.Show("co van de, khong choi duoc");
 				Close();
 			}
@@ -60,7 +62,8 @@ namespace Client.PlayerClient
 
 			pointsControl = new PointsControl(playersInfo);
 			startPlayerControl = new StartPlayerControl(client);
-			obstaPlayerControl = new ObstaPlayerControl(client);
+			obstaPlayerControl = new ObstaPlayerControl(client, wholeExam.obstacle.attach);
+			finishPlayerControl = new FinishPlayerControl(client);
 			grid.Children.Add(pointsControl);
 			grid.Children.Add(startPlayerControl);
 			pointsControl.Visibility = Visibility.Visible;
@@ -126,6 +129,18 @@ namespace Client.PlayerClient
 							break;
 						case "TIME":
 							obstaPlayerControl.StartTimer();
+							break;
+					}
+					break;
+
+				case "VD":
+					switch (tokens[2]) {
+						case "QUES":
+							string question = tokens[3], attach = tokens[4];
+							finishPlayerControl.ShowQuestion(new OQuestion(question, "", attach));
+							break;
+						case "LOCK":
+							//
 							break;
 					}
 					break;

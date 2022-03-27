@@ -99,10 +99,10 @@ namespace Server.HostServer
 			timerMain.Start(); showQuestion();
 			btnCorrect.IsEnabled = true;
 			btnWrong.IsEnabled = true;
-			btnStartTurn1.IsEnabled = true;
-			btnStartTurn2.IsEnabled = true;
-			btnStartTurn3.IsEnabled = true;
-			btnStartTurn4.IsEnabled = true;
+			btnStartTurn1.IsEnabled = false;
+			btnStartTurn2.IsEnabled = false;
+			btnStartTurn3.IsEnabled = false;
+			btnStartTurn4.IsEnabled = false;
 		}
 
 		private void btnStartTurn1_Click(object sender, RoutedEventArgs e)
@@ -150,13 +150,12 @@ namespace Server.HostServer
 
 				btnCorrect.IsEnabled = false;
 				btnWrong.IsEnabled = false;
-				btnStartTurn1.IsEnabled = false;
-				btnStartTurn2.IsEnabled = false;
-				btnStartTurn3.IsEnabled = false;
-				btnStartTurn4.IsEnabled = false;
+				btnStartTurn1.IsEnabled = true;
+				btnStartTurn2.IsEnabled = true;
+				btnStartTurn3.IsEnabled = true;
+				btnStartTurn4.IsEnabled = true;
 			}
 		}
-
 		
 	}
 }
