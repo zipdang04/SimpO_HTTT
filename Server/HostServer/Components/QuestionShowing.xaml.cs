@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Server.HostServer.Components
 {
 	/// <summary>
-	/// Interaction logic for FinishControl.xaml
+	/// Interaction logic for QuestionShowing.xaml
 	/// </summary>
-	public partial class FinishControl : UserControl
+	public partial class QuestionShowing : UserControl
 	{
-		public FinishControl()
+		public QuestionShowing()
 		{
 			InitializeComponent();
 		}

@@ -11,9 +11,10 @@ namespace Server.QuestionClass
 		public const int PLAYERS = 4;
 		public const int QUES_TYPE = 3;
 		public const int QUES_CNT= 3;
-		public static readonly int[] QUES_POINT = new int[QUES_TYPE]{10, 20, 30};
-		public static readonly int[] QUES_TIME  = new int[QUES_TYPE]{10, 15, 20};
-		public static readonly int[] PRAC_TIME  = new int[QUES_TYPE]{20, 30, 40};
+		public static readonly int[] QUES_POINT		  = new int[QUES_TYPE]{10, 20, 30};
+		public static readonly int[] QUES_TIME		  = new int[QUES_TYPE]{10, 15, 20};
+		public static readonly int[] PRAC_TIME		  = new int[QUES_TYPE]{30, 45, 60};
+		public static readonly int[] REMAIN_PRAC_TIME = new int[QUES_TYPE]{20, 30, 40};
 
 		public OQuestion[][][] ques = new OQuestion[4][][];
 		public FinishClass()
