@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Server.HostServer.Components"
              mc:Ignorable="d" 
-             Height="200" d:DesignWidth="800">
+             Height="150" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
@@ -18,10 +18,10 @@
         <Label Grid.Row="0" Grid.Column="0">Câu hỏi</Label>
         <Label Grid.Row="1" Grid.Column="0">Trả lời</Label>
         <Label Grid.Row="0" Grid.Column="1">
-            <TextBlock  x:Name="txtQuestion"  TextWrapping="Wrap" />
+            <TextBlock x:Name="txtQuestion"  TextWrapping="Wrap" />
         </Label>
         <Label Grid.Row="1" Grid.Column="1">
-            <TextBlock  x:Name="txtAnswer"  TextWrapping="Wrap" />
+            <TextBlock x:Name="txtAnswer"  TextWrapping="Wrap" />
         </Label>
     </Grid>
 </UserControl>

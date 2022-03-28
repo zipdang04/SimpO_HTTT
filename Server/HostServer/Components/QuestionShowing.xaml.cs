@@ -23,6 +23,14 @@ namespace Server.HostServer.Components
 		public QuestionShowing()
 		{
 			InitializeComponent();
+			txtQuestion.Text = "";
+			txtAnswer.Text = "";
+		}
+
+		public void displayQA(string question, string answer)
+		{
+			txtQuestion.Text = question;
+			txtAnswer.Text= answer;
 		}
 	}
 }
