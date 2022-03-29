@@ -30,7 +30,7 @@ namespace Server.HostServer.Components
 		public void displayQA(string question, string answer)
 		{
 			txtQuestion.Text = question;
-			txtAnswer.Text= answer;
+			txtAnswer.Text = answer;
 		}
 	}
 }

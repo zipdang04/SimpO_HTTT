@@ -38,16 +38,21 @@ namespace Server.HostServer
 		PlayerNetwork playerNetwork;
 		FinishClass finishClass;
 
-		int playerTurn = NaN;
+		int playerTurn = NaN, playerSuck = NaN;
 		int[] quesDifficulty = new int[3];
 
-		int questionPtr = 0;
+		int questionPtr = 0, currentPtr = NaN, difficulty;
+		bool practiceMode = false;
+		bool isSucking = false; // hút
+		bool usingStar = false;
 
 		RadioButton[][] chosen = new RadioButton[3][];
 
 		public FinishController(SimpleSocketTcpListener listener, FinishClass finishClass, PlayerClass playerClass, PlayerNetwork playerNetwork)
 		{
 			InitializeComponent();
+			timerMain = new DispatcherTimer();
+			timerMain.Tick += TimerMain_Tick;
 			for (int i = 0; i < 3; i++) {
 				chosen[i] = new RadioButton[3];
 				for (int j = 0; j < 3; j++) {
@@ -69,7 +74,21 @@ namespace Server.HostServer
 			Grid.SetRow(pointsControl, 1);
 
 			grdChoosePoint.Visibility = Visibility.Collapsed;
-			mainGrid.IsEnabled = false;
+			mainGrid.IsEnabled = true;
+		}
+
+		public void sendMessageToEveryone(string message)
+		{
+			foreach (KeyValuePair<int, IClientInfo> client in listener.GetConnectedClients())
+				listener.SendMessage(client.Value.Id, message);
+		}
+
+		private void TimerMain_Tick(object? sender, EventArgs e)
+		{
+			timeRemaining--;
+			if (timeRemaining == 0){
+				timerMain.Stop();
+			}
 		}
 
 		void MakeDecision(int playerTurn) {
@@ -95,9 +114,80 @@ namespace Server.HostServer
 
 		private void btnConfirmPts_Click(object sender, RoutedEventArgs e)
 		{
-			grdChoosePoint.Visibility = Visibility.Collapsed; mainGrid.IsEnabled = false;
+			grdChoosePoint.Visibility = Visibility.Collapsed; mainGrid.IsEnabled = true;
 			for (int i = 0; i < 3; i++) for (int j = 0; j < 3; j++)
 				if (chosen[i][j].IsEnabled) quesDifficulty[i] = j;
+			usingStar = false;
+		}
+
+		private void btnTurn_Click(object sender, RoutedEventArgs e)
+		{
+			currentPtr = questionPtr; questionPtr++;
+			if (questionPtr == 3) btnTurn.IsEnabled = false;
+			difficulty = quesDifficulty[currentPtr];
+			
+			OQuestion question = finishClass.questions[playerTurn][currentPtr][difficulty];
+			questionBox.displayQA(question.question, question.answer);
+			
+			btnStart.IsEnabled = true; btnStar.IsEnabled = true;
+			btnPrac.IsEnabled = false; btnCorrect.IsEnabled = false; btnWrong.IsEnabled = false;
+			
+			practiceMode = false; isSucking = false;
+			playerSuck = NaN;
+			usingStar = false;
+		}
+
+		private void btnStart_Click(object sender, RoutedEventArgs e)
+		{
+			timeRemaining = FinishClass.QUES_TIME[difficulty];
+			btnStart.IsEnabled = false; btnPrac.IsEnabled = true;
+			btnCorrect.IsEnabled = true; btnWrong.IsEnabled = true;
+			timerMain.Start();
+		}
+
+		private void btnStar_Click(object sender, RoutedEventArgs e)
+		{
+			usingStar = true;
+			btnStar.IsEnabled = false;
+		}
+
+		private void btnPrac_Click(object sender, RoutedEventArgs e)
+		{
+			timeRemaining = FinishClass.PRAC_TIME[difficulty];
+			practiceMode = true;
+			btnPrac.IsEnabled = false;
+			timerMain.Start();
+		}
+
+		private void btnCorrect_Click(object sender, RoutedEventArgs e)
+		{
+			switch(isSucking) {
+				case false:
+					int add = FinishClass.QUES_POINT[difficulty];
+					if (usingStar) add *= 2;
+					playerClass.points[playerTurn] += add;
+					break;
+				case true:
+					if (playerSuck != NaN){
+						int pts = FinishClass.QUES_POINT[difficulty];
+						playerClass.points[playerTurn] -= pts;
+						playerClass.points[playerSuck] += pts;
+					}
+					break;
+			};
+			btnCorrect.IsEnabled = false;
+			btnWrong.IsEnabled = false;
+		}
+
+		private void btnWrong_Click(object sender, RoutedEventArgs e)
+		{
+			if (isSucking == false) {
+				if (usingStar)
+				if (practiceMode == false){
+					practiceMode = true;
+					//timeRemaining = 
+				}
+			}
 		}
 	}
 }

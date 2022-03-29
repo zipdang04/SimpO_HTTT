@@ -42,13 +42,14 @@
                 <Button x:Name="btnConfirmPts" Grid.Row="4" Grid.Column="3" Content="Xác nhận" Click="btnConfirmPts_Click"/>
             </Grid>
             <Grid x:Name="mainGrid" Height="370">
-                <Button x:Name="btnTurn" Content="Hiện câu hỏi" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="btnTurn" Content="Hiện câu hỏi" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="btnTurn_Click"/>
                 <Button x:Name="btnFinish" Content="Kết thúc lượt" HorizontalAlignment="Left" Margin="93,10,0,0" VerticalAlignment="Top" Click="btnFinish_Click"/>
                 <compo:QuestionShowing x:Name="questionBox" VerticalAlignment="Top" Margin="0, 40, 0, 0" />
-                <Button x:Name="btnStart" Content="Bắt đầu suy nghĩ" HorizontalAlignment="Left" Margin="10,270,0,0" VerticalAlignment="Top"/>
-                <Button x:Name="btnPrac" Content="Bắt đầu thực hành" HorizontalAlignment="Left" Margin="123,270,0,0" VerticalAlignment="Top"/>
-                <Button x:Name="btnCorrect" Content="Đúng" HorizontalAlignment="Left" Margin="10,319,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Lime"/>
-                <Button x:Name="btnWrong" Content="Sai" HorizontalAlignment="Left" Margin="82,319,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Red"/>
+                <Button x:Name="btnStar" Content="Sao" HorizontalAlignment="Left" Margin="10,221,0,0" VerticalAlignment="Top" Background="Yellow" Height="44" Width="45" Click="btnStar_Click"/>
+                <Button x:Name="btnStart" Content="Bắt đầu suy nghĩ" HorizontalAlignment="Left" Margin="10,281,0,0" VerticalAlignment="Top" Click="btnStart_Click"/>
+                <Button x:Name="btnPrac" Content="Bắt đầu thực hành" HorizontalAlignment="Left" Margin="110,281,0,0" VerticalAlignment="Top" Click="btnPrac_Click"/>
+                <Button x:Name="btnCorrect" Content="Đúng" HorizontalAlignment="Left" Margin="10,319,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Lime" Click="btnCorrect_Click"/>
+                <Button x:Name="btnWrong" Content="Sai" HorizontalAlignment="Left" Margin="82,319,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Red" Click="btnWrong_Click"/>
             </Grid>
         </StackPanel>
 
