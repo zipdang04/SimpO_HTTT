@@ -128,8 +128,10 @@ namespace Server.HostServer
 		private void btnCorrect_Click(object sender, RoutedEventArgs e)
 		{
 			if (playerTurn == NaN) return;
-			playerClass.points[playerTurn] += 10;
-			sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
+			if (questionPtr < StartClass.QUES_CNT) {
+				playerClass.points[playerTurn] += 10;
+				sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
+			}
 
 			showQuestion();
 		}

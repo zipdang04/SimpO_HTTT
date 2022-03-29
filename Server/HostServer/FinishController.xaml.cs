@@ -25,6 +25,14 @@ namespace Server.HostServer
 	/// <summary>
 	/// Interaction logic for FinishController.xaml
 	/// </summary>
+	/// 
+	public enum StarState
+	{
+		NOPE,
+		USING,
+		USED
+	}
+
 	public partial class FinishController : UserControl
 	{
 		public const int NaN = -1;
@@ -44,7 +52,7 @@ namespace Server.HostServer
 		int questionPtr = 0, currentPtr = NaN, difficulty;
 		bool practiceMode = false;
 		bool isSucking = false; // hút
-		bool usingStar = false;
+		StarState starState = StarState.NOPE;
 
 		RadioButton[][] chosen = new RadioButton[3][];
 
@@ -117,19 +125,19 @@ namespace Server.HostServer
 			grdChoosePoint.Visibility = Visibility.Collapsed; mainGrid.IsEnabled = true;
 			for (int i = 0; i < 3; i++) for (int j = 0; j < 3; j++)
 				if (chosen[i][j].IsEnabled) quesDifficulty[i] = j;
-			usingStar = false;
+			starState = StarState.NOPE; btnStar.IsEnabled = true;
 		}
 
-		private void btnTurn_Click(object sender, RoutedEventArgs e)
+		private void btnShowQuestion_Click(object sender, RoutedEventArgs e)
 		{
 			currentPtr = questionPtr; questionPtr++;
-			if (questionPtr == 3) btnTurn.IsEnabled = false;
+			if (questionPtr == 3) btnShowQuestion.IsEnabled = false;
 			difficulty = quesDifficulty[currentPtr];
 			
 			OQuestion question = finishClass.questions[playerTurn][currentPtr][difficulty];
 			questionBox.displayQA(question.question, question.answer);
 			
-			btnStart.IsEnabled = true; btnStar.IsEnabled = true;
+			btnStart.IsEnabled = true; 
 			btnPrac.IsEnabled = false; btnCorrect.IsEnabled = false; btnWrong.IsEnabled = false;
 			
 			practiceMode = false; isSucking = false;

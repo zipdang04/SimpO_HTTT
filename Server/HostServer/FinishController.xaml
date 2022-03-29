@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Server.HostServer"
              xmlns:compo="clr-namespace:Server.HostServer.Components"
              mc:Ignorable="d"   
-             d:DesignHeight="650" MinHeight="650" d:DesignWidth="800" MinWidth="600">
+             d:DesignHeight="650" MinHeight="650" d:DesignWidth="600" MinWidth="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -42,14 +42,23 @@
                 <Button x:Name="btnConfirmPts" Grid.Row="4" Grid.Column="3" Content="Xác nhận" Click="btnConfirmPts_Click"/>
             </Grid>
             <Grid x:Name="mainGrid" Height="370">
-                <Button x:Name="btnTurn" Content="Hiện câu hỏi" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="btnTurn_Click"/>
+                <Button x:Name="btnShowQuestion" Content="Hiện câu hỏi" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="btnShowQuestion_Click"/>
                 <Button x:Name="btnFinish" Content="Kết thúc lượt" HorizontalAlignment="Left" Margin="93,10,0,0" VerticalAlignment="Top" Click="btnFinish_Click"/>
+
                 <compo:QuestionShowing x:Name="questionBox" VerticalAlignment="Top" Margin="0, 40, 0, 0" />
-                <Button x:Name="btnStar" Content="Sao" HorizontalAlignment="Left" Margin="10,221,0,0" VerticalAlignment="Top" Background="Yellow" Height="44" Width="45" Click="btnStar_Click"/>
-                <Button x:Name="btnStart" Content="Bắt đầu suy nghĩ" HorizontalAlignment="Left" Margin="10,281,0,0" VerticalAlignment="Top" Click="btnStart_Click"/>
-                <Button x:Name="btnPrac" Content="Bắt đầu thực hành" HorizontalAlignment="Left" Margin="110,281,0,0" VerticalAlignment="Top" Click="btnPrac_Click"/>
+
+                <Button x:Name="btnStar" Content="Sao" HorizontalAlignment="Left" Margin="545,206,0,0" VerticalAlignment="Top" Background="Yellow" Height="44" Width="45" Click="btnStar_Click"/>
+                <Label HorizontalAlignment="Left" Margin="69,215,0,0" VerticalAlignment="Top">lưu ý: việc chọn sao chỉ có tác dụng sau khi bấm Hiện câu hỏi</Label>
+
+                <Button x:Name="btnStart" Content="Bắt đầu suy nghĩ" HorizontalAlignment="Left" Margin="9,283,0,0" VerticalAlignment="Top" Click="btnStart_Click"/>
+                <Button x:Name="btnPrac" Content="Bắt đầu thực hành" HorizontalAlignment="Left" Margin="109,283,0,0" VerticalAlignment="Top" Click="btnPrac_Click"/>
                 <Button x:Name="btnCorrect" Content="Đúng" HorizontalAlignment="Left" Margin="10,319,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Lime" Click="btnCorrect_Click"/>
-                <Button x:Name="btnWrong" Content="Sai" HorizontalAlignment="Left" Margin="82,319,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Red" Click="btnWrong_Click"/>
+                <Button x:Name="btnWrong" Content="Sai" HorizontalAlignment="Left" Margin="80,319,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Red" Click="btnWrong_Click"/>
+
+                <Button x:Name="btn5s" Content="5s hút" HorizontalAlignment="Center" Margin="0,283,0,0" VerticalAlignment="Top" Click="btnPrac_Click" Width="54"/>
+                <Button x:Name="btnSuckPrac" Content="Bắt đầu lại thực hành" HorizontalAlignment="Left" Margin="349,283,0,0" VerticalAlignment="Top" Click="btnPrac_Click"/>
+                <Button x:Name="btnSuckCorrect" Content="Hút đúng" HorizontalAlignment="Center" Margin="0,319,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Lime" Click="btnCorrect_Click"/>
+                <Button x:Name="btnSuckWrong" Content="Hút sai" HorizontalAlignment="Left" Margin="349,319,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Red" Click="btnWrong_Click"/>
             </Grid>
         </StackPanel>
 
