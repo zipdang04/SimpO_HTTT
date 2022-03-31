@@ -38,6 +38,7 @@ namespace Server.HostServer
 
 		GeneralControl generalControl;
 		StartController startController;
+		FinishController finishController;
 		
 		public void updatePoint()
 		{
@@ -70,6 +71,8 @@ namespace Server.HostServer
 			gridGeneral.Children.Add(generalControl);
 			startController = new StartController(listener, wholeExam.startQuestions, playerInfo, playerNetwork);
 			gridStart.Children.Add(startController);
+			finishController = new FinishController(listener, wholeExam.finish, playerInfo, playerNetwork);
+			gridFinish.Children.Add(finishController);
 		}
 
 		public void sendMessageToEveryone(string message)
@@ -112,6 +115,13 @@ namespace Server.HostServer
 						listener.SendMessage(id, "OLPA FAILED");
 					break;
 				case "KD":
+					break;
+				case "VD":
+					if (tokens[2] == "BELL") {
+						for (int i = 0; i < 4; i++)
+							if (playerNetwork.clients[i] != null && playerNetwork.clients[i].Id == id)
+								finishController.SomeoneSucking(i);
+					}
 					break;
 			}
 		}

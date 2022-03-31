@@ -71,7 +71,7 @@ namespace Client.PlayerClient
 				client.MessageReceived -= ServerMessageReceived;
 
 				Dispatcher.Invoke(() => {
-					PlayerWindow playerWindow = new PlayerWindow(client);
+					PlayerWindow playerWindow = new PlayerWindow(this, client);
 					playerWindow.Show(); Hide();
 				});
 			} else

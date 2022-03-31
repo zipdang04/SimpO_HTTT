@@ -30,7 +30,7 @@ namespace Client.PlayerClient
 		public static readonly string filePath = "Resources/OExam.json";
 
 		SimpleSocketClient client;
-		//LogInWindow logInWindow;
+		LogInWindow logInWindow;
 		PlayerClass playersInfo;
 
 		public StartPlayerControl startPlayerControl;
@@ -38,11 +38,11 @@ namespace Client.PlayerClient
 		public ObstaPlayerControl obstaPlayerControl;
 		public FinishPlayerControl finishPlayerControl;
 		WholeExamClass? wholeExam;
-		public PlayerWindow(SimpleSocketClient client)
+		public PlayerWindow(LogInWindow logInWindow, SimpleSocketClient client)
 		{
 			InitializeComponent();
-			//logInWindow = 
-			
+			this.logInWindow = logInWindow;
+
 			try {
 				byte[] jsonString = File.ReadAllBytes(filePath);
 				var utf8Reader = new Utf8JsonReader(jsonString);
@@ -66,9 +66,11 @@ namespace Client.PlayerClient
 			finishPlayerControl = new FinishPlayerControl(client);
 			grid.Children.Add(pointsControl);
 			grid.Children.Add(startPlayerControl);
+			grid.Children.Add(finishPlayerControl);
 			pointsControl.Visibility = Visibility.Visible;
 			startPlayerControl.Visibility = Visibility.Collapsed;
 			obstaPlayerControl.Visibility = Visibility.Collapsed;
+			finishPlayerControl.Visibility = Visibility.Collapsed;
 		}
 
 		private void ServerMessageReceived(SimpleSocket a, string msg)
@@ -83,6 +85,7 @@ namespace Client.PlayerClient
 						pointsControl.Visibility = Visibility.Hidden;
 						startPlayerControl.Visibility = Visibility.Collapsed;
 						obstaPlayerControl.Visibility = Visibility.Collapsed;
+						finishPlayerControl.Visibility = Visibility.Collapsed;
 						switch (tokens[2]) {
 							case "POINT":
 								pointsControl.Visibility = Visibility.Visible;
@@ -96,6 +99,7 @@ namespace Client.PlayerClient
 							case "TT":
 								break;
 							case "VD":
+								finishPlayerControl.Visibility = Visibility.Visible;
 								break;
 						}
 					});
@@ -140,11 +144,20 @@ namespace Client.PlayerClient
 							finishPlayerControl.ShowQuestion(new OQuestion(question, "", attach));
 							break;
 						case "LOCK":
-							//
+							finishPlayerControl.LockButton();
+							break;
+						case "UNLOCK":
+							finishPlayerControl.UnlockButton();
 							break;
 					}
 					break;
 			}
+		}
+
+		private void Window_Closed(object sender, EventArgs e)
+		{
+			client.Close();
+			logInWindow.Show();
 		}
 	}
 }
