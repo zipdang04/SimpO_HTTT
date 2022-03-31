@@ -156,7 +156,8 @@ namespace Client.PlayerClient
 
 		private void Window_Closed(object sender, EventArgs e)
 		{
-			client.Close();
+			try { client.Close(); }
+			catch { }
 			logInWindow.Show();
 		}
 	}

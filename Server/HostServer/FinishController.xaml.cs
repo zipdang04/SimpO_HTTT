@@ -85,7 +85,7 @@ namespace Server.HostServer
 			pointsControl.Visibility = Visibility.Visible;
 
 			grdChoosePoint.Visibility = Visibility.Collapsed;
-			mainGrid.IsEnabled = true;
+			mainGrid.IsEnabled = false;
 		}
 
 		public void sendMessageToEveryone(string message)
@@ -113,8 +113,14 @@ namespace Server.HostServer
 			{
 				timer5s.Stop();
 				sendMessageToEveryone("OLPA VD LOCK");
-				if (playerSuck == NaN)
+				if (playerSuck == NaN) {
 					if (starState == StarState.NOPE) btnStar.IsEnabled = true;
+					if (starState == StarState.USING) starState = StarState.USED;
+				} else {
+					btnSuckPrac.IsEnabled = true;
+					btnSuckCorrect.IsEnabled = true;
+					btnSuckWrong.IsEnabled = true;
+				}
 				
 			}
 		}
@@ -154,9 +160,18 @@ namespace Server.HostServer
 
 		private void btnFinish_Click(object sender, RoutedEventArgs e)
 		{
-			playerTurn = NaN;
+			playerTurn = NaN; playerSuck = NaN;
 			btnS1.IsEnabled = true; btnS2.IsEnabled = true; btnS3.IsEnabled = true; btnS4.IsEnabled = true;
 			mainGrid.IsEnabled = false;
+
+			btnShowQuestion.IsEnabled = true; 
+			starState = StarState.NOPE; btnStar.IsEnabled = true;
+			btnStart.IsEnabled = btnPrac.IsEnabled = btnCorrect.IsEnabled = btnWrong.IsEnabled = true;
+			btn5s.IsEnabled = btnSuckPrac.IsEnabled = btnSuckCorrect.IsEnabled = btnSuckWrong.IsEnabled = true;
+
+			questionPtr = 0; currentPtr = NaN; 
+			practiceMode = false; isSucking = false; 
+			
 			// TODO: do somethiing else to refresh database
 			for (int i = 0; i < 4; i++) pointsControl.BackToNormal(i);
 		}
@@ -166,7 +181,6 @@ namespace Server.HostServer
 			grdChoosePoint.Visibility = Visibility.Collapsed; mainGrid.IsEnabled = true;
 			for (int i = 0; i < 3; i++) for (int j = 0; j < 3; j++)
 				if (chosen[i][j].IsChecked == true) quesDifficulty[i] = j;
-			starState = StarState.NOPE; btnStar.IsEnabled = true;
 			sendMessageToEveryone(string.Format("OLPA VD CHOSEN {0} {1} {2}", quesDifficulty[0], quesDifficulty[1], quesDifficulty[2]));
 		}
 
@@ -260,7 +274,7 @@ namespace Server.HostServer
 			if (timer5s.IsEnabled == true && playerSuck == NaN)
 			{
 				playerSuck = index;
-				pointsControl.ChoosePlayer(playerSuck);
+				pointsControl.DisablePlayer(playerSuck);
 			}
 		}
 
@@ -269,6 +283,8 @@ namespace Server.HostServer
 			timeRemaining = FinishClass.REMAIN_PRAC_TIME[difficulty];
 			sendMessageToEveryone("OLPA VD PRAC SUCK");
 			timerPrac.Start();
+			btnSuckCorrect.IsEnabled = false;
+			btnSuckWrong.IsEnabled = false;
 		}
 
 		private void btnSuckCorrect_Click(object sender, RoutedEventArgs e)
@@ -279,6 +295,7 @@ namespace Server.HostServer
 			if (starState == StarState.NOPE) btnStar.IsEnabled = true;
 			sendMessageToEveryone("OLPA VD CORRECT");
 			sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
+			if (starState == StarState.USING) starState = StarState.USED;
 		}
 
 		private void btnSuckWrong_Click(object sender, RoutedEventArgs e)
@@ -289,6 +306,7 @@ namespace Server.HostServer
 			if (starState == StarState.NOPE) btnStar.IsEnabled = true;
 			sendMessageToEveryone("OLPA VD WRONG");
 			sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
+			if (starState == StarState.USING) starState = StarState.USED;
 		}
 	}
 }
