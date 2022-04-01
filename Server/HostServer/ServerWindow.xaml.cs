@@ -91,7 +91,7 @@ namespace Server.HostServer
 
 		private void Window_Unloaded(object sender, RoutedEventArgs e)
 		{
-			listener.Dispose();
+			try {listener.Dispose();} catch { }
 			Close();
 			main.Show();
 		}

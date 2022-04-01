@@ -33,8 +33,9 @@ namespace Server.ExamMaker
 			stackQues.Add(st1);
 			stackQues.Add(st2);
 			stackQues.Add(st3);
+			stackQues.Add(st4);
 
-			for (int i = 0; i < 3; i++)
+			for (int i = 0; i < StartClass.PLAYERS; i++)
 				for (int j = 0; j < StartClass.QUES_CNT; j++)
 				{
 					QuestionControl tmp = new QuestionControl(start.questions[i][j]);
