@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Text.Json;
 using Server.QuestionClass;
 using System.IO;
+using Microsoft.Win32;
 
 namespace Server.ExamMaker
 {
@@ -66,6 +67,17 @@ namespace Server.ExamMaker
 		private void btnSave_Click(object sender, RoutedEventArgs e)
 		{
 			SaveFile();
+		}
+
+		private void btnOpen_Click(object sender, RoutedEventArgs e)
+		{
+			OpenFileDialog openFileDialog = new OpenFileDialog();
+			if (openFileDialog.ShowDialog() == true)
+				wholeExam = Information.HelperClass.ExcelToWholeExam(openFileDialog.FileName);
+			tabStart.Content = new StartControl(wholeExam.startQuestions);
+			tabObsta.Content = new ObstaControl(wholeExam.obstacle);
+			tabAccel.Content = new AccelControl(wholeExam.acceleration);
+			tabFinsh.Content = new FinishControl(wholeExam.finish);
 		}
 	}
 }

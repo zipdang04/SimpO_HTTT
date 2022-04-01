@@ -128,13 +128,24 @@ namespace Server.Information
 			int vcnvRow = 63, vcnvCol = 2;
 			for (int ques = 0; ques < ObstacleClass.QUES_NO; ques++) {
 				OQuestion question = new OQuestion();
-				question.question = xlWorksheet.Cells[vcnvRow + ques, vcnvCol];
-				question.answer = xlWorksheet.Cells[vcnvRow + ques, vcnvCol + 1];
-				question.attach = xlWorksheet.Cells[vcnvRow + ques, vcnvCol + 2];
+				question.question = xlWorksheet.Cells[vcnvRow + ques, vcnvCol].Value;
+				question.answer = xlWorksheet.Cells[vcnvRow + ques, vcnvCol + 1].Value;
+				question.attach = xlWorksheet.Cells[vcnvRow + ques, vcnvCol + 2].Value;
 				whole.obstacle.questions[ques] = question;
 			}
 
 			// TT!
+			int accelRow = 61, accelCol = 7;
+			for (int i = 0; i < 4; i++)
+			{
+				OQuestion question = new OQuestion();
+				question.question = xlWorksheet.Cells[accelRow][accelCol].Value;
+				question.answer = xlWorksheet.Cells[accelRow][accelCol + 1].Value;
+				question.attach = xlWorksheet.Cells[accelRow][accelCol + 2].Value;
+				whole.acceleration.accelQuestions[i].question = question;
+				whole.acceleration.accelQuestions[i].isVideo = true;
+				whole.acceleration.accelQuestions[i].cntImage = 0;
+			}
 
 			// Về đích!
 			int[] finishRow = new int[4] { 77, 77, 90, 90 };
@@ -151,6 +162,7 @@ namespace Server.Information
 						ptr++;
 					}
 			}
+			xlWorkbook.Close();
 
 			return whole;
 		}
