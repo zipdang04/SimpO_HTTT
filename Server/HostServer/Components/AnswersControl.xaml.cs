@@ -26,12 +26,55 @@ namespace Server.HostServer.Components
 	{
 		SimpleSocketListener listener;
 		PlayerClass playerClass;
-		PlayerAnswers playerAnswers { get; set; }
-		public AnswersControl(SimpleSocketListener listener)
+		List<Label> lblAnswers;
+		List<CheckBox> checkBoxes;
+		public AnswersControl(SimpleSocketListener listener, PlayerClass playerClass)
 		{
 			InitializeComponent();
 			this.listener = listener;
-			playerAnswers = new PlayerAnswers();
+			this.playerClass = playerClass;
+
+			lblAnswers = new List<Label>();
+			lblAnswers.Add(lblAnswer1);
+			lblAnswers.Add(lblAnswer2);
+			lblAnswers.Add(lblAnswer3);
+			lblAnswers.Add(lblAnswer4);
+
+			checkBoxes = new List<CheckBox>();
+			checkBoxes.Add(chkBox1);
+			checkBoxes.Add(chkBox2);
+			checkBoxes.Add(chkBox3);
+			checkBoxes.Add(chkBox4);
+
+			DataContext = playerClass;
+		}
+
+		public void sendMessageToEveryone(string message)
+		{
+			foreach (KeyValuePair<int, IClientInfo> client in listener.GetConnectedClients()) {
+				listener.SendMessage(client.Value.Id, message);
+			}
+		}
+
+		void Reset() {
+			Dispatcher.Invoke(() =>{
+				for (int i = 0; i < 4; i++){
+					lblAnswers[i].Content = "";
+					checkBoxes[i].IsChecked = false;
+				}
+			}); 
+		}
+
+		void SendAnswer() {
+			string command = "OLPA VD ANSWER {0} {1} {2} {3}";
+			for (int i = 0; i < 4; i++){
+				object str = lblAnswers[i].Content;
+				command = string.Format(command, HelperClass.MakeString((str == null) ? "" : str.ToString()));
+			}
+		}
+
+		void SendVerification() {
+			//
 		}
 	}
 }

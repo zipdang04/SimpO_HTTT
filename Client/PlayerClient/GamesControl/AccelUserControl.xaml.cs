@@ -29,7 +29,7 @@ namespace Client.PlayerClient.GamesControl
 		SimpleSocketClient client;
 		DispatcherTimer timer;
 
-		int time;
+		int time, timeLimit;
 
 		public AccelUserControl(SimpleSocketClient client)
 		{
@@ -42,13 +42,13 @@ namespace Client.PlayerClient.GamesControl
 
 		void timer_Tick(object? sender, EventArgs e)
 		{
-			time--; lblTime.Content = time;
-			if (time == 0) StopTimer();
+			time++; lblTime.Content = time;
+			if (time == timeLimit) StopTimer();
 		}
 
 		public void ShowQuestion(string label, string question, string attach, int time)
 		{
-			this.time = time;
+			timeLimit = time;
 			attach = "Resources/" + attach;
 			Dispatcher.Invoke(() => {
 				lblTemp.Content = "Hàng ngang " + label;
@@ -59,10 +59,10 @@ namespace Client.PlayerClient.GamesControl
 
 		public void StartTimer()
 		{
-			txtAnswer.Text = "";
-			txtAnswer.IsEnabled = true;
+			time = 0;
+			txtAnswer.Text = ""; txtAnswer.IsEnabled = true;
 			lblTime.Content = time;
-			timer.Start();
+			mediaPlayer.Play(); timer.Start();
 			txtAnswer.Focus();
 		}
 
@@ -81,7 +81,12 @@ namespace Client.PlayerClient.GamesControl
 
 		private void txtAnswer_KeyDown(object sender, KeyEventArgs e)
 		{
-
+			if (e.Key == Key.Enter)
+			{
+				client.SendMessage(string.Format("OLPA VD ANSWER {0} {1}", time, txtAnswer.Text));
+				lblAnswer.Content = txtAnswer.Text;
+				txtAnswer.Text = "";
+			}
 		}
 	}
 }
