@@ -24,14 +24,14 @@ namespace Client.PlayerClient.GamesControl
 	/// Interaction logic for AccelUserControl.xaml
 	/// </summary>
 
-	public partial class AccelUserControl : UserControl
+	public partial class AccelPlayerControl : UserControl
 	{
 		SimpleSocketClient client;
 		DispatcherTimer timer;
 
 		int time, timeLimit;
 
-		public AccelUserControl(SimpleSocketClient client)
+		public AccelPlayerControl(SimpleSocketClient client)
 		{
 			InitializeComponent();
 			this.client = client;

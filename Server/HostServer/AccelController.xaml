@@ -10,14 +10,17 @@
     <Grid>
         <StackPanel x:Name="stackPanel">
             <Grid>
-                <Button x:Name="btnTT1" Content="Tăng tốc 1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="btnTT1" Content="Tăng tốc 1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="btnTT1_Click"/>
                 <Button x:Name="btnTT2" Content="Tăng tốc 2" HorizontalAlignment="Left" Margin="75,10,0,0" VerticalAlignment="Top"/>
                 <Button x:Name="btnTT3" Content="Tăng tốc 3" HorizontalAlignment="Left" Margin="140,10,0,0" VerticalAlignment="Top"/>
                 <Button x:Name="btnTT4" Content="Tăng tốc 4" HorizontalAlignment="Left" Margin="205,10,0,0" VerticalAlignment="Top"/>
-                <compo:QuestionShowing x:Name="questionBox" VerticalAlignment="Top" Margin="0,40,0,0"/>
+                <Button x:Name="btnPlay" Content="Chạy video" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top"/>
+                <Label HorizontalAlignment="Left" Margin="82,32,0,0" VerticalAlignment="Top">Thời gian</Label>
+                <Label Name="lblTime" HorizontalAlignment="Left" Margin="150,32,0,0" VerticalAlignment="Top" Content="0"/>
+                <compo:QuestionShowing x:Name="questionBox" VerticalAlignment="Top" Margin="0,70,0,0"/>
             </Grid>
         </StackPanel>
-        
-        
+
+
     </Grid>
 </UserControl>

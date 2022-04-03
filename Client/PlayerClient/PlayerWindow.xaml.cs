@@ -36,6 +36,7 @@ namespace Client.PlayerClient
 		public StartPlayerControl startPlayerControl;
 		public PointsControl pointsControl;
 		public ObstaPlayerControl obstaPlayerControl;
+		public AccelPlayerControl accelPlayerControl;
 		public FinishPlayerControl finishPlayerControl;
 		WholeExamClass? wholeExam;
 		public PlayerWindow(LogInWindow logInWindow, SimpleSocketClient client)
@@ -63,13 +64,17 @@ namespace Client.PlayerClient
 			pointsControl = new PointsControl(playersInfo);
 			startPlayerControl = new StartPlayerControl(client);
 			obstaPlayerControl = new ObstaPlayerControl(client, wholeExam.obstacle.attach);
+			accelPlayerControl = new AccelPlayerControl(client);
 			finishPlayerControl = new FinishPlayerControl(client);
 			grid.Children.Add(pointsControl);
 			grid.Children.Add(startPlayerControl);
+			grid.Children.Add(obstaPlayerControl);
+			grid.Children.Add(accelPlayerControl);
 			grid.Children.Add(finishPlayerControl);
 			pointsControl.Visibility = Visibility.Visible;
 			startPlayerControl.Visibility = Visibility.Collapsed;
 			obstaPlayerControl.Visibility = Visibility.Collapsed;
+			accelPlayerControl.Visibility = Visibility.Collapsed;
 			finishPlayerControl.Visibility = Visibility.Collapsed;
 		}
 
@@ -97,6 +102,7 @@ namespace Client.PlayerClient
 								obstaPlayerControl.Visibility = Visibility.Visible;
 								break;
 							case "TT":
+								accelPlayerControl.Visibility = Visibility.Visible;
 								break;
 							case "VD":
 								finishPlayerControl.Visibility = Visibility.Visible;
@@ -136,7 +142,8 @@ namespace Client.PlayerClient
 							break;
 					}
 					break;
-
+				case "TT":
+					break;
 				case "VD":
 					switch (tokens[2]) {
 						case "QUES":

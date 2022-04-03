@@ -38,6 +38,7 @@ namespace Server.HostServer
 
 		GeneralControl generalControl;
 		StartController startController;
+		AccelController accelController;
 		FinishController finishController;
 		
 		public void updatePoint()
@@ -71,6 +72,8 @@ namespace Server.HostServer
 			gridGeneral.Children.Add(generalControl);
 			startController = new StartController(listener, wholeExam.startQuestions, playerInfo, playerNetwork);
 			gridStart.Children.Add(startController);
+			accelController = new AccelController(listener, wholeExam.acceleration, playerInfo, playerNetwork);
+			gridAccel.Children.Add(accelController);
 			finishController = new FinishController(listener, wholeExam.finish, playerInfo, playerNetwork);
 			gridFinish.Children.Add(finishController);
 		}
@@ -116,6 +119,8 @@ namespace Server.HostServer
 					break;
 				case "KD":
 					break;
+				case "TT":
+					break;
 				case "VD":
 					if (tokens[2] == "BELL") {
 						for (int i = 0; i < 4; i++)
@@ -127,7 +132,6 @@ namespace Server.HostServer
 		}
 
 		private void tabGeneral_GotFocus(object sender, RoutedEventArgs e){sendMessageToEveryone("OLPA SCENE POINT");}
-
 		private void tabStart_GotFocus(object sender, RoutedEventArgs e){ sendMessageToEveryone("OLPA SCENE KD"); }
 		private void tabObsta_GotFocus(object sender, RoutedEventArgs e){sendMessageToEveryone("OLPA SCENE VCNV");}
 		private void tabAccel_GotFocus(object sender, RoutedEventArgs e){sendMessageToEveryone("OLPA SCENE TT");}
