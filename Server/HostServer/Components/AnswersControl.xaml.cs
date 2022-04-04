@@ -26,19 +26,24 @@ namespace Server.HostServer.Components
 	{
 		SimpleSocketListener listener;
 		PlayerClass playerClass;
-		List<Label> lblAnswers;
+		List<Label> lblAnswers, lblTimes;
 		List<CheckBox> checkBoxes;
-		public AnswersControl(SimpleSocketListener listener, PlayerClass playerClass)
+
+		string gameName;
+
+		public AnswersControl(SimpleSocketListener listener, PlayerClass playerClass, string gameName)
 		{
 			InitializeComponent();
 			this.listener = listener;
 			this.playerClass = playerClass;
+			this.gameName = gameName;
 
 			lblAnswers = new List<Label>();
 			lblAnswers.Add(lblAnswer1);
 			lblAnswers.Add(lblAnswer2);
 			lblAnswers.Add(lblAnswer3);
 			lblAnswers.Add(lblAnswer4);
+
 
 			checkBoxes = new List<CheckBox>();
 			checkBoxes.Add(chkBox1);
@@ -56,7 +61,7 @@ namespace Server.HostServer.Components
 			}
 		}
 
-		void Reset() {
+		public void Reset() {
 			Dispatcher.Invoke(() =>{
 				for (int i = 0; i < 4; i++){
 					lblAnswers[i].Content = "";
@@ -65,16 +70,23 @@ namespace Server.HostServer.Components
 			}); 
 		}
 
-		void SendAnswer() {
-			string command = "OLPA VD ANSWER {0} {1} {2} {3}";
-			for (int i = 0; i < 4; i++){
+		private void btnShowAnswer_Click(object sender, RoutedEventArgs e)
+		{
+			string command = "OLPA " + gameName + " ANSWER {0} {0} {0} {0} TIME {0} {0} {0} {0}";
+			for (int i = 0; i < 4; i++)
+			{
 				object str = lblAnswers[i].Content;
 				command = string.Format(command, HelperClass.MakeString((str == null) ? "" : str.ToString()));
 			}
+			sendMessageToEveryone(command);
 		}
 
-		void SendVerification() {
-			//
+		private void btnConfirm_Click(object sender, RoutedEventArgs e)
+		{
+			string command = "OLPA " + gameName + " RES {0} {0} {0} {0}";
+			for (int i = 0; i < 4; i++)
+				command = string.Format(command, checkBoxes[i].IsChecked);
+			sendMessageToEveryone(command);
 		}
 	}
 }

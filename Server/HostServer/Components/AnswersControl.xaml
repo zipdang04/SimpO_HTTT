@@ -21,6 +21,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition />
+                <ColumnDefinition Width="75"/>
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
             <Label x:Name="lblName1" Content="{Binding Path=names[0]}" Grid.Row="0" Grid.Column="0"/>
@@ -31,11 +32,22 @@
             <Label x:Name="lblAnswer2" Grid.Row="1" Grid.Column="1"/>
             <Label x:Name="lblAnswer3" Grid.Row="2" Grid.Column="1"/>
             <Label x:Name="lblAnswer4" Grid.Row="3" Grid.Column="1"/>
-            <CheckBox x:Name="chkBox1" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <CheckBox x:Name="chkBox2" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <CheckBox x:Name="chkBox3" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <CheckBox x:Name="chkBox4" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label x:Name="lblTime1" Grid.Row="0" Grid.Column="2"/>
+            <Label x:Name="lblTime2" Grid.Row="1" Grid.Column="2"/>
+            <Label x:Name="lblTime3" Grid.Row="2" Grid.Column="2"/>
+            <Label x:Name="lblTime4" Grid.Row="3" Grid.Column="2"/>
+            <CheckBox x:Name="chkBox1" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <CheckBox x:Name="chkBox2" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <CheckBox x:Name="chkBox3" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <CheckBox x:Name="chkBox4" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
-        <Button x:Name="btnConfirm" Content="Xác nhận" Grid.Row="1"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnShowAnswer" Content="Hiện đáp án" Grid.Column="0" Click="btnShowAnswer_Click"/>
+            <Button x:Name="btnConfirm" Content="Xác nhận" Grid.Column="1" Click="btnConfirm_Click"/>
+        </Grid>
     </Grid>
 </UserControl>

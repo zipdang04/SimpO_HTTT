@@ -43,7 +43,9 @@ namespace Server.HostServer
 			this.listener = listener; this.playerClass = playerClass;
 			this.accelClass = accelClass; this.playerNetwork = playerNetwork;
 
-			answersControl = new AnswersControl(listener, playerClass);
+			timer = new DispatcherTimer(); timer.Interval = TimeSpan.FromMilliseconds(10);
+
+			answersControl = new AnswersControl(listener, playerClass, "TT");
 			stackPanel.Children.Add(answersControl);
 			pointsControl = new PointsControl(playerClass);
 			stackPanel.Children.Add(pointsControl);
@@ -53,17 +55,24 @@ namespace Server.HostServer
 			btnPlay.IsEnabled = false;
 		}
 
+		void timer_Tick(object? sender, EventArgs e)
+		{
+			timeRemaining--;
+			lblTime.Content = timeRemaining.ToString();
+			if (timeRemaining == 0){
+				timer.Stop();
+				answersControl.IsEnabled = true;
+			}
+		}
+
 		void Prepare(int turn)
 		{
-			btnTT1.IsEnabled = false;
-			btnTT2.IsEnabled = false;
-			btnTT3.IsEnabled = false;
-			btnTT4.IsEnabled = false;
+			btnPlay.IsEnabled = true;
 			timeRemaining = (turn + 1) * 1000;
 			
 			OQuestion question = accelClass.accelQuestions[turn].question;
 			questionBox.displayQA(question.question, question.answer);
-
+			answersControl.Reset();
 		}
 
 		private void btnTT1_Click(object sender, RoutedEventArgs e)
