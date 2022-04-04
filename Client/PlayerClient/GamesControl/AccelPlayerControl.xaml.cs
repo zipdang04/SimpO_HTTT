@@ -17,6 +17,7 @@ using SimpleSockets.Client;
 using Server.QuestionClass;
 using Server.Information;
 using System.Windows.Threading;
+using System.IO;
 
 namespace Client.PlayerClient.GamesControl
 {
@@ -29,29 +30,40 @@ namespace Client.PlayerClient.GamesControl
 		SimpleSocketClient client;
 		DispatcherTimer timer;
 
-		int time, timeLimit;
+		int timeLimit;
+		DateTime timeEnd;
 
 		public AccelPlayerControl(SimpleSocketClient client)
 		{
 			InitializeComponent();
 			this.client = client;
 			timer = new DispatcherTimer();
-			timer.Interval = TimeSpan.FromMilliseconds(10);
+			timer.Interval = TimeSpan.FromMilliseconds(2);
 			timer.Tick += timer_Tick;
+			mediaPlayer.LoadedBehavior = MediaState.Manual;
+		}
+
+
+		int getTime()
+		{
+			TimeSpan span = DateTime.Now.Subtract(timeEnd);
+			return (span.Seconds * 1000 + span.Milliseconds) / 10;
 		}
 
 		void timer_Tick(object? sender, EventArgs e)
 		{
-			time++; lblTime.Content = time;
-			if (time == timeLimit) StopTimer();
+			int time = getTime();
+			lblTime.Content = timeLimit / 100.0;
+			//
+			if (time >= timeLimit) StopTimer();
 		}
 
-		public void ShowQuestion(string label, string question, string attach, int time)
+		public void ShowQuestion(int turn, string question, string attach, int time)
 		{
 			timeLimit = time;
-			attach = "Resources/" + attach;
+			attach = Directory.GetCurrentDirectory() + @"\Resources\" + attach;
 			Dispatcher.Invoke(() => {
-				lblTemp.Content = "Hàng ngang " + label;
+				lblTemp.Content = turn;
 				lblQuestion.Content = question;
 				mediaPlayer.Source = new Uri(attach);
 			});
@@ -59,34 +71,45 @@ namespace Client.PlayerClient.GamesControl
 
 		public void StartTimer()
 		{
-			time = 0;
-			txtAnswer.Text = ""; txtAnswer.IsEnabled = true;
-			lblTime.Content = time;
-			mediaPlayer.Play(); timer.Start();
-			txtAnswer.Focus();
+			timeEnd = DateTime.Now.AddSeconds(timeLimit / 100);
+			Dispatcher.Invoke(() => {
+				txtAnswer.Text = ""; txtAnswer.IsEnabled = true;
+				//lblTime.Content = time;
+				mediaPlayer.Play(); timer.Start();
+				txtAnswer.Focus();
+			});
 		}
 
 		public void ResetGame()
 		{
-			txtAnswer.IsEnabled = false;
+			Dispatcher.Invoke(() => {
+				txtAnswer.IsEnabled = false;
+				lblAnswer.Content = "";
+			});
 			timer.Stop();
-			lblAnswer.Content = "";
 		}
 
 		void StopTimer()
 		{
-			txtAnswer.Text = "";
-			txtAnswer.IsEnabled = false;
+			timer.Stop();
+			Dispatcher.Invoke(() => {
+				txtAnswer.Text = "";
+				txtAnswer.IsEnabled = false;
+			});
 		}
 
 		private void txtAnswer_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.Key == Key.Enter)
 			{
-				client.SendMessage(string.Format("OLPA VD ANSWER {0} {1}", time, txtAnswer.Text));
-				lblAnswer.Content = txtAnswer.Text;
-				txtAnswer.Text = "";
+				client.SendMessage(string.Format("OLPA TT ANSWER {0} {1}", getTime(), txtAnswer.Text));
+				Dispatcher.Invoke(() => { 
+					lblAnswer.Content = txtAnswer.Text;
+					txtAnswer.Text = "";
+				});
 			}
 		}
+
+		
 	}
 }

@@ -24,26 +24,29 @@ namespace Server.HostServer.Components
 	/// </summary>
 	public partial class AnswersControl : UserControl
 	{
-		SimpleSocketListener listener;
-		PlayerClass playerClass;
-		List<Label> lblAnswers, lblTimes;
-		List<CheckBox> checkBoxes;
+		List<Label> lblTimes;
+		public List<CheckBox> checkBoxes;
 
-		string gameName;
+		public class Data{
+			public PlayerClass names { get; set; }
+			public PlayerAnswers answers {get;set;}
+			public Data(PlayerClass playerClass, PlayerAnswers playerAnswers){
+				names = playerClass; answers = playerAnswers;
+			}
+		}
+		public Data data { get; set; }
 
-		public AnswersControl(SimpleSocketListener listener, PlayerClass playerClass, string gameName)
+		public AnswersControl(PlayerClass playerClass)
 		{
 			InitializeComponent();
-			this.listener = listener;
-			this.playerClass = playerClass;
-			this.gameName = gameName;
+			
+			data = new Data(playerClass, new PlayerAnswers());
 
-			lblAnswers = new List<Label>();
-			lblAnswers.Add(lblAnswer1);
-			lblAnswers.Add(lblAnswer2);
-			lblAnswers.Add(lblAnswer3);
-			lblAnswers.Add(lblAnswer4);
-
+			lblTimes = new List<Label>();
+			lblTimes.Add(lblTime1);
+			lblTimes.Add(lblTime2);
+			lblTimes.Add(lblTime3);
+			lblTimes.Add(lblTime4);
 
 			checkBoxes = new List<CheckBox>();
 			checkBoxes.Add(chkBox1);
@@ -51,42 +54,24 @@ namespace Server.HostServer.Components
 			checkBoxes.Add(chkBox3);
 			checkBoxes.Add(chkBox4);
 
-			DataContext = playerClass;
-		}
-
-		public void sendMessageToEveryone(string message)
-		{
-			foreach (KeyValuePair<int, IClientInfo> client in listener.GetConnectedClients()) {
-				listener.SendMessage(client.Value.Id, message);
-			}
+			DataContext = data;
 		}
 
 		public void Reset() {
+			data.answers.Reset();
 			Dispatcher.Invoke(() =>{
-				for (int i = 0; i < 4; i++){
-					lblAnswers[i].Content = "";
+				for (int i = 0; i < 4; i++)
 					checkBoxes[i].IsChecked = false;
-				}
 			}); 
 		}
 
-		private void btnShowAnswer_Click(object sender, RoutedEventArgs e)
+		public void SomeoneAnswering(int player, string answer, int time)
 		{
-			string command = "OLPA " + gameName + " ANSWER {0} {0} {0} {0} TIME {0} {0} {0} {0}";
-			for (int i = 0; i < 4; i++)
-			{
-				object str = lblAnswers[i].Content;
-				command = string.Format(command, HelperClass.MakeString((str == null) ? "" : str.ToString()));
-			}
-			sendMessageToEveryone(command);
-		}
-
-		private void btnConfirm_Click(object sender, RoutedEventArgs e)
-		{
-			string command = "OLPA " + gameName + " RES {0} {0} {0} {0}";
-			for (int i = 0; i < 4; i++)
-				command = string.Format(command, checkBoxes[i].IsChecked);
-			sendMessageToEveryone(command);
+			data.answers.answers[player] = answer;
+			data.answers.times[player] = time;
+			Dispatcher.Invoke(() => {
+				lblTimes[player].Content = time / 100.0;
+			});
 		}
 	}
 }

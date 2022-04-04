@@ -34,8 +34,10 @@ namespace Server.HostServer
 		AnswersControl answersControl;
 		PointsControl pointsControl;
 
+		int questionTurn;
 		DispatcherTimer timer;
-		int timeRemaining = 0;
+		int timeLimit;
+		DateTime timeEnd;
 
 		public AccelController(SimpleSocketListener listener, AccelClass accelClass, PlayerClass playerClass, PlayerNetwork playerNetwork)
 		{
@@ -43,10 +45,12 @@ namespace Server.HostServer
 			this.listener = listener; this.playerClass = playerClass;
 			this.accelClass = accelClass; this.playerNetwork = playerNetwork;
 
-			timer = new DispatcherTimer(); timer.Interval = TimeSpan.FromMilliseconds(10);
+			timer = new DispatcherTimer(); 
+			timer.Interval = TimeSpan.FromMilliseconds(2);
+			timer.Tick += timer_Tick;
 
-			answersControl = new AnswersControl(listener, playerClass, "TT");
-			stackPanel.Children.Add(answersControl);
+			answersControl = new AnswersControl(playerClass);
+			gridAnswer.Children.Add(answersControl);
 			pointsControl = new PointsControl(playerClass);
 			stackPanel.Children.Add(pointsControl);
 			answersControl.IsEnabled = false;
@@ -55,11 +59,24 @@ namespace Server.HostServer
 			btnPlay.IsEnabled = false;
 		}
 
+		public void sendMessageToEveryone(string message)
+		{
+			foreach (KeyValuePair<int, IClientInfo> client in listener.GetConnectedClients()) {
+				listener.SendMessage(client.Value.Id, message);
+			}
+		}
+		int getTime()
+		{
+			TimeSpan span = timeEnd.Subtract(DateTime.Now);
+			return (span.Seconds * 1000 + span.Milliseconds) / 10;
+		}
+
 		void timer_Tick(object? sender, EventArgs e)
 		{
-			timeRemaining--;
-			lblTime.Content = timeRemaining.ToString();
-			if (timeRemaining == 0){
+			int time = getTime();
+			Dispatcher.Invoke(() => { lblTime.Content = time; });
+			
+			if (time >= timeLimit){
 				timer.Stop();
 				answersControl.IsEnabled = true;
 			}
@@ -68,16 +85,50 @@ namespace Server.HostServer
 		void Prepare(int turn)
 		{
 			btnPlay.IsEnabled = true;
-			timeRemaining = (turn + 1) * 1000;
+			timeLimit = (turn + 1) * 1000 + 200;
 			
 			OQuestion question = accelClass.accelQuestions[turn].question;
 			questionBox.displayQA(question.question, question.answer);
-			answersControl.Reset();
+			answersControl.Reset(); answersControl.IsEnabled = false;
+
+			sendMessageToEveryone(string.Format("OLPA TT LOAD {0} {1}", turn + 1, HelperClass.ServerJoinQA(question)));
 		}
 
 		private void btnTT1_Click(object sender, RoutedEventArgs e)
 		{
-			Prepare(1);
+			Prepare(0);
+		}
+
+		public void PlayerAnswering(int player, string answer, int time)
+		{
+			answersControl.SomeoneAnswering(player, answer, time);
+		}
+
+		private void btnPlay_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA TT PLAY");
+
+			timer.Start(); timeEnd = DateTime.Now.AddSeconds((questionTurn + 1) * 10);
+			btnPlay.IsEnabled = false;
+		}
+
+		private void btnShowAnswer_Click(object sender, RoutedEventArgs e)
+		{
+			string command = "OLPA TT ANSWER {0} {0} {0} {0} TIME {0} {0} {0} {0}";
+			PlayerAnswers answers = answersControl.data.answers;
+			for (int i = 0; i < 4; i++)
+				command = string.Format(command, HelperClass.MakeString(answers.answers[i]));
+			for (int i = 0; i < 4; i++)
+				command = string.Format(command, answers.times[i]);
+			sendMessageToEveryone(command);
+		}
+
+		private void btnConfirm_Click(object sender, RoutedEventArgs e)
+		{
+			string command = "OLPA TT RES {0} {0} {0} {0}";
+			for (int i = 0; i < 4; i++)
+				command = string.Format(command, answersControl.checkBoxes[i].IsChecked);
+			sendMessageToEveryone(command);
 		}
 	}
 }

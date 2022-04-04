@@ -14,10 +14,19 @@
                 <Button x:Name="btnTT2" Content="Tăng tốc 2" HorizontalAlignment="Left" Margin="75,10,0,0" VerticalAlignment="Top"/>
                 <Button x:Name="btnTT3" Content="Tăng tốc 3" HorizontalAlignment="Left" Margin="140,10,0,0" VerticalAlignment="Top"/>
                 <Button x:Name="btnTT4" Content="Tăng tốc 4" HorizontalAlignment="Left" Margin="205,10,0,0" VerticalAlignment="Top"/>
-                <Button x:Name="btnPlay" Content="Chạy video" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="btnPlay" Content="Chạy video" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Click="btnPlay_Click"/>
                 <Label HorizontalAlignment="Left" Margin="82,32,0,0" VerticalAlignment="Top">Thời gian</Label>
                 <Label Name="lblTime" HorizontalAlignment="Left" Margin="150,32,0,0" VerticalAlignment="Top" Content="0"/>
                 <compo:QuestionShowing x:Name="questionBox" VerticalAlignment="Top" Margin="0,70,0,0"/>
+            </Grid>
+            <Grid x:Name="gridAnswer" Height="120"/>
+            <Grid Height="40">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btnShowAnswer" Content="Hiện đáp án" Grid.Column="0"/>
+                <Button x:Name="btnConfirm" Content="Xác nhận" Grid.Column="1"/>
             </Grid>
         </StackPanel>
 

@@ -120,6 +120,15 @@ namespace Server.HostServer
 				case "KD":
 					break;
 				case "TT":
+					switch (tokens[2]) {
+						case "ANSWER":
+							int time = Convert.ToInt32(tokens[3]);
+							string answer = tokens[4];
+							for (int i = 0; i < 4; i++)
+								if (playerNetwork.clients[i] != null && playerNetwork.clients[i].Id == id)
+									accelController.PlayerAnswering(i, answer, time);
+						break;
+					}
 					break;
 				case "VD":
 					if (tokens[2] == "BELL") {

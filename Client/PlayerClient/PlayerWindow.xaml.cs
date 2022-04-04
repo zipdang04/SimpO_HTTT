@@ -143,6 +143,18 @@ namespace Client.PlayerClient
 					}
 					break;
 				case "TT":
+					switch (tokens[2]) {
+						case "LOAD":
+							int turn = Convert.ToInt32(tokens[3]);
+							string question = tokens[4];
+							string attach = tokens[5];
+							accelPlayerControl.ResetGame();
+							accelPlayerControl.ShowQuestion(turn, question, attach, turn * 1000);
+							break;
+						case "PLAY":
+							accelPlayerControl.StartTimer();
+							break;
+					}
 					break;
 				case "VD":
 					switch (tokens[2]) {
