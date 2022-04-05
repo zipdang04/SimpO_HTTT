@@ -28,7 +28,6 @@ namespace Client.PlayerClient.GamesControl
 		SimpleSocketClient client;
 		DispatcherTimer timer;
 
-		ImageControl imageControl;
 		string imagePath;
 
 		int timeLimit;
@@ -39,19 +38,13 @@ namespace Client.PlayerClient.GamesControl
 			return (span.Seconds * 1000 + span.Milliseconds) / 10;
 		}
 
-		public ObstaPlayerControl(SimpleSocketClient client, string imagePath = null)
+		public ObstaPlayerControl(SimpleSocketClient client)
 		{
 			InitializeComponent();
 			this.client = client;
 			timer = new DispatcherTimer();
 			timer.Interval = TimeSpan.FromMilliseconds(2);
 			timer.Tick += timer_Tick;
-
-			imageControl = new ImageControl();
-			this.imagePath = imagePath;
-			quesGrid.Children.Add(imageControl);
-			Grid.SetColumn(imageControl, 1);
-
 			setImage();
 		}
 

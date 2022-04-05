@@ -21,11 +21,11 @@ namespace Client.PlayerClient.GamesControl
 	/// </summary>
 	public partial class ImageControl : UserControl
 	{
-		string path;
+		string path = "";
 		double width, height;
 		List<Rectangle> rects;
 
-		public ImageControl(string path = "")
+		public ImageControl()
 		{
 			InitializeComponent();
 			rects = new List<Rectangle>();
@@ -35,8 +35,6 @@ namespace Client.PlayerClient.GamesControl
 			rects.Append(rectUL);
 			rects.Append(rectUR);
 			rects.Append(rectTT);
-
-			path = "";
 		}
 
 		public void setImage(string fileName)

@@ -68,8 +68,11 @@ namespace Client.PlayerClient.GamesControl
 			//attach = "Resources/" + attach;
 			Dispatcher.Invoke(() => {
 				mediaPlayer.Source = new Uri(attach);
+				mediaPlayer.Play();
+				mediaPlayer.Visibility = Visibility.Hidden;
 				lblTemp.Content = turn;
 				lblQuestion.Content = question;
+				mediaPlayer.Stop();
 			});
 		}
 
@@ -77,7 +80,8 @@ namespace Client.PlayerClient.GamesControl
 		{
 			timeBegin = DateTime.Now;
 			Dispatcher.Invoke(() => {
-				mediaPlayer.Play(); 
+				mediaPlayer.Visibility = Visibility.Visible;
+				mediaPlayer.Play();
 				txtAnswer.Text = ""; txtAnswer.IsEnabled = true;
 				//lblTime.Content = time;
 				timer.Start();

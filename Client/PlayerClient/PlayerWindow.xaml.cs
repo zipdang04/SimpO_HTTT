@@ -63,7 +63,7 @@ namespace Client.PlayerClient
 
 			pointsControl = new PointsControl(playersInfo);
 			startPlayerControl = new StartPlayerControl(client);
-			obstaPlayerControl = new ObstaPlayerControl(client, wholeExam.obstacle.attach);
+			obstaPlayerControl = new ObstaPlayerControl(client);
 			accelPlayerControl = new AccelPlayerControl(client);
 			finishPlayerControl = new FinishPlayerControl(client);
 			grid.Children.Add(pointsControl);
