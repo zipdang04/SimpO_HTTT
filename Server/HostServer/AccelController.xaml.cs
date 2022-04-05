@@ -37,7 +37,7 @@ namespace Server.HostServer
 		int questionTurn;
 		DispatcherTimer timer;
 		int timeLimit;
-		DateTime timeEnd;
+		DateTime timeBegin;
 
 		public AccelController(SimpleSocketListener listener, AccelClass accelClass, PlayerClass playerClass, PlayerNetwork playerNetwork)
 		{
@@ -67,14 +67,14 @@ namespace Server.HostServer
 		}
 		int getTime()
 		{
-			TimeSpan span = timeEnd.Subtract(DateTime.Now);
+			TimeSpan span = DateTime.Now - timeBegin;
 			return (span.Seconds * 1000 + span.Milliseconds) / 10;
 		}
 
 		void timer_Tick(object? sender, EventArgs e)
 		{
 			int time = getTime();
-			Dispatcher.Invoke(() => { lblTime.Content = time; });
+			Dispatcher.Invoke(() => { lblTime.Content = time / 100.0; });
 			
 			if (time >= timeLimit){
 				timer.Stop();
@@ -108,7 +108,7 @@ namespace Server.HostServer
 		{
 			sendMessageToEveryone("OLPA TT PLAY");
 
-			timer.Start(); timeEnd = DateTime.Now.AddSeconds((questionTurn + 1) * 10);
+			timer.Start(); timeBegin = DateTime.Now;
 			btnPlay.IsEnabled = false;
 		}
 

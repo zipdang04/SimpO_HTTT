@@ -16,6 +16,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Resources\Effects\KD_1_Start.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Effects\KD_2_Start.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Effects\KD_3_Start.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Effects\KD_4_Start.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\KD_1_Start.mkv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\OExam.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

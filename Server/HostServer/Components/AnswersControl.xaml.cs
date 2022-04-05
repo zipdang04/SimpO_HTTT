@@ -61,7 +61,10 @@ namespace Server.HostServer.Components
 			data.answers.Reset();
 			Dispatcher.Invoke(() =>{
 				for (int i = 0; i < 4; i++)
+				{
 					checkBoxes[i].IsChecked = false;
+					lblTimes[i].Content = "";
+				}
 			}); 
 		}
 

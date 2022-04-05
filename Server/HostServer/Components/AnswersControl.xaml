@@ -24,9 +24,9 @@
         <Label x:Name="lblName3" Content="{Binding Path=names.names[2]}" Grid.Row="2" Grid.Column="0"/>
         <Label x:Name="lblName4" Content="{Binding Path=names.names[3]}" Grid.Row="3" Grid.Column="0"/>
         <Label x:Name="lblAnswer1" Content="{Binding Path=answers.answers[0]}" Grid.Row="0" Grid.Column="1" HorizontalContentAlignment = "Right"/>
-        <Label x:Name="lblAnswer2" Content="{Binding Path=answers.answers[0]}" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment = "Right"/>
-        <Label x:Name="lblAnswer3" Content="{Binding Path=answers.answers[0]}" Grid.Row="2" Grid.Column="1" HorizontalContentAlignment = "Right"/>
-        <Label x:Name="lblAnswer4" Content="{Binding Path=answers.answers[0]}" Grid.Row="3" Grid.Column="1" HorizontalContentAlignment = "Right"/>
+        <Label x:Name="lblAnswer2" Content="{Binding Path=answers.answers[1]}" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment = "Right"/>
+        <Label x:Name="lblAnswer3" Content="{Binding Path=answers.answers[2]}" Grid.Row="2" Grid.Column="1" HorizontalContentAlignment = "Right"/>
+        <Label x:Name="lblAnswer4" Content="{Binding Path=answers.answers[3]}" Grid.Row="3" Grid.Column="1" HorizontalContentAlignment = "Right"/>
         <Label x:Name="lblTime1" Grid.Row="0" Grid.Column="2" HorizontalContentAlignment = "Right"/>
         <Label x:Name="lblTime2" Grid.Row="1" Grid.Column="2" HorizontalContentAlignment = "Right"/>
         <Label x:Name="lblTime3" Grid.Row="2" Grid.Column="2" HorizontalContentAlignment = "Right"/>

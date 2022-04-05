@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,13 +36,13 @@ namespace Client.PlayerClient.GamesControl
 			rects.Append(rectUR);
 			rects.Append(rectTT);
 
-			setImage(path);
+			path = "";
 		}
 
-		public void setImage(string path)
+		public void setImage(string fileName)
 		{
 			try {
-				this.path = path;
+				path = Directory.GetCurrentDirectory() + @"\Resources\" + fileName;
 				image.Source = new BitmapImage(new Uri(path));
 				width = image.RenderSize.Width / 2.0;
 				height = image.RenderSize.Height / 2.0;

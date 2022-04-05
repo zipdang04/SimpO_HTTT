@@ -31,7 +31,12 @@ namespace Client.PlayerClient.GamesControl
 		DispatcherTimer timer;
 
 		int timeLimit;
-		DateTime timeEnd;
+		DateTime timeBegin;
+		int getTime()
+		{
+			TimeSpan span = DateTime.Now - timeBegin;
+			return (span.Seconds * 1000 + span.Milliseconds) / 10;
+		}
 
 		public AccelPlayerControl(SimpleSocketClient client)
 		{
@@ -44,38 +49,38 @@ namespace Client.PlayerClient.GamesControl
 		}
 
 
-		int getTime()
-		{
-			TimeSpan span = DateTime.Now.Subtract(timeEnd);
-			return (span.Seconds * 1000 + span.Milliseconds) / 10;
-		}
 
 		void timer_Tick(object? sender, EventArgs e)
 		{
 			int time = getTime();
-			lblTime.Content = timeLimit / 100.0;
+			lblTime.Content = time / 100.0;
 			//
-			if (time >= timeLimit) StopTimer();
+			if (time >= timeLimit){
+				StopTimer();
+				mediaPlayer.Stop();
+			}
 		}
 
 		public void ShowQuestion(int turn, string question, string attach, int time)
 		{
 			timeLimit = time;
 			attach = Directory.GetCurrentDirectory() + @"\Resources\" + attach;
+			//attach = "Resources/" + attach;
 			Dispatcher.Invoke(() => {
+				mediaPlayer.Source = new Uri(attach);
 				lblTemp.Content = turn;
 				lblQuestion.Content = question;
-				mediaPlayer.Source = new Uri(attach);
 			});
 		}
 
 		public void StartTimer()
 		{
-			timeEnd = DateTime.Now.AddSeconds(timeLimit / 100);
+			timeBegin = DateTime.Now;
 			Dispatcher.Invoke(() => {
+				mediaPlayer.Play(); 
 				txtAnswer.Text = ""; txtAnswer.IsEnabled = true;
 				//lblTime.Content = time;
-				mediaPlayer.Play(); timer.Start();
+				timer.Start();
 				txtAnswer.Focus();
 			});
 		}

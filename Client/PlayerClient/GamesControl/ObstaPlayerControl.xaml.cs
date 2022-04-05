@@ -31,14 +31,20 @@ namespace Client.PlayerClient.GamesControl
 		ImageControl imageControl;
 		string imagePath;
 
-		int time;
+		int timeLimit;
+		DateTime timeBegin;
+		int getTime()
+		{
+			TimeSpan span = DateTime.Now - timeBegin;
+			return (span.Seconds * 1000 + span.Milliseconds) / 10;
+		}
 
 		public ObstaPlayerControl(SimpleSocketClient client, string imagePath = null)
 		{
 			InitializeComponent();
 			this.client = client;
 			timer = new DispatcherTimer();
-			timer.Interval = TimeSpan.FromSeconds(1);
+			timer.Interval = TimeSpan.FromMilliseconds(2);
 			timer.Tick += timer_Tick;
 
 			imageControl = new ImageControl();
@@ -59,8 +65,12 @@ namespace Client.PlayerClient.GamesControl
 
 		void timer_Tick(object? sender, EventArgs e)
 		{
-			time--; lblTime.Content = time;
-			if (time == 0) StopTimer();
+			int time = getTime();
+			lblTime.Content = time / 100.0;
+			//
+			if (time >= timeLimit){
+				StopTimer();
+			}
 		}
 
 		public void ShowQuestion(string label, string question)
@@ -75,7 +85,7 @@ namespace Client.PlayerClient.GamesControl
 		{
 			txtAnswer.Text = "";
 			txtAnswer.IsEnabled = true;
-			time = 15; lblTime.Content = time;
+			//time = 15; lblTime.Content = time;
 			timer.Start();
 			txtAnswer.Focus();
 		}
