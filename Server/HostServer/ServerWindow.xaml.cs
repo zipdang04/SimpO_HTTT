@@ -38,6 +38,7 @@ namespace Server.HostServer
 
 		GeneralControl generalControl;
 		StartController startController;
+		ObstaController obstaController;
 		AccelController accelController;
 		FinishController finishController;
 		
@@ -72,6 +73,8 @@ namespace Server.HostServer
 			gridGeneral.Children.Add(generalControl);
 			startController = new StartController(listener, wholeExam.startQuestions, playerInfo, playerNetwork);
 			gridStart.Children.Add(startController);
+			obstaController = new ObstaController(listener, wholeExam.obstacle, playerInfo, playerNetwork);
+			gridObsta.Children.Add(obstaController);
 			accelController = new AccelController(listener, wholeExam.acceleration, playerInfo, playerNetwork);
 			gridAccel.Children.Add(accelController);
 			finishController = new FinishController(listener, wholeExam.finish, playerInfo, playerNetwork);
@@ -107,6 +110,10 @@ namespace Server.HostServer
 		private void MessageReceived(IClientInfo client, string msg)
 		{
 			int id = client.Id;
+			int player = -1;
+			for (int i = 0; i < 4; i++)
+				if (playerNetwork.clients[i] != null && playerNetwork.clients[i].Id == id)
+					player = i;
 
 			List<string> tokens = HelperClass.ParseToken(msg);
 			switch (tokens[1]) {
@@ -117,29 +124,36 @@ namespace Server.HostServer
 					else
 						listener.SendMessage(id, "OLPA FAILED");
 					break;
-				case "KD":
+				case "VCNV":
+					switch (tokens[2]) {
+						case "BELL":
+							obstaController.SomeoneBelling(player);
+							break;
+						case "ANSWER":
+							int time = Convert.ToInt32(tokens[3]);
+							string answer = tokens[4];
+							obstaController.PlayerAnswering(player, answer, time);
+							break;
+						case "":
+							break;
+					}
 					break;
 				case "TT":
 					switch (tokens[2]) {
 						case "ANSWER":
 							int time = Convert.ToInt32(tokens[3]);
 							string answer = tokens[4];
-							for (int i = 0; i < 4; i++)
-								if (playerNetwork.clients[i] != null && playerNetwork.clients[i].Id == id)
-									accelController.PlayerAnswering(i, answer, time);
+							accelController.PlayerAnswering(player, answer, time);
 						break;
 					}
 					break;
 				case "VD":
 					if (tokens[2] == "BELL") {
-						for (int i = 0; i < 4; i++)
-							if (playerNetwork.clients[i] != null && playerNetwork.clients[i].Id == id)
-								finishController.SomeoneSucking(i);
+						finishController.SomeoneSucking(player);
 					}
 					break;
 			}
 		}
-
 		private void tabGeneral_GotFocus(object sender, RoutedEventArgs e){sendMessageToEveryone("OLPA SCENE POINT");}
 		private void tabStart_GotFocus(object sender, RoutedEventArgs e){ sendMessageToEveryone("OLPA SCENE KD"); }
 		private void tabObsta_GotFocus(object sender, RoutedEventArgs e){sendMessageToEveryone("OLPA SCENE VCNV");}

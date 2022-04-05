@@ -4,12 +4,57 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Server.HostServer"
+             xmlns:compo="clr-namespace:Server.HostServer.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+        <Button x:Name="btnReset" Content="Bắt đầu" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="btnReset_Click"/>
+
+        <Grid Height="150" VerticalAlignment="Top" Margin="0,60,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnHN1" Content="1" Grid.Column="0" Grid.Row="0" Click="btnHN1_Click"/>
+            <Button x:Name="btnHN2" Content="2" Grid.Column="0" Grid.Row="1"/>
+            <Button x:Name="btnHN3" Content="3" Grid.Column="0" Grid.Row="2"/>
+            <Button x:Name="btnHN4" Content="4" Grid.Column="0" Grid.Row="3"/>
+            <Button x:Name="btnTT" Content="TT" Grid.Column="0" Grid.Row="4"/>
+            <Label x:Name="lblHN1" Grid.Column="1" Grid.Row="0"/>
+            <Label x:Name="lblHN2" Grid.Column="1" Grid.Row="1"/>
+            <Label x:Name="lblHN3" Grid.Column="1" Grid.Row="2"/>
+            <Label x:Name="lblHN4" Grid.Column="1" Grid.Row="3"/>
+            <Label x:Name="lblTT" Grid.Column="1" Grid.Row="4"/>
+        </Grid>
+        <compo:QuestionShowing x:Name="questionBox" Height="120" VerticalAlignment="Top" Margin="0,220,0,0"/>
+        <Button x:Name="btnStart" Content="Bắt đầu" HorizontalAlignment="Left" Margin="10,340,0,0" VerticalAlignment="Top" Click="btnStart_Click"/>
+        <Grid x:Name="gridAnswer"  Height="120" VerticalAlignment="Top" Margin="0,370,0,0"/>
+        <Grid Height="30" VerticalAlignment="Top" Margin="0,500,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnShowAnswer" Grid.Column="0" Content="Hiện đáp án"/>
+            <Button x:Name="btnConfirm" Grid.Column="1" Content="Xác nhận"/>
+        </Grid>
+        <Grid x:Name="gridPoint" Width ="500" Height="60" VerticalAlignment="Top" Margin="0,540,0,0"/>
+        <Label VerticalAlignment="Top" Margin="0,640,0,0">Hút:</Label>
+        <Grid VerticalAlignment="Top" Margin="0,670,0,0" Height="120">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnBellConfirm">Xác nhận</Button>
+            <StackPanel x:Name="stackPlayerList"/>
+        </Grid>
+        <Label Content="Thời gian" HorizontalAlignment="Left" Margin="59,337,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblTime" Content="0" HorizontalAlignment="Left" Margin="126,337,0,0" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

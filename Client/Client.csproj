@@ -16,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Resources\1233.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\Effects\KD_1_Start.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

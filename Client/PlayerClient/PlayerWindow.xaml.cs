@@ -90,6 +90,7 @@ namespace Client.PlayerClient
 						pointsControl.Visibility = Visibility.Hidden;
 						startPlayerControl.Visibility = Visibility.Collapsed;
 						obstaPlayerControl.Visibility = Visibility.Collapsed;
+						accelPlayerControl.Visibility = Visibility.Collapsed;
 						finishPlayerControl.Visibility = Visibility.Collapsed;
 						switch (tokens[2]) {
 							case "POINT":
@@ -130,7 +131,8 @@ namespace Client.PlayerClient
 				case "VCNV":
 					switch (tokens[2]) {
 						case "START":
-							obstaPlayerControl.ResetGame();
+							string attach = tokens[3];
+							obstaPlayerControl.ResetGame(attach);
 							break;
 						case "SHOW":
 							string label = tokens[3];

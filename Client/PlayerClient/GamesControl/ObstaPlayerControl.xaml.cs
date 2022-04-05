@@ -76,11 +76,13 @@ namespace Client.PlayerClient.GamesControl
 
 		public void StartTimer()
 		{
-			txtAnswer.Text = "";
-			txtAnswer.IsEnabled = true;
-			//time = 15; lblTime.Content = time;
+			Dispatcher.Invoke(() => {
+				txtAnswer.Text = "";
+				txtAnswer.IsEnabled = true;
+				txtAnswer.Focus();
+			});
+			timeLimit = 1500; timeBegin = DateTime.Now;
 			timer.Start();
-			txtAnswer.Focus();
 		}
 		
 		void StopTimer()
@@ -89,12 +91,16 @@ namespace Client.PlayerClient.GamesControl
 			txtAnswer.IsEnabled = false;
 		}
 		
-		public void ResetGame()
+		public void ResetGame(string imagePath = "")
 		{
-			btnBell.IsEnabled = true;
-			txtAnswer.IsEnabled = false;
+			Dispatcher.Invoke(() => {
+				btnBell.IsEnabled = true;
+				txtAnswer.IsEnabled = false;
+				lblAnswer.Content = "";
+
+			});
 			timer.Stop();
-			lblAnswer.Content = "";
+			this.imagePath = imagePath;
 			setImage();
 		}
 
@@ -107,7 +113,7 @@ namespace Client.PlayerClient.GamesControl
 		private void txtAnswer_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (txtAnswer.IsEnabled == true && e.Key == Key.Enter) {
-				client.SendMessage("OLPA VCNV ANSWER " + HelperClass.MakeString(txtAnswer.Text));
+				client.SendMessage(String.Format("OLPA VCNV ANSWER {0} {1}", getTime(), HelperClass.MakeString(txtAnswer.Text)));
 				lblAnswer.Content = txtAnswer.Text;
 			}
 		}
