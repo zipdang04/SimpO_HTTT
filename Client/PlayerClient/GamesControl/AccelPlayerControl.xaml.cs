@@ -83,6 +83,9 @@ namespace Client.PlayerClient.GamesControl
 				mediaPlayer.Visibility = Visibility.Visible;
 				mediaPlayer.Position = TimeSpan.FromSeconds(0);
 				mediaPlayer.Play();
+			});
+			Dispatcher.Invoke(() =>
+			{
 				txtAnswer.Text = ""; txtAnswer.IsEnabled = true;
 				//lblTime.Content = time;
 				timer.Start();

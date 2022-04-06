@@ -31,6 +31,7 @@ namespace Server.HostServer
 
 		SimpleSocketTcpListener listener;
 		ObstacleClass obstaClass;
+		List<Label> labels = new List<Label>();
 		PlayerClass playerClass { get; set; }
 		public PointsControl pointsControl;
 		public AnswersControl answersControl;
@@ -66,6 +67,10 @@ namespace Server.HostServer
 			timer = new DispatcherTimer();
 			timer.Interval = TimeSpan.FromMilliseconds(2);
 			timer.Tick += timer_Tick;
+
+			labels.Add(lblHN1); labels.Add(lblHN2); labels.Add(lblHN3); labels.Add(lblHN4); labels.Add(lblTT);
+			for (int i = 0; i < 5; i++) labels[i].Content = obstaClass.questions[i].answer;
+			lblAnswer.Content = obstaClass.keyword;
 		}
 		public void sendMessageToEveryone(string message)
 		{
@@ -97,13 +102,16 @@ namespace Server.HostServer
 		{
 			btnHN1.IsEnabled = true;btnHN2.IsEnabled = true;btnHN3.IsEnabled = true;btnHN4.IsEnabled = true; btnTT.IsEnabled = false;
 			btnStart.IsEnabled = false; btnShowAnswer.IsEnabled = false; btnConfirm.IsEnabled = false;
-				
-			string command = string.Format("OLPA VCNV START {0}", HelperClass.MakeString(obstaClass.attach));
-			sendMessageToEveryone(command);
-			for (int i = 0; i < 4; i++) hasBelled[i] = false;
+			answersControl.Reset();
 			stackPlayerList.Children.Clear();
+
+			for (int i = 0; i < 4; i++) hasBelled[i] = false;
 			playerWinner = NaN;
 			remainingPoint = 80; cntRow = 0;
+			currentRow = NaN;
+			
+			string command = string.Format("OLPA VCNV START {0}", HelperClass.MakeString(obstaClass.attach));
+			sendMessageToEveryone(command);
 		}
 
 		public void PlayerAnswering(int player, string answer, int time)
