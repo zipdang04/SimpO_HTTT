@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using SimpleSockets.Client;
 using Server.QuestionClass;
 using Server.Information;
+using System.IO;
 
 namespace Client.PlayerClient.GamesControl
 {
@@ -36,7 +37,8 @@ namespace Client.PlayerClient.GamesControl
 			Dispatcher.Invoke(() => {
 				lblQuestion.Content = question.question;
 				try {
-					image.Source = new BitmapImage(new Uri(question.attach));
+					string path = Directory.GetCurrentDirectory() + @"\Resources\Media\" + question.attach;
+					image.Source = new BitmapImage(new Uri(path));
 				}
 				catch {
 					image = new Image();

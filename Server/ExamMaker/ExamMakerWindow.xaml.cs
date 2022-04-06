@@ -14,7 +14,9 @@ using System.Windows.Shapes;
 using System.Text.Json;
 using Server.QuestionClass;
 using System.IO;
+using System.IO.Compression;
 using Microsoft.Win32;
+using Server.Information;
 
 namespace Server.ExamMaker
 {
@@ -78,6 +80,21 @@ namespace Server.ExamMaker
 			tabObsta.Content = new ObstaControl(wholeExam.obstacle);
 			tabAccel.Content = new AccelControl(wholeExam.acceleration);
 			tabFinsh.Content = new FinishControl(wholeExam.finish);
+		}
+
+		private void btnMedia_Click(object sender, RoutedEventArgs e)
+		{
+			string dirPath = @"./Resources/Media";
+			OpenFileDialog openFileDialog = new OpenFileDialog();
+			if (openFileDialog.ShowDialog() == true) {
+				try {
+					HelperClass.ClearDirectory(new DirectoryInfo(dirPath));
+					ZipFile.ExtractToDirectory(openFileDialog.FileName, dirPath);
+				}
+				catch {
+					MessageBox.Show("Oh shit there's some problem :(", "err", MessageBoxButton.OK);
+				}
+			}
 		}
 	}
 }

@@ -31,16 +31,16 @@
     <None Update="Resources\Effects\KD_4_Start.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\KD_1_Start.mkv">
+    <None Update="Resources\TT2.mkv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\OExam.json">
+    <None Update="Resources\KD_1_Start.mkv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\ZipProcessing\" />
+    <Folder Include="Resources\Media\" />
   </ItemGroup>
 
 </Project>

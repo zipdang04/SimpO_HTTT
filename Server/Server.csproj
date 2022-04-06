@@ -30,6 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Resources\Media\x">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\OExam.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

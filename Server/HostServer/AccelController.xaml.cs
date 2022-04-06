@@ -143,5 +143,20 @@ namespace Server.HostServer
 			}
 			sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
 		}
+
+		private void btnTT2_Click(object sender, RoutedEventArgs e)
+		{
+			Prepare(1);
+		}
+
+		private void btnTT3_Click(object sender, RoutedEventArgs e)
+		{
+			Prepare(2);
+		}
+
+		private void btnTT4_Click(object sender, RoutedEventArgs e)
+		{
+			Prepare(3);
+		}
 	}
 }

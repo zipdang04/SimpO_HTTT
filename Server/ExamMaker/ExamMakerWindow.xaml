@@ -17,8 +17,9 @@
             <TabItem x:Name="tabAccel" Header="Tăng tốc"/>
             <TabItem x:Name="tabFinsh" Header="Về đích"/>
         </TabControl>
-        <Button x:Name="btnSave" Content="Lưu" HorizontalAlignment="Left" Margin="693,10,0,0" VerticalAlignment="Top" Height="30" Grid.RowSpan="2" Width="97" Click="btnSave_Click"/>
-        <Button x:Name="btnOpen" Content="Mở Excel" HorizontalAlignment="Left" Margin="570,10,0,0" VerticalAlignment="Top" Height="30" Grid.RowSpan="2" Width="97" Click="btnOpen_Click"/>
+        <Button x:Name="btnSave" Content="Lưu" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="30" Grid.RowSpan="2" Width="97" Click="btnSave_Click"/>
+        <Button x:Name="btnOpen" Content="Mở Excel" HorizontalAlignment="Right" Margin="0,10,110,0" VerticalAlignment="Top" Height="30" Grid.RowSpan="2" Width="97" Click="btnOpen_Click"/>
+        <Button x:Name="btnMedia" Content="Thêm Media" HorizontalAlignment="Right" Margin="0,10,210,0" VerticalAlignment="Top" Height="30" Grid.RowSpan="2" Width="97" Click="btnMedia_Click"/>
 
     </Grid>
 </Window>

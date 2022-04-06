@@ -41,7 +41,7 @@ namespace Client.PlayerClient.GamesControl
 		{
 			try {
 				Dispatcher.Invoke(() => {
-					path = Directory.GetCurrentDirectory() + @"\Resources\" + fileName;
+					path = Directory.GetCurrentDirectory() + @"\Resources\Media\" + fileName;
 					image.Source = new BitmapImage(new Uri(path));
 
 					for (int i = 0; i < 5; i++) rects[i].Visibility = Visibility.Visible;

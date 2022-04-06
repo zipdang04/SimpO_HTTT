@@ -46,6 +46,7 @@ namespace Client.PlayerClient.GamesControl
 			timer.Interval = TimeSpan.FromMilliseconds(2);
 			timer.Tick += timer_Tick;
 			mediaPlayer.LoadedBehavior = MediaState.Manual;
+			
 		}
 
 
@@ -53,7 +54,7 @@ namespace Client.PlayerClient.GamesControl
 		void timer_Tick(object? sender, EventArgs e)
 		{
 			int time = getTime();
-			lblTime.Content = time / 100.0;
+			lblTime.Content = string.Format("{0:0.00}", time / 100.0);
 			//
 			if (time >= timeLimit){
 				StopTimer();
@@ -64,15 +65,15 @@ namespace Client.PlayerClient.GamesControl
 		public void ShowQuestion(int turn, string question, string attach, int time)
 		{
 			timeLimit = time;
-			attach = Directory.GetCurrentDirectory() + @"\Resources\" + attach;
+			attach = Directory.GetCurrentDirectory() + @"\Resources\Media\" + attach;
 			//attach = "Resources/" + attach;
 			Dispatcher.Invoke(() => {
 				mediaPlayer.Source = new Uri(attach);
-				mediaPlayer.Play();
-				mediaPlayer.Visibility = Visibility.Hidden;
+				//mediaPlayer.Visibility = Visibility.Hidden;
 				lblTemp.Content = turn;
 				lblQuestion.Content = question;
-				//mediaPlayer.Stop();
+				mediaPlayer.Play();
+				mediaPlayer.Stop();
 			});
 		}
 
@@ -80,13 +81,14 @@ namespace Client.PlayerClient.GamesControl
 		{
 			timeBegin = DateTime.Now;
 			Dispatcher.Invoke(() => {
-				mediaPlayer.Visibility = Visibility.Visible;
+				//mediaPlayer.Visibility = Visibility.Visible;
 				mediaPlayer.Position = TimeSpan.FromSeconds(0);
-				mediaPlayer.Play();
 				txtAnswer.Text = ""; txtAnswer.IsEnabled = true;
-				//lblTime.Content = time;
-				timer.Start();
 				txtAnswer.Focus();
+				mediaPlayer.Play();
+			});
+			Dispatcher.Invoke(() => { 
+				timer.Start();
 			});
 		}
 

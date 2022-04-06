@@ -30,8 +30,9 @@
         </TabControl>
         <Label x:Name="lblIP" Content="IP: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblPort" Content="Cổng: " HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-        
+
         <TextBox x:Name="txtPort" HorizontalAlignment="Left" Margin="59,45,0,0" TextWrapping="Wrap" Text="6996" VerticalAlignment="Top" Width="120" InputScope="Number"/>
-        <Button x:Name="btnStart" Content="Khởi chạy server" HorizontalAlignment="Left" Height="80" Margin="827,0,0,0" VerticalAlignment="Center" Width="163" Click="btnStart_Click"/>
+        <Button x:Name="btnStart" Content="Khởi chạy server" HorizontalAlignment="Right" Height="80" Margin="0,0,10,0" VerticalAlignment="Center" Width="120" Click="btnStart_Click"/>
+        <Button x:Name="btnSend" Content="Gửi file" HorizontalAlignment="Right" Height="80" Margin="0,0,150,0" VerticalAlignment="Center" Width="120" Click="btnSend_Click"/>
     </Grid>
 </Window>

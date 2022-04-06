@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
+using System.IO.Compression;
 using System.Text.Json;
 
 using SimpleSockets.Server;
@@ -159,5 +160,14 @@ namespace Server.HostServer
 		private void tabObsta_GotFocus(object sender, RoutedEventArgs e){sendMessageToEveryone("OLPA SCENE VCNV");}
 		private void tabAccel_GotFocus(object sender, RoutedEventArgs e){sendMessageToEveryone("OLPA SCENE TT");}
 		private void tabFinish_GotFocus(object sender, RoutedEventArgs e){sendMessageToEveryone("OLPA SCENE VD");}
+
+		private void btnSend_Click(object sender, RoutedEventArgs e)
+		{
+			string source = @"Resources/Media", dest = @"Resources/Media.zip";
+			if (File.Exists(dest)) File.Delete(dest);
+			ZipFile.CreateFromDirectory(source, dest);
+			foreach (KeyValuePair<int, IClientInfo> client in listener.GetConnectedClients())
+				listener.SendFile(client.Value.Id, dest, @"./Resources/Media.zip");
+		}
 	}
 }

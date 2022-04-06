@@ -19,6 +19,8 @@ using Client.PlayerClient.GamesControl;
 using Server.QuestionClass;
 using System.IO;
 using System.Text.Json;
+using SimpleSockets.Messaging;
+using System.IO.Compression;
 
 namespace Client.PlayerClient
 {
@@ -27,7 +29,7 @@ namespace Client.PlayerClient
 	/// </summary>
 	public partial class PlayerWindow : Window
 	{
-		public static readonly string filePath = "Resources/OExam.json";
+		//public static readonly string filePath = "Resources/OExam.json";
 
 		SimpleSocketClient client;
 		LogInWindow logInWindow;
@@ -38,28 +40,29 @@ namespace Client.PlayerClient
 		public ObstaPlayerControl obstaPlayerControl;
 		public AccelPlayerControl accelPlayerControl;
 		public FinishPlayerControl finishPlayerControl;
-		WholeExamClass? wholeExam;
+		//WholeExamClass? wholeExam;
 		public PlayerWindow(LogInWindow logInWindow, SimpleSocketClient client)
 		{
 			InitializeComponent();
 			this.logInWindow = logInWindow;
 
-			try {
-				byte[] jsonString = File.ReadAllBytes(filePath);
-				var utf8Reader = new Utf8JsonReader(jsonString);
-				wholeExam = JsonSerializer.Deserialize<WholeExamClass>(ref utf8Reader);
-				if (wholeExam == null)
-					wholeExam = new WholeExamClass();
-			}
-			catch {
-				wholeExam = new WholeExamClass();
-				MessageBox.Show("co van de, khong choi duoc");
-				Close();
-			}
+			//try {
+			//	byte[] jsonString = File.ReadAllBytes(filePath);
+			//	var utf8Reader = new Utf8JsonReader(jsonString);
+			//	wholeExam = JsonSerializer.Deserialize<WholeExamClass>(ref utf8Reader);
+			//	if (wholeExam == null)
+			//		wholeExam = new WholeExamClass();
+			//}
+			//catch {
+			//	wholeExam = new WholeExamClass();
+			//	MessageBox.Show("co van de, khong choi duoc");
+			//	Close();
+			//}
 
 			this.client = client;
 			playersInfo = new PlayerClass();
 			this.client.MessageReceived += ServerMessageReceived;
+			this.client.FileReceiver += ClientOnFileReceiver;
 
 			pointsControl = new PointsControl(playersInfo);
 			startPlayerControl = new StartPlayerControl(client);
@@ -76,6 +79,14 @@ namespace Client.PlayerClient
 			obstaPlayerControl.Visibility = Visibility.Collapsed;
 			accelPlayerControl.Visibility = Visibility.Collapsed;
 			finishPlayerControl.Visibility = Visibility.Collapsed;
+		}
+		private static void ClientOnFileReceiver(SimpleSocketClient a, int currentPart, int totalParts, string loc, MessageState state)
+		{
+			if (File.Exists(loc)) {
+				string dirPath = @"Resources/Media";
+				HelperClass.ClearDirectory(new DirectoryInfo(dirPath));
+				ZipFile.ExtractToDirectory(loc, dirPath);
+			}
 		}
 
 		private void ServerMessageReceived(SimpleSocket a, string msg)
