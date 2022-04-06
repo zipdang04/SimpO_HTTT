@@ -38,10 +38,11 @@ namespace Server.HostServer
 
 		bool[] hasBelled = new bool[4] { false, false, false, false };
 		int playerWinner = NaN;
-		int remainingPoint;
+		int remainingPoint, cntRow;
+		int currentRow = NaN;
 
 		DispatcherTimer timer;
-		int timeLimit;
+		const int timeLimit = 1600;
 		DateTime timeBegin;
 		int getTime()
 		{
@@ -63,7 +64,7 @@ namespace Server.HostServer
 			gridPoint.Children.Add(pointsControl);
 
 			timer = new DispatcherTimer();
-			timer.Interval = TimeSpan.FromSeconds(1);
+			timer.Interval = TimeSpan.FromMilliseconds(2);
 			timer.Tick += timer_Tick;
 		}
 		public void sendMessageToEveryone(string message)
@@ -88,15 +89,21 @@ namespace Server.HostServer
 		public void SomeoneBelling(int player)
 		{
 			if (hasBelled[player]) return;
-			stackPlayerList.Children.Add(new PlayerVCNVBelling(player, playerClass.names[player]));
+			Dispatcher.Invoke(() =>{
+				stackPlayerList.Children.Add(new PlayerVCNVBelling(player, playerClass.names[player]));
+			});
 		}
 		private void btnReset_Click(object sender, RoutedEventArgs e)
 		{
+			btnHN1.IsEnabled = true;btnHN2.IsEnabled = true;btnHN3.IsEnabled = true;btnHN4.IsEnabled = true;
+			btnStart.IsEnabled = false; btnShowAnswer.IsEnabled = false; btnConfirm.IsEnabled = false;
+				
 			string command = string.Format("OLPA VCNV START {0}", HelperClass.MakeString(obstaClass.attach));
 			sendMessageToEveryone(command);
 			for (int i = 0; i < 4; i++) hasBelled[i] = false;
+			stackPlayerList.Children.Clear();
 			playerWinner = NaN;
-			remainingPoint = 80;
+			remainingPoint = 80; cntRow = 0;
 		}
 
 		public void PlayerAnswering(int player, string answer, int time)
@@ -106,20 +113,16 @@ namespace Server.HostServer
 
 		void Prepare(int qIdx)
 		{
+			currentRow = qIdx; cntRow++;
 			OQuestion question = obstaClass.questions[0];
 			questionBox.displayQA(question.question, question.answer);
 			btnStart.IsEnabled = true;
 
-			if (qIdx == 4) remainingPoint -= 10;
-			else remainingPoint -= 20;
+			if (cntRow == 5) remainingPoint -= 10;
+			else if (cntRow > 1) remainingPoint -= 20;
 			
 			string command = string.Format("OLPA VCNV SHOW {0} {1}", qIdx, HelperClass.ServerJoinQA(question));
 			sendMessageToEveryone(command);
-		}
-		private void btnHN1_Click(object sender, RoutedEventArgs e)
-		{
-			btnHN1.IsEnabled = false;
-			Prepare(0);
 		}
 
 		private void btnStart_Click(object sender, RoutedEventArgs e)
@@ -128,6 +131,67 @@ namespace Server.HostServer
 
 			timer.Start(); timeBegin = DateTime.Now;
 			btnStart.IsEnabled = false;
+		}
+
+		private void btnConfirm_Click(object sender, RoutedEventArgs e)
+		{
+			bool willOpen = false;
+			for (int i = 0; i < 4; i++){
+				if (answersControl.checkBoxes[i].IsChecked == true){
+					playerClass.points[i] += 10;
+					willOpen = true;
+				}
+			}
+			if (willOpen) sendMessageToEveryone(string.Format("OLPA VCNV OPEN {0}", currentRow));
+			btnConfirm.IsEnabled = false;
+		}
+		private void btnHN1_Click(object sender, RoutedEventArgs e)
+		{
+			btnHN1.IsEnabled = false;
+			Prepare(0);
+		}
+		private void btnHN2_Click(object sender, RoutedEventArgs e)
+		{
+			btnHN2.IsEnabled = false;
+			Prepare(1);
+		}
+
+		private void btnHN3_Click(object sender, RoutedEventArgs e)
+		{
+			btnHN3.IsEnabled = false;
+			Prepare(2);
+		}
+
+		private void btnHN4_Click(object sender, RoutedEventArgs e)
+		{
+			btnHN4.IsEnabled = false;
+			Prepare(3);
+		}
+
+		private void btnTT_Click(object sender, RoutedEventArgs e)
+		{
+			btnTT.IsEnabled = false;
+			Prepare(4);
+		}
+
+		private void btnBellConfirm_Click(object sender, RoutedEventArgs e)
+		{
+			for (int i = 0; i < stackPlayerList.Children.Count; i++)
+			{
+				PlayerVCNVBelling control = (PlayerVCNVBelling) stackPlayerList.Children[i];
+				int player = control.playerIndex;
+				if (control.radioCorrect.IsChecked == true){
+					if (playerWinner == NaN){
+						playerWinner = player;
+						playerClass.points[player] += remainingPoint;
+					}
+					stackPlayerList.Children.Remove(control); i--;
+				}
+				else if (control.radioWrong.IsChecked == true){
+					stackPlayerList.Children.Remove(control);
+					i--;
+				}
+			}
 		}
 	}
 }

@@ -142,6 +142,9 @@ namespace Client.PlayerClient
 						case "TIME":
 							obstaPlayerControl.StartTimer();
 							break;
+						case "OPEN":
+							obstaPlayerControl.Erase(Convert.ToInt32(tokens[3]));
+							break;
 					}
 					break;
 				case "TT":

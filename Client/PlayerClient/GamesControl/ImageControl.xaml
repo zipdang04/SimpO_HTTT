@@ -7,11 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Image x:Name="image" Stretch="Uniform" />
-        <Rectangle x:Name="rectUL" Fill="Blue"/>
-        <Rectangle x:Name="rectUR" Fill="Blue"/>
-        <Rectangle x:Name="rectDL" Fill="Blue"/>
-        <Rectangle x:Name="rectDR" Fill="Blue"/>
-        <Rectangle x:Name="rectTT" Fill="Red"/>
+        <Image x:Name="image" Stretch="Uniform" SizeChanged="image_SizeChanged" />
+        <Rectangle x:Name="rectUL" HorizontalAlignment="Center" VerticalAlignment="Center" Width="77.5" Height="107.5" Margin="77.5,107.5,0,0" Fill="Blue"/>
+        <Rectangle x:Name="rectUR" HorizontalAlignment="Center" VerticalAlignment="Center" Width="77.5" Height="107.5" Margin="77.5,-107.5,0,0" Fill="Blue"/>
+        <Rectangle x:Name="rectDL" HorizontalAlignment="Center" VerticalAlignment="Center" Width="77.5" Height="107.5" Margin="-77.5,107.5,0,0" Fill="Blue"/>
+        <Rectangle x:Name="rectDR" HorizontalAlignment="Center" VerticalAlignment="Center" Width="77.5" Height="107.5" Margin="-77.5,-107.5,0,0" Fill="Blue"/>
+        <Rectangle x:Name="rectTT" HorizontalAlignment="Center" VerticalAlignment="Center" Width="77.5" Height="107.5" Margin="0,0,0,0" Fill="Red"/>
     </Grid>
 </UserControl>

@@ -30,7 +30,7 @@ namespace Client.PlayerClient.GamesControl
 
 		string imagePath;
 
-		int timeLimit;
+		const int timeLimit = 1500;
 		DateTime timeBegin;
 		int getTime()
 		{
@@ -52,7 +52,7 @@ namespace Client.PlayerClient.GamesControl
 		{
 			imageControl.setImage(imagePath);
 		}
-		void erase(int idx) {
+		public void Erase(int idx) {
 			imageControl.erase(idx);
 		}
 
@@ -81,12 +81,13 @@ namespace Client.PlayerClient.GamesControl
 				txtAnswer.IsEnabled = true;
 				txtAnswer.Focus();
 			});
-			timeLimit = 1500; timeBegin = DateTime.Now;
+			timeBegin = DateTime.Now;
 			timer.Start();
 		}
 		
 		void StopTimer()
 		{
+			timer.Stop();
 			txtAnswer.Text = "";
 			txtAnswer.IsEnabled = false;
 		}
