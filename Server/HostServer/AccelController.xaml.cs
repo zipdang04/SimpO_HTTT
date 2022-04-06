@@ -132,14 +132,21 @@ namespace Server.HostServer
 			sendMessageToEveryone(command);
 
 			PlayerAnswers playerAnswers = answersControl.data.answers;
-			bool[] used = new bool[4] { false, false, false, false };
+			bool[] visited = new bool[4] { false, false, false, false };
 			for (int pts = 40; pts > 0; pts -= 10) {
 				int time = 5000;
 				List<int> playerDeserved = new List<int>();
 				for (int i = 0; i < 4; i++)
 					if (answersControl.checkBoxes[i].IsChecked == true) {
-						//
+						int curTime = answersControl.data.answers.times[i];
+						if (curTime < time) playerDeserved = new List<int> { i };
+						else if (curTime == time) playerDeserved.Add(i);
 					}
+				if (playerDeserved.Count == 0) break;
+				foreach (int player in playerDeserved){
+					visited[player] = true;
+					playerClass.points[player] += pts;
+				}
 			}
 			sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
 		}
