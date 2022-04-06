@@ -95,7 +95,7 @@ namespace Server.HostServer
 		}
 		private void btnReset_Click(object sender, RoutedEventArgs e)
 		{
-			btnHN1.IsEnabled = true;btnHN2.IsEnabled = true;btnHN3.IsEnabled = true;btnHN4.IsEnabled = true;
+			btnHN1.IsEnabled = true;btnHN2.IsEnabled = true;btnHN3.IsEnabled = true;btnHN4.IsEnabled = true; btnTT.IsEnabled = false;
 			btnStart.IsEnabled = false; btnShowAnswer.IsEnabled = false; btnConfirm.IsEnabled = false;
 				
 			string command = string.Format("OLPA VCNV START {0}", HelperClass.MakeString(obstaClass.attach));
@@ -117,9 +117,11 @@ namespace Server.HostServer
 			OQuestion question = obstaClass.questions[0];
 			questionBox.displayQA(question.question, question.answer);
 			btnStart.IsEnabled = true;
+			answersControl.Reset();
 
 			if (cntRow == 5) remainingPoint -= 10;
 			else if (cntRow > 1) remainingPoint -= 20;
+			if (cntRow == 4) btnTT.IsEnabled = true;
 			
 			string command = string.Format("OLPA VCNV SHOW {0} {1}", qIdx, HelperClass.ServerJoinQA(question));
 			sendMessageToEveryone(command);

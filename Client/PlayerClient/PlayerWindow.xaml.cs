@@ -180,9 +180,11 @@ namespace Client.PlayerClient
 
 		private void Window_Closed(object sender, EventArgs e)
 		{
-			try { client.Close(); }
+			try { 
+				client.Close(); 
+				logInWindow.Show();
+			}
 			catch { }
-			logInWindow.Show();
 		}
 	}
 }

@@ -72,7 +72,7 @@ namespace Client.PlayerClient.GamesControl
 				mediaPlayer.Visibility = Visibility.Hidden;
 				lblTemp.Content = turn;
 				lblQuestion.Content = question;
-				mediaPlayer.Stop();
+				//mediaPlayer.Stop();
 			});
 		}
 
@@ -81,6 +81,7 @@ namespace Client.PlayerClient.GamesControl
 			timeBegin = DateTime.Now;
 			Dispatcher.Invoke(() => {
 				mediaPlayer.Visibility = Visibility.Visible;
+				mediaPlayer.Position = TimeSpan.FromSeconds(0);
 				mediaPlayer.Play();
 				txtAnswer.Text = ""; txtAnswer.IsEnabled = true;
 				//lblTime.Content = time;

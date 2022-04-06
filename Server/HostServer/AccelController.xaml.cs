@@ -121,6 +121,7 @@ namespace Server.HostServer
 			for (int i = 0; i < 4; i++)
 				command = string.Format(command, answers.times[i]);
 			sendMessageToEveryone(command);
+			sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
 		}
 
 		private void btnConfirm_Click(object sender, RoutedEventArgs e)
@@ -129,6 +130,18 @@ namespace Server.HostServer
 			for (int i = 0; i < 4; i++)
 				command = string.Format(command, answersControl.checkBoxes[i].IsChecked);
 			sendMessageToEveryone(command);
+
+			PlayerAnswers playerAnswers = answersControl.data.answers;
+			bool[] used = new bool[4] { false, false, false, false };
+			for (int pts = 40; pts > 0; pts -= 10) {
+				int time = 5000;
+				List<int> playerDeserved = new List<int>();
+				for (int i = 0; i < 4; i++)
+					if (answersControl.checkBoxes[i].IsChecked == true) {
+						//
+					}
+			}
+			sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
 		}
 	}
 }
