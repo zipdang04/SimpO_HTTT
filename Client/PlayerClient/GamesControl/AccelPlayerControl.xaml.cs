@@ -83,13 +83,7 @@ namespace Client.PlayerClient.GamesControl
 			Dispatcher.Invoke(() => {
 				//mediaPlayer.Visibility = Visibility.Visible;
 				mediaPlayer.Position = TimeSpan.FromSeconds(0);
-<<<<<<< HEAD
-=======
 				mediaPlayer.Play();
-			});
-			Dispatcher.Invoke(() =>
-			{
->>>>>>> 2ce3c929cbc755b1f3ba31b3a87a6808596724da
 				txtAnswer.Text = ""; txtAnswer.IsEnabled = true;
 				txtAnswer.Focus();
 				mediaPlayer.Play();
