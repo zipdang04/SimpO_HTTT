@@ -192,7 +192,7 @@ namespace Server.HostServer
 			if (questionPtr == 3) btnShowQuestion.IsEnabled = false;
 			difficulty = quesDifficulty[currentPtr]; score = FinishClass.QUES_POINT[difficulty];
 			
-			OQuestion question = finishClass.questions[playerTurn][currentPtr][difficulty];
+			OQuestion question = finishClass.questions[playerTurn][difficulty][currentPtr];
 			questionBox.displayQA(question.question, question.answer);
 			sendMessageToEveryone(string.Format("OLPA VD QUES {0}", HelperClass.ServerJoinQA(question)));
 			

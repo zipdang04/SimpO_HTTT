@@ -16,9 +16,11 @@
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Label x:Name="lblQuestion" Grid.Column="0"/>
+            <Label Grid.Column="0">
+                <TextBlock x:Name="txtQuestion"/>
+            </Label>
             <Image x:Name="image" Grid.Column="1"/>
         </Grid>
-        <Button x:Name="btnBell" Grid.Row="1" IsEnabled="False" Click="btnBell_Click">Giành quyền trả lời</Button>
+        <Button x:Name="btnBell" IsEnabled="False" Grid.Row="1"  Click="btnBell_Click" Background="Red" Foreground="White" FontWeight="Bold">Giành quyền trả lời</Button>
     </Grid>
 </UserControl>

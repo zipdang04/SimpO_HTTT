@@ -122,7 +122,7 @@ namespace Server.HostServer
 		void Prepare(int qIdx)
 		{
 			currentRow = qIdx; cntRow++;
-			OQuestion question = obstaClass.questions[0];
+			OQuestion question = obstaClass.questions[qIdx];
 			questionBox.displayQA(question.question, question.answer);
 			btnStart.IsEnabled = true;
 			answersControl.Reset();

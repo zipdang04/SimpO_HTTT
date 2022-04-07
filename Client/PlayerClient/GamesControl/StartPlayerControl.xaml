@@ -11,7 +11,9 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="lblQuestion" Content="Label" Grid.Column="0"/>
+        <Label Grid.Column="0">
+            <TextBlock x:Name="txtQuestion"/>
+        </Label>
         <Image x:Name="image" Grid.Column="1"/>
     </Grid>
 </UserControl>

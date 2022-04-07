@@ -22,7 +22,9 @@
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Label x:Name="lblQuestion" Content="Label" Grid.Column="0" FontSize="17"/>
+            <Label Grid.Column="0" FontSize="17">
+                <TextBlock x:Name="txtQuestion"/>
+            </Label>
         </Grid>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
@@ -32,6 +34,6 @@
             <TextBox x:Name="txtAnswer" Text="" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False" Grid.Column="0" KeyDown="txtAnswer_KeyDown"/>
             <Label x:Name="lblAnswer" Content="" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1"/>
         </Grid>
-        <Button x:Name="btnBell" Content="Giành quyền CNV" Grid.Row="4" Click="btnBell_Click" IsEnabled="False"/>
+        <Button x:Name="btnBell" Content="Giành quyền CNV" Grid.Row="4" Click="btnBell_Click" IsEnabled="False" Background="Red"/>
     </Grid>
 </UserControl>

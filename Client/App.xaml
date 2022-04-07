@@ -4,6 +4,9 @@
              xmlns:local="clr-namespace:Client"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
     </Application.Resources>
 </Application>

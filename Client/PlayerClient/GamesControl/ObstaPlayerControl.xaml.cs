@@ -70,7 +70,7 @@ namespace Client.PlayerClient.GamesControl
 		{
 			Dispatcher.Invoke(() => {
 				lblTemp.Content = "Hàng ngang " + label;
-				lblQuestion.Content = question;
+				txtQuestion.Text = question;
 			});
 		}
 

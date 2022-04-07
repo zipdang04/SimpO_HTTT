@@ -36,7 +36,7 @@ namespace Client.PlayerClient.GamesControl
 		public void ShowQuestion(OQuestion question)
 		{
 			Dispatcher.Invoke(() => { 
-				lblQuestion.Content = question.question;
+				txtQuestion.Text = question.question;
 				try {
 					string path = Directory.GetCurrentDirectory() + @"\Resources\Media\" + question.attach;
 					image.Source = new BitmapImage(new Uri(path));
