@@ -62,7 +62,7 @@ namespace Client.PlayerClient
 			this.client = client;
 			playersInfo = new PlayerClass();
 			this.client.MessageReceived += ServerMessageReceived;
-			this.client.FileReceiver += ClientOnFileReceiver;
+			this.client.BytesReceived += ServerBytesReceived;
 
 			pointsControl = new PointsControl(playersInfo);
 			startPlayerControl = new StartPlayerControl(client);
@@ -80,13 +80,17 @@ namespace Client.PlayerClient
 			accelPlayerControl.Visibility = Visibility.Collapsed;
 			finishPlayerControl.Visibility = Visibility.Collapsed;
 		}
-		private static void ClientOnFileReceiver(SimpleSocketClient a, int currentPart, int totalParts, string loc, MessageState state)
-		{
-			if (File.Exists(loc)) {
-				string dirPath = @"Resources/Media";
-				HelperClass.ClearDirectory(new DirectoryInfo(dirPath));
-				ZipFile.ExtractToDirectory(loc, dirPath);
-			}
+
+		public static void ServerBytesReceived(SimpleSocketClient client, byte[] messageBytes) {
+			string zip = @"Resources/Media.zip";
+			if (File.Exists(zip)) File.Delete(zip);
+			FileStream file = File.Create(zip);//.Write(messageBytes);
+			file.Write(messageBytes);
+			file.Close();
+
+			string dirPath = @"Resources/Media";
+			HelperClass.ClearDirectory(new DirectoryInfo(dirPath));
+			ZipFile.ExtractToDirectory(zip, dirPath);
 		}
 
 		private void ServerMessageReceived(SimpleSocket a, string msg)
@@ -95,6 +99,9 @@ namespace Client.PlayerClient
 			int len = tokens.Count;
 			
 			switch (tokens[1]) {
+				case "FILE":
+					
+					break;
 				case "SCENE":
 					Dispatcher.Invoke(() =>
 					{

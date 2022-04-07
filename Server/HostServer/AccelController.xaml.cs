@@ -137,7 +137,7 @@ namespace Server.HostServer
 				int time = 5000;
 				List<int> playerDeserved = new List<int>();
 				for (int i = 0; i < 4; i++)
-					if (answersControl.checkBoxes[i].IsChecked == true) {
+					if (visited[i] == false && answersControl.checkBoxes[i].IsChecked == true) {
 						int curTime = answersControl.data.answers.times[i];
 						if (curTime < time) playerDeserved = new List<int> { i };
 						else if (curTime == time) playerDeserved.Add(i);

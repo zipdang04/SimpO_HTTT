@@ -166,8 +166,9 @@ namespace Server.HostServer
 			string source = @"Resources/Media", dest = @"Resources/Media.zip";
 			if (File.Exists(dest)) File.Delete(dest);
 			ZipFile.CreateFromDirectory(source, dest);
+			byte[] goddamn = File.ReadAllBytes(dest);
 			foreach (KeyValuePair<int, IClientInfo> client in listener.GetConnectedClients())
-				listener.SendFile(client.Value.Id, dest, @"./Resources/Media.zip");
+				listener.SendBytes(client.Value.Id, goddamn);
 		}
 	}
 }
