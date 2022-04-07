@@ -152,6 +152,7 @@ namespace Server.HostServer
 					willOpen = true;
 				}
 			}
+			sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
 			if (willOpen) sendMessageToEveryone(string.Format("OLPA VCNV OPEN {0}", currentRow));
 			btnConfirm.IsEnabled = false;
 		}
@@ -194,6 +195,7 @@ namespace Server.HostServer
 					if (playerWinner == NaN){
 						playerWinner = player;
 						playerClass.points[player] += remainingPoint;
+						sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
 					}
 					stackPlayerList.Children.Remove(control); i--;
 				}
