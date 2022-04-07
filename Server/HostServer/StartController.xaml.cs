@@ -29,8 +29,7 @@ namespace Server.HostServer
 	{
 		public const int NaN = -1;
 
-		DispatcherTimer timerMain;
-		int timeMainRemaining;
+		//int timeMainRemaining;
 
 		SimpleSocketTcpListener listener;
 		StartClass startClass;
@@ -40,6 +39,16 @@ namespace Server.HostServer
 
 		int playerTurn = NaN;
 		int questionPtr = 0;
+
+		//DispatcherTimer timer;
+		DispatcherTimer timerMain;
+		const int timeLimit = 6000;
+		DateTime timeBegin;
+		int getTime()
+		{
+			TimeSpan span = DateTime.Now - timeBegin;
+			return (span.Seconds * 1000 + span.Milliseconds) / 10;
+		}
 
 		public StartController(SimpleSocketTcpListener listener, StartClass startClass, PlayerClass playerClass, PlayerNetwork playerNetwork)
 		{
@@ -70,7 +79,7 @@ namespace Server.HostServer
 
 		public void showQuestion()
 		{
-			if (timeMainRemaining == 0) {
+			if (timerMain.IsEnabled == false) {
 				lblStartQuestion.Content = "";
 				lblStartAnswer.Content = "";
 				return;
@@ -95,8 +104,8 @@ namespace Server.HostServer
 		private void StartTurn(int player)
 		{
 			playerTurn = player; questionPtr = 0;
-			timeMainRemaining = 60;
-			timerMain.Start(); showQuestion();
+			timeBegin = DateTime.Now; timerMain.Start(); 
+			showQuestion();
 			btnCorrect.IsEnabled = true;
 			btnWrong.IsEnabled = true;
 			btnStartTurn1.IsEnabled = false;
@@ -144,9 +153,9 @@ namespace Server.HostServer
 
 		void timerMain_Tick(object? sender, EventArgs e)
 		{
-			timeMainRemaining--;
-			lblTime.Content = timeMainRemaining.ToString();
-			if (timeMainRemaining == 0) {
+			int time = getTime();
+			lblTime.Content = string.Format("{0:0.00}", time / 100.0);
+			if (time >= timeLimit) {
 				playerTurn = -1;
 				timerMain.Stop();
 

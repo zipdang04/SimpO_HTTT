@@ -153,7 +153,7 @@ namespace Client.PlayerClient
 							obstaPlayerControl.ResetGame(attach);
 							break;
 						case "SHOW":
-							string label = tokens[3];
+							string label = (Convert.ToInt32(tokens[3]) + 1).ToString();
 							string question = tokens[4];
 							obstaPlayerControl.ShowQuestion(label, question);
 							break;

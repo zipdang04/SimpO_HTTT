@@ -57,12 +57,18 @@ namespace Client.PlayerClient
 				client.StartClient(serverIP, serverPort);
 			} catch {
 				MessageBox.Show("Có lỗi trong khi kết nối");
+				client.Close();
 				return;
 			}
+			MessageBox.Show("Đã kết nối, vui lòng chờ đợi", "đã nối", MessageBoxButton.OK) ;
+			Dispatcher.Invoke(() => {
+				button.IsEnabled = false;
+			});
 		}
 
 		private void ConnectedToServer(SimpleSocket a){
-			client.SendMessage("OLPA S " + playerPosition.ToString());
+			client.SendMessage("OLPA S " + playerPosition.ToString()); 
+			client.ConnectedToServer -= ConnectedToServer;
 		}
 
 		private void ServerMessageReceived(SimpleSocket a, string msg)
@@ -74,9 +80,14 @@ namespace Client.PlayerClient
 					PlayerWindow playerWindow = new PlayerWindow(this, client);
 					playerWindow.Show(); Hide();
 				});
-			} else
+			} else if (msg == "OLPA FAILED")
 			{
 				MessageBox.Show("Kết nối tới máy chủ thất bại: có thể là bị trùng vị trí đứng");
+				client.Close();
+				client.ConnectedToServer += ConnectedToServer;
+				Dispatcher.Invoke(() => {
+					button.IsEnabled = true;
+				});
 			}
 		}
 
