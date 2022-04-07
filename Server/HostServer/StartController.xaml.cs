@@ -47,7 +47,7 @@ namespace Server.HostServer
 		int getTime()
 		{
 			TimeSpan span = DateTime.Now - timeBegin;
-			return (span.Seconds * 1000 + span.Milliseconds) / 10;
+			return (span.Minutes * 60 * 1000 + span.Seconds * 1000 + span.Milliseconds) / 10;
 		}
 
 		public StartController(SimpleSocketTcpListener listener, StartClass startClass, PlayerClass playerClass, PlayerNetwork playerNetwork)

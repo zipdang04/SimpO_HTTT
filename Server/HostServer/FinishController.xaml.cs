@@ -67,6 +67,8 @@ namespace Server.HostServer
 				for (int j = 0; j < 3; j++) {
 					chosen[i][j] = new RadioButton();
 					chosen[i][j].GroupName = i.ToString();
+					chosen[i][j].HorizontalAlignment = HorizontalAlignment.Center;
+					chosen[i][j].VerticalAlignment = VerticalAlignment.Center;
 
 					grdChoosePoint.Children.Add(chosen[i][j]);
 					Grid.SetRow(chosen[i][j], i + 1);

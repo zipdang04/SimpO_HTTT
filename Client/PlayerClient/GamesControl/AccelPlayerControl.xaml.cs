@@ -115,7 +115,7 @@ namespace Client.PlayerClient.GamesControl
 		{
 			if (e.Key == Key.Enter)
 			{
-				client.SendMessage(string.Format("OLPA TT ANSWER {0} {1}", getTime(), txtAnswer.Text));
+				client.SendMessage(string.Format("OLPA TT ANSWER {0} {1}", getTime(), HelperClass.MakeString(txtAnswer.Text)));
 				Dispatcher.Invoke(() => { 
 					lblAnswer.Content = txtAnswer.Text;
 					txtAnswer.Text = "";

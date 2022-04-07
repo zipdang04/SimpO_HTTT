@@ -143,7 +143,8 @@ namespace Server.HostServer
 					switch (tokens[2]) {
 						case "ANSWER":
 							int time = Convert.ToInt32(tokens[3]);
-							string answer = tokens[4];
+							string answer = "";
+							if (tokens.Count == 5) answer = tokens[4];
 							accelController.PlayerAnswering(player, answer, time);
 						break;
 					}

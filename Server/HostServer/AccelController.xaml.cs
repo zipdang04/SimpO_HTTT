@@ -139,7 +139,10 @@ namespace Server.HostServer
 				for (int i = 0; i < 4; i++)
 					if (visited[i] == false && answersControl.checkBoxes[i].IsChecked == true) {
 						int curTime = answersControl.data.answers.times[i];
-						if (curTime < time) playerDeserved = new List<int> { i };
+						if (curTime < time) {
+							playerDeserved = new List<int> { i };
+							time = curTime;
+						}
 						else if (curTime == time) playerDeserved.Add(i);
 					}
 				if (playerDeserved.Count == 0) break;
