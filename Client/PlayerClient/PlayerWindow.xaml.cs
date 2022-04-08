@@ -16,6 +16,7 @@ using Server.Information;
 using SimpleSockets;
 using SimpleSockets.Client;
 using Client.PlayerClient.GamesControl;
+using Client.PlayerClient.GamesControl.Components;
 using Server.QuestionClass;
 using System.IO;
 using System.Text.Json;
@@ -41,7 +42,8 @@ namespace Client.PlayerClient
 		public AccelPlayerControl accelPlayerControl;
 		public FinishPlayerControl finishPlayerControl;
 		//WholeExamClass? wholeExam;
-		public PlayerWindow(LogInWindow logInWindow, SimpleSocketClient client)
+
+		public PlayerWindow(LogInWindow logInWindow, SimpleSocketClient client, int player)
 		{
 			InitializeComponent();
 			this.logInWindow = logInWindow;
@@ -66,6 +68,9 @@ namespace Client.PlayerClient
 			obstaPlayerControl.Visibility = Visibility.Collapsed;
 			accelPlayerControl.Visibility = Visibility.Collapsed;
 			finishPlayerControl.Visibility = Visibility.Collapsed;
+
+			pointsControl.Visibility = Visibility.Visible;
+			pointsControl.ChoosePlayer(player - 1);
 		}
 
 		public static void ServerBytesReceived(SimpleSocketClient client, byte[] messageBytes) {
@@ -122,6 +127,7 @@ namespace Client.PlayerClient
 				case "KD":
 					switch (tokens[2]) {
 						case "START":
+							startPlayerControl.StartTimer();
 							break;
 						case "QUES":
 							string question = tokens[3], attach = tokens[4];
@@ -138,7 +144,7 @@ namespace Client.PlayerClient
 						case "SHOW":
 							string label = (Convert.ToInt32(tokens[3]) + 1).ToString();
 							string question = tokens[4];
-							obstaPlayerControl.ShowQuestion(label, question);
+							obstaPlayerControl.ShowQuestion(label, question, tokens[5]);
 							break;
 						case "TIME":
 							obstaPlayerControl.StartTimer();
@@ -173,6 +179,10 @@ namespace Client.PlayerClient
 							break;
 						case "UNLOCK":
 							finishPlayerControl.UnlockButton();
+							break;
+						case "TIME":
+							int timeLimit = Convert.ToInt32(tokens[3]);
+							finishPlayerControl.StartTimer(timeLimit);
 							break;
 					}
 					break;

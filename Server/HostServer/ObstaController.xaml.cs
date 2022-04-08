@@ -42,14 +42,8 @@ namespace Server.HostServer
 		int remainingPoint, cntRow;
 		int currentRow = NaN;
 
-		DispatcherTimer timer;
+		Simer timer;
 		const int timeLimit = 1600;
-		DateTime timeBegin;
-		int getTime()
-		{
-			TimeSpan span = DateTime.Now - timeBegin;
-			return (span.Seconds * 1000 + span.Milliseconds) / 10;
-		}
 
 		public ObstaController(SimpleSocketTcpListener listener, ObstacleClass obstaClass, PlayerClass playerClass, PlayerNetwork playerNetwork)
 		{
@@ -64,8 +58,7 @@ namespace Server.HostServer
 			gridAnswer.Children.Add(answersControl);
 			gridPoint.Children.Add(pointsControl);
 
-			timer = new DispatcherTimer();
-			timer.Interval = TimeSpan.FromMilliseconds(2);
+			timer = new Simer(timeLimit);
 			timer.Tick += timer_Tick;
 
 			labels.Add(lblHN1); labels.Add(lblHN2); labels.Add(lblHN3); labels.Add(lblHN4); labels.Add(lblTT);
@@ -79,11 +72,10 @@ namespace Server.HostServer
 			}
 		}
 
-		void timer_Tick(object? sender, EventArgs e)
+		void timer_Tick(int time, bool done)
 		{
-			int time = getTime();
 			lblTime.Content = string.Format("{0:0.00}", time / 100.0);
-			if (time >= timeLimit) {
+			if (done) {
 				timer.Stop();
 				answersControl.IsEnabled = true;
 				btnShowAnswer.IsEnabled = true;
@@ -139,7 +131,7 @@ namespace Server.HostServer
 		{
 			sendMessageToEveryone("OLPA VCNV TIME");
 
-			timer.Start(); timeBegin = DateTime.Now;
+			timer.Start(); 
 			btnStart.IsEnabled = false;
 		}
 

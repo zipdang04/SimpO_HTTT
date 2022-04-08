@@ -18,6 +18,7 @@ using Server.QuestionClass;
 using Server.Information;
 using System.Windows.Threading;
 using System.IO;
+using Server.HostServer.Components;
 
 namespace Client.PlayerClient.GamesControl
 {
@@ -29,36 +30,28 @@ namespace Client.PlayerClient.GamesControl
 	{
 		SimpleSocketClient client;
 
-		DispatcherTimer timer;
+		Simer timer;
 		int timeLimit;
-		DateTime timeBegin;
-		int getTime()
-		{
-			TimeSpan span = DateTime.Now - timeBegin;
-			return (span.Seconds * 1000 + span.Milliseconds) / 10;
-		}
 
 		public AccelPlayerControl(SimpleSocketClient client)
 		{
 			InitializeComponent();
 			this.client = client;
-			timer = new DispatcherTimer();
-			timer.Interval = TimeSpan.FromMilliseconds(2);
+			timer = new Simer();
 			timer.Tick += timer_Tick;
 			mediaPlayer.LoadedBehavior = MediaState.Manual;
 			
 		}
 
-
-
-		void timer_Tick(object? sender, EventArgs e)
+		void timer_Tick(int time, bool done)
 		{
-			int time = getTime();
 			lblTime.Content = string.Format("{0:0.00}", time / 100.0);
-			//
-			if (time >= timeLimit){
-				StopTimer();
-				mediaPlayer.Stop();
+			if (done){
+				Dispatcher.Invoke(() => {
+					txtAnswer.Text = "";
+					txtAnswer.IsEnabled = false;
+					mediaPlayer.Stop();
+				});
 			}
 		}
 
@@ -79,17 +72,14 @@ namespace Client.PlayerClient.GamesControl
 
 		public void StartTimer()
 		{
-			timeBegin = DateTime.Now;
 			Dispatcher.Invoke(() => {
-				//mediaPlayer.Visibility = Visibility.Visible;
 				mediaPlayer.Position = TimeSpan.FromSeconds(0);
-				mediaPlayer.Play();
 				txtAnswer.Text = ""; txtAnswer.IsEnabled = true;
 				txtAnswer.Focus();
 				mediaPlayer.Play();
 			});
 			Dispatcher.Invoke(() => { 
-				timer.Start();
+				timer.Start(timeLimit);
 			});
 		}
 
@@ -102,20 +92,11 @@ namespace Client.PlayerClient.GamesControl
 			timer.Stop();
 		}
 
-		void StopTimer()
-		{
-			timer.Stop();
-			Dispatcher.Invoke(() => {
-				txtAnswer.Text = "";
-				txtAnswer.IsEnabled = false;
-			});
-		}
-
 		private void txtAnswer_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.Key == Key.Enter)
 			{
-				client.SendMessage(string.Format("OLPA TT ANSWER {0} {1}", getTime(), HelperClass.MakeString(txtAnswer.Text)));
+				client.SendMessage(string.Format("OLPA TT ANSWER {0} {1}", timer.getTime(), HelperClass.MakeString(txtAnswer.Text)));
 				Dispatcher.Invoke(() => { 
 					lblAnswer.Content = txtAnswer.Text;
 					txtAnswer.Text = "";

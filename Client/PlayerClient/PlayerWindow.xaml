@@ -8,10 +8,10 @@
         Title="PlayerWindow" Height="450" Width="800" Closed="Window_Closed" WindowStyle="None" WindowState="Maximized">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid x:Name="gridPoint"/>
-        <Grid x:Name="grid"/>
+        <Grid x:Name="grid" Grid.Row="1"/>
     </Grid>
 </Window>

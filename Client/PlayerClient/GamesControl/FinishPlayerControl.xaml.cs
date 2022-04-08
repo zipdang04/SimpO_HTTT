@@ -17,6 +17,8 @@ using SimpleSockets.Client;
 using Server.QuestionClass;
 using Server.Information;
 using System.IO;
+using System.Windows.Threading;
+using Server.HostServer.Components;
 
 namespace Client.PlayerClient.GamesControl
 {
@@ -26,23 +28,30 @@ namespace Client.PlayerClient.GamesControl
 	public partial class FinishPlayerControl : UserControl
 	{
 		SimpleSocketClient client;
+
+		Simer timer;
 		public FinishPlayerControl(SimpleSocketClient client)
 		{
 			InitializeComponent();
 			this.client = client;
+			timer = new Simer();
+			timer.Tick += timer_Tick;
+		}
+
+		public void StartTimer(int timeLimit)
+		{
+			timer.Start(timeLimit);
+		}
+		void timer_Tick(int time, bool done)
+		{
+			txtTime.Text = string.Format("{0:0.00}", time / 100.0);
+			if (done) timer.Stop();
 		}
 
 		public void ShowQuestion(OQuestion question)
 		{
 			Dispatcher.Invoke(() => {
-				txtQuestion.Text = question.question;
-				try {
-					string path = Directory.GetCurrentDirectory() + @"\Resources\Media\" + question.attach;
-					image.Source = new BitmapImage(new Uri(path));
-				}
-				catch {
-					image = new Image();
-				}
+				questionBox.DisplayQuestion(question.question, question.attach);
 			});
 			LockButton();
 		}

@@ -19,8 +19,8 @@
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
             <Label x:Name="lblTemp" Content="0" Grid.Column="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" FontWeight="Bold"/>
-            <Label x:Name="lblQuestion" Content="Label" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <Label x:Name="lblTime" Content="0" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <Label x:Name="lblQuestion" Content="Label" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="17"/>
+            <Label x:Name="lblTime" Content="0" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14"/>
         </Grid>
         <MediaElement x:Name="mediaPlayer" LoadedBehavior="Manual" Stretch="Uniform" Grid.Row="1"/>
 

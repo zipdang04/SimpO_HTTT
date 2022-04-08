@@ -4,23 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Client.PlayerClient.GamesControl"
+             xmlns:compo="clr-namespace:Client.PlayerClient.GamesControl.Components"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
             <RowDefinition/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0">
-                <TextBlock x:Name="txtQuestion"/>
+        <Grid Grid.Row="0">
+            <Label HorizontalAlignment="Left" VerticalContentAlignment="Center">
+                <TextBlock FontSize="13"> Thời gian</TextBlock>
             </Label>
-            <Image x:Name="image" Grid.Column="1"/>
+            <Label HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="100,0,0,0">
+                <TextBlock x:Name="txtTime" FontSize="18">0</TextBlock>
+            </Label>
         </Grid>
-        <Button x:Name="btnBell" IsEnabled="False" Grid.Row="1"  Click="btnBell_Click" Background="Red" Foreground="White" FontWeight="Bold">Giành quyền trả lời</Button>
+        <compo:QuestionControl x:Name="questionBox" Grid.Row="1"/>
+        <Button x:Name="btnBell" IsEnabled="False" Grid.Row="2"  Click="btnBell_Click" Background="Red" Foreground="White" FontWeight="Bold">Giành quyền trả lời</Button>
     </Grid>
 </UserControl>

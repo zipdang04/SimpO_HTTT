@@ -40,15 +40,7 @@ namespace Server.HostServer
 		int playerTurn = NaN;
 		int questionPtr = 0;
 
-		//DispatcherTimer timer;
-		DispatcherTimer timerMain;
-		const int timeLimit = 6000;
-		DateTime timeBegin;
-		int getTime()
-		{
-			TimeSpan span = DateTime.Now - timeBegin;
-			return (span.Minutes * 60 * 1000 + span.Seconds * 1000 + span.Milliseconds) / 10;
-		}
+		Simer timer;
 
 		public StartController(SimpleSocketTcpListener listener, StartClass startClass, PlayerClass playerClass, PlayerNetwork playerNetwork)
 		{
@@ -60,9 +52,8 @@ namespace Server.HostServer
 			pointsControl = new PointsControl(playerClass);
 			gridPoint.Children.Add(pointsControl);
 
-			timerMain = new DispatcherTimer();
-			timerMain.Interval = TimeSpan.FromMilliseconds(3);
-			timerMain.Tick += timerMain_Tick;
+			timer = new Simer(6000);
+			timer.Tick += timer_Tick;
 			this.playerClass = playerClass;
 			
 			btnCorrect.IsEnabled = false;
@@ -79,7 +70,7 @@ namespace Server.HostServer
 
 		public void showQuestion()
 		{
-			if (timerMain.IsEnabled == false) {
+			if (timer.IsEnabled == false) {
 				lblStartQuestion.Content = "";
 				lblStartAnswer.Content = "";
 				return;
@@ -104,7 +95,7 @@ namespace Server.HostServer
 		private void StartTurn(int player)
 		{
 			playerTurn = player; questionPtr = 0;
-			timeBegin = DateTime.Now; timerMain.Start();
+			timer.Start();
 			sendMessageToEveryone("OLPA KD START");
 			showQuestion();
 			btnCorrect.IsEnabled = true;
@@ -152,13 +143,11 @@ namespace Server.HostServer
 		}
 
 
-		void timerMain_Tick(object? sender, EventArgs e)
+		void timer_Tick(int time, bool done)
 		{
-			int time = getTime();
 			lblTime.Content = string.Format("{0:0.00}", time / 100.0);
-			if (time >= timeLimit) {
+			if (done) {
 				playerTurn = -1;
-				timerMain.Stop();
 
 				btnCorrect.IsEnabled = false;
 				btnWrong.IsEnabled = false;

@@ -35,9 +35,8 @@ namespace Server.HostServer
 		PointsControl pointsControl;
 
 		int questionTurn;
-		DispatcherTimer timer;
+		Simer timer;
 		int timeLimit;
-		DateTime timeBegin;
 
 		public AccelController(SimpleSocketListener listener, AccelClass accelClass, PlayerClass playerClass, PlayerNetwork playerNetwork)
 		{
@@ -45,8 +44,7 @@ namespace Server.HostServer
 			this.listener = listener; this.playerClass = playerClass;
 			this.accelClass = accelClass; this.playerNetwork = playerNetwork;
 
-			timer = new DispatcherTimer(); 
-			timer.Interval = TimeSpan.FromMilliseconds(2);
+			timer = new Simer(); 
 			timer.Tick += timer_Tick;
 
 			answersControl = new AnswersControl(playerClass);
@@ -65,21 +63,12 @@ namespace Server.HostServer
 				listener.SendMessage(client.Value.Id, message);
 			}
 		}
-		int getTime()
-		{
-			TimeSpan span = DateTime.Now - timeBegin;
-			return (span.Seconds * 1000 + span.Milliseconds) / 10;
-		}
 
-		void timer_Tick(object? sender, EventArgs e)
+		void timer_Tick(int time, bool done)
 		{
-			int time = getTime();
 			Dispatcher.Invoke(() => { lblTime.Content = time / 100.0; });
 			
-			if (time >= timeLimit){
-				timer.Stop();
-				answersControl.IsEnabled = true;
-			}
+			if (done) answersControl.IsEnabled = true;
 		}
 
 		void Prepare(int turn)
@@ -108,7 +97,7 @@ namespace Server.HostServer
 		{
 			sendMessageToEveryone("OLPA TT PLAY");
 
-			timer.Start(); timeBegin = DateTime.Now;
+			timer.Start(timeLimit); 
 			btnPlay.IsEnabled = false;
 		}
 

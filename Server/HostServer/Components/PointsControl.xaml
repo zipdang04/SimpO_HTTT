@@ -17,13 +17,13 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="lblName1" Grid.Row="0" Grid.Column="0" Content = "{Binding Path = names[0], Mode=TwoWay}"/>
-        <Label x:Name="lblName2" Grid.Row="0" Grid.Column="1" Content = "{Binding Path = names[1], Mode=TwoWay}"/>
-        <Label x:Name="lblName3" Grid.Row="0" Grid.Column="2" Content = "{Binding Path = names[2], Mode=TwoWay}"/>
-        <Label x:Name="lblName4" Grid.Row="0" Grid.Column="3" Content = "{Binding Path = names[3], Mode=TwoWay}"/>
-        <Label x:Name="lblPoint1" Grid.Row="1" Grid.Column="0" Content = "{Binding Path = points[0], Mode=TwoWay}"/>
-        <Label x:Name="lblPoint2" Grid.Row="1" Grid.Column="1" Content = "{Binding Path = points[1], Mode=TwoWay}"/>
-        <Label x:Name="lblPoint3" Grid.Row="1" Grid.Column="2" Content = "{Binding Path = points[2], Mode=TwoWay}"/>
-        <Label x:Name="lblPoint4" Grid.Row="1" Grid.Column="3" Content = "{Binding Path = points[3], Mode=TwoWay}"/>
+        <Label x:Name="lblName1" Grid.Row="0" Grid.Column="0" Content = "{Binding Path = names[0], Mode=TwoWay}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15"/>
+        <Label x:Name="lblName2" Grid.Row="0" Grid.Column="1" Content = "{Binding Path = names[1], Mode=TwoWay}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15"/>
+        <Label x:Name="lblName3" Grid.Row="0" Grid.Column="2" Content = "{Binding Path = names[2], Mode=TwoWay}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15"/>
+        <Label x:Name="lblName4" Grid.Row="0" Grid.Column="3" Content = "{Binding Path = names[3], Mode=TwoWay}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15"/>
+        <Label x:Name="lblPoint1" Grid.Row="1" Grid.Column="0" Content = "{Binding Path = points[0], Mode=TwoWay}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" FontWeight="Bold"/>
+        <Label x:Name="lblPoint2" Grid.Row="1" Grid.Column="1" Content = "{Binding Path = points[1], Mode=TwoWay}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" FontWeight="Bold"/>
+        <Label x:Name="lblPoint3" Grid.Row="1" Grid.Column="2" Content = "{Binding Path = points[2], Mode=TwoWay}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" FontWeight="Bold"/>
+        <Label x:Name="lblPoint4" Grid.Row="1" Grid.Column="3" Content = "{Binding Path = points[3], Mode=TwoWay}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" FontWeight="Bold"/>
     </Grid>
 </UserControl>

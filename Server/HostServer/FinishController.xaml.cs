@@ -37,8 +37,7 @@ namespace Server.HostServer
 	{
 		public const int NaN = -1;
 
-		DispatcherTimer timerMain, timer5s, timerPrac;
-		int timeRemaining;
+		Simer timerMain, timer5s, timerPrac;
 
 		SimpleSocketTcpListener listener;
 		PlayerClass playerClass { get; set; }
@@ -59,9 +58,9 @@ namespace Server.HostServer
 		public FinishController(SimpleSocketTcpListener listener, FinishClass finishClass, PlayerClass playerClass, PlayerNetwork playerNetwork)
 		{
 			InitializeComponent();
-			timerMain = new DispatcherTimer(); timerMain.Tick += TimerMain_Tick; timerMain.Interval = TimeSpan.FromSeconds(1);
-			timer5s = new DispatcherTimer(); timer5s.Tick += Timer5s_Tick;		 timer5s.Interval = TimeSpan.FromSeconds(1);
-			timerPrac = new DispatcherTimer(); timerPrac.Tick += TimerPrac_Tick; timerPrac.Interval = TimeSpan.FromSeconds(1);
+			timerMain = new Simer(); timerMain.Tick += TimerMain_Tick;
+			timer5s = new Simer(500); timer5s.Tick += Timer5s_Tick;	
+			timerPrac = new Simer(); timerPrac.Tick += TimerPrac_Tick;
 			for (int i = 0; i < 3; i++) {
 				chosen[i] = new RadioButton[3];
 				for (int j = 0; j < 3; j++) {
@@ -96,22 +95,20 @@ namespace Server.HostServer
 				listener.SendMessage(client.Value.Id, message);
 		}
 
-		private void TimerMain_Tick(object? sender, EventArgs e)
+		private void TimerMain_Tick(int time, bool done)
 		{
-			timeRemaining--;
-			lblTimer.Content = timeRemaining;
-			if (timeRemaining == 0){
+			lblTimer.Content = string.Format("{0:0.00}", time / 100.0);
+			if (done){
 				timerMain.Stop();
 				btnPrac.IsEnabled = true;
 				btnCorrect.IsEnabled = true;
 				btnWrong.IsEnabled = true;
 			}
 		}
-		private void Timer5s_Tick(object? sender, EventArgs e)
+		private void Timer5s_Tick(int time, bool done)
 		{
-			timeRemaining--;
-			lblTimer.Content = timeRemaining;
-			if (timeRemaining == 0)
+			lblTimer.Content = string.Format("{0:0.00}", time / 100.0);
+			if (done)
 			{
 				timer5s.Stop();
 				sendMessageToEveryone("OLPA VD LOCK");
@@ -119,18 +116,17 @@ namespace Server.HostServer
 					if (starState == StarState.NOPE) btnStar.IsEnabled = true;
 					if (starState == StarState.USING) starState = StarState.USED;
 				} else {
-					btnSuckPrac.IsEnabled = true;
+					if (practiceMode) btnSuckPrac.IsEnabled = true;
 					btnSuckCorrect.IsEnabled = true;
 					btnSuckWrong.IsEnabled = true;
 				}
 				
 			}
 		}
-		private void TimerPrac_Tick(object? sender, EventArgs e)
+		private void TimerPrac_Tick(int time, bool done)
 		{
-			timeRemaining--;
-			lblTimer.Content = timeRemaining;
-			if (timeRemaining == 0)
+			lblTimer.Content = string.Format("{0:0.00}", time / 100.0);
+			if (done)
 			{
 				timerPrac.Stop();
 				if (isSucking)
@@ -210,10 +206,9 @@ namespace Server.HostServer
 
 		private void btnStart_Click(object sender, RoutedEventArgs e)
 		{
-			timeRemaining = FinishClass.QUES_TIME[difficulty];
 			btnStart.IsEnabled = false;
-			timerMain.Start();
-			sendMessageToEveryone("OLPA VD START");
+			timerMain.Start(TimeSpan.FromSeconds(FinishClass.QUES_TIME[difficulty]));
+			sendMessageToEveryone(String.Format("OLPA VD TIME {0}", FinishClass.QUES_TIME[difficulty] * 100));
 		}
 
 		private void btnStar_Click(object sender, RoutedEventArgs e)
@@ -225,10 +220,9 @@ namespace Server.HostServer
 
 		private void btnPrac_Click(object sender, RoutedEventArgs e)
 		{
-			timeRemaining = FinishClass.PRAC_TIME[difficulty];
+			timerMain.Start(TimeSpan.FromSeconds(FinishClass.PRAC_TIME[difficulty]));
 			practiceMode = true;
 			btnPrac.IsEnabled = false;
-			timerMain.Start();
 			sendMessageToEveryone("OLPA VD PRAC MAIN");
 			btnCorrect.IsEnabled = false;
 			btnWrong.IsEnabled = false;
@@ -268,7 +262,7 @@ namespace Server.HostServer
 			if (playerNetwork.clients[playerTurn] != null)
 				listener.SendMessage(playerNetwork.clients[playerTurn].Id, "OLPA VD LOCK");
 			btn5s.IsEnabled = false;
-			timeRemaining = 5; isSucking = true;
+			isSucking = true;
 			timer5s.Start();
 		}
 
@@ -282,7 +276,7 @@ namespace Server.HostServer
 
 		private void btnSuckPrac_Click(object sender, RoutedEventArgs e)
 		{
-			timeRemaining = FinishClass.REMAIN_PRAC_TIME[difficulty];
+			timerPrac.Start(TimeSpan.FromSeconds(FinishClass.REMAIN_PRAC_TIME[difficulty]));
 			sendMessageToEveryone("OLPA VD PRAC SUCK");
 			timerPrac.Start();
 			btnSuckCorrect.IsEnabled = false;

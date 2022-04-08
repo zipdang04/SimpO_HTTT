@@ -77,7 +77,7 @@ namespace Client.PlayerClient
 				client.MessageReceived -= ServerMessageReceived;
 
 				Dispatcher.Invoke(() => {
-					PlayerWindow playerWindow = new PlayerWindow(this, client);
+					PlayerWindow playerWindow = new PlayerWindow(this, client, playerPosition);
 					playerWindow.Show(); Hide();
 				});
 			} else if (msg == "OLPA FAILED")

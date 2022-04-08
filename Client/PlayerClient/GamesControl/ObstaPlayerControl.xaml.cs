@@ -17,6 +17,7 @@ using SimpleSockets.Client;
 using Server.QuestionClass;
 using Server.Information;
 using System.Windows.Threading;
+using Server.HostServer.Components;
 
 namespace Client.PlayerClient.GamesControl
 {
@@ -26,24 +27,17 @@ namespace Client.PlayerClient.GamesControl
 	public partial class ObstaPlayerControl : UserControl
 	{
 		SimpleSocketClient client;
-		DispatcherTimer timer;
 
 		string imagePath;
 
+		Simer timer;
 		const int timeLimit = 1500;
-		DateTime timeBegin;
-		int getTime()
-		{
-			TimeSpan span = DateTime.Now - timeBegin;
-			return (span.Seconds * 1000 + span.Milliseconds) / 10;
-		}
 
 		public ObstaPlayerControl(SimpleSocketClient client)
 		{
 			InitializeComponent();
 			this.client = client;
-			timer = new DispatcherTimer();
-			timer.Interval = TimeSpan.FromMilliseconds(2);
+			timer = new Simer(timeLimit);
 			timer.Tick += timer_Tick;
 			setImage();
 		}
@@ -56,21 +50,21 @@ namespace Client.PlayerClient.GamesControl
 			imageControl.erase(idx);
 		}
 
-		void timer_Tick(object? sender, EventArgs e)
+		void timer_Tick(int time, bool done)
 		{
-			int time = getTime();
-			lblTime.Content = time / 100.0;
+			lblTime.Content = string.Format("{0:0.00}", time / 100.0);
 			//
-			if (time >= timeLimit){
-				StopTimer();
+			if (done){
+				txtAnswer.Text = "";
+				txtAnswer.IsEnabled = false;
 			}
 		}
 
-		public void ShowQuestion(string label, string question)
+		public void ShowQuestion(string label, string question, string attach)
 		{
 			Dispatcher.Invoke(() => {
 				lblTemp.Content = "Hàng ngang " + label;
-				txtQuestion.Text = question;
+				questionBox.DisplayQuestion(question, attach);
 			});
 		}
 
@@ -81,15 +75,7 @@ namespace Client.PlayerClient.GamesControl
 				txtAnswer.IsEnabled = true;
 				txtAnswer.Focus();
 			});
-			timeBegin = DateTime.Now;
 			timer.Start();
-		}
-		
-		void StopTimer()
-		{
-			timer.Stop();
-			txtAnswer.Text = "";
-			txtAnswer.IsEnabled = false;
 		}
 		
 		public void ResetGame(string imagePath = "")
@@ -114,7 +100,7 @@ namespace Client.PlayerClient.GamesControl
 		private void txtAnswer_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (txtAnswer.IsEnabled == true && e.Key == Key.Enter) {
-				client.SendMessage(String.Format("OLPA VCNV ANSWER {0} {1}", getTime(), HelperClass.MakeString(txtAnswer.Text)));
+				client.SendMessage(String.Format("OLPA VCNV ANSWER {0} {1}", timer.getTime(), HelperClass.MakeString(txtAnswer.Text)));
 				lblAnswer.Content = txtAnswer.Text;
 			}
 		}
