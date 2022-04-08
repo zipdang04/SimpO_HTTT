@@ -46,19 +46,6 @@ namespace Client.PlayerClient
 			InitializeComponent();
 			this.logInWindow = logInWindow;
 
-			//try {
-			//	byte[] jsonString = File.ReadAllBytes(filePath);
-			//	var utf8Reader = new Utf8JsonReader(jsonString);
-			//	wholeExam = JsonSerializer.Deserialize<WholeExamClass>(ref utf8Reader);
-			//	if (wholeExam == null)
-			//		wholeExam = new WholeExamClass();
-			//}
-			//catch {
-			//	wholeExam = new WholeExamClass();
-			//	MessageBox.Show("co van de, khong choi duoc");
-			//	Close();
-			//}
-
 			this.client = client;
 			playersInfo = new PlayerClass();
 			this.client.MessageReceived += ServerMessageReceived;
@@ -69,7 +56,7 @@ namespace Client.PlayerClient
 			obstaPlayerControl = new ObstaPlayerControl(client);
 			accelPlayerControl = new AccelPlayerControl(client);
 			finishPlayerControl = new FinishPlayerControl(client);
-			grid.Children.Add(pointsControl);
+			gridPoint.Children.Add(pointsControl);
 			grid.Children.Add(startPlayerControl);
 			grid.Children.Add(obstaPlayerControl);
 			grid.Children.Add(accelPlayerControl);
@@ -84,13 +71,14 @@ namespace Client.PlayerClient
 		public static void ServerBytesReceived(SimpleSocketClient client, byte[] messageBytes) {
 			string zip = @"Resources/Media.zip";
 			if (File.Exists(zip)) File.Delete(zip);
-			FileStream file = File.Create(zip);//.Write(messageBytes);
+			FileStream file = File.Create(zip);
 			file.Write(messageBytes);
 			file.Close();
 
 			string dirPath = @"Resources/Media";
 			HelperClass.ClearDirectory(new DirectoryInfo(dirPath));
 			ZipFile.ExtractToDirectory(zip, dirPath);
+			MessageBox.Show("Đã chuyển xong file!", "Chuyển xong file", MessageBoxButton.OK);
 		}
 
 		private void ServerMessageReceived(SimpleSocket a, string msg)
@@ -99,21 +87,14 @@ namespace Client.PlayerClient
 			int len = tokens.Count;
 			
 			switch (tokens[1]) {
-				case "FILE":
-					
-					break;
 				case "SCENE":
 					Dispatcher.Invoke(() =>
 					{
-						pointsControl.Visibility = Visibility.Hidden;
 						startPlayerControl.Visibility = Visibility.Collapsed;
 						obstaPlayerControl.Visibility = Visibility.Collapsed;
 						accelPlayerControl.Visibility = Visibility.Collapsed;
 						finishPlayerControl.Visibility = Visibility.Collapsed;
 						switch (tokens[2]) {
-							case "POINT":
-								pointsControl.Visibility = Visibility.Visible;
-								break;
 							case "KD":
 								startPlayerControl.Visibility = Visibility.Visible;
 								break;
@@ -140,6 +121,8 @@ namespace Client.PlayerClient
 					break;
 				case "KD":
 					switch (tokens[2]) {
+						case "START":
+							break;
 						case "QUES":
 							string question = tokens[3], attach = tokens[4];
 							startPlayerControl.ShowQuestion(new OQuestion(question, "", attach));

@@ -17,6 +17,7 @@ using SimpleSockets.Client;
 using Server.QuestionClass;
 using Server.Information;
 using System.IO;
+using System.Windows.Threading;
 
 namespace Client.PlayerClient.GamesControl
 {
@@ -27,10 +28,35 @@ namespace Client.PlayerClient.GamesControl
 	{
 		SimpleSocketClient client;
 
+		const int timeLimit = 6000;
+		DateTime timeBegin;
+		DispatcherTimer timer;
+		int getTime()
+		{
+			TimeSpan span = DateTime.Now - timeBegin;
+			return (span.Seconds * 1000 + span.Milliseconds) / 10;
+		}
+
 		public StartPlayerControl(SimpleSocketClient client)
 		{
 			InitializeComponent();
 			this.client = client;
+			timer = new DispatcherTimer();
+		}
+
+		public void StartTimer()
+		{
+		}
+
+		void timer_Tick(object? sender, EventArgs e)
+		{
+			int time = getTime();
+			txtTime.Text = string.Format("{0:0.00}", time / 100.0);
+			//
+			if (time >= timeLimit)
+			{
+				timer.Stop();
+			}
 		}
 
 		public void ShowQuestion(OQuestion question)

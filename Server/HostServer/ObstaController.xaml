@@ -52,7 +52,7 @@
             <Button x:Name="btnShowAnswer" Grid.Column="0" Content="Hiện đáp án"/>
             <Button x:Name="btnConfirm" Grid.Column="1" Content="Xác nhận" Click="btnConfirm_Click"/>
         </Grid>
-        
+
         <Label VerticalAlignment="Top" Margin="0,520,0,0">Hút:</Label>
         <Grid VerticalAlignment="Top" Margin="0,550,0,0" Height="120">
             <Grid.ColumnDefinitions>
@@ -62,7 +62,7 @@
             <Button x:Name="btnBellConfirm" Click="btnBellConfirm_Click">Xác nhận</Button>
             <StackPanel x:Name="stackPlayerList" Grid.Column="1"/>
         </Grid>
-        <Label Content="Thời gian" HorizontalAlignment="Left" Margin="59,337,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblTime" Content="0" HorizontalAlignment="Left" Margin="126,337,0,0" VerticalAlignment="Top"/>
+        <Label Content="Thời gian" HorizontalAlignment="Left" Margin="59,307,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblTime" Content="0" HorizontalAlignment="Left" Margin="126,307,0,0" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

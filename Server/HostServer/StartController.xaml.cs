@@ -61,7 +61,7 @@ namespace Server.HostServer
 			gridPoint.Children.Add(pointsControl);
 
 			timerMain = new DispatcherTimer();
-			timerMain.Interval = TimeSpan.FromSeconds(1);
+			timerMain.Interval = TimeSpan.FromMilliseconds(3);
 			timerMain.Tick += timerMain_Tick;
 			this.playerClass = playerClass;
 			
@@ -104,7 +104,8 @@ namespace Server.HostServer
 		private void StartTurn(int player)
 		{
 			playerTurn = player; questionPtr = 0;
-			timeBegin = DateTime.Now; timerMain.Start(); 
+			timeBegin = DateTime.Now; timerMain.Start();
+			sendMessageToEveryone("OLPA KD START");
 			showQuestion();
 			btnCorrect.IsEnabled = true;
 			btnWrong.IsEnabled = true;

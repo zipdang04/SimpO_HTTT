@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client.PlayerClient"
         mc:Ignorable="d"
-        Title="PlayerWindow" Height="450" Width="800" Closed="Window_Closed">
-    <Grid x:Name="grid">
-        
+        Title="PlayerWindow" Height="450" Width="800" Closed="Window_Closed" WindowStyle="None" WindowState="Maximized">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="gridPoint"/>
+        <Grid x:Name="grid"/>
     </Grid>
 </Window>

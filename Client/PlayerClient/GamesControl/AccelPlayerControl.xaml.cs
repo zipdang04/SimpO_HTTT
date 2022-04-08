@@ -28,8 +28,8 @@ namespace Client.PlayerClient.GamesControl
 	public partial class AccelPlayerControl : UserControl
 	{
 		SimpleSocketClient client;
-		DispatcherTimer timer;
 
+		DispatcherTimer timer;
 		int timeLimit;
 		DateTime timeBegin;
 		int getTime()
