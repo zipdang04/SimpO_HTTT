@@ -19,8 +19,6 @@ using Client.PlayerClient.GamesControl;
 using Client.PlayerClient.GamesControl.Components;
 using Server.QuestionClass;
 using System.IO;
-using System.Text.Json;
-using SimpleSockets.Messaging;
 using System.IO.Compression;
 
 namespace Client.PlayerClient

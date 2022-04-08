@@ -50,7 +50,6 @@ namespace Client.PlayerClient.GamesControl
 				Dispatcher.Invoke(() => {
 					txtAnswer.Text = "";
 					txtAnswer.IsEnabled = false;
-					mediaPlayer.Stop();
 				});
 			}
 		}
@@ -65,8 +64,8 @@ namespace Client.PlayerClient.GamesControl
 				//mediaPlayer.Visibility = Visibility.Hidden;
 				lblTemp.Content = turn;
 				lblQuestion.Content = question;
-				mediaPlayer.Play();
-				mediaPlayer.Stop();
+				//mediaPlayer.Play();
+				//mediaPlayer.Stop();
 			});
 		}
 
@@ -90,6 +89,7 @@ namespace Client.PlayerClient.GamesControl
 				lblAnswer.Content = "";
 			});
 			timer.Stop();
+			mediaPlayer.Stop();
 		}
 
 		private void txtAnswer_KeyDown(object sender, KeyEventArgs e)

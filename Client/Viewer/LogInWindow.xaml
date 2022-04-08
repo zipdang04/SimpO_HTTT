@@ -1,19 +1,16 @@
-﻿<Window x:Class="Client.PlayerClient.LogInWindow"
+﻿<Window x:Class="Client.Viewer.LogInWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Client.PlayerClient"
+        xmlns:local="clr-namespace:Client.Viewer"
         mc:Ignorable="d"
-        Title="Đăng nhập" Height="125" Width="500" ResizeMode="NoResize" Unloaded="Window_Unloaded">
+        Title="Đăng nhập" Height="100" Width="417" ResizeMode="NoResize" Unloaded="Window_Unloaded">
     <Grid>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="411,0,0,0" VerticalAlignment="Center" Height="114" Width="79" Click="button_Click"/>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="328,0,0,0" VerticalAlignment="Center" Height="75" Width="79" Click="button_Click"/>
         <Label Content="IP" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Cổng" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-        <Label Content="Vị trí" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtIP" HorizontalAlignment="Left" Margin="67,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="txtPort" HorizontalAlignment="Left" Margin="67,45,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtS" HorizontalAlignment="Left" Margin="67,76,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-
     </Grid>
 </Window>

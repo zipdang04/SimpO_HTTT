@@ -75,6 +75,7 @@ namespace Server.HostServer
 		{
 			btnPlay.IsEnabled = true;
 			timeLimit = (turn + 1) * 1000 + 200;
+			timer.Stop();
 			
 			OQuestion question = accelClass.accelQuestions[turn].question;
 			questionBox.displayQA(question.question, question.answer);
