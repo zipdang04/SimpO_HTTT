@@ -20,8 +20,8 @@ namespace Client
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		PlayerClient.LogInWindow logInWindow;
-
+		PlayerClient.LogInWindow player;
+		Viewer.LogInWindow viewer;
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -29,8 +29,14 @@ namespace Client
 
 		private void btnClient_Click(object sender, RoutedEventArgs e)
 		{
-			logInWindow = new PlayerClient.LogInWindow(this);
-			logInWindow.Show(); Hide();
+			player = new PlayerClient.LogInWindow(this);
+			player.Show(); Hide();
+		}
+
+		private void btnViewer_Click(object sender, RoutedEventArgs e)
+		{
+			viewer = new Viewer.LogInWindow(this);
+			viewer.Show(); Hide();
 		}
 	}
 }

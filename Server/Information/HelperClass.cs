@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,6 +58,7 @@ namespace Server.Information
 			}
 			return answer;
 		}
+		
 		public static string ServerNameCommand(string[] names)
 		{
 			string answer = "OLPA INFO NAME ";
@@ -73,7 +75,6 @@ namespace Server.Information
 
 			return answer;
 		}
-
 		public static string ServerPointCommand(int[] points)
 		{
 			string answer = "OLPA INFO POINT ";
@@ -159,11 +160,19 @@ namespace Server.Information
 
 			return whole;
 		}
-
 		public static void ClearDirectory(System.IO.DirectoryInfo directory)
 		{
 			foreach (System.IO.FileInfo file in directory.GetFiles()) file.Delete();
 			foreach (System.IO.DirectoryInfo subDirectory in directory.GetDirectories()) subDirectory.Delete(true);
+		}
+	
+		public static string PathString(string attach)
+		{
+			return Directory.GetCurrentDirectory() + @"\Resources\" + attach;
+		}
+		public static string PathString(string dir, string attach)
+		{
+			return Directory.GetCurrentDirectory() + string.Format(@"\Resources\{0}\{1}", dir, attach);
 		}
 	}
 }

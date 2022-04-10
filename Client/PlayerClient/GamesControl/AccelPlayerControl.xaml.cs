@@ -72,7 +72,7 @@ namespace Client.PlayerClient.GamesControl
 		public void StartTimer()
 		{
 			Dispatcher.Invoke(() => {
-				mediaPlayer.Position = TimeSpan.FromSeconds(0);
+				mediaPlayer.Position = TimeSpan.FromMilliseconds(1);
 				txtAnswer.Text = ""; txtAnswer.IsEnabled = true;
 				txtAnswer.Focus();
 				mediaPlayer.Play();
@@ -87,9 +87,9 @@ namespace Client.PlayerClient.GamesControl
 			Dispatcher.Invoke(() => {
 				txtAnswer.IsEnabled = false;
 				lblAnswer.Content = "";
+				timer.Stop();
+				mediaPlayer.Stop();
 			});
-			timer.Stop();
-			mediaPlayer.Stop();
 		}
 
 		private void txtAnswer_KeyDown(object sender, KeyEventArgs e)

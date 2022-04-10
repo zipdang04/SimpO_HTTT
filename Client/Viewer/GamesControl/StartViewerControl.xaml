@@ -4,16 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Client.Viewer.GamesControl"
+             xmlns:compo="clr-namespace:Client.Viewer.GamesControl.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="900" d:DesignWidth="1600">
     <Grid>
-        <MediaElement Source="Resources/Effects/KD_1_Run.mp4" LoadedBehavior="Manual" Stretch="Uniform"/>
-        <MediaElement Source="Resources/Effects/KD_2_Run.mp4" LoadedBehavior="Manual" Stretch="Uniform"/>
-        <MediaElement Source="Resources/Effects/KD_3_Run.mp4" LoadedBehavior="Manual" Stretch="Uniform"/>
-        <MediaElement Source="Resources/Effects/KD_4_Run.mp4" LoadedBehavior="Manual" Stretch="Uniform"/>
-        <MediaElement Source="Resources/Effects/KD_1_Start.mp4" LoadedBehavior="Manual" Stretch="Uniform"/>
-        <MediaElement Source="Resources/Effects/KD_2_Start.mp4" LoadedBehavior="Manual" Stretch="Uniform"/>
-        <MediaElement Source="Resources/Effects/KD_3_Start.mp4" LoadedBehavior="Manual" Stretch="Uniform"/>
-        <MediaElement Source="Resources/Effects/KD_4_Start.mp4" LoadedBehavior="Manual" Stretch="Uniform"/>
+        <MediaElement x:Name="media" LoadedBehavior="Manual"/>
+        <compo:QNPBox x:Name="qnpBox"/>
+        <MediaElement x:Name="mediaCorrect" LoadedBehavior="Manual"/>
+        <MediaElement x:Name="mediaWrong" LoadedBehavior="Manual"/>
     </Grid>
 </UserControl>

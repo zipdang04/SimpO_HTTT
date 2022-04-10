@@ -38,8 +38,10 @@ namespace Client.Viewer
 		{
 			client.ConnectedToServer -= ConnectedToServer;
 			MessageBox.Show("Đã kết nối", "đã nối", MessageBoxButton.OK);
-			viewerWindow = new ViewerWindow(this, client);
-			viewerWindow.Show(); Hide();
+			Dispatcher.Invoke(() => {
+				viewerWindow = new ViewerWindow(this, client);
+				viewerWindow.Show(); Hide();
+			});
 		}
 
 		private void button_Click(object sender, RoutedEventArgs e)

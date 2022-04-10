@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client.PlayerClient"
         mc:Ignorable="d"
-        Title="Đăng nhập" Height="125" Width="500" ResizeMode="NoResize" Unloaded="Window_Unloaded">
+        Title="Đăng nhập" Height="150" Width="500" ResizeMode="NoResize" Unloaded="Window_Unloaded">
     <Grid>
         <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="411,0,0,0" VerticalAlignment="Center" Height="114" Width="79" Click="button_Click"/>
         <Label Content="IP" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>

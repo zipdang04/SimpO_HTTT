@@ -156,8 +156,6 @@ namespace Server.HostServer
 					break;
 			}
 		}
-		private void tabGeneral_GotFocus(object sender, RoutedEventArgs e){sendMessageToEveryone("OLPA SCENE POINT");}
-		private void tabStart_GotFocus(object sender, RoutedEventArgs e){ sendMessageToEveryone("OLPA SCENE KD"); }
 		private void tabObsta_GotFocus(object sender, RoutedEventArgs e){sendMessageToEveryone("OLPA SCENE VCNV");}
 		private void tabAccel_GotFocus(object sender, RoutedEventArgs e){sendMessageToEveryone("OLPA SCENE TT");}
 		private void tabFinish_GotFocus(object sender, RoutedEventArgs e){sendMessageToEveryone("OLPA SCENE VD");}

@@ -47,6 +47,7 @@ namespace Server.HostServer
 
 		int playerTurn = NaN, playerSuck = NaN;
 		int[] quesDifficulty = new int[3];
+		int[] quesPosition = new int[3];
 
 		int questionPtr = 0, currentPtr = NaN, difficulty, score;
 		bool practiceMode = false;
@@ -54,6 +55,8 @@ namespace Server.HostServer
 		StarState starState = StarState.NOPE;
 
 		RadioButton[][] chosen = new RadioButton[3][];
+		List<ListBox> lstPoints = new List<ListBox>();
+		List<ListBox> lstNos = new List<ListBox>();
 
 		public FinishController(SimpleSocketTcpListener listener, FinishClass finishClass, PlayerClass playerClass, PlayerNetwork playerNetwork)
 		{
@@ -61,19 +64,9 @@ namespace Server.HostServer
 			timerMain = new Simer(); timerMain.Tick += TimerMain_Tick;
 			timer5s = new Simer(500); timer5s.Tick += Timer5s_Tick;	
 			timerPrac = new Simer(); timerPrac.Tick += TimerPrac_Tick;
-			for (int i = 0; i < 3; i++) {
-				chosen[i] = new RadioButton[3];
-				for (int j = 0; j < 3; j++) {
-					chosen[i][j] = new RadioButton();
-					chosen[i][j].GroupName = i.ToString();
-					chosen[i][j].HorizontalAlignment = HorizontalAlignment.Center;
-					chosen[i][j].VerticalAlignment = VerticalAlignment.Center;
 
-					grdChoosePoint.Children.Add(chosen[i][j]);
-					Grid.SetRow(chosen[i][j], i + 1);
-					Grid.SetColumn(chosen[i][j], j + 1);
-				}
-			}
+			lstPoints.Add(lstPoint1); lstPoints.Add(lstPoint2); lstPoints.Add(lstPoint3);
+			lstNos.Add(lstNo1); lstNos.Add(lstNo2); lstNos.Add(lstNo3);
 
 			this.listener = listener;
 			this.playerClass = playerClass;
@@ -147,7 +140,10 @@ namespace Server.HostServer
 
 			grdChoosePoint.Visibility = Visibility.Visible;
 			mainGrid.IsEnabled = true;
-			for (int i = 0; i < 3; i++) for (int j = 0; j < 3; j++) chosen[i][j].IsChecked = false;
+			for (int i = 0; i < 3; i++) {
+				lstPoints[i].UnselectAll();
+				lstNos[i].SelectedIndex = i;
+			}
 			sendMessageToEveryone("OLPA VD CHOOSING");
 			pointsControl.ChoosePlayer(playerTurn);
 		}
@@ -176,9 +172,22 @@ namespace Server.HostServer
 
 		private void btnConfirmPts_Click(object sender, RoutedEventArgs e)
 		{
+			for (int i = 0; i < 3; i++)
+				if (lstPoints[i].SelectedItem == null || lstNos[i].SelectedItem == null) {
+					MessageBox.Show(String.Format("Lượt {0} chưa chọn", i + 1), "chưa được chọn", MessageBoxButton.OK);
+					return;
+				}
+			for (int i = 0; i < 3; i++) for (int j = i + 1; j < 3; j++) 
+				if (lstPoints[i].SelectedIndex == lstPoints[j].SelectedIndex && lstNos[i].SelectedIndex == lstNos[j].SelectedIndex) {
+					MessageBox.Show(String.Format("Lượt {0} và {1} cấu hình trùng nhau", i + 1, j + 1), "trùng", MessageBoxButton.OK);
+					return;
+				}
+
 			grdChoosePoint.Visibility = Visibility.Collapsed; mainGrid.IsEnabled = true;
-			for (int i = 0; i < 3; i++) for (int j = 0; j < 3; j++)
-				if (chosen[i][j].IsChecked == true) quesDifficulty[i] = j;
+			for (int i = 0; i < 3; i++) {
+				quesDifficulty[i] = lstPoints[i].SelectedIndex;
+				quesPosition[i] = lstNos[i].SelectedIndex;
+			}
 			sendMessageToEveryone(string.Format("OLPA VD CHOSEN {0} {1} {2}", quesDifficulty[0], quesDifficulty[1], quesDifficulty[2]));
 		}
 
@@ -188,7 +197,7 @@ namespace Server.HostServer
 			if (questionPtr == 3) btnShowQuestion.IsEnabled = false;
 			difficulty = quesDifficulty[currentPtr]; score = FinishClass.QUES_POINT[difficulty];
 			
-			OQuestion question = finishClass.questions[playerTurn][difficulty][currentPtr];
+			OQuestion question = finishClass.questions[playerTurn][difficulty][quesPosition[currentPtr]];
 			questionBox.displayQA(question.question, question.answer);
 			sendMessageToEveryone(string.Format("OLPA VD QUES {0}", HelperClass.ServerJoinQA(question)));
 			

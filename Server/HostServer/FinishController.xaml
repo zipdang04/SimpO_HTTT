@@ -31,36 +31,95 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="1">10 điểm</Label>
-                <Label Grid.Row="0" Grid.Column="2">20 điểm</Label>
-                <Label Grid.Row="0" Grid.Column="3">30 điểm</Label>
                 <Label Grid.Row="1" Grid.Column="0">Lượt 1</Label>
                 <Label Grid.Row="2" Grid.Column="0">Lượt 2</Label>
                 <Label Grid.Row="3" Grid.Column="0">Lượt 3</Label>
+                <Label Grid.Row="0" Grid.Column="1">Mức điểm</Label>
+                <Label Grid.Row="0" Grid.Column="2">Câu thứ</Label>
+
+                <ListBox x:Name="lstPoint1"  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBoxItem>10</ListBoxItem>
+                    <ListBoxItem>20</ListBoxItem>
+                    <ListBoxItem>30</ListBoxItem>
+                </ListBox>
+                <ListBox x:Name="lstPoint2" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBoxItem>10</ListBoxItem>
+                    <ListBoxItem>20</ListBoxItem>
+                    <ListBoxItem>30</ListBoxItem>
+                </ListBox>
+                <ListBox x:Name="lstPoint3" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBoxItem>10</ListBoxItem>
+                    <ListBoxItem>20</ListBoxItem>
+                    <ListBoxItem>30</ListBoxItem>
+                </ListBox>
+                <ListBox x:Name="lstNo1" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBoxItem IsSelected="True">1</ListBoxItem>
+                    <ListBoxItem>2</ListBoxItem>
+                    <ListBoxItem>3</ListBoxItem>
+                </ListBox>
+                <ListBox x:Name="lstNo2" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBoxItem>1</ListBoxItem>
+                    <ListBoxItem IsSelected="True">2</ListBoxItem>
+                    <ListBoxItem>3</ListBoxItem>
+                </ListBox>
+                <ListBox x:Name="lstNo3" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBoxItem>1</ListBoxItem>
+                    <ListBoxItem>2</ListBoxItem>
+                    <ListBoxItem IsSelected="True">3</ListBoxItem>
+                </ListBox>
                 <Button x:Name="btnConfirmPts" Grid.Row="4" Grid.Column="3" Content="Xác nhận" Click="btnConfirmPts_Click"/>
             </Grid>
-            <Grid x:Name="mainGrid" Height="370">
+            <Grid x:Name="mainGrid" Height="320">
                 <Button x:Name="btnShowQuestion" Content="Hiện câu hỏi" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="btnShowQuestion_Click"/>
                 <Button x:Name="btnFinish" Content="Kết thúc lượt" HorizontalAlignment="Left" Margin="93,10,0,0" VerticalAlignment="Top" Click="btnFinish_Click"/>
-                <Label x:Name="lblTimer" HorizontalAlignment="Left" Margin="574,7,0,0" VerticalAlignment="Top" >0</Label>
+                <Label x:Name="lblTimer" HorizontalAlignment="Right" Margin="574,7,0,0" VerticalAlignment="Top" >0</Label>
 
-                <compo:QuestionShowing x:Name="questionBox" VerticalAlignment="Top" Margin="0, 40, 0, 0" />
+                <compo:QuestionShowing x:Name="questionBox" VerticalAlignment="Top" Margin="0,40,0,0" Height="130" />
 
-                <Button x:Name="btnStar" Content="Sao" HorizontalAlignment="Left" Margin="545,206,0,0" VerticalAlignment="Top" Background="Yellow" Height="44" Width="45" Click="btnStar_Click"/>
-                <Label HorizontalAlignment="Left" Margin="69,203,0,0" VerticalAlignment="Top">lưu ý: việc chọn sao chỉ có tác dụng sau khi bấm Hiện câu hỏi</Label>
-                <Label HorizontalAlignment="Left" Margin="69,225,0,0" VerticalAlignment="Top">NHỚ CHỌN SAO TRƯỚC KHI HIỆN CÂU HỎI MỚI</Label>
+                <Button x:Name="btnStar" Content="Sao" HorizontalAlignment="Left" Margin="545,188,0,0" VerticalAlignment="Top" Background="Yellow" Height="44" Width="45" Click="btnStar_Click"/>
+                <Label HorizontalAlignment="Left" Margin="69,185,0,0" VerticalAlignment="Top">lưu ý: việc chọn sao chỉ có tác dụng sau khi bấm Hiện câu hỏi</Label>
+                <Label HorizontalAlignment="Left" Margin="69,205,0,0" VerticalAlignment="Top">NHỚ CHỌN SAO TRƯỚC KHI HIỆN CÂU HỎI MỚI</Label>
 
-                <Button x:Name="btnStart" Content="Bắt đầu suy nghĩ" HorizontalAlignment="Left" Margin="9,283,0,0" VerticalAlignment="Top" Click="btnStart_Click"/>
-                <Button x:Name="btnPrac" Content="Bắt đầu thực hành" HorizontalAlignment="Left" Margin="109,283,0,0" VerticalAlignment="Top" Click="btnPrac_Click"/>
-                <Button x:Name="btnCorrect" Content="Đúng" HorizontalAlignment="Left" Margin="10,319,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Lime" Click="btnCorrect_Click"/>
-                <Button x:Name="btnWrong" Content="Sai" HorizontalAlignment="Left" Margin="80,319,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Red" Click="btnWrong_Click"/>
+                <Button x:Name="btnStart" Content="Bắt đầu suy nghĩ" HorizontalAlignment="Left" Margin="11,237,0,0" VerticalAlignment="Top" Click="btnStart_Click"/>
+                <Button x:Name="btnPrac" Content="Bắt đầu thực hành" HorizontalAlignment="Left" Margin="111,237,0,0" VerticalAlignment="Top" Click="btnPrac_Click"/>
+                <Button x:Name="btnCorrect" Content="Đúng" HorizontalAlignment="Left" Margin="12,269,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Lime" Click="btnCorrect_Click"/>
+                <Button x:Name="btnWrong" Content="Sai" HorizontalAlignment="Left" Margin="82,269,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Red" Click="btnWrong_Click"/>
 
-                <Button x:Name="btn5s" Content="5s hút" HorizontalAlignment="Center" Margin="0,283,0,0" VerticalAlignment="Top" Width="54" Click="btn5s_Click"/>
-                <Button x:Name="btnSuckPrac" Content="Bắt đầu lại thực hành" HorizontalAlignment="Left" Margin="349,283,0,0" VerticalAlignment="Top" Click="btnSuckPrac_Click"/>
-                <Button x:Name="btnSuckCorrect" Content="Hút đúng" HorizontalAlignment="Center" Margin="0,319,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Lime" Click="btnSuckCorrect_Click"/>
-                <Button x:Name="btnSuckWrong" Content="Hút sai" HorizontalAlignment="Left" Margin="349,319,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Red" Click="btnSuckWrong_Click"/>
+                <Button x:Name="btn5s" Content="5s hút" HorizontalAlignment="Center" Margin="0,237,0,0" VerticalAlignment="Top" Width="54" Click="btn5s_Click"/>
+                <Button x:Name="btnSuckPrac" Content="Bắt đầu lại thực hành" HorizontalAlignment="Left" Margin="351,237,0,0" VerticalAlignment="Top" Click="btnSuckPrac_Click"/>
+                <Button x:Name="btnSuckCorrect" Content="Hút đúng" HorizontalAlignment="Center" Margin="0,269,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Lime" Click="btnSuckCorrect_Click"/>
+                <Button x:Name="btnSuckWrong" Content="Hút sai" HorizontalAlignment="Left" Margin="351,269,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Red" Click="btnSuckWrong_Click"/>
             </Grid>
         </StackPanel>
 

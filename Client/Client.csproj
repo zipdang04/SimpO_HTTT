@@ -21,8 +21,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Viewer\GamesControl\Components\" />
-  </ItemGroup>
-
 </Project>

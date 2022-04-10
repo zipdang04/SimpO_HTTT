@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.Information;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +25,13 @@ namespace Client.Viewer.GamesControl
         {
             InitializeComponent();
         }
+        public void Play(string attach)
+		{
+            attach = HelperClass.PathString(@"Effects\" + attach);
+            Dispatcher.Invoke(() => {
+                media.Source = new Uri(attach);
+                media.Play();
+            });
+		}
     }
 }

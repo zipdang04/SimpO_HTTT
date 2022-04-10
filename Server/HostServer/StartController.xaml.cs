@@ -71,8 +71,7 @@ namespace Server.HostServer
 		public void showQuestion()
 		{
 			if (timer.IsEnabled == false) {
-				lblStartQuestion.Content = "";
-				lblStartAnswer.Content = "";
+				questionBox.displayQA("", "");
 				return;
 			}
 
@@ -86,24 +85,30 @@ namespace Server.HostServer
 				question = startClass.questions[playerTurn][questionPtr]; questionPtr++;
 			}
 
-			lblStartQuestion.Content = question.question;
-			lblStartAnswer.Content = question.answer;
-
+			questionBox.displayQA(question.question, question.answer);
 			sendMessageToEveryone("OLPA KD QUES " + HelperClass.ServerJoinQA(question));
 		}
 
 		private void StartTurn(int player)
 		{
 			playerTurn = player; questionPtr = 0;
-			timer.Start();
-			sendMessageToEveryone("OLPA KD START");
-			showQuestion();
+			sendMessageToEveryone(string.Format("OLPA KD START {0}", player));
 			btnCorrect.IsEnabled = true;
 			btnWrong.IsEnabled = true;
+			btnStartTIME.IsEnabled = true;
+			lblTurn.Content = string.Format("Lượt {0}", player + 1);
+		}
+
+		private void btnStartTIME_Click(object sender, RoutedEventArgs e)
+		{
 			btnStartTurn1.IsEnabled = false;
 			btnStartTurn2.IsEnabled = false;
 			btnStartTurn3.IsEnabled = false;
 			btnStartTurn4.IsEnabled = false;
+			btnStartTIME.IsEnabled = false;
+			sendMessageToEveryone("OLPA KD TIME");
+			showQuestion();
+			timer.Start();
 		}
 
 		private void btnStartTurn1_Click(object sender, RoutedEventArgs e)
@@ -131,6 +136,7 @@ namespace Server.HostServer
 			if (playerTurn == NaN) return;
 			if (questionPtr < StartClass.QUES_CNT) {
 				playerClass.points[playerTurn] += 10;
+				sendMessageToEveryone("OLPA KD CORRECT");
 				sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
 			}
 
@@ -139,6 +145,7 @@ namespace Server.HostServer
 
 		private void btnWrong_Click(object sender, RoutedEventArgs e)
 		{
+			sendMessageToEveryone("OLPA KD WRONG");
 			showQuestion();
 		}
 
@@ -158,5 +165,21 @@ namespace Server.HostServer
 			}
 		}
 		
+
+		private void btnChangeScene_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA SCENE KD");
+		}
+
+		private void btnIntro_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA KD INTRO");
+		}
+
+		private void btnBlank_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA KD BLANK");
+		}
+
 	}
 }

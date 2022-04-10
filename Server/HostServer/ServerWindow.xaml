@@ -12,10 +12,16 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TabControl Grid.Row="1">
-            <TabItem x:Name="tabGeneral" Header="Thông tin thí sinh" GotFocus="tabGeneral_GotFocus">
-                <Grid x:Name="gridGeneral"/>
+            <TabItem x:Name="tabGeneral" Header="Stuffs">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid x:Name="gridGeneral" Grid.Row="1"/>
+                </Grid>
             </TabItem>
-            <TabItem x:Name="tabStart" Header="Khởi động" GotFocus="tabStart_GotFocus">
+            <TabItem x:Name="tabStart" Header="Khởi động">
                 <Grid x:Name="gridStart"/>
             </TabItem>
             <TabItem x:Name="tabObsta" GotFocus="tabObsta_GotFocus"  Header="VCNV">

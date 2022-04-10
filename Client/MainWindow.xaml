@@ -13,6 +13,6 @@
         </Grid.RowDefinitions>
 
         <Button x:Name="btnClient" Grid.Row="0" Click="btnClient_Click">Client</Button>
-        <Button x:Name="btnViewer" Grid.Row="1">Viewer</Button>
+        <Button x:Name="btnViewer" Grid.Row="1" Click="btnViewer_Click">Viewer</Button>
     </Grid>
 </Window>

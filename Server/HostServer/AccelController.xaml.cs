@@ -55,6 +55,7 @@ namespace Server.HostServer
 			pointsControl.IsEnabled = false;
 
 			btnPlay.IsEnabled = false;
+			btnConfirm.IsEnabled = false;
 		}
 
 		public void sendMessageToEveryone(string message)
@@ -67,15 +68,18 @@ namespace Server.HostServer
 		void timer_Tick(int time, bool done)
 		{
 			Dispatcher.Invoke(() => { lblTime.Content = time / 100.0; });
-			
-			if (done) answersControl.IsEnabled = true;
+
+			if (done) {
+				answersControl.IsEnabled = true;
+				btnConfirm.IsEnabled = true;
+			}
 		}
 
 		void Prepare(int turn)
 		{
 			btnPlay.IsEnabled = true;
 			timeLimit = (turn + 1) * 1000 + 200;
-			timer.Stop();
+			timer.Stop(); btnConfirm.IsEnabled = false;
 			
 			OQuestion question = accelClass.accelQuestions[turn].question;
 			questionBox.displayQA(question.question, question.answer);
@@ -116,6 +120,7 @@ namespace Server.HostServer
 
 		private void btnConfirm_Click(object sender, RoutedEventArgs e)
 		{
+			btnConfirm.IsEnabled = false;
 			string command = "OLPA TT RES {0} {0} {0} {0}";
 			for (int i = 0; i < 4; i++)
 				command = string.Format(command, answersControl.checkBoxes[i].IsChecked);

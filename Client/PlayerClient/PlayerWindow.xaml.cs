@@ -39,7 +39,6 @@ namespace Client.PlayerClient
 		public ObstaPlayerControl obstaPlayerControl;
 		public AccelPlayerControl accelPlayerControl;
 		public FinishPlayerControl finishPlayerControl;
-		//WholeExamClass? wholeExam;
 
 		public PlayerWindow(LogInWindow logInWindow, SimpleSocketClient client, int player)
 		{
@@ -124,7 +123,7 @@ namespace Client.PlayerClient
 					break;
 				case "KD":
 					switch (tokens[2]) {
-						case "START":
+						case "TIME":
 							startPlayerControl.StartTimer();
 							break;
 						case "QUES":
