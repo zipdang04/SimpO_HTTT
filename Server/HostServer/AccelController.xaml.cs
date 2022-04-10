@@ -115,7 +115,6 @@ namespace Server.HostServer
 			for (int i = 0; i < 4; i++)
 				command = string.Format(command, answers.times[i]);
 			sendMessageToEveryone(command);
-			sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
 		}
 
 		private void btnConfirm_Click(object sender, RoutedEventArgs e)

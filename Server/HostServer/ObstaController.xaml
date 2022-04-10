@@ -49,7 +49,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnShowAnswer" Grid.Column="0" Content="Hiện đáp án"/>
+            <Button x:Name="btnShowAnswer" Grid.Column="0" Content="Hiện đáp án" Height="30" VerticalAlignment="Top" Click="btnShowAnswer_Click"/>
             <Button x:Name="btnConfirm" Grid.Column="1" Content="Xác nhận" Click="btnConfirm_Click"/>
         </Grid>
 

@@ -169,5 +169,20 @@ namespace Server.HostServer
 			foreach (KeyValuePair<int, IClientInfo> client in listener.GetConnectedClients())
 				listener.SendBytes(client.Value.Id, goddamn);
 		}
+
+		private void btnIntro_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA PLAIN INTRO");
+		}
+
+		private void btnOpening_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA PLAIN OPENING");
+		}
+
+		private void btnPlayerIntro_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA PLAIN PLINTRO");
+		}
 	}
 }

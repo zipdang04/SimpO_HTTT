@@ -97,6 +97,22 @@ namespace Client.Viewer
 			int len = tokens.Count;
 
 			switch (tokens[1]) {
+				case "PLAIN":
+					switch (tokens[2]) { 
+						case "INTRO":
+							ChangeScene("PLAIN");
+							plainControl.Play("Intro.mp4");
+							break;
+						case "OPENING":
+							ChangeScene("PLAIN");
+							plainControl.Play("Opening.mpeg");
+							break;
+						case "PLINTRO":
+							ChangeScene("PLAIN");
+							plainControl.Play("PlayerIntro.mp3");
+							break;
+					}
+					break;
 				case "SCENE":
 					ChangeScene(tokens[2]);
 					break;

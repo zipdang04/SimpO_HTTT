@@ -137,6 +137,11 @@ namespace Server.HostServer
 
 		private void btnConfirm_Click(object sender, RoutedEventArgs e)
 		{
+			string command = "OLPA TT RES {0} {0} {0} {0}";
+			for (int i = 0; i < 4; i++)
+				command = string.Format(command, answersControl.checkBoxes[i].IsChecked);
+			sendMessageToEveryone(command);
+
 			bool willOpen = false;
 			for (int i = 0; i < 4; i++){
 				if (answersControl.checkBoxes[i].IsChecked == true){
@@ -175,6 +180,17 @@ namespace Server.HostServer
 		{
 			btnTT.IsEnabled = false;
 			Prepare(4);
+		}
+
+		private void btnShowAnswer_Click(object sender, RoutedEventArgs e)
+		{
+			string command = "OLPA VCNV ANSWER {0} {0} {0} {0} TIME {0} {0} {0} {0}";
+			PlayerAnswers answers = answersControl.data.answers;
+			for (int i = 0; i < 4; i++)
+				command = string.Format(command, HelperClass.MakeString(answers.answers[i]));
+			for (int i = 0; i < 4; i++)
+				command = string.Format(command, answers.times[i]);
+			sendMessageToEveryone(command);
 		}
 
 		private void btnBellConfirm_Click(object sender, RoutedEventArgs e)

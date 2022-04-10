@@ -156,6 +156,8 @@ namespace Server.HostServer
 			lblTime.Content = string.Format("{0:0.00}", (time) / 100.0);
 			if (done) {
 				btnDone.IsEnabled = true;
+				btnCorrect.IsEnabled = false;
+				btnWrong.IsEnabled = false;
 			}
 		}
 		
@@ -184,8 +186,7 @@ namespace Server.HostServer
 			btnDone.IsEnabled = false;
 			playerTurn = -1;
 
-			btnCorrect.IsEnabled = false;
-			btnWrong.IsEnabled = false;
+			
 			btnStartTurn1.IsEnabled = true;
 			btnStartTurn2.IsEnabled = true;
 			btnStartTurn3.IsEnabled = true;
