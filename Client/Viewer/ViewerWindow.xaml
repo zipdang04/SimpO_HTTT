@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client.Viewer"
         mc:Ignorable="d"
-        Title="ViewerWindow" Height="900" Width="1600" ResizeMode="NoResize" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        Title="ViewerWindow" Height="900" Width="1600" ResizeMode="NoResize" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown" Unloaded="Window_Unloaded">
     <Grid x:Name="grid" Background="Cyan">
         
     </Grid>

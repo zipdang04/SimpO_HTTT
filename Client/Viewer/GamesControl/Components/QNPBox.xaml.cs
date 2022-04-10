@@ -38,7 +38,7 @@ namespace Client.Viewer.GamesControl.Components
 			SetHiddenAll();
 			txtblQuestion.Text = "";
 			lblPoint.Content = 0;
-			label.Content = 0;
+			label.Content = "";
 
 			DataContext = playerClass;
 		}

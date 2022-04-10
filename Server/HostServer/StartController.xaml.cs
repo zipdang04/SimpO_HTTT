@@ -52,12 +52,13 @@ namespace Server.HostServer
 			pointsControl = new PointsControl(playerClass);
 			gridPoint.Children.Add(pointsControl);
 
-			timer = new Simer(6000);
+			timer = new Simer(6000); // 60s + 1
 			timer.Tick += timer_Tick;
 			this.playerClass = playerClass;
 			
 			btnCorrect.IsEnabled = false;
 			btnWrong.IsEnabled = false;
+			btnDone.IsEnabled = false;
 			playerTurn = NaN;
 		}
 
@@ -93,8 +94,6 @@ namespace Server.HostServer
 		{
 			playerTurn = player; questionPtr = 0;
 			sendMessageToEveryone(string.Format("OLPA KD START {0}", player));
-			btnCorrect.IsEnabled = true;
-			btnWrong.IsEnabled = true;
 			btnStartTIME.IsEnabled = true;
 			lblTurn.Content = string.Format("Lượt {0}", player + 1);
 		}
@@ -106,9 +105,11 @@ namespace Server.HostServer
 			btnStartTurn3.IsEnabled = false;
 			btnStartTurn4.IsEnabled = false;
 			btnStartTIME.IsEnabled = false;
+			btnCorrect.IsEnabled = true;
+			btnWrong.IsEnabled = true;
 			sendMessageToEveryone("OLPA KD TIME");
-			showQuestion();
 			timer.Start();
+			showQuestion();
 		}
 
 		private void btnStartTurn1_Click(object sender, RoutedEventArgs e)
@@ -152,16 +153,9 @@ namespace Server.HostServer
 
 		void timer_Tick(int time, bool done)
 		{
-			lblTime.Content = string.Format("{0:0.00}", time / 100.0);
+			lblTime.Content = string.Format("{0:0.00}", (time) / 100.0);
 			if (done) {
-				playerTurn = -1;
-
-				btnCorrect.IsEnabled = false;
-				btnWrong.IsEnabled = false;
-				btnStartTurn1.IsEnabled = true;
-				btnStartTurn2.IsEnabled = true;
-				btnStartTurn3.IsEnabled = true;
-				btnStartTurn4.IsEnabled = true;
+				btnDone.IsEnabled = true;
 			}
 		}
 		
@@ -175,11 +169,30 @@ namespace Server.HostServer
 		{
 			sendMessageToEveryone("OLPA KD INTRO");
 		}
+		private void btnOpening_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA KD OPENING");
+		}
 
 		private void btnBlank_Click(object sender, RoutedEventArgs e)
 		{
 			sendMessageToEveryone("OLPA KD BLANK");
 		}
 
+		private void btnDone_Click(object sender, RoutedEventArgs e)
+		{
+			btnDone.IsEnabled = false;
+			playerTurn = -1;
+
+			btnCorrect.IsEnabled = false;
+			btnWrong.IsEnabled = false;
+			btnStartTurn1.IsEnabled = true;
+			btnStartTurn2.IsEnabled = true;
+			btnStartTurn3.IsEnabled = true;
+			btnStartTurn4.IsEnabled = true;
+			sendMessageToEveryone("OLPA KD DONE");
+		}
+
+		
 	}
 }

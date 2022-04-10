@@ -16,6 +16,7 @@
         <Grid>
             <Button x:Name="btnChangeScene" Content="KHỞI ĐỘNG!" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Background="#FF1A1DBD" Foreground="White" FontWeight="Bold" Click="btnChangeScene_Click"/>
             <Button x:Name="btnIntro" Content="Chạy intro" HorizontalAlignment="Left" Margin="104,10,0,0" VerticalAlignment="Top" Click="btnIntro_Click"/>
+            <Button x:Name="btnOpening" Content="Chạy nhạc BẮT ĐẦU" HorizontalAlignment="Left" Margin="195,10,0,0" VerticalAlignment="Top" Click="btnOpening_Click"/>
             <Button x:Name="btnStartTurn1" Content="Lượt 1" HorizontalAlignment="Left" Margin="11,38,0,0" VerticalAlignment="Top" Click="btnStartTurn1_Click"/>
             <Button x:Name="btnStartTurn2" Content="Lượt 2" HorizontalAlignment="Left" Margin="66,38,0,0" VerticalAlignment="Top" Click="btnStartTurn2_Click"/>
             <Button x:Name="btnStartTurn3" Content="Lượt 3" HorizontalAlignment="Left" Margin="121,38,0,0" VerticalAlignment="Top" Click="btnStartTurn3_Click"/>
@@ -31,7 +32,8 @@
             <Button x:Name="btnCorrect" Content="Đúng" HorizontalAlignment="Left" Margin="10,0,0,7" VerticalAlignment="Bottom" Width="50" Background="Lime" Click="btnCorrect_Click"/>
             <Button x:Name="btnWrong" Content="Sai" HorizontalAlignment="Left" Margin="71,0,0,7" VerticalAlignment="Bottom" Width="50" Background="Red" Click="btnWrong_Click"/>
             <Label x:Name="lblTime" Content="0" HorizontalAlignment="Left" Height="30" Margin="142,0,0,26" VerticalAlignment="Bottom" Width="48"/>
-            <Button x:Name="btnEmergency" Content="KHẨN CẤP!!" HorizontalAlignment="Left" Height="49" Margin="220,0,0,17" VerticalAlignment="Bottom" Width="88" Background="Red" Foreground="White" FontWeight="Bold"/>
+            <Button x:Name="btnEmergency" Content="KHẨN CẤP!!" HorizontalAlignment="Left" Height="49" Margin="546,0,0,17" VerticalAlignment="Bottom" Width="88" Background="Red" Foreground="White" FontWeight="Bold"/>
+            <Button x:Name="btnDone" Content="Xong" HorizontalAlignment="Left" Height="49" Margin="287,0,0,17" VerticalAlignment="Bottom" Width="88" FontWeight="Bold" Click="btnDone_Click"/>
         </Grid>
         <Grid x:Name="gridPoint" Grid.Row="2"/>
     </Grid>

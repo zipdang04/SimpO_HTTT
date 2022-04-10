@@ -7,10 +7,15 @@
              xmlns:compo="clr-namespace:Client.Viewer.GamesControl.Components"
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="1600">
-    <Grid>
+    <Grid x:Name="grid">
+        <!--
         <MediaElement x:Name="media" LoadedBehavior="Manual"/>
-        <compo:QNPBox x:Name="qnpBox"/>
+        -->
+        <MediaElement x:Name="mediaOpening" LoadedBehavior="Manual"/>
         <MediaElement x:Name="mediaCorrect" LoadedBehavior="Manual"/>
         <MediaElement x:Name="mediaWrong" LoadedBehavior="Manual"/>
+        <MediaElement x:Name="mediaBlank" LoadedBehavior="Manual"/>
+        <MediaElement x:Name="mediaDone" LoadedBehavior="Manual"/>
+        <compo:QNPBox x:Name="qnpBox"/>
     </Grid>
 </UserControl>

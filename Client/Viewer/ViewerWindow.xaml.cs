@@ -124,11 +124,20 @@ namespace Client.Viewer
 							startViewerControl.RunPlayer();
 							break;
 						}
+						case "OPENING":
+							startViewerControl.Opening();
+							break;
 						case "CORRECT":
 							startViewerControl.Correct();
 							break;
 						case "WRONG":
 							startViewerControl.Wrong();
+							break;
+						case "BLANK":
+							startViewerControl.Blank();
+							break;
+						case "DONE":
+							startViewerControl.Done();
 							break;
 						case "QUES":
 							string question = tokens[3], attach = tokens[4];
@@ -195,6 +204,12 @@ namespace Client.Viewer
 		private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
             DragMove();
+		}
+
+		private void Window_Unloaded(object sender, RoutedEventArgs e)
+		{
+			client.Dispose();
+			logInWindow.Show();
 		}
 	}
 }
