@@ -174,5 +174,12 @@ namespace Server.Information
 		{
 			return Directory.GetCurrentDirectory() + string.Format(@"\Resources\{0}\{1}", dir, attach);
 		}
+	
+		public static int VCNV_CountLetter(string words)
+		{
+			int count = 0;
+			foreach (char c in words) count += (c == ' ') ? 0 : 1;
+			return count;
+		}
 	}
 }

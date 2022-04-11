@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Server.HostServer"
              xmlns:compo="clr-namespace:Server.HostServer.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="800">
     <Grid>
         <Button x:Name="btnReset" Content="Bắt đầu" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="btnReset_Click"/>
         <Grid Height="125" VerticalAlignment="Top" Margin="0,60,0,0">
@@ -43,26 +43,37 @@
         </Grid>
         <compo:QuestionShowing x:Name="questionBox" Height="120" VerticalAlignment="Top" Margin="0,190,0,0"/>
         <Button x:Name="btnStart" Content="Bắt đầu" HorizontalAlignment="Left" Margin="10,310,0,0" VerticalAlignment="Top" Click="btnStart_Click"/>
-        <Grid x:Name="gridAnswer"  Height="120" VerticalAlignment="Top" Margin="0,340,0,0"/>
-        <Grid Height="30" VerticalAlignment="Top" Margin="0,470,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Button x:Name="btnShowAnswer" Grid.Column="0" Content="Hiện đáp án" Height="30" VerticalAlignment="Top" Click="btnShowAnswer_Click"/>
-            <Button x:Name="btnConfirm" Grid.Column="1" Content="Xác nhận" Click="btnConfirm_Click"/>
-        </Grid>
-
-        <Label VerticalAlignment="Top" Margin="0,520,0,0">Hút:</Label>
-        <Grid VerticalAlignment="Top" Margin="0,550,0,0" Height="120">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Button x:Name="btnBellConfirm" Click="btnBellConfirm_Click">Xác nhận</Button>
-            <StackPanel x:Name="stackPlayerList" Grid.Column="1"/>
-        </Grid>
         <Label Content="Thời gian" HorizontalAlignment="Left" Margin="59,307,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblTime" Content="0" HorizontalAlignment="Left" Margin="126,307,0,0" VerticalAlignment="Top"/>
+        <Grid VerticalAlignment="Top" Margin="0,340,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid x:Name="gridAnswer"  Height="120" VerticalAlignment="Top"/>
+                <Grid Height="30" VerticalAlignment="Top" Margin="0,130,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btnShowAnswer" Grid.Column="0" Content="Hiện đáp án" Height="30" VerticalAlignment="Top" Click="btnShowAnswer_Click"/>
+                    <Button x:Name="btnConfirm" Grid.Column="1" Content="Xác nhận" Click="btnConfirm_Click"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Label VerticalAlignment="Top" Margin="0,0,0,0">Hút:</Label>
+                <Grid VerticalAlignment="Top" Margin="0,30,0,0" Height="120">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btnBellConfirm" Click="btnBellConfirm_Click">Xác nhận</Button>
+                    <StackPanel x:Name="stackPlayerList" />
+                </Grid>
+            </Grid>
+        </Grid>
+
+     
     </Grid>
 </UserControl>
