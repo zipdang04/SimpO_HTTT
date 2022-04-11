@@ -8,6 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="1600">
     <Grid>
+        <MediaElement x:Name="mediaOpening" Source="../../Media/Effects/VCNV_Opening.mpeg" LoadedBehavior="Manual"/>
         <Grid x:Name="gridWord" Visibility="Visible">
             <Grid.Background>
                 <ImageBrush ImageSource="../../Resources/Effects/VCNV_Background.png"/>

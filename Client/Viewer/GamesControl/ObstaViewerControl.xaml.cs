@@ -24,5 +24,21 @@ namespace Client.Viewer.GamesControl
 		{
 			InitializeComponent();
 		}
+
+		public void ResetGame()
+		{
+			//
+		}
+
+		public void Opening() { Dispatcher.Invoke(() => { mediaOpening.Position = TimeSpan.Zero; mediaOpening.Play(); }); }
+		public void ChangeScene(string s)
+		{
+			Dispatcher.Invoke(() => { 
+				gridPic.Visibility = Visibility.Hidden;
+				gridWord.Visibility = Visibility.Hidden;
+				if (s == "PIC") gridPic.Visibility = Visibility.Visible;
+				else if (s == "WORD") gridPic.Visibility = Visibility.Hidden;
+			});
+		}
 	}
 }

@@ -31,8 +31,9 @@ namespace Client.Viewer
         SimpleSocketClient client;
         PlayerClass playersInfo;
 
-        StartViewerControl startViewerControl;
 		PlainControl plainControl;
+        StartViewerControl startViewerControl;
+		ObstaViewerControl obstaViewerControl;
         public ViewerWindow(LogInWindow logInWindow, SimpleSocketClient client)
         {
             InitializeComponent();
@@ -44,9 +45,11 @@ namespace Client.Viewer
 
 			plainControl = new PlainControl();
             startViewerControl = new StartViewerControl(playersInfo);
-			plainControl.Visibility = Visibility.Collapsed;
+			obstaViewerControl = new ObstaViewerControl();
 			grid.Children.Add(plainControl);
 			grid.Children.Add(startViewerControl);
+			grid.Children.Add(obstaViewerControl);
+			ChangeScene("PLAIN");
 		}
 
 		void ChangeScene(string s)
@@ -54,7 +57,7 @@ namespace Client.Viewer
 			Dispatcher.Invoke(() => {
 				plainControl.Visibility = Visibility.Collapsed;
 				startViewerControl.Visibility = Visibility.Collapsed;
-				//obstaViewerControl.Visibility = Visibility.Collapsed;
+				obstaViewerControl.Visibility = Visibility.Collapsed;
 				//accelViewerControl.Visibility = Visibility.Collapsed;
 				//finishViewerControl.Visibility = Visibility.Collapsed;
 				switch (s) {
@@ -136,7 +139,6 @@ namespace Client.Viewer
 							break;
 						}
 						case "TIME": {
-							//int player = Convert.ToInt32(tokens[3]);
 							startViewerControl.RunPlayer();
 							break;
 						}
@@ -164,6 +166,15 @@ namespace Client.Viewer
 				case "VCNV":
 					switch (tokens[2]) {
 						case "INTRO":
+							ChangeScene("PLAIN");
+							plainControl.Play("VCNV_Intro.mp4");
+							break;
+						case "OPENING":
+							obstaViewerControl.Opening();
+							break;
+						case "SCENE":
+							if (tokens[3] == "ANSWER") ;
+							else obstaViewerControl.ChangeScene(tokens[3]);
 							break;
 						case "START":
 							string attach = tokens[3];
@@ -179,6 +190,12 @@ namespace Client.Viewer
 							break;
 						case "OPEN":
 							//obstaViewerControl.Erase(Convert.ToInt32(tokens[3]));
+							break;
+						case "ANSWER":
+							break;
+						case "REMOVESTACK":
+							break;
+						case "WINNER":
 							break;
 					}
 					break;

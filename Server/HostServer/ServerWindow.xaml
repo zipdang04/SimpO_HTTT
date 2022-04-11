@@ -27,7 +27,7 @@
             <TabItem x:Name="tabStart" Header="Khởi động">
                 <Grid x:Name="gridStart"/>
             </TabItem>
-            <TabItem x:Name="tabObsta" GotFocus="tabObsta_GotFocus"  Header="VCNV">
+            <TabItem x:Name="tabObsta"  Header="VCNV">
                 <Grid x:Name="gridObsta"/>
             </TabItem>
             <TabItem x:Name="tabAccel" GotFocus="tabAccel_GotFocus" Header="Tăng tốc">

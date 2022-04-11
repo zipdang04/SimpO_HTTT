@@ -199,6 +199,7 @@ namespace Server.HostServer
 			for (int i = 0; i < 4; i++)
 				command = string.Format(command, answers.times[i]);
 			sendMessageToEveryone(command);
+			sendMessageToEveryone("OLPA VCNV SCENE ANSWER");
 		}
 
 		private void btnBellConfirm_Click(object sender, RoutedEventArgs e)
@@ -212,12 +213,15 @@ namespace Server.HostServer
 						playerWinner = player;
 						playerClass.points[player] += remainingPoint;
 						sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
+						sendMessageToEveryone("OLPA VCNV WINNER");
 					}
 					stackPlayerList.Children.Remove(control); i--;
+					sendMessageToEveryone("OLPA VCNV REMOVESTACK");
 				}
 				else if (control.radioWrong.IsChecked == true){
 					stackPlayerList.Children.Remove(control);
 					i--;
+					sendMessageToEveryone("OLPA VCNV REMOVESTACK");
 				}
 			}
 		}
