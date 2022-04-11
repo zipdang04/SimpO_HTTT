@@ -32,6 +32,7 @@ namespace Server.HostServer
 		SimpleSocketTcpListener listener;
 		ObstacleClass obstaClass;
 		List<Label> labels = new List<Label>();
+		List<Button> buttons = new List<Button>();
 		PlayerClass playerClass { get; set; }
 		public PointsControl pointsControl;
 		public AnswersControl answersControl;
@@ -62,6 +63,7 @@ namespace Server.HostServer
 			timer.Tick += timer_Tick;
 
 			labels.Add(lblHN1); labels.Add(lblHN2); labels.Add(lblHN3); labels.Add(lblHN4); labels.Add(lblTT);
+			buttons.Add(btnPic1); buttons.Add(btnPic2); buttons.Add(btnPic3); buttons.Add(btnPic4); buttons.Add(btnPicTT);
 			lblAnswer.Content = obstaClass.keyword;
 		}
 		public void sendMessageToEveryone(string message)
@@ -92,6 +94,7 @@ namespace Server.HostServer
 		private void btnReset_Click(object sender, RoutedEventArgs e)
 		{
 			btnHN1.IsEnabled = true;btnHN2.IsEnabled = true;btnHN3.IsEnabled = true;btnHN4.IsEnabled = true; btnTT.IsEnabled = false;
+			for (int i = 0; i < 5; i++) buttons[i].IsEnabled = false;
 			btnStart.IsEnabled = false; btnShowAnswer.IsEnabled = false; btnConfirm.IsEnabled = false;
 			answersControl.Reset();
 			stackPlayerList.Children.Clear();
@@ -154,7 +157,8 @@ namespace Server.HostServer
 				}
 			}
 			sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
-			if (willOpen) sendMessageToEveryone(string.Format("OLPA VCNV OPEN {0}", currentRow));
+			if (willOpen) buttons[currentRow].IsEnabled = true;
+				
 			btnConfirm.IsEnabled = false;
 		}
 		private void btnHN1_Click(object sender, RoutedEventArgs e)
@@ -216,6 +220,53 @@ namespace Server.HostServer
 					i--;
 				}
 			}
+		}
+
+		private void btnPic1_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA VCNV OPEN 0");
+		}
+		private void btnPic2_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA VCNV OPEN 1");
+		}
+		private void btnPic3_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA VCNV OPEN 2");
+		}
+		private void btnPic4_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA VCNV OPEN 3");
+		}
+
+		private void btnIntro_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA VCNV INTRO");
+		}
+
+		private void btnVCNV_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA SCENE VCNV");
+		}
+
+		private void btnOpening_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA VCNV OPENING");
+		}
+
+		private void btnVCNVPic_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA VCNV SCENE PIC");
+		}
+
+		private void btnVCNVWord_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA VCNV SCENE WORD");
+		}
+
+		private void btnPicTT_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA VCNV OPEN 4");
 		}
 	}
 }

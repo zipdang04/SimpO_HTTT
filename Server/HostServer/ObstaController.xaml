@@ -8,72 +8,85 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
     <Grid>
-        <Button x:Name="btnReset" Content="Bắt đầu" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="btnReset_Click"/>
-        <Grid Height="125" VerticalAlignment="Top" Margin="0,60,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="90"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
+        <Grid>
+            <Button x:Name="btnReset" Content="BẮT ĐẦU!" HorizontalAlignment="Left" Margin="10,44,0,0" VerticalAlignment="Top" Click="btnReset_Click" Background="Red" Foreground="White" FontWeight="Bold"/>
+            <Button x:Name="btnVCNV" Content="VƯỢT CHƯỚNG NGẠI VẬT!" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Background="#FF00FF46" Click="btnVCNV_Click"/>
+            <Button x:Name="btnIntro" Content="Chạy Intro" HorizontalAlignment="Left" Margin="173,10,0,0" VerticalAlignment="Top" Click="btnIntro_Click"/>
+            <Button x:Name="btnOpening" Content="Chạy nhạc mở đầu" HorizontalAlignment="Left" Margin="245,10,0,0" VerticalAlignment="Top" Click="btnOpening_Click"/>
+            <Button x:Name="btnVCNVWord" Content="Scene Hàng ngang" HorizontalAlignment="Left" Margin="292,44,0,0" VerticalAlignment="Top" Height="44" Click="btnVCNVWord_Click"/>
+            <Button x:Name="btnVCNVPic" Content="Scene Hình ảnh" HorizontalAlignment="Left" Margin="173,44,0,0" VerticalAlignment="Top" Height="44" Click="btnVCNVPic_Click"/>
+            <Label Content="Mở hình ảnh:" HorizontalAlignment="Left" Margin="469,63,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="btnPic1" Content="1" HorizontalAlignment="Left" Height="35" Margin="561,18,0,0" VerticalAlignment="Top" Width="42" IsEnabled="False" Click="btnPic1_Click"/>
+            <Button x:Name="btnPic2" Content="2" HorizontalAlignment="Left" Height="35" Margin="664,18,0,0" VerticalAlignment="Top" Width="42" IsEnabled="False" Click="btnPic2_Click"/>
+            <Button x:Name="btnPic3" Content="3" HorizontalAlignment="Left" Height="35" Margin="664,105,0,0" VerticalAlignment="Top" Width="42" IsEnabled="False" Click="btnPic3_Click"/>
+            <Button x:Name="btnPic4" Content="4" HorizontalAlignment="Left" Height="35" Margin="561,105,0,0" VerticalAlignment="Top" Width="42" IsEnabled="False" Click="btnPic4_Click"/>
+            <Button x:Name="btnPicTT" Content="TT" HorizontalAlignment="Left" Height="35" Margin="614,63,0,0" VerticalAlignment="Top" Width="42" IsEnabled="False" Click="btnPicTT_Click"/>
+        </Grid>
+        <Grid Margin="0, 150, 0, 0">
+            <Grid Height="125" VerticalAlignment="Top" Margin="0,0,0,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="90"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="btnHN1" Content="1" Grid.Column="0" Grid.Row="0" Click="btnHN1_Click"/>
-                <Button x:Name="btnHN2" Content="2" Grid.Column="0" Grid.Row="1" Click="btnHN2_Click"/>
-                <Button x:Name="btnHN3" Content="3" Grid.Column="0" Grid.Row="2" Click="btnHN3_Click"/>
-                <Button x:Name="btnHN4" Content="4" Grid.Column="0" Grid.Row="3" Click="btnHN4_Click"/>
-                <Button x:Name="btnTT"  Content="TT" Grid.Column="0" Grid.Row="4" Click="btnTT_Click"/>
-                <Label x:Name="lblHN1" Grid.Column="1" Grid.Row="0"/>
-                <Label x:Name="lblHN2" Grid.Column="1" Grid.Row="1"/>
-                <Label x:Name="lblHN3" Grid.Column="1" Grid.Row="2"/>
-                <Label x:Name="lblHN4" Grid.Column="1" Grid.Row="3"/>
-                <Label x:Name="lblTT" Grid.Column="1" Grid.Row="4"/>
-            </Grid>
-            <Label x:Name="lblAnswer" Grid.Column="1"/>
-            <Grid x:Name="gridPoint" Grid.Column="2"/>
-        </Grid>
-        <compo:QuestionShowing x:Name="questionBox" Height="120" VerticalAlignment="Top" Margin="0,190,0,0"/>
-        <Button x:Name="btnStart" Content="Bắt đầu" HorizontalAlignment="Left" Margin="10,310,0,0" VerticalAlignment="Top" Click="btnStart_Click"/>
-        <Label Content="Thời gian" HorizontalAlignment="Left" Margin="59,307,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblTime" Content="0" HorizontalAlignment="Left" Margin="126,307,0,0" VerticalAlignment="Top"/>
-        <Grid VerticalAlignment="Top" Margin="0,340,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <Grid x:Name="gridAnswer"  Height="120" VerticalAlignment="Top"/>
-                <Grid Height="30" VerticalAlignment="Top" Margin="0,130,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="40"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="btnShowAnswer" Grid.Column="0" Content="Hiện đáp án" Height="30" VerticalAlignment="Top" Click="btnShowAnswer_Click"/>
-                    <Button x:Name="btnConfirm" Grid.Column="1" Content="Xác nhận" Click="btnConfirm_Click"/>
+                    <Button x:Name="btnHN1" Content="1" Grid.Column="0" Grid.Row="0" Click="btnHN1_Click"/>
+                    <Button x:Name="btnHN2" Content="2" Grid.Column="0" Grid.Row="1" Click="btnHN2_Click"/>
+                    <Button x:Name="btnHN3" Content="3" Grid.Column="0" Grid.Row="2" Click="btnHN3_Click"/>
+                    <Button x:Name="btnHN4" Content="4" Grid.Column="0" Grid.Row="3" Click="btnHN4_Click"/>
+                    <Button x:Name="btnTT"  Content="TT" Grid.Column="0" Grid.Row="4" Click="btnTT_Click"/>
+                    <Label x:Name="lblHN1" Grid.Column="1" Grid.Row="0"/>
+                    <Label x:Name="lblHN2" Grid.Column="1" Grid.Row="1"/>
+                    <Label x:Name="lblHN3" Grid.Column="1" Grid.Row="2"/>
+                    <Label x:Name="lblHN4" Grid.Column="1" Grid.Row="3"/>
+                    <Label x:Name="lblTT" Grid.Column="1" Grid.Row="4"/>
                 </Grid>
+                <Label x:Name="lblAnswer" Grid.Column="1"/>
+                <Grid x:Name="gridPoint" Grid.Column="2"/>
             </Grid>
-            <Grid Grid.Column="1">
-                <Label VerticalAlignment="Top" Margin="0,0,0,0">Hút:</Label>
-                <Grid VerticalAlignment="Top" Margin="0,30,0,0" Height="120">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Button x:Name="btnBellConfirm" Click="btnBellConfirm_Click">Xác nhận</Button>
-                    <StackPanel x:Name="stackPlayerList" />
+            <compo:QuestionShowing x:Name="questionBox" Height="120" VerticalAlignment="Top" Margin="0,130,0,0"/>
+            <Button x:Name="btnStart" Content="Bắt đầu" HorizontalAlignment="Left" Margin="10,250,0,0" VerticalAlignment="Top" Click="btnStart_Click"/>
+            <Label Content="Thời gian" HorizontalAlignment="Left" Margin="59,247,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblTime" Content="0" HorizontalAlignment="Left" Margin="126,247,0,0" VerticalAlignment="Top"/>
+            <Grid VerticalAlignment="Top" Margin="0,280,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid x:Name="gridAnswer"  Height="120" VerticalAlignment="Top"/>
+                    <Grid Height="30" VerticalAlignment="Top" Margin="0,130,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btnShowAnswer" Grid.Column="0" Content="Hiện đáp án" Height="30" VerticalAlignment="Top" Click="btnShowAnswer_Click"/>
+                        <Button x:Name="btnConfirm" Grid.Column="1" Content="Xác nhận" Click="btnConfirm_Click"/>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Label VerticalAlignment="Top" Margin="0,0,0,0">Hút:</Label>
+                    <Grid VerticalAlignment="Top" Margin="0,30,0,0" Height="120">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btnBellConfirm" Click="btnBellConfirm_Click">Xác nhận</Button>
+                        <StackPanel x:Name="stackPlayerList" />
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
-
-     
     </Grid>
 </UserControl>

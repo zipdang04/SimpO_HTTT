@@ -31,14 +31,13 @@ namespace Client.Viewer.GamesControl.Components
 			InitializeComponent();
 			SetNormal();
 		}
-		public Letter(char c): this()
-		{
-			lblChar.Content = c;
-		}
+		public Letter(char c): this() { SetChar(c); }
+
+		public void SetChar(char c) { lblChar.Content = c; }
 
 		public void SetNormal() { background.ImageSource = new BitmapImage(NORMAL); lblChar.Visibility = Visibility.Hidden; }
 		public void SetChoosing() { background.ImageSource = new BitmapImage(CHOOSING); lblChar.Visibility = Visibility.Hidden; }
-		public void SetEnabled() { background.ImageSource = new BitmapImage(ENABLED); lblChar.Visibility = Visibility.Hidden; }
+		public void SetEnabled() { background.ImageSource = new BitmapImage(ENABLED); lblChar.Visibility = Visibility.Visible; }
 		public void SetDisabled() { background.ImageSource = new BitmapImage(DISABLED); lblChar.Visibility = Visibility.Hidden; }
 	}
 }
