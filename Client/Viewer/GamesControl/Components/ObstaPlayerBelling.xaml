@@ -5,13 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Client.Viewer.GamesControl.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="30" d:DesignWidth="400">
+             Height="32" Width="140">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="../../../Resources/Effects/VCNV_PlayerBelling.png"/>
+        </Grid.Background>
+        <Label x:Name="lblName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="17" FontWeight="Bold" Margin="0,-1,0,0"/>
     </Grid>
 </UserControl>

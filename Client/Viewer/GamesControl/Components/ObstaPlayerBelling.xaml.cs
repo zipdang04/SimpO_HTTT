@@ -20,9 +20,12 @@ namespace Client.Viewer.GamesControl.Components
 	/// </summary>
 	public partial class ObstaPlayerBelling : UserControl
 	{
-		public ObstaPlayerBelling()
+		public int player;
+		public ObstaPlayerBelling(int player, string name)
 		{
 			InitializeComponent();
+			lblName.Content = name;
+			this.player = player;
 		}
 	}
 }

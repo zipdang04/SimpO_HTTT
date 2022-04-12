@@ -30,10 +30,10 @@
             <TabItem x:Name="tabObsta"  Header="VCNV">
                 <Grid x:Name="gridObsta"/>
             </TabItem>
-            <TabItem x:Name="tabAccel" GotFocus="tabAccel_GotFocus" Header="Tăng tốc">
+            <TabItem x:Name="tabAccel" Header="Tăng tốc">
                 <Grid x:Name="gridAccel"/>
             </TabItem>
-            <TabItem x:Name="tabFinish" GotFocus="tabFinish_GotFocus" Header="Về đích">
+            <TabItem x:Name="tabFinish" Header="Về đích">
                 <Grid x:Name="gridFinish"/>
             </TabItem>
         </TabControl>

@@ -25,7 +25,7 @@
             <RowDefinition Height="90*"/>
         </Grid.RowDefinitions>
         <Label Grid.Row="1" Grid.Column="1">
-            <TextBlock Name="txtblQuestion" TextWrapping="Wrap" FontSize="20">
+            <TextBlock Name="txtblQuestion" TextWrapping="Wrap" FontSize="23">
                 Đây là một câu hỏi rất là dàiiiiiii
             </TextBlock>
         </Label>

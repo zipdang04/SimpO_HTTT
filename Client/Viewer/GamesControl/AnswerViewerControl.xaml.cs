@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,12 +25,19 @@ namespace Client.Viewer.GamesControl
 	{
 		PlayerClass? playerClass;
 		List<Label> lblNames, lblAnswers, lblTimes;
-		public AnswerViewerControl()
+		ObservableCollection<string> names, answers, timeString;
+		ObservableCollection<int> times, positions;
+		//int[] times = new int[4], positions = new int[4];
+		public AnswerViewerControl(PlayerClass playerClass)
 		{
 			InitializeComponent();
-			DataContext = playerClass;
+			this.playerClass = playerClass;
 
-			media.Source = new Uri(HelperClass.PathString("Effects", "PlayerAnswer.mp4"));
+			mediaCorrect.Source = new Uri(HelperClass.PathString("Effects", "PlayerAnswerCorrect.mpeg"));
+			mediaCorrect.BeginInit(); mediaCorrect.Play(); mediaCorrect.Stop();
+			mediaWrong.Source = new Uri(HelperClass.PathString("Effects", "PlayerAnswerWrong.mpeg"));
+			mediaWrong.BeginInit(); mediaWrong.Play(); mediaWrong.Stop();
+			media.Source = new Uri(HelperClass.PathString("Effects", "PlayerAnswers.mp4"));
 			media.BeginInit(); media.Play(); media.Stop();
 
 			lblNames = new List<Label>();
@@ -38,35 +46,79 @@ namespace Client.Viewer.GamesControl
 			lblAnswers.Add(lblAnswer1); lblAnswers.Add(lblAnswer2); lblAnswers.Add(lblAnswer3); lblAnswers.Add(lblName4);
 			lblTimes = new List<Label>();
 			lblTimes.Add(lblTime1); lblTimes.Add(lblTime2); lblTimes.Add(lblTime3); lblTimes.Add(lblTime4);
+
+			names = new ObservableCollection<string> { "", "", "", "" };
+			answers = new ObservableCollection<string> { "", "", "", "" };
+			timeString = new ObservableCollection<string> { "", "", "", "" };
+			times = new ObservableCollection<int> { 0, 0, 0, 0 };
+			positions = new ObservableCollection<int> { 0, 0, 0, 0 };
+			DataContext = new {
+				names = names,
+				answers = answers,
+				times = timeString
+			};
 		}
 
-		public void SetContext(PlayerClass playerClass)
-		{
-			this.playerClass = playerClass;
-			DataContext = playerClass;
-		}
-
-		private void media_MediaEnded(object sender, RoutedEventArgs e)
-		{
-			Dispatcher.Invoke(() => { gridAnswer.Visibility = Visibility.Visible; });
-		}
 		public void Reset()
 		{
-			gridAnswer.Visibility = Visibility.Hidden;
+			Dispatcher.Invoke(() => {
+				gridAnswer.Visibility = Visibility.Hidden;
+				for (int i = 0; i < 4; i++) {
+					lblAnswers[i].Visibility = Visibility.Visible;
+					lblNames[i].Visibility = Visibility.Visible;
+					lblTimes[i].Visibility = Visibility.Visible;
+				}
+			});
 		}
-		public void Run()
+
+		public void SetPlayerAnswer(string[] pAns, int[] pTime, bool sort = false)
 		{
+			Reset();
+			for (int i = 0; i < 4; i++) {
+				answers[i] = pAns[i]; times[i] = pTime[i]; positions[i] = i;
+			}
+			if (sort)
+				for (int i = 0; i < 4; i++) for (int j = i + 1; j < 4; j++)
+						if (times[i] > times[j]) {
+							string s = answers[i]; answers[i] = answers[j]; answers[j] = s;
+							int x = times[i]; times[i] = times[j]; times[j] = x;
+							x = positions[i]; positions[i] = positions[j]; positions[j] = x;
+						}
+			for (int i = 0; i < 4; i++) {
+				names[i] = (playerClass == null) ? "" : playerClass.names[positions[i]];
+				timeString[i] = timeString[i] = string.Format("{0:00.00}", pTime[i] / 100.0);
+			}
+		}
+		public void Run(string[] pAns, int[] pTime, bool sort = false)
+		{
+			SetPlayerAnswer(pAns, pTime, sort);
 			Dispatcher.Invoke(() => {
 				media.Position = TimeSpan.Zero;
 				gridAnswer.Visibility = Visibility.Hidden;
 				media.Play();
 			});
 		}
-		public void SetPlayerAnswer(int player, string answer, int time)
+		private void media_MediaEnded(object sender, RoutedEventArgs e)
+		{
+			Dispatcher.Invoke(() => { gridAnswer.Visibility = Visibility.Visible; });
+		}
+		public void Conclusion(bool[] correct)
 		{
 			Dispatcher.Invoke(() => {
-				lblAnswers[player].Content = answer;
-				lblTimes[player].Content = string.Format("{0:0.00}", time);
+				bool haveWinner = false;
+				for (int i = 0; i < 4; i++)
+					if (correct[positions[i]] == false) {
+						lblAnswers[i].Visibility = Visibility.Hidden;
+						lblNames[i].Visibility = Visibility.Hidden;
+						lblTimes[i].Visibility = Visibility.Hidden;
+					}
+					else haveWinner = true;
+				if (haveWinner) {
+					mediaCorrect.Position = TimeSpan.Zero; mediaCorrect.Play();
+				}
+				else {
+					mediaWrong.Position = TimeSpan.Zero; mediaWrong.Play();
+				}
 			});
 		}
 	}

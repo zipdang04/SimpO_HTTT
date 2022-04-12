@@ -24,49 +24,59 @@ namespace Client.Viewer.GamesControl
     {
         PlayerClass playerClass;
         int player = -1;
-        MediaElement[] mediaStart = new MediaElement[4];
-        MediaElement[] mediaRun = new MediaElement[4];
+        MediaElement mediaStart = new MediaElement(), mediaRun = new MediaElement();
+        //MediaElement[] mediaStart = new MediaElement[4];
+        //MediaElement[] mediaRun = new MediaElement[4];
+        MediaPlayer mediaOpening = new MediaPlayer(), 
+                    mediaCorrect = new MediaPlayer(), 
+                    mediaWrong = new MediaPlayer(), 
+                    mediaBlank = new MediaPlayer(), 
+                    mediaDone = new MediaPlayer();
         public StartViewerControl(PlayerClass playerClass)
         {
             InitializeComponent();
             this.playerClass = playerClass;
             qnpBox.SetContext(playerClass);
 
-            for (int i = 0; i < 4; i++) {
-                mediaStart[i] = new MediaElement();
-                mediaStart[i].LoadedBehavior = MediaState.Manual;
-                mediaStart[i].Source = new Uri(HelperClass.PathString("Effects", string.Format("KD_{0}_Start.mp4", i + 1)));
-                mediaStart[i].Play(); mediaStart[i].Stop();
-                mediaStart[i].Visibility = Visibility.Collapsed;
+            mediaStart.LoadedBehavior = MediaState.Manual;
+            mediaRun.LoadedBehavior = MediaState.Manual;
+            grid.Children.Add(mediaStart);
+			grid.Children.Add(mediaRun);
+			//for (int i = 0; i < 4; i++) {
+			//    mediaStart[i] = new MediaElement();
+			//    mediaStart[i].LoadedBehavior = MediaState.Manual;
+			//    mediaStart[i].Source = new Uri(HelperClass.PathString("Effects", string.Format("KD_{0}_Start.mp4", i + 1)));
+			//    mediaStart[i].Play(); mediaStart[i].Stop();
+			//    mediaStart[i].Visibility = Visibility.Collapsed;
 
-                mediaRun[i] = new MediaElement();
-                mediaRun[i].LoadedBehavior = MediaState.Manual;
-                mediaRun[i].Source = new Uri(HelperClass.PathString("Effects", string.Format("KD_{0}_Run.mp4", i + 1)));
-                mediaRun[i].Play(); mediaRun[i].Stop();
-                mediaRun[i].Visibility = Visibility.Collapsed;
+			//    mediaRun[i] = new MediaElement();
+			//    mediaRun[i].LoadedBehavior = MediaState.Manual;
+			//    mediaRun[i].Source = new Uri(HelperClass.PathString("Effects", string.Format("KD_{0}_Run.mp4", i + 1)));
+			//    mediaRun[i].Play(); mediaRun[i].Stop();
+			//    mediaRun[i].Visibility = Visibility.Collapsed;
 
-                grid.Children.Add(mediaStart[i]);
-                grid.Children.Add(mediaRun[i]);
-            }
+			//    grid.Children.Add(mediaStart[i]);
+			//    grid.Children.Add(mediaRun[i]);
+			//}
 
-            mediaOpening.Source = new Uri(HelperClass.PathString("Effects", "KD_Opening.mpeg"));
-            mediaOpening.BeginInit(); mediaOpening.Play(); mediaOpening.Stop();
-            mediaCorrect.Source = new Uri(HelperClass.PathString("Effects", "KD_Correct.m4a")); 
-            mediaCorrect.BeginInit(); mediaCorrect.Play(); mediaCorrect.Stop();
-            mediaWrong.Source = new Uri(HelperClass.PathString("Effects", "KD_Wrong.m4a")); 
-            mediaWrong.BeginInit(); mediaWrong.Play(); mediaWrong.Stop();
-            mediaBlank.Source = new Uri(HelperClass.PathString("Effects", "Blank.mp3")); 
-            mediaBlank.BeginInit(); mediaBlank.Play(); mediaBlank.Stop();
-            mediaDone.Source = new Uri(HelperClass.PathString("Effects", "KD_Done.m4a")); 
-            mediaDone.BeginInit(); mediaDone.Play(); mediaDone.Stop();
+			mediaOpening.Open(new Uri(HelperClass.PathString("Effects", "KD_Opening.mpeg")));
+            mediaOpening.Play(); mediaOpening.Stop();
+            mediaCorrect.Open(new Uri(HelperClass.PathString("Effects", "KD_Correct.m4a"))); 
+            mediaCorrect.Play(); mediaCorrect.Stop();
+            mediaWrong.Open(new Uri(HelperClass.PathString("Effects", "KD_Wrong.m4a"))); 
+            mediaWrong.Play(); mediaWrong.Stop();
+            mediaBlank.Open(new Uri(HelperClass.PathString("Effects", "Blank.mp3"))); 
+            mediaBlank.Play(); mediaBlank.Stop();
+            mediaDone.Open(new Uri(HelperClass.PathString("Effects", "KD_Done.m4a"))); 
+            mediaDone.Play(); mediaDone.Stop();
             Grid.SetZIndex(qnpBox, 100);
         }
 
         public void TurnOff()
 		{
             for (int i = 0; i < 4; i++) {
-                mediaStart[i].Visibility = Visibility.Collapsed;
-                mediaRun[i].Visibility = Visibility.Collapsed;
+                mediaStart.Visibility = Visibility.Collapsed;
+                mediaRun.Visibility = Visibility.Collapsed;
             }
 		}
         public void StartPlayer(int player)
@@ -74,13 +84,16 @@ namespace Client.Viewer.GamesControl
             this.player = player;
             //string attach = HelperClass.PathString("Effects", string.Format("KD_{0}_Start.mp4", player + 1));
             Dispatcher.Invoke(() => {
+                mediaStart.Source = new Uri(HelperClass.PathString("Effects", string.Format("KD_{0}_Start.mp4", player + 1)));
+                mediaRun.Source = new Uri(HelperClass.PathString("Effects", string.Format("KD_{0}_Run.mp4", player + 1)));
+                mediaRun.Play(); mediaRun.Stop();
                 TurnOff();
                 qnpBox.SetHiddenAll();
                 //media.Source = new Uri(attach);
                 //media.Play();
-                mediaStart[player].Position = TimeSpan.Zero;
-                mediaStart[player].Visibility = Visibility.Visible;
-                mediaStart[player].Play();
+                mediaStart.Position = TimeSpan.Zero;
+                mediaStart.Visibility = Visibility.Visible;
+                mediaStart.Play();
             });
 		}
 
@@ -94,9 +107,9 @@ namespace Client.Viewer.GamesControl
                 qnpBox.Visibility = Visibility.Visible;
                 //media.Source = new Uri(attach);
                 //media.Play();
-                mediaRun[player].Position = TimeSpan.Zero;
-                mediaRun[player].Visibility = Visibility.Visible;
-                mediaRun[player].Play();
+                mediaRun.Position = TimeSpan.Zero;
+                mediaRun.Visibility = Visibility.Visible;
+                mediaRun.Play();
             });
         }
         public void Opening() { Dispatcher.Invoke(() => { mediaOpening.Position = TimeSpan.Zero; mediaOpening.Play(); }); }

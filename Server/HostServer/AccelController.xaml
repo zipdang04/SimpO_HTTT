@@ -9,6 +9,9 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel x:Name="stackPanel">
+            <Grid Height="100">
+                <Button x:Name="btnTToc" Content="TĂNG TỐC" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Background="#FFFDFF00" FontWeight="Bold" Click="btnTToc_Click"/>
+            </Grid>
             <Grid>
                 <Button x:Name="btnTT1" Content="Tăng tốc 1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="btnTT1_Click"/>
                 <Button x:Name="btnTT2" Content="Tăng tốc 2" HorizontalAlignment="Left" Margin="75,10,0,0" VerticalAlignment="Top" Click="btnTT2_Click"/>
@@ -25,7 +28,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="btnShowAnswer" Content="Hiện đáp án" Grid.Column="0"/>
+                <Button x:Name="btnShowAnswer" Content="Hiện đáp án" Grid.Column="0" Click="btnShowAnswer_Click"/>
                 <Button x:Name="btnConfirm" Content="Xác nhận" Grid.Column="1" Click="btnConfirm_Click"/>
             </Grid>
         </StackPanel>
