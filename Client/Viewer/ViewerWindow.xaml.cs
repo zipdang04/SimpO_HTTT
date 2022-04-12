@@ -178,15 +178,17 @@ namespace Client.Viewer
 							break;
 						case "START":
 							string attach = tokens[3];
-							//obstaViewerControl.ResetGame(attach);
+							int[] cntLetter = new int[4];
+							for (int i = 0; i < 4; i++)
+								cntLetter[i] = Convert.ToInt32(tokens[4 + i]);
+							obstaViewerControl.ResetGame(attach, cntLetter);
 							break;
 						case "SHOW":
-							string label = (Convert.ToInt32(tokens[3]) + 1).ToString();
 							string question = tokens[4];
-							//obstaViewerControl.ShowQuestion(label, question, tokens[5]);
+							obstaViewerControl.ShowQuestion(Convert.ToInt32(tokens[3]), question, tokens[5]);
 							break;
 						case "TIME":
-							//obstaViewerControl.StartTimer();
+							obstaViewerControl.StartTimer();
 							break;
 						case "OPEN":
 							//obstaViewerControl.Erase(Convert.ToInt32(tokens[3]));

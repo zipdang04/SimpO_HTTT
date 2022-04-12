@@ -104,11 +104,11 @@ namespace Server.HostServer
 			remainingPoint = 80; cntRow = 0;
 			currentRow = NaN;
 			
-			string command = string.Format("OLPA VCNV START {0} {0} {0} {0} {0} {0}", HelperClass.MakeString(obstaClass.attach));
+			string command = string.Format("OLPA VCNV START {0}", HelperClass.MakeString(obstaClass.attach));
 			for (int i = 0; i < 5; i++){
 				int cntLetter = HelperClass.VCNV_CountLetter(obstaClass.questions[i].answer);
 				labels[i].Content = cntLetter;
-				command = String.Format(command, cntLetter);
+				command = String.Format(command + " {0}", cntLetter);
 			}
 			sendMessageToEveryone(command);
 		}

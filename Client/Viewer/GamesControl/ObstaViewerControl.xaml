@@ -8,12 +8,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="1600">
     <Grid>
-        <MediaElement x:Name="mediaOpening" Source="../../Media/Effects/VCNV_Opening.mpeg" LoadedBehavior="Manual"/>
+        <MediaElement x:Name="mediaOpening" LoadedBehavior="Manual"/>
         <Grid x:Name="gridWord" Visibility="Visible">
             <Grid.Background>
                 <ImageBrush ImageSource="../../Resources/Effects/VCNV_Background.png"/>
             </Grid.Background>
-            <MediaElement x:Name="mediaShow" Source="../../Resources/Effects/VCNV_ShowQuestion.mp4" LoadedBehavior="Manual" Visibility="Hidden"/>
+            <MediaElement x:Name="mediaShow" LoadedBehavior="Manual" Visibility="Hidden" MediaEnded="mediaShow_MediaEnded"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="130*"/>
@@ -32,10 +32,10 @@
                     <RowDefinition Height="475*"/>
                 </Grid.RowDefinitions>
             </Grid>
-            <MediaElement x:Name="media15s" Source="../../Resources/Effects/VCNV_15s.mp4" LoadedBehavior="Manual"/>
+            <MediaElement x:Name="media15s" LoadedBehavior="Manual"/>
             <compo:QNPBox x:Name="qBox"/>
         </Grid>
-        <Grid x:Name="gridPic">
+        <Grid x:Name="gridPic" Visibility="Hidden">
             <Grid.Background>
                 <SolidColorBrush Color="#FFF5EAD7"/>
             </Grid.Background>
@@ -48,6 +48,5 @@
                 <Image x:Name="rectTT" Source="../../Resources/Effects/VCNV_Piece_TT.png" Stretch="Fill"/>
             </Grid>
         </Grid>
-        
     </Grid>
 </UserControl>

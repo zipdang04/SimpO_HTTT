@@ -32,11 +32,18 @@ namespace Client.Viewer.GamesControl.Components
 				letters[i].Visibility = Visibility.Hidden;
 			}
 		}
-		public void setWord(string s)
+		public void Reset()
+		{
+			for (int i = 0; i < MAXLEN; i++)
+			{
+				letters[i].SetChar(' ');
+				letters[i].SetNull();
+			}
+		}
+		public void SetWord(int num)
 		{
 			string processed = "";
-			foreach (char c in s) if (c != ' ')
-				processed += c;
+			for (int i = 0; i < num; i++) processed += 'X';
 			bool addLeft = false;
 			while (processed.Length < MAXLEN)
 			{
@@ -45,20 +52,31 @@ namespace Client.Viewer.GamesControl.Components
 				addLeft = !addLeft;
 			}
 			for (int i = 0; i < MAXLEN; i++)
-				letters[i].SetChar(processed[i]);
+				if (processed[i] != ' ')
+					letters[i].SetNormal();
+				else
+					letters[i].SetNull();
 		}
-
-		public void SetNormal() {
-			for (int i = 0; i < MAXLEN; i++) letters[i].SetNormal();
+		public void ShowAnswer(int index, string answer)
+		{
+			int ptr = 0;
+			if (index < 4)
+				for (int i = 0; i < MAXLEN; i++)
+					if (letters[i].Visibility == Visibility.Visible) { 
+						letters[i].SetChar(answer[ptr]); 
+						letters[i].SetEnabled(); ptr++; 
+					}
+		}
+		public void DisAnswer(int index)
+		{
+			for (int i = 0; i < MAXLEN; i++)
+				if (letters[i].Visibility == Visibility.Visible)
+					letters[i].SetDisabled();
 		}
 		public void SetChoosing() { 
-			for (int i = 0; i < MAXLEN; i++) letters[i].SetChoosing();
-		}
-		public void SetEnabled() { 
-			for (int i = 0; i < MAXLEN; i++) letters[i].SetEnabled();
-		}
-		public void SetDisabled() { 
-			for (int i = 0; i < MAXLEN; i++) letters[i].SetDisabled();
+			for (int i = 0; i < MAXLEN; i++) 
+				if (letters[i].Visibility == Visibility.Visible)
+					letters[i].SetChoosing();
 		}
 	}
 }

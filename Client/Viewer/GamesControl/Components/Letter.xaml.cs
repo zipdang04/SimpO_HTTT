@@ -35,9 +35,10 @@ namespace Client.Viewer.GamesControl.Components
 
 		public void SetChar(char c) { lblChar.Content = c; }
 
-		public void SetNormal() { background.ImageSource = new BitmapImage(NORMAL); lblChar.Visibility = Visibility.Hidden; }
-		public void SetChoosing() { background.ImageSource = new BitmapImage(CHOOSING); lblChar.Visibility = Visibility.Hidden; }
-		public void SetEnabled() { background.ImageSource = new BitmapImage(ENABLED); lblChar.Visibility = Visibility.Visible; }
-		public void SetDisabled() { background.ImageSource = new BitmapImage(DISABLED); lblChar.Visibility = Visibility.Hidden; }
+		public void SetNull() { background.ImageSource = null; lblChar.Visibility = Visibility.Hidden; Visibility = Visibility.Hidden; }
+		public void SetNormal() { background.ImageSource = new BitmapImage(NORMAL); lblChar.Visibility = Visibility.Hidden; Visibility = Visibility.Visible; }
+		public void SetChoosing() { background.ImageSource = new BitmapImage(CHOOSING); lblChar.Visibility = Visibility.Hidden; Visibility = Visibility.Visible; }
+		public void SetEnabled() { background.ImageSource = new BitmapImage(ENABLED); lblChar.Visibility = Visibility.Visible; Visibility = Visibility.Visible; }
+		public void SetDisabled() { background.ImageSource = new BitmapImage(DISABLED); lblChar.Visibility = Visibility.Hidden; Visibility = Visibility.Visible; }
 	}
 }
