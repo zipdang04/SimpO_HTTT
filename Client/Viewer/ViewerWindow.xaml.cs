@@ -68,7 +68,7 @@ namespace Client.Viewer
 						startViewerControl.Visibility = Visibility.Visible;
 						break;
 					case "VCNV":
-						//obstaViewerControl.Visibility = Visibility.Visible;
+						obstaViewerControl.Visibility = Visibility.Visible;
 						break;
 					case "TT":
 						//accelViewerControl.Visibility = Visibility.Visible;
@@ -191,7 +191,7 @@ namespace Client.Viewer
 							obstaViewerControl.StartTimer();
 							break;
 						case "OPEN":
-							//obstaViewerControl.Erase(Convert.ToInt32(tokens[3]));
+							obstaViewerControl.Open(Convert.ToInt32(tokens[3]));
 							break;
 						case "ANSWER":
 							break;

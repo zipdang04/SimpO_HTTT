@@ -14,7 +14,7 @@
                 <ImageBrush ImageSource="../../Resources/Effects/VCNV_Background.png"/>
             </Grid.Background>
             <MediaElement x:Name="mediaShow" LoadedBehavior="Manual" Visibility="Hidden" MediaEnded="mediaShow_MediaEnded"/>
-            <Grid>
+            <Grid x:Name="grid4W">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="130*"/>
                     <ColumnDefinition Width="1535*"/>

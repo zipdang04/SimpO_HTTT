@@ -33,13 +33,13 @@ namespace Client.Viewer.GamesControl
 			for (int i = 0; i < 4; i++)
 			{
 				wordControls[i] = new WordControl();
-				gridWord.Children.Add(wordControls[i]);
+				grid4W.Children.Add(wordControls[i]);
 				Grid.SetColumn(wordControls[i], 1);
-				Grid.SetRow(wordControls[i], (i + 1) * 2);
+				Grid.SetRow(wordControls[i], i * 2 + 1);
 			}
-			mediaOpening.Source = new Uri(HelperClass.PathString("Effects", "VCNV_Opening")); mediaOpening.BeginInit();
-			mediaShow.Source = new Uri(HelperClass.PathString("Effects", "VCNV_ShowQuestion")); mediaShow.BeginInit();
-			media15s.Source = new Uri(HelperClass.PathString("Effects", "VCNV_15s")); media15s.BeginInit();
+			mediaOpening.Source = new Uri(HelperClass.PathString("Effects", "VCNV_Opening.mpeg")); mediaOpening.BeginInit();
+			mediaShow.Source = new Uri(HelperClass.PathString("Effects", "VCNV_ShowQuestion.mp4")); mediaShow.BeginInit();
+			media15s.Source = new Uri(HelperClass.PathString("Effects", "VCNV_15s.mp4")); media15s.BeginInit();
 		}
 
 		public void ResetGame(string attach, int[] cntLetter)
@@ -81,7 +81,8 @@ namespace Client.Viewer.GamesControl
 			Dispatcher.Invoke(() => { 
 				qBox.SetQuestion(question);
 				qBox.Visibility = Visibility.Hidden;
-				wordControls[index].SetChoosing();
+				if (index < 4) wordControls[index].SetChoosing();
+				media15s.Visibility = Visibility.Hidden;
 				mediaShow.Visibility = Visibility.Visible;
 				mediaShow.Position = TimeSpan.Zero; mediaShow.Play();
 			});

@@ -23,7 +23,7 @@ namespace Client.Viewer.GamesControl.Components
 	{
 		public enum LetterState { NORMAL, CHOOSING, ENABLE, DISABLE };
 		public static Uri NORMAL = new Uri(HelperClass.PathString("Effects", "VCNV_LetterNormal.png"));
-		public static Uri CHOOSING = new Uri(HelperClass.PathString("Effects", "VCNV_LetterChossing.png"));
+		public static Uri CHOOSING = new Uri(HelperClass.PathString("Effects", "VCNV_LetterChoosing.png"));
 		public static Uri ENABLED = new Uri(HelperClass.PathString("Effects", "VCNV_LetterEnabled.png"));
 		public static Uri DISABLED = new Uri(HelperClass.PathString("Effects", "VCNV_LetterDisabled.png"));
 		public Letter()
