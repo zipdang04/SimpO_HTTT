@@ -181,5 +181,15 @@ namespace Server.HostServer
 		{
 			sendMessageToEveryone("OLPA PLAIN PLINTRO");
 		}
+
+		private void btnPlain_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA SCENE PLAIN");
+		}
+
+		private void btnPoints_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA POINTS");
+		}
 	}
 }

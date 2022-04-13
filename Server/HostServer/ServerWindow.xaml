@@ -22,6 +22,8 @@
                     <Button x:Name="btnOpening" Content="Nhạc bắt đầu" HorizontalAlignment="Left" Margin="61,10,0,0" VerticalAlignment="Top" Click="btnOpening_Click"/>
                     <Grid x:Name="gridGeneral" Grid.Row="1"/>
                     <Button x:Name="btnPlayerIntro" Content="Giới thiệu thí sinh" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Click="btnPlayerIntro_Click"/>
+                    <Button x:Name="btnPlain" Content="Màn hình video intro" HorizontalAlignment="Left" Margin="176,15,0,0" VerticalAlignment="Top" Click="btnPlain_Click"/>
+                    <Button x:Name="btnPoints" Content="Tổng kết điểm" HorizontalAlignment="Left" Margin="176,39,0,0" VerticalAlignment="Top" Click="btnPoints_Click"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="tabStart" Header="Khởi động">

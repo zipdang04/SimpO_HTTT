@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="Client.Viewer.GamesControl.FinishViewerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Client.Viewer.GamesControl"
+             xmlns:compo="clr-namespace:Client.Viewer.GamesControl.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="900" d:DesignWidth="1600">
+    <Grid>
+        <Grid x:Name="gridPoint">
+            <Image x:Name="backgroundPoint" Source="../../Resources/Effects/VD_Choosing.png"/>
+            <MediaElement x:Name="mediaStart" LoadedBehavior="Manual" MediaEnded="mediaStart_MediaEnded"/>
+        </Grid>
+        <Grid x:Name="gridQuestion">
+            <MediaElement x:Name="media10s" LoadedBehavior="Manual"/>
+            <MediaElement x:Name="media15s" LoadedBehavior="Manual"/>
+            <MediaElement x:Name="media20s" LoadedBehavior="Manual"/>
+            <Image x:Name="imgP1" Source="../../Resources/Effects/P1.png"/>
+            <Image x:Name="imgP2" Source="../../Resources/Effects/P2.png"/>
+            <Image x:Name="imgP3" Source="../../Resources/Effects/P3.png"/>
+            <Image x:Name="imgP4" Source="../../Resources/Effects/P4.png"/>
+            <compo:QNPBoxV2 x:Name="questionBox"/>
+        </Grid>
+        <Grid x:Name="gridPrac">
+        </Grid>
+        <Grid x:Name="grMedia">
+            <Grid.Background>
+                <SolidColorBrush Color="White"/>
+            </Grid.Background>
+            <MediaElement x:Name="media" LoadedBehavior="Manual"/>
+        </Grid>
+    </Grid>
+</UserControl>

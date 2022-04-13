@@ -38,6 +38,10 @@ namespace Server.HostServer.Components
 		{
 			this.timeLimit = timeLimit;
 		}
+		public void SetTimeLimit(TimeSpan span)
+		{
+			this.timeLimit = ToInt(span);
+		}
 
 		private void Timer_Tick(object? sender, EventArgs e)
 		{

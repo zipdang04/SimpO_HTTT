@@ -111,9 +111,9 @@
 
                 <compo:QuestionShowing x:Name="questionBox" VerticalAlignment="Top" Margin="0,40,0,0" Height="130" />
 
-                <Button x:Name="btnStar" Content="Sao" HorizontalAlignment="Left" Margin="545,188,0,0" VerticalAlignment="Top" Background="Yellow" Height="44" Width="45" Click="btnStar_Click"/>
-                <Label HorizontalAlignment="Left" Margin="69,185,0,0" VerticalAlignment="Top">lưu ý: việc chọn sao chỉ có tác dụng sau khi bấm Hiện câu hỏi</Label>
-                <Label HorizontalAlignment="Left" Margin="69,205,0,0" VerticalAlignment="Top">NHỚ CHỌN SAO TRƯỚC KHI HIỆN CÂU HỎI MỚI</Label>
+                <Button x:Name="btnStar" Content="Sao" HorizontalAlignment="Right" Margin="0,186,10,0" VerticalAlignment="Top" Background="Yellow" Height="44" Width="45" Click="btnStar_Click"/>
+                <Label HorizontalAlignment="Right" Margin="0,185,60,0" VerticalAlignment="Top">lưu ý: việc chọn sao chỉ có tác dụng sau khi bấm Hiện câu hỏi</Label>
+                <Label HorizontalAlignment="Right" Margin="0,205,60,0" VerticalAlignment="Top">NHỚ CHỌN SAO TRƯỚC KHI HIỆN CÂU HỎI MỚI</Label>
 
                 <Button x:Name="btnStart" Content="Bắt đầu suy nghĩ" HorizontalAlignment="Left" Margin="11,237,0,0" VerticalAlignment="Top" Click="btnStart_Click"/>
                 <Button x:Name="btnPrac" Content="Bắt đầu thực hành" HorizontalAlignment="Left" Margin="111,237,0,0" VerticalAlignment="Top" Click="btnPrac_Click"/>
@@ -124,6 +124,7 @@
                 <Button x:Name="btnSuckPrac" Content="Bắt đầu lại thực hành" HorizontalAlignment="Left" Margin="351,237,0,0" VerticalAlignment="Top" Click="btnSuckPrac_Click"/>
                 <Button x:Name="btnSuckCorrect" Content="Hút đúng" HorizontalAlignment="Center" Margin="0,269,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Lime" Click="btnSuckCorrect_Click"/>
                 <Button x:Name="btnSuckWrong" Content="Hút sai" HorizontalAlignment="Left" Margin="351,269,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Red" Click="btnSuckWrong_Click"/>
+                <Button x:Name="btnMedia" Content="Mở Clip/Ảnh" HorizontalAlignment="Left" Height="38" Margin="39,186,0,0" VerticalAlignment="Top" Width="70" Click="btnMedia_Click"/>
             </Grid>
         </StackPanel>
 

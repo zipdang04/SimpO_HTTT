@@ -21,12 +21,15 @@ namespace Client.Viewer.GamesControl
 	/// </summary>
 	public partial class AccelViewerControl : UserControl
 	{
+		MediaPlayer mediaOpening;
 		public AccelViewerControl()
 		{
 			InitializeComponent();
 			mediaStart.Source = new Uri(HelperClass.PathString("Effects", "TT_Start.mp4"));
 			mediaStart.BeginInit(); mediaStart.Play(); mediaStart.Stop();
+			
 			mediaRun.BeginInit();
+			mediaOpening = new MediaPlayer(); mediaOpening.Open(new Uri(HelperClass.PathString("Effects", "TT_Opening.mpeg")));
 		}
 
 		public void Prepare(string question, string attach, int turn)
@@ -47,6 +50,12 @@ namespace Client.Viewer.GamesControl
 				mediaRun.Visibility = Visibility.Hidden;
 				mediaStart.Position = TimeSpan.Zero; mediaStart.Play();
 			});
+		}
+
+		public void Opening()
+		{
+			mediaOpening.Position = TimeSpan.Zero;
+			mediaOpening.Play();
 		}
 		private void mediaStart_MediaEnded(object sender, RoutedEventArgs e)
 		{

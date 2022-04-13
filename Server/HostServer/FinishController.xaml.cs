@@ -144,7 +144,7 @@ namespace Server.HostServer
 				lstPoints[i].UnselectAll();
 				lstNos[i].SelectedIndex = i;
 			}
-			sendMessageToEveryone("OLPA VD CHOOSING");
+			sendMessageToEveryone(String.Format("OLPA VD CHOOSING {0}", playerTurn));
 			pointsControl.ChoosePlayer(playerTurn);
 		}
 		private void btnS1_Click(object sender, RoutedEventArgs e){MakeDecision(0);}
@@ -199,6 +199,7 @@ namespace Server.HostServer
 			
 			OQuestion question = finishClass.questions[playerTurn][difficulty][quesPosition[currentPtr]];
 			questionBox.displayQA(question.question, question.answer);
+			sendMessageToEveryone(String.Format("OLPA VD TURN {0}", currentPtr));
 			sendMessageToEveryone(string.Format("OLPA VD QUES {0}", HelperClass.ServerJoinQA(question)));
 			
 			btnStart.IsEnabled = true; 
@@ -256,6 +257,11 @@ namespace Server.HostServer
 		private void btnVeDich_Click(object sender, RoutedEventArgs e)
 		{
 			sendMessageToEveryone("OLPA SCENE VD");
+		}
+
+		private void btnMedia_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA VD MEDIA");
 		}
 
 		private void btnWrong_Click(object sender, RoutedEventArgs e)
