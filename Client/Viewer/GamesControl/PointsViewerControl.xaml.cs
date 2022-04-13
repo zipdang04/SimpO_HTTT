@@ -60,7 +60,7 @@ namespace Client.Viewer.GamesControl
 		public void Start(ObservableCollection<string> pName, ObservableCollection<int> pPoint)
 		{
 			for (int i = 0; i < 4; i++) { names[i] = pName[i]; points[i] = pPoint[i]; }
-			for (int i = 0; i < 4; i++) for (int j = 0; j < 4; j++)
+			for (int i = 0; i < 4; i++) for (int j = i + 1; j < 4; j++)
 				if (points[i] > points[j]) {
 					int x = points[i]; points[i] = points[j]; points[j] = x;
 					string s = names[i]; names[i] = names[j]; names[j] = s;

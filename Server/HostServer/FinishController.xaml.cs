@@ -168,6 +168,7 @@ namespace Server.HostServer
 			
 			// TODO: do somethiing else to refresh database
 			for (int i = 0; i < 4; i++) pointsControl.BackToNormal(i);
+			sendMessageToEveryone("OLPA VD ENDING");
 		}
 
 		private void btnConfirmPts_Click(object sender, RoutedEventArgs e)
@@ -255,16 +256,13 @@ namespace Server.HostServer
 		}
 
 		private void btnVeDich_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA SCENE VD"); }
-
 		private void btnMedia_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD MEDIA"); }
-
 		private void btnScenePoint_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD SCENE POINT"); }
-
 		private void btnSceneQues_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD SCENE QUES"); }
-
 		private void btnScenePrac_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD SCENE PRAC"); }
-
 		private void btnSceneMedia_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD SCENE MEDIA"); }
+		private void btnIntro_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD INTRO"); }
+		private void btnOpening_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD OPENING"); }
 
 		private void btnWrong_Click(object sender, RoutedEventArgs e)
 		{

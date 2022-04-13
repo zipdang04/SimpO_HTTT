@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Server.HostServer"
         mc:Ignorable="d"
-        Title="Server" MinHeight="700" MinWidth="1000" Unloaded="Window_Unloaded">
+        Title="Server" MinHeight="800" MinWidth="1000" Unloaded="Window_Unloaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -44,6 +44,9 @@
                         <Button x:Name="btnKick3" Grid.Row="2" Grid.Column="1" Content="Kick" Click="btnKick3_Click" IsEnabled="False"/>
                         <Button x:Name="btnKick4" Grid.Row="3" Grid.Column="1" Content="Kick" Click="btnKick4_Click" IsEnabled="False"/>
                     </Grid>
+                    <TextBox x:Name="txtFile" HorizontalAlignment="Left" Margin="10,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <Button x:Name="btnOpenFile" Content="..." HorizontalAlignment="Left" Margin="135,148,0,0" VerticalAlignment="Top" Click="btnOpenFile_Click"/>
+                    <Button x:Name="btnOpen" Content="Chạy" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top" Height="23" Width="136" Click="btnOpen_Click"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="tabStart" Header="Khởi động">

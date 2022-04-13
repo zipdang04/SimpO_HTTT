@@ -8,6 +8,5 @@
              d:DesignHeight="450" d:DesignWidth="800" Background="Cyan">
     <Grid>
         <MediaElement x:Name="media" LoadedBehavior="Manual"/>
-        <Label>abc</Label>
     </Grid>
 </UserControl>

@@ -54,8 +54,10 @@ namespace Client.Viewer.GamesControl
 
 		public void Opening()
 		{
-			mediaOpening.Position = TimeSpan.Zero;
-			mediaOpening.Play();
+			Dispatcher.Invoke(() => {
+				mediaOpening.Position = TimeSpan.Zero;
+				mediaOpening.Play();
+			});
 		}
 		private void mediaStart_MediaEnded(object sender, RoutedEventArgs e)
 		{

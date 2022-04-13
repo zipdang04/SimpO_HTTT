@@ -27,7 +27,7 @@ namespace Client.Viewer.GamesControl
         }
         public void Play(string attach)
 		{
-            attach = HelperClass.PathString(@"Effects\" + attach);
+            attach = HelperClass.PathString("Effects", attach);
             Dispatcher.Invoke(() => {
                 media.Source = new Uri(attach);
                 media.Play();

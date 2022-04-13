@@ -25,12 +25,13 @@ namespace Client.Viewer.GamesControl
 		PlayerClass playerClass;
 		Image[] imgPlayer = new Image[4];
 		Rectangle[] rects = new Rectangle[4];
-		MediaPlayer mediaGeneral = new MediaPlayer(), //opening, startturn
+		MediaPlayer mediaStartTurn = new MediaPlayer(), //opening, startturn
 					mediaStar = new MediaPlayer(), //choosing, star
 					mediaPrac = new MediaPlayer(), // 4 file + 2 file mystery / prac
 					media5s = new MediaPlayer(),
 					mediaBell = new MediaPlayer(),
-					mediaResult = new MediaPlayer(); // 2 file
+					mediaResult = new MediaPlayer(),
+					mediaEnding = new MediaPlayer(); // 2 file
 		int currentPlayer;
 		int turn = -1;
 		int[] difficulty = new int[3];
@@ -41,21 +42,27 @@ namespace Client.Viewer.GamesControl
 			media5s.Open(new Uri(HelperClass.PathString("Effects", "VD_5s.m4a")));
 			mediaBell.Open(new Uri(HelperClass.PathString("Effects", "VD_Bell.m4a")));
 			mediaStar.Open(new Uri(HelperClass.PathString("Effects", "VD_Star.mp3")));
+			mediaEnding.Open(new Uri(HelperClass.PathString("Effects", "VD_Ending.mpeg")));
+			mediaStartTurn.Open(new Uri(HelperClass.PathString("Effects", "VD_StartTurn.mpeg")));
 			media10s.Source = new Uri(HelperClass.PathString("Effects", "VD_10_Run.mp4"));
 			media15s.Source = new Uri(HelperClass.PathString("Effects", "VD_20_Run.mp4"));
 			media20s.Source = new Uri(HelperClass.PathString("Effects", "VD_30_Run.mp4"));
+			mediaBegin.Source = new Uri(HelperClass.PathString("Effects", "VD_Begin.mp4")); mediaBegin.BeginInit();
 
 			imgPlayer[0] = imgP1; imgPlayer[1] = imgP2; imgPlayer[2] = imgP3; imgPlayer[3] = imgP4;
 			rects[0] = rectBell1; rects[1] = rectBell2; rects[2] = rectBell3; rects[3] = rectBell4;
 			for (int i = 0; i < 4; i++) imgPlayer[i].Visibility = Visibility.Hidden;
 			mediaStart.Visibility = Visibility.Visible;
-
 			
 			this.playerClass = playerClass;
 			questionBox.SetContext(playerClass);
 			Reset();
 			timer = new Simer(); timer.Tick += timer_Tick;
+
+			mediaStartTurn.MediaEnded += MediaStartTurn_MediaEnded;
 		}
+
+		
 
 		public void ChangeScene(string s)
 		{
@@ -85,7 +92,7 @@ namespace Client.Viewer.GamesControl
 			Dispatcher.Invoke(() => {
 				ChangeScene("POINT");
 
-				mediaBegin.Visibility = Visibility.Visible;
+				mediaBegin.Visibility = Visibility.Hidden;
 				backgroundPoint.Visibility = Visibility.Hidden;
 				mediaStart.Visibility = Visibility.Hidden;
 				for (int i = 0; i < 4; i++) {
@@ -94,21 +101,15 @@ namespace Client.Viewer.GamesControl
 				}
 			});
 		}
-
-		private void media10s_MediaEnded(object sender, RoutedEventArgs e)
+		private void MediaStartTurn_MediaEnded(object? sender, EventArgs e)
 		{
-			media10s.Visibility = Visibility.Hidden;
+			Dispatcher.Invoke(() => {
+				mediaBegin.Visibility = Visibility.Visible;
+				mediaBegin.Play(); 
+			});
 		}
 
-		private void media15s_MediaEnded(object sender, RoutedEventArgs e)
-		{
-			media15s.Visibility = Visibility.Hidden;
-		}
-
-		private void media20s_MediaEnded(object sender, RoutedEventArgs e)
-		{
-			media20s.Visibility = Visibility.Hidden;
-		}
+		
 		public void Choosing(int player)
 		{
 			Reset();
@@ -116,10 +117,11 @@ namespace Client.Viewer.GamesControl
 			Dispatcher.Invoke(() => {
 				mediaStart.Source = new Uri(HelperClass.PathString("Effects", string.Format("VD_{0}_Start.mp4", currentPlayer + 1)));
 				mediaStart.Play(); mediaStart.Stop();
+				mediaBegin.Position = TimeSpan.Zero;
 
-				mediaBegin.Visibility = Visibility.Visible;
-				mediaBegin.Position = TimeSpan.Zero; mediaBegin.Play(); 
-				
+				mediaStartTurn.Position = TimeSpan.Zero;
+				mediaStartTurn.Play();
+
 				imgPlayer[player].Visibility = Visibility.Visible;
 				questionBox.SetChosenOne(player);
 			});
@@ -153,7 +155,7 @@ namespace Client.Viewer.GamesControl
 		{
 			this.turn = turn;
 			Dispatcher.Invoke(() => {
-				questionBox.SetLabel((turn + 1).ToString() + "0 điểm");
+				questionBox.SetLabel((difficulty[turn] + 1).ToString() + "0 điểm");
 				questionBox.SetQuestion("");
 				for (int i = 0; i < 4; i++)
 					rects[i].Visibility = Visibility.Hidden;
@@ -179,17 +181,24 @@ namespace Client.Viewer.GamesControl
 			Dispatcher.Invoke(() => {
 				switch (difficulty[turn]) {
 					case 0:
+						media10s.Visibility = Visibility.Visible;
 						media10s.Position = TimeSpan.Zero; media10s.Play();
 						break;
 					case 1:
+						media15s.Visibility = Visibility.Visible;
 						media15s.Position = TimeSpan.Zero; media15s.Play();
 						break;
 					case 2:
+						media20s.Visibility = Visibility.Visible;
 						media20s.Position = TimeSpan.Zero; media20s.Play();
 						break;
 				};
 			});
 		}
+		private void media10s_MediaEnded(object sender, RoutedEventArgs e) { media10s.Visibility = Visibility.Hidden; }
+		private void media15s_MediaEnded(object sender, RoutedEventArgs e) { media15s.Visibility = Visibility.Hidden; }
+		private void media20s_MediaEnded(object sender, RoutedEventArgs e) { media20s.Visibility = Visibility.Hidden; }
+
 		public void Start5s()
 		{
 			Dispatcher.Invoke(() => {
@@ -208,8 +217,8 @@ namespace Client.Viewer.GamesControl
 
 		public void Star()
 		{
-			//VD_Star.mp3
 			Dispatcher.Invoke(() => {
+				mediaStarAnimate.Visibility = Visibility.Visible;
 				mediaStar.Position = TimeSpan.Zero;
 				mediaStarAnimate.Position = TimeSpan.Zero;
 				mediaStar.Play(); mediaStarAnimate.Play();
@@ -250,5 +259,12 @@ namespace Client.Viewer.GamesControl
 			Dispatcher.Invoke(() => { lblTime.Content = pracTime - (time / 100); if (done) lblTime.Content = 0; });
 		}
 
+		public void Ending()
+		{
+			ChangeScene("");
+			Dispatcher.Invoke(() => {
+				mediaEnding.Play();
+			});
+		}
 	}
 }

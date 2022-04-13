@@ -120,6 +120,11 @@ namespace Client.Viewer
 			int len = tokens.Count;
 
 			switch (tokens[1]) {
+				case "PLAY":
+					string media = tokens[2];
+					ChangeScene("PLAIN");
+					plainControl.Play(media);
+					break;
 				case "PLAIN":
 					switch (tokens[2]) { 
 						case "INTRO":
@@ -261,6 +266,13 @@ namespace Client.Viewer
 					break;
 				case "VD":
 					switch (tokens[2]) {
+						case "INTRO":
+							ChangeScene("PLAIN");
+							plainControl.Play("VD_Intro.mp4");
+							break;
+						case "OPENING":
+							//finishViewerControl.Opening();
+							break;
 						case "SCENE":
 							finishViewerControl.ChangeScene(tokens[3]);
 							break;
@@ -307,6 +319,9 @@ namespace Client.Viewer
 							break;
 						case "WRONG":
 							finishViewerControl.ResultMusic(false);
+							break;
+						case "ENDING":
+							finishViewerControl.Ending();
 							break;
 					}
 					break;

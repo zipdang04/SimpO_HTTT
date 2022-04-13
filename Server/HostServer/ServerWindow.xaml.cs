@@ -21,6 +21,7 @@ using Server.QuestionClass;
 using SimpleSockets.Messaging.Metadata;
 using SimpleSockets;
 using Server.HostServer.Components;
+using Microsoft.Win32;
 
 namespace Server.HostServer
 {
@@ -42,7 +43,8 @@ namespace Server.HostServer
 		ObstaController obstaController;
 		AccelController accelController;
 		FinishController finishController;
-		
+
+		OpenFileDialog openFileDialog = new OpenFileDialog();
 		public void updatePoint()
 		{
 			//startController.pointsControl.update();
@@ -52,6 +54,10 @@ namespace Server.HostServer
 		{
 			InitializeComponent();
 			this.main = main;
+			
+			openFileDialog.Multiselect = false;
+			openFileDialog.InitialDirectory = Directory.GetCurrentDirectory() + @"\Resources\Media";
+			
 			listener = new SimpleSocketTcpListener();
 			playerNetwork = new PlayerNetwork();
 			playerInfo = new PlayerClass();
@@ -207,5 +213,14 @@ namespace Server.HostServer
 		private void btnKick2_Click(object sender, RoutedEventArgs e) { Kick(1); btnKick2.IsEnabled = false; }
 		private void btnKick3_Click(object sender, RoutedEventArgs e) { Kick(2); btnKick3.IsEnabled = false; }
 		private void btnKick4_Click(object sender, RoutedEventArgs e) { Kick(3); btnKick4.IsEnabled = false; }
+
+		private void btnOpenFile_Click(object sender, RoutedEventArgs e) {
+			if (openFileDialog.ShowDialog() == true) txtFile.Text = openFileDialog.FileName;
+		}
+
+		private void btnOpen_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone(String.Format("OLPA PLAY {0}", txtFile.Text));
+		}
 	}
 }
