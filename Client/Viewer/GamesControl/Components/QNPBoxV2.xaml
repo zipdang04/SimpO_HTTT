@@ -36,7 +36,7 @@
             </Grid.RowDefinitions>
             <Label x:Name="lblPoint" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="100" Grid.Row="1">365</Label>
         </Grid>
-        <Grid Grid.Row="0" Grid.Column="1" Margin="0,0,10,0">
+        <Grid Grid.Row="0" Grid.Column="1" Margin="0,0, 10, 5">
             <Grid.Resources>
                 <Style TargetType="Label">
                     <Setter Property="FontSize" Value="20"/>
@@ -68,7 +68,7 @@
             <Label x:Name="lblNormalPoint3" Foreground="White" Content="{Binding Path=points[2]}" Grid.Row="1" Grid.Column="5" FontWeight="Bold"/>
             <Label x:Name="lblNormalPoint4" Foreground="White" Content="{Binding Path=points[3]}" Grid.Row="1" Grid.Column="7" FontWeight="Bold"/>
         </Grid>
-        <Grid Grid.Row="0" Grid.Column="1" Margin="0,0,10,0">
+        <Grid Grid.Row="0" Grid.Column="1" Margin="0,0,10,10">
             <Grid.Resources>
                 <Style TargetType="Label">
                     <Setter Property="FontSize" Value="20"/>
@@ -76,6 +76,7 @@
                     <Setter Property="VerticalContentAlignment" Value="Center"/>
                     <Setter Property="HorizontalAlignment" Value="Center"/>
                     <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Foreground" Value="White"/>
                 </Style>
             </Grid.Resources>
             <Grid.RowDefinitions>

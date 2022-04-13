@@ -254,15 +254,17 @@ namespace Server.HostServer
 			sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
 		}
 
-		private void btnVeDich_Click(object sender, RoutedEventArgs e)
-		{
-			sendMessageToEveryone("OLPA SCENE VD");
-		}
+		private void btnVeDich_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA SCENE VD"); }
 
-		private void btnMedia_Click(object sender, RoutedEventArgs e)
-		{
-			sendMessageToEveryone("OLPA VD MEDIA");
-		}
+		private void btnMedia_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD MEDIA"); }
+
+		private void btnScenePoint_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD SCENE POINT"); }
+
+		private void btnSceneQues_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD SCENE QUES"); }
+
+		private void btnScenePrac_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD SCENE PRAC"); }
+
+		private void btnSceneMedia_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD SCENE MEDIA"); }
 
 		private void btnWrong_Click(object sender, RoutedEventArgs e)
 		{
@@ -291,6 +293,7 @@ namespace Server.HostServer
 			{
 				playerSuck = index;
 				pointsControl.DisablePlayer(playerSuck);
+				sendMessageToEveryone(String.Format("OLPA VD SUCK {0}", playerSuck));
 			}
 		}
 

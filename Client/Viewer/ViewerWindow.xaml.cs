@@ -37,6 +37,7 @@ namespace Client.Viewer
 		AnswerViewerControl answerViewerControl;
 		AccelViewerControl accelViewerControl;
 		PointsViewerControl pointsViewerControl;
+		FinishViewerControl finishViewerControl;
 		public ViewerWindow(LogInWindow logInWindow, SimpleSocketClient client)
         {
             InitializeComponent();
@@ -52,12 +53,14 @@ namespace Client.Viewer
 			answerViewerControl = new AnswerViewerControl(playersInfo);
 			accelViewerControl = new AccelViewerControl();
 			pointsViewerControl = new PointsViewerControl();
+			finishViewerControl = new FinishViewerControl(playersInfo);
 			grid.Children.Add(plainControl);
 			grid.Children.Add(startViewerControl);
 			grid.Children.Add(obstaViewerControl);
 			grid.Children.Add(answerViewerControl);
 			grid.Children.Add(accelViewerControl);
 			grid.Children.Add(pointsViewerControl);
+			grid.Children.Add(finishViewerControl);
 			ChangeScene("PLAIN");
 		}
 
@@ -70,7 +73,7 @@ namespace Client.Viewer
 				answerViewerControl.Visibility = Visibility.Collapsed;
 				accelViewerControl.Visibility = Visibility.Collapsed;
 				pointsViewerControl.Visibility = Visibility.Collapsed;
-				//finishViewerControl.Visibility = Visibility.Collapsed;
+				finishViewerControl.Visibility = Visibility.Collapsed;
 				switch (s) {
 					case "PLAIN":
 						plainControl.Visibility = Visibility.Visible;
@@ -91,7 +94,7 @@ namespace Client.Viewer
 						accelViewerControl.Visibility = Visibility.Visible;
 						break;
 					case "VD":
-						//finishViewerControl.Visibility = Visibility.Visible;
+						finishViewerControl.Visibility = Visibility.Visible;
 						break;
 				}
 			});
@@ -258,36 +261,50 @@ namespace Client.Viewer
 					break;
 				case "VD":
 					switch (tokens[2]) {
-						case "CHOOSING":
+						case "SCENE":
+							finishViewerControl.ChangeScene(tokens[3]);
+							break;
+						case "CHOOSING": {
 							int player = Convert.ToInt32(tokens[3]);
+							finishViewerControl.Choosing(player);
+						}
 							break;
 						case "CHOSEN":
 							int[] difficulty = new int[3];
 							for (int i = 0; i < 3; i++)
 								difficulty[i] = Convert.ToInt32(tokens[i + 3]);
+							finishViewerControl.Chosen(difficulty);
 							break;
 						case "TURN":
 							int turn = Convert.ToInt32(tokens[3]);
+							finishViewerControl.SetTurn(turn);
 							break;
 						case "QUES":
 							string question = tokens[3], attach = tokens[4];
-							//finishViewerControl.ShowQuestion(new OQuestion(question, "", attach));
+							finishViewerControl.ShowQuestion(question, attach);
+							break;
+						case "STAR":
+							finishViewerControl.Star();
 							break;
 						case "UNLOCK":
-							//
+							finishViewerControl.Start5s();
+							break;
+						case "SUCK": { int player = Convert.ToInt32(tokens[3]); finishViewerControl.SomeoneSucking(player); }
 							break;
 						case "PRAC":
-							if (tokens[3] == "MAIN") {
-								//
-							} else if (tokens[3] == "SUCK") {
-								//
-							}
+							finishViewerControl.PracticeMode(tokens[3] == "MAIN");
 							break;
 						case "MEDIA":
+							finishViewerControl.ShowMedia();
 							break;
 						case "TIME":
-							int timeLimit = Convert.ToInt32(tokens[3]);
-							//finishViewerControl.StartTimer(timeLimit);
+							finishViewerControl.Run();
+							break;
+						case "CORRECT":
+							finishViewerControl.ResultMusic(true);
+							break;
+						case "WRONG":
+							finishViewerControl.ResultMusic(false);
 							break;
 					}
 					break;

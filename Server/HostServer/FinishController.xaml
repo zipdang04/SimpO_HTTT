@@ -13,8 +13,12 @@
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <StackPanel>
-            <Grid Height="50">
+            <Grid Height="100">
                 <Button x:Name="btnVeDich" Content="VỀ ĐÍCH" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Background="Red" Foreground="White" FontWeight="Bold" Click="btnVeDich_Click"/>
+                <Button x:Name="btnSceneQues" Content="Scene Câu hỏi" HorizontalAlignment="Left" Margin="90,50,0,0" VerticalAlignment="Top" Click="btnSceneQues_Click"/>
+                <Button x:Name="btnScenePrac" Content="Scene Thực hành" HorizontalAlignment="Left" Margin="272,15,0,0" VerticalAlignment="Top" Click="btnScenePrac_Click"/>
+                <Button x:Name="btnScenePoint" Content="Scene Chọn điểm" HorizontalAlignment="Left" Margin="81,10,0,0" VerticalAlignment="Top" Click="btnScenePoint_Click"/>
+                <Button x:Name="btnSceneMedia" Content="Scene Media" HorizontalAlignment="Left" Margin="259,60,0,0" VerticalAlignment="Top" Click="btnSceneMedia_Click"/>
 
             </Grid>
             <Grid Height="40">
