@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.HostServer.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,19 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Client.Viewer.GamesControl.Components
+namespace Client.Viewer.GamesControl
 {
 	/// <summary>
-	/// Interaction logic for ObstaPlayerBelling.xaml
+	/// Interaction logic for PointsViewerControl.xaml
 	/// </summary>
-	public partial class ObstaPlayerBelling : UserControl
+	public partial class PointsViewerControl : UserControl
 	{
-		public int player;
-		public ObstaPlayerBelling(int player, string name)
+		Simer timer;
+		public PointsViewerControl()
 		{
 			InitializeComponent();
-			lblName.Content = name;
-			this.player = player;
 		}
 	}
 }

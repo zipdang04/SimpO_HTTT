@@ -34,7 +34,9 @@ namespace Client.Viewer
 		PlainControl plainControl;
         StartViewerControl startViewerControl;
 		ObstaViewerControl obstaViewerControl;
-        public ViewerWindow(LogInWindow logInWindow, SimpleSocketClient client)
+		AnswerViewerControl answerViewerControl;
+		AccelViewerControl accelViewerControl;
+		public ViewerWindow(LogInWindow logInWindow, SimpleSocketClient client)
         {
             InitializeComponent();
             this.logInWindow = logInWindow; this.client = client;
@@ -46,9 +48,13 @@ namespace Client.Viewer
 			plainControl = new PlainControl();
             startViewerControl = new StartViewerControl(playersInfo);
 			obstaViewerControl = new ObstaViewerControl();
+			answerViewerControl = new AnswerViewerControl(playersInfo);
+			accelViewerControl = new AccelViewerControl();
 			grid.Children.Add(plainControl);
 			grid.Children.Add(startViewerControl);
 			grid.Children.Add(obstaViewerControl);
+			grid.Children.Add(answerViewerControl);
+			grid.Children.Add(accelViewerControl);
 			ChangeScene("PLAIN");
 		}
 
@@ -58,11 +64,15 @@ namespace Client.Viewer
 				plainControl.Visibility = Visibility.Collapsed;
 				startViewerControl.Visibility = Visibility.Collapsed;
 				obstaViewerControl.Visibility = Visibility.Collapsed;
-				//accelViewerControl.Visibility = Visibility.Collapsed;
+				answerViewerControl.Visibility = Visibility.Collapsed;
+				accelViewerControl.Visibility = Visibility.Collapsed;
 				//finishViewerControl.Visibility = Visibility.Collapsed;
 				switch (s) {
 					case "PLAIN":
 						plainControl.Visibility = Visibility.Visible;
+						break;
+					case "ANSWER":
+						answerViewerControl.Visibility = Visibility.Visible;
 						break;
 					case "KD":
 						startViewerControl.Visibility = Visibility.Visible;
@@ -71,7 +81,7 @@ namespace Client.Viewer
 						obstaViewerControl.Visibility = Visibility.Visible;
 						break;
 					case "TT":
-						//accelViewerControl.Visibility = Visibility.Visible;
+						accelViewerControl.Visibility = Visibility.Visible;
 						break;
 					case "VD":
 						//finishViewerControl.Visibility = Visibility.Visible;
@@ -138,10 +148,9 @@ namespace Client.Viewer
 							startViewerControl.StartPlayer(player);
 							break;
 						}
-						case "TIME": {
+						case "TIME": 
 							startViewerControl.RunPlayer();
 							break;
-						}
 						case "OPENING":
 							startViewerControl.Opening();
 							break;
@@ -193,11 +202,25 @@ namespace Client.Viewer
 						case "OPEN":
 							obstaViewerControl.Open(Convert.ToInt32(tokens[3]));
 							break;
-						case "ANSWER":
+						case "BELLING": 
+							{ int player = Convert.ToInt32(tokens[3]); obstaViewerControl.PlayerBelling(player, playersInfo.names[player]); }
 							break;
-						case "REMOVESTACK":
+						case "REMOVESTACK": 
+							{ int player = Convert.ToInt32(tokens[3]); obstaViewerControl.RemoveStack(player); }
 							break;
 						case "WINNER":
+							obstaViewerControl.FoundWinner();
+							break;
+						case "ENAROW": {
+							int index = Convert.ToInt32(tokens[3]);
+							string answer = tokens[4];
+							obstaViewerControl.OpenWord(index, answer);
+						}
+							break;
+						case "DISROW": {
+							int index = Convert.ToInt32(tokens[3]);
+							obstaViewerControl.CloseWord(index);
+						}
 							break;
 					}
 					break;
@@ -207,10 +230,10 @@ namespace Client.Viewer
 							int turn = Convert.ToInt32(tokens[3]);
 							string question = tokens[4];
 							string attach = tokens[5];
-							//accelViewerControl.ResetGame();
-							//accelViewerControl.ShowQuestion(turn, question, attach, turn * 1000);
+							accelViewerControl.Prepare(question, attach, turn);
 							break;
 						case "PLAY":
+							accelViewerControl.Run();
 							//accelViewerControl.StartTimer();
 							break;
 					}
@@ -231,6 +254,24 @@ namespace Client.Viewer
 							int timeLimit = Convert.ToInt32(tokens[3]);
 							//finishViewerControl.StartTimer(timeLimit);
 							break;
+					}
+					break;
+				case "ANS":
+					if (tokens[2] == "ANSWER") {
+						string[] answers = new string[4]; int[] times = new int[4];
+						for (int i = 0; i < 4; i++) {
+							answers[i] = tokens[3 + i];
+							times[i] = Convert.ToInt32(tokens[8 + i]);
+						}
+						ChangeScene("ANSWER");
+						answerViewerControl.Run(answers, times);
+						obstaViewerControl.SceneReset();
+						//accelViewerControl.SceneReset();
+					} else if (tokens[2] == "RES"){
+						bool[] correct = new bool[4];
+						for (int i = 0; i < 4; i++) { correct[i] = Convert.ToInt32(tokens[3 + i]) == 1; }
+						ChangeScene("ANSWER");
+						answerViewerControl.Conclusion(correct);
 					}
 					break;
 			}

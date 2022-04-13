@@ -6,13 +6,17 @@
              xmlns:local="clr-namespace:Server.HostServer"
              xmlns:compo="clr-namespace:Server.HostServer.Components"
              mc:Ignorable="d"   
-             d:DesignHeight="650" MinHeight="650" d:DesignWidth="600" MinWidth="600">
+             d:DesignHeight="700" MinHeight="700" d:DesignWidth="600" MinWidth="600">
     <Grid x:Name="grid">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <StackPanel>
+            <Grid Height="50">
+                <Button x:Name="btnVeDich" Content="VỀ ĐÍCH" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Background="Red" Foreground="White" FontWeight="Bold" Click="btnVeDich_Click"/>
+
+            </Grid>
             <Grid Height="40">
                 <Button x:Name="btnS1" Content="Thí sinh 1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="btnS1_Click"/>
                 <Button x:Name="btnS2" Content="Thí sinh 2" HorizontalAlignment="Left" Margin="70,10,0,0" VerticalAlignment="Top" Click="btnS2_Click"/>

@@ -253,6 +253,11 @@ namespace Server.HostServer
 			sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
 		}
 
+		private void btnVeDich_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA SCENE VD");
+		}
+
 		private void btnWrong_Click(object sender, RoutedEventArgs e)
 		{
 			if (starState == StarState.USING)

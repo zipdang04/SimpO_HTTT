@@ -13,23 +13,25 @@
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
             </Style>
         </Grid.Resources>
+        <MediaElement x:Name="mediaCorrect" LoadedBehavior="Manual"/>
+        <MediaElement x:Name="mediaWrong" LoadedBehavior="Manual"/>
         <MediaElement x:Name="media" LoadedBehavior="Manual" MediaEnded="media_MediaEnded"/>
         <Grid x:Name="gridAnswer">
             <Label x:Name="lblName1" Content="{Binding Path=names[0]}" HorizontalAlignment="Left" Height="36" Margin="497,109,0,0" VerticalAlignment="Top" Width="172" FontWeight="Bold" FontSize="18" Foreground="#FF945414"/>
-            <Label x:Name="lblTime1" Content="" HorizontalAlignment="Left" Height="88" Margin="962,141,0,0" VerticalAlignment="Top" Width="186" FontWeight="Bold" FontSize="48" Foreground="#FFB7691B"/>
-            <Label x:Name="lblAnswer1" Content="" HorizontalAlignment="Left" Height="88" Margin="466,141,0,0" VerticalAlignment="Top" Width="486" FontWeight="Bold" FontSize="36" Foreground="White"/>
+            <Label x:Name="lblTime1" Content="{Binding Path=times[0]}" HorizontalAlignment="Left" Height="88" Margin="962,141,0,0" VerticalAlignment="Top" Width="186" FontWeight="Bold" FontSize="48" Foreground="#FFB7691B"/>
+            <Label x:Name="lblAnswer1" Content="{Binding Path=answers[0]}" HorizontalAlignment="Left" Height="88" Margin="466,141,0,0" VerticalAlignment="Top" Width="486" FontWeight="Bold" FontSize="36" Foreground="White"/>
             
             <Label x:Name="lblName2" Content="{Binding Path=names[1]}" HorizontalAlignment="Left" Height="36" Margin="497,283,0,0" VerticalAlignment="Top" Width="172" FontWeight="Bold" FontSize="18" Foreground="#FF945414"/>
-            <Label x:Name="lblTime2" Content="" HorizontalAlignment="Left" Height="88" Margin="962,315,0,0" VerticalAlignment="Top" Width="186" FontWeight="Bold" FontSize="48" Foreground="#FFB7691B"/>
-            <Label x:Name="lblAnswer2" Content="" HorizontalAlignment="Left" Height="88" Margin="466,315,0,0" VerticalAlignment="Top" Width="486" FontWeight="Bold" FontSize="36" Foreground="White"/>
+            <Label x:Name="lblTime2" Content="{Binding Path=times[1]}" HorizontalAlignment="Left" Height="88" Margin="962,315,0,0" VerticalAlignment="Top" Width="186" FontWeight="Bold" FontSize="48" Foreground="#FFB7691B"/>
+            <Label x:Name="lblAnswer2" Content="{Binding Path=answers[1]}" HorizontalAlignment="Left" Height="88" Margin="466,315,0,0" VerticalAlignment="Top" Width="486" FontWeight="Bold" FontSize="36" Foreground="White"/>
             
             <Label x:Name="lblName3" Content="{Binding Path=names[2]}" HorizontalAlignment="Left" Height="36" Margin="497,441,0,0" VerticalAlignment="Top" Width="172" FontWeight="Bold" FontSize="18" Foreground="#FF945414"/>
-            <Label x:Name="lblTime3" Content="" HorizontalAlignment="Left" Height="88" Margin="962,473,0,0" VerticalAlignment="Top" Width="186" FontWeight="Bold" FontSize="48" Foreground="#FFB7691B"/>
-            <Label x:Name="lblAnswer3" Content="" HorizontalAlignment="Left" Height="88" Margin="466,473,0,0" VerticalAlignment="Top" Width="486" FontWeight="Bold" FontSize="36" Foreground="White"/>
+            <Label x:Name="lblTime3" Content="{Binding Path=times[2]}" HorizontalAlignment="Left" Height="88" Margin="962,473,0,0" VerticalAlignment="Top" Width="186" FontWeight="Bold" FontSize="48" Foreground="#FFB7691B"/>
+            <Label x:Name="lblAnswer3" Content="{Binding Path=answers[2]}" HorizontalAlignment="Left" Height="88" Margin="466,473,0,0" VerticalAlignment="Top" Width="486" FontWeight="Bold" FontSize="36" Foreground="White"/>
             
             <Label x:Name="lblName4" Content="{Binding Path=names[3]}" HorizontalAlignment="Left" Height="36" Margin="497,598,0,0" VerticalAlignment="Top" Width="172" FontWeight="Bold" FontSize="18" Foreground="#FF945414"/>
-            <Label x:Name="lblTime4" Content="" HorizontalAlignment="Left" Height="88" Margin="962,630,0,0" VerticalAlignment="Top" Width="186" FontWeight="Bold" FontSize="48" Foreground="#FFB7691B"/>
-            <Label x:Name="lblAnswer4" Content="" HorizontalAlignment="Left" Height="88" Margin="466,630,0,0" VerticalAlignment="Top" Width="486" FontWeight="Bold" FontSize="36" Foreground="White"/>
+            <Label x:Name="lblTime4" Content="{Binding Path=times[3]}" HorizontalAlignment="Left" Height="88" Margin="962,630,0,0" VerticalAlignment="Top" Width="186" FontWeight="Bold" FontSize="48" Foreground="#FFB7691B"/>
+            <Label x:Name="lblAnswer4" Content="{Binding Path=answers[3]}" HorizontalAlignment="Left" Height="88" Margin="466,630,0,0" VerticalAlignment="Top" Width="486" FontWeight="Bold" FontSize="36" Foreground="White"/>
         </Grid>
     </Grid>
 </UserControl>

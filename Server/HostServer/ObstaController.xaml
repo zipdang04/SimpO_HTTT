@@ -83,7 +83,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Button x:Name="btnBellConfirm" Click="btnBellConfirm_Click">Xác nhận</Button>
-                        <StackPanel x:Name="stackPlayerList" />
+                        <StackPanel x:Name="stackPlayerList" Grid.Column="1"/>
                     </Grid>
                 </Grid>
             </Grid>

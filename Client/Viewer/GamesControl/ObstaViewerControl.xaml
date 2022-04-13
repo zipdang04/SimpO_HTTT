@@ -8,6 +8,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="1600">
     <Grid>
+        <!--
+            <MediaElement x:Name="mediaStartGame" LoadedBehavior="Manual"/>
+            <MediaElement x:Name="mediaOpening" LoadedBehavior="Manual"/>
+            <MediaElement x:Name="mediaOpenPiece" LoadedBehavior="Manual"/>
+            <MediaElement x:Name="mediaOpenQuestion" LoadedBehavior="Manual" MediaEnded="mediaOpenQuestion_MediaEnded"/>
+        -->
+        
         <Grid x:Name="gridWord" Visibility="Visible">
             <Grid.Background>
                 <ImageBrush ImageSource="../../Resources/Effects/VCNV_Background.png"/>
@@ -47,5 +54,6 @@
                 <Image x:Name="rectTT" Source="../../Resources/Effects/VCNV_Piece_TT.png" Stretch="Fill"/>
             </Grid>
         </Grid>
+        <StackPanel x:Name="stackBell" Width="560" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="131,563,0,0"></StackPanel>
     </Grid>
 </UserControl>

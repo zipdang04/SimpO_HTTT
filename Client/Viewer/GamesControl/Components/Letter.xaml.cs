@@ -33,12 +33,12 @@ namespace Client.Viewer.GamesControl.Components
 		}
 		public Letter(char c): this() { SetChar(c); }
 
-		public void SetChar(char c) { lblChar.Content = c; }
+		public void SetChar(char c) { Dispatcher.Invoke(() => { lblChar.Content = c; }); }
 
-		public void SetNull() { background.ImageSource = null; lblChar.Visibility = Visibility.Hidden; Visibility = Visibility.Hidden; }
-		public void SetNormal() { background.ImageSource = new BitmapImage(NORMAL); lblChar.Visibility = Visibility.Hidden; Visibility = Visibility.Visible; }
-		public void SetChoosing() { background.ImageSource = new BitmapImage(CHOOSING); lblChar.Visibility = Visibility.Hidden; Visibility = Visibility.Visible; }
-		public void SetEnabled() { background.ImageSource = new BitmapImage(ENABLED); lblChar.Visibility = Visibility.Visible; Visibility = Visibility.Visible; }
-		public void SetDisabled() { background.ImageSource = new BitmapImage(DISABLED); lblChar.Visibility = Visibility.Hidden; Visibility = Visibility.Visible; }
+		public void SetNull() { Dispatcher.Invoke(() => { background.ImageSource = null; lblChar.Visibility = Visibility.Hidden; Visibility = Visibility.Hidden; }); }
+		public void SetNormal() { Dispatcher.Invoke(() => { background.ImageSource = new BitmapImage(NORMAL); lblChar.Visibility = Visibility.Hidden; Visibility = Visibility.Visible; }); }
+		public void SetChoosing() { Dispatcher.Invoke(() => { background.ImageSource = new BitmapImage(CHOOSING); lblChar.Visibility = Visibility.Hidden; Visibility = Visibility.Visible; }); }
+		public void SetEnabled() { Dispatcher.Invoke(() => { background.ImageSource = new BitmapImage(ENABLED); lblChar.Visibility = Visibility.Visible; Visibility = Visibility.Visible; }); }
+		public void SetDisabled() { Dispatcher.Invoke(() => { background.ImageSource = new BitmapImage(DISABLED); lblChar.Visibility = Visibility.Hidden; Visibility = Visibility.Visible; }); }
 	}
 }

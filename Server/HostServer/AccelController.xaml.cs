@@ -55,6 +55,7 @@ namespace Server.HostServer
 			pointsControl.IsEnabled = false;
 
 			btnPlay.IsEnabled = false;
+			btnShowAnswer.IsEnabled = false;
 			btnConfirm.IsEnabled = false;
 		}
 
@@ -72,6 +73,7 @@ namespace Server.HostServer
 			if (done) {
 				answersControl.IsEnabled = true;
 				btnConfirm.IsEnabled = true;
+				btnShowAnswer.IsEnabled = true;
 			}
 		}
 
@@ -79,7 +81,8 @@ namespace Server.HostServer
 		{
 			btnPlay.IsEnabled = true;
 			timeLimit = (turn + 1) * 1000 + 200;
-			timer.Stop(); btnConfirm.IsEnabled = false;
+			timer.Stop();
+			btnShowAnswer.IsEnabled = false; btnConfirm.IsEnabled = false;
 			
 			OQuestion question = accelClass.accelQuestions[turn].question;
 			questionBox.displayQA(question.question, question.answer);
@@ -108,21 +111,22 @@ namespace Server.HostServer
 
 		private void btnShowAnswer_Click(object sender, RoutedEventArgs e)
 		{
-			string command = "OLPA TT ANSWER {0} {0} {0} {0} TIME {0} {0} {0} {0}";
+			string command = "OLPA ANS ANSWER";
 			PlayerAnswers answers = answersControl.data.answers;
 			for (int i = 0; i < 4; i++)
-				command = string.Format(command, HelperClass.MakeString(answers.answers[i]));
+				command += " " + HelperClass.MakeString(answers.answers[i]);
+			command += " TIME";
 			for (int i = 0; i < 4; i++)
-				command = string.Format(command, answers.times[i]);
+				command += " " + answers.times[i].ToString();
 			sendMessageToEveryone(command);
 		}
 
 		private void btnConfirm_Click(object sender, RoutedEventArgs e)
 		{
 			btnConfirm.IsEnabled = false;
-			string command = "OLPA TT RES {0} {0} {0} {0}";
+			string command = "OLPA ANS RES";
 			for (int i = 0; i < 4; i++)
-				command = string.Format(command, answersControl.checkBoxes[i].IsChecked);
+				command += " " + ((answersControl.checkBoxes[i].IsChecked == true) ? 1 : 0).ToString();
 			sendMessageToEveryone(command);
 
 			PlayerAnswers playerAnswers = answersControl.data.answers;
@@ -161,6 +165,11 @@ namespace Server.HostServer
 		private void btnTT4_Click(object sender, RoutedEventArgs e)
 		{
 			Prepare(3);
+		}
+
+		private void btnTToc_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA SCENE TT");
 		}
 	}
 }

@@ -31,23 +31,41 @@ namespace Client.Viewer.GamesControl
 
 		public void Prepare(string question, string attach, int turn)
 		{
-			txtQuestion.Visibility = Visibility.Hidden;
-			media.Source = new Uri(HelperClass.PathString("Media", attach));
-			media.Play(); media.Stop();
-			media.Volume = 0;
-			mediaRun.Source = new Uri(HelperClass.PathString("Effects", String.Format("TT_{0}0s.mp4", turn + 1)));
-			mediaRun.Play(); mediaRun.Stop();
+			Dispatcher.Invoke(() => {
+				txtQuestion.Visibility = Visibility.Hidden;
+				txtQuestion.Text = question;
 
-			mediaStart.Position = TimeSpan.Zero; mediaStart.Play();
+				media.Source = new Uri(HelperClass.PathString("Media", attach));
+				media.Visibility = Visibility.Hidden;
+				media.Play(); media.Stop();
+				media.Volume = 0;
+
+				mediaRun.Source = new Uri(HelperClass.PathString("Effects", String.Format("TT_{0}0s.mp4", turn + 1)));
+				mediaRun.Play(); mediaRun.Stop();
+
+				mediaStart.Visibility = Visibility.Visible;
+				mediaRun.Visibility = Visibility.Hidden;
+				mediaStart.Position = TimeSpan.Zero; mediaStart.Play();
+			});
+		}
+		private void mediaStart_MediaEnded(object sender, RoutedEventArgs e)
+		{
+			Dispatcher.Invoke(() => {
+				txtQuestion.Visibility = Visibility.Visible;
+				media.Visibility = Visibility.Visible;
+			});
 		}
 
 		public void Run()
 		{
+			Dispatcher.Invoke(() => {
+				mediaStart.Visibility = Visibility.Hidden;
+				mediaRun.Position = TimeSpan.Zero; 
+				mediaRun.Visibility = Visibility.Visible;
+				mediaRun.Play(); media.Play();
+			});
 		}
 
-		private void media_MediaEnded(object sender, RoutedEventArgs e)
-		{
-			txtQuestion.Visibility = Visibility.Visible;
-		}
+		
 	}
 }

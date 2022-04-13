@@ -87,6 +87,7 @@ namespace Server.HostServer
 		public void SomeoneBelling(int player)
 		{
 			if (hasBelled[player]) return;
+			sendMessageToEveryone(String.Format("OLPA VCNV BELLING {0}", player));
 			Dispatcher.Invoke(() =>{
 				stackPlayerList.Children.Add(new PlayerVCNVBelling(player, playerClass.names[player]));
 			});
@@ -144,9 +145,9 @@ namespace Server.HostServer
 
 		private void btnConfirm_Click(object sender, RoutedEventArgs e)
 		{
-			string command = "OLPA TT RES {0} {0} {0} {0}";
+			string command = "OLPA ANS RES";
 			for (int i = 0; i < 4; i++)
-				command = string.Format(command, answersControl.checkBoxes[i].IsChecked);
+				command += " " + ((answersControl.checkBoxes[i].IsChecked == true) ? 1 : 0).ToString();
 			sendMessageToEveryone(command);
 
 			bool willOpen = false;
@@ -157,8 +158,12 @@ namespace Server.HostServer
 				}
 			}
 			sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
-			if (willOpen) buttons[currentRow].IsEnabled = true;
-				
+			if (willOpen) {
+				buttons[currentRow].IsEnabled = true;
+				sendMessageToEveryone(String.Format("OLPA VCNV ENAROW {0} {1}", currentRow, HelperClass.MakeString(obstaClass.questions[currentRow].answer)));
+			} else
+				sendMessageToEveryone(String.Format("OLPA VCNV DISROW {0}", currentRow));
+
 			btnConfirm.IsEnabled = false;
 		}
 		private void btnHN1_Click(object sender, RoutedEventArgs e)
@@ -171,19 +176,16 @@ namespace Server.HostServer
 			btnHN2.IsEnabled = false;
 			Prepare(1);
 		}
-
 		private void btnHN3_Click(object sender, RoutedEventArgs e)
 		{
 			btnHN3.IsEnabled = false;
 			Prepare(2);
 		}
-
 		private void btnHN4_Click(object sender, RoutedEventArgs e)
 		{
 			btnHN4.IsEnabled = false;
 			Prepare(3);
 		}
-
 		private void btnTT_Click(object sender, RoutedEventArgs e)
 		{
 			btnTT.IsEnabled = false;
@@ -192,14 +194,14 @@ namespace Server.HostServer
 
 		private void btnShowAnswer_Click(object sender, RoutedEventArgs e)
 		{
-			string command = "OLPA VCNV ANSWER {0} {0} {0} {0} TIME {0} {0} {0} {0}";
+			string command = "OLPA ANS ANSWER";
 			PlayerAnswers answers = answersControl.data.answers;
 			for (int i = 0; i < 4; i++)
-				command = string.Format(command, HelperClass.MakeString(answers.answers[i]));
+				command += " " + HelperClass.MakeString(answers.answers[i]);
+			command += " TIME";
 			for (int i = 0; i < 4; i++)
-				command = string.Format(command, answers.times[i]);
+				command += " " + answers.times[i].ToString();
 			sendMessageToEveryone(command);
-			sendMessageToEveryone("OLPA VCNV SCENE ANSWER");
 		}
 
 		private void btnBellConfirm_Click(object sender, RoutedEventArgs e)
@@ -214,14 +216,16 @@ namespace Server.HostServer
 						playerClass.points[player] += remainingPoint;
 						sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
 						sendMessageToEveryone("OLPA VCNV WINNER");
+						for (int x = 0; x < 5; x++)
+							sendMessageToEveryone(String.Format("OLPA VCNV OPEN {0}", x));
 					}
 					stackPlayerList.Children.Remove(control); i--;
-					sendMessageToEveryone("OLPA VCNV REMOVESTACK");
+					sendMessageToEveryone(string.Format("OLPA VCNV REMOVESTACK {0}", player));
 				}
 				else if (control.radioWrong.IsChecked == true){
 					stackPlayerList.Children.Remove(control);
 					i--;
-					sendMessageToEveryone("OLPA VCNV REMOVESTACK");
+					sendMessageToEveryone(string.Format("OLPA VCNV REMOVESTACK {0}", player));
 				}
 			}
 		}

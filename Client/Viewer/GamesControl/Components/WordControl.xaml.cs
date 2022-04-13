@@ -59,13 +59,16 @@ namespace Client.Viewer.GamesControl.Components
 		}
 		public void ShowAnswer(int index, string answer)
 		{
-			int ptr = 0;
-			if (index < 4)
-				for (int i = 0; i < MAXLEN; i++)
-					if (letters[i].Visibility == Visibility.Visible) { 
-						letters[i].SetChar(answer[ptr]); 
-						letters[i].SetEnabled(); ptr++; 
-					}
+			//Dispatcher.Invoke(() => {
+				int ptr = 0;
+				if (index < 4)
+					for (int i = 0; i < MAXLEN; i++)
+						if (letters[i].Visibility == Visibility.Visible) {
+							while (answer[ptr] == ' ') ptr++;
+							letters[i].SetChar(answer[ptr]);
+							letters[i].SetEnabled(); ptr++;
+						}
+			//});
 		}
 		public void DisAnswer(int index)
 		{

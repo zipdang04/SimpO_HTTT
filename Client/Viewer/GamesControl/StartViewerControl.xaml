@@ -9,13 +9,13 @@
              d:DesignHeight="900" d:DesignWidth="1600">
     <Grid x:Name="grid">
         <!--
-        <MediaElement x:Name="media" LoadedBehavior="Manual"/>
-        -->
         <MediaElement x:Name="mediaOpening" LoadedBehavior="Manual"/>
         <MediaElement x:Name="mediaCorrect" LoadedBehavior="Manual"/>
         <MediaElement x:Name="mediaWrong" LoadedBehavior="Manual"/>
         <MediaElement x:Name="mediaBlank" LoadedBehavior="Manual"/>
         <MediaElement x:Name="mediaDone" LoadedBehavior="Manual"/>
+        -->
+        <MediaElement x:Name="media" LoadedBehavior="Manual"/>
         <compo:QNPBox x:Name="qnpBox"/>
     </Grid>
 </UserControl>

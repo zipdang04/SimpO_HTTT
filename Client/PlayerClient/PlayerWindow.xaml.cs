@@ -70,17 +70,23 @@ namespace Client.PlayerClient
 			pointsControl.ChoosePlayer(player - 1);
 		}
 
-		public static void ServerBytesReceived(SimpleSocketClient client, byte[] messageBytes) {
-			string zip = @"Resources/Media.zip";
-			if (File.Exists(zip)) File.Delete(zip);
-			FileStream file = File.Create(zip);
-			file.Write(messageBytes);
-			file.Close();
+		public void ServerBytesReceived(SimpleSocketClient client, byte[] messageBytes) {
+			Dispatcher.Invoke(() => {
+				try {
+					string zip = @"Resources/Media.zip";
+					if (File.Exists(zip)) File.Delete(zip);
+					FileStream file = File.Create(zip);
+					file.Write(messageBytes);
+					file.Close();
 
-			string dirPath = @"Resources/Media";
-			HelperClass.ClearDirectory(new DirectoryInfo(dirPath));
-			ZipFile.ExtractToDirectory(zip, dirPath);
-			MessageBox.Show("Đã chuyển xong file!", "Chuyển xong file", MessageBoxButton.OK);
+					string dirPath = @"Resources/Media";
+					HelperClass.ClearDirectory(new DirectoryInfo(dirPath));
+					ZipFile.ExtractToDirectory(zip, dirPath);
+					MessageBox.Show("Đã chuyển xong file!", "Chuyển xong file", MessageBoxButton.OK);
+				} catch {
+					MessageBox.Show("Có vấn đề trong lúc chuyển file!\nLiên hệ người tổ chức trận đấu để có phương án xử lý (như copy file về máy thi đấu)");
+				}
+			});
 		}
 
 		private void ServerMessageReceived(SimpleSocket a, string msg)

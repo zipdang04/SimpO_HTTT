@@ -7,9 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="1600">
     <Grid>
+        <!--
         <Grid.Background>
             <ImageBrush ImageSource="../../Resources/Effects/image49.png"/>
         </Grid.Background>
+        -->
+        <MediaElement x:Name="mediaStart" LoadedBehavior="Manual" MediaEnded="mediaStart_MediaEnded"/>
+        <MediaElement x:Name="mediaRun" LoadedBehavior="Manual"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="360*"/>
@@ -38,7 +42,6 @@
             </Grid.RowDefinitions>
             <MediaElement x:Name="media" Grid.Row="1" Grid.Column="1" LoadedBehavior="Manual"/>
         </Grid>
-        <MediaElement x:Name="mediaStart" LoadedBehavior="Manual"/>
-        <MediaElement x:Name="mediaRun" LoadedBehavior="Manual"/>
+        
     </Grid>
 </UserControl>
