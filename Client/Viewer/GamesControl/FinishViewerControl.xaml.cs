@@ -112,7 +112,6 @@ namespace Client.Viewer.GamesControl
 		public void Choosing(int player)
 		{
 			Reset();
-			donePlayChoosing = false;
 			currentPlayer = player;
 			Dispatcher.Invoke(() => {
 				mediaStart.Source = new Uri(HelperClass.PathString("Effects", string.Format("VD_{0}_Start.mp4", currentPlayer + 1)));
