@@ -9,9 +9,13 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
+            <RowDefinition Height="40"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid x:Name="gridPoint"/>
-        <Grid x:Name="grid" Grid.Row="1"/>
+        <Grid x:Name="grid" Grid.Row="1">
+            <Label Content="Tình hình chuyển file:" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblStatus" Content="" HorizontalAlignment="Left" Margin="135,4,0,0" VerticalAlignment="Top"/>
+        </Grid>
     </Grid>
 </Window>

@@ -95,6 +95,7 @@ namespace Server.HostServer
 		private void btnReset_Click(object sender, RoutedEventArgs e)
 		{
 			btnHN1.IsEnabled = true;btnHN2.IsEnabled = true;btnHN3.IsEnabled = true;btnHN4.IsEnabled = true; btnTT.IsEnabled = false;
+			btnLast15s.IsEnabled = false; btnAll.IsEnabled = false;
 			for (int i = 0; i < 5; i++) buttons[i].IsEnabled = false;
 			btnStart.IsEnabled = false; btnShowAnswer.IsEnabled = false; btnConfirm.IsEnabled = false;
 			answersControl.Reset();
@@ -165,6 +166,7 @@ namespace Server.HostServer
 				sendMessageToEveryone(String.Format("OLPA VCNV DISROW {0}", currentRow));
 
 			btnConfirm.IsEnabled = false;
+			if (cntRow == 5) btnLast15s.IsEnabled = false;
 		}
 		private void btnHN1_Click(object sender, RoutedEventArgs e)
 		{
@@ -270,6 +272,18 @@ namespace Server.HostServer
 		private void btnVCNVWord_Click(object sender, RoutedEventArgs e)
 		{
 			sendMessageToEveryone("OLPA VCNV SCENE WORD");
+		}
+
+		private void btnAll_Click(object sender, RoutedEventArgs e)
+		{
+			for (int i = 0; i < 5; i++)
+				sendMessageToEveryone(String.Format("OLPA VCNV OPEN {0}", i));
+		}
+
+		private void btnLast15s_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA VCNV LAST15");
+			btnAll.IsEnabled = false;
 		}
 
 		private void btnPicTT_Click(object sender, RoutedEventArgs e)

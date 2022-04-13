@@ -60,7 +60,7 @@ namespace Client.PlayerClient
 				client.Close();
 				return;
 			}
-			MessageBox.Show("Đã kết nối, vui lòng chờ đợi", "đã nối", MessageBoxButton.OK) ;
+			lblStatus.Content = "Đã kết nối\n Chờ đợi chuyển màn hình";
 			Dispatcher.Invoke(() => {
 				button.IsEnabled = false;
 			});

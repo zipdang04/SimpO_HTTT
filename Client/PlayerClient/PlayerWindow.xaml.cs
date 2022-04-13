@@ -82,9 +82,9 @@ namespace Client.PlayerClient
 					string dirPath = @"Resources/Media";
 					HelperClass.ClearDirectory(new DirectoryInfo(dirPath));
 					ZipFile.ExtractToDirectory(zip, dirPath);
-					MessageBox.Show("Đã chuyển xong file!", "Chuyển xong file", MessageBoxButton.OK);
+					lblStatus.Content = "Chuyển file thành công";
 				} catch {
-					MessageBox.Show("Có vấn đề trong lúc chuyển file!\nLiên hệ người tổ chức trận đấu để có phương án xử lý (như copy file về máy thi đấu)");
+					lblStatus.Content = "Chuyển file tạch, vui lòng liên hệ ban tổ chức trận đấu để có phương án xử lý (như copy file về máy thi đấu)";
 				}
 			});
 		}

@@ -38,7 +38,7 @@ namespace Client.Viewer.GamesControl
 		{
 			InitializeComponent();
 			images = new List<Image>();
-			images.Add(rectUL); images.Add(rectUR); images.Add(rectDR); images.Add(rectDL); images.Add(rectTT);
+			images.Add(rectUL); images.Add(rectUR); images.Add(rectDL); images.Add(rectDR); images.Add(rectTT);
 			for (int i = 0; i < 4; i++)
 			{
 				wordControls[i] = new WordControl();
@@ -158,6 +158,7 @@ namespace Client.Viewer.GamesControl
 			Dispatcher.Invoke(() => {
 				mediaShow.Visibility = Visibility.Hidden;
 				media15s.Visibility = Visibility.Hidden;
+				qBox.Visibility = Visibility.Hidden;
 			});
 		}
 

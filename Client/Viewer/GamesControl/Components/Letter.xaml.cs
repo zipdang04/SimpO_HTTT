@@ -33,7 +33,7 @@ namespace Client.Viewer.GamesControl.Components
 		}
 		public Letter(char c): this() { SetChar(c); }
 
-		public void SetChar(char c) { Dispatcher.Invoke(() => { lblChar.Content = c; }); }
+		public void SetChar(char c) { Dispatcher.Invoke(() => { lblChar.Content = Char.ToUpper(c); }); }
 
 		public void SetNull() { Dispatcher.Invoke(() => { background.ImageSource = null; lblChar.Visibility = Visibility.Hidden; Visibility = Visibility.Hidden; }); }
 		public void SetNormal() { Dispatcher.Invoke(() => { background.ImageSource = new BitmapImage(NORMAL); lblChar.Visibility = Visibility.Hidden; Visibility = Visibility.Visible; }); }

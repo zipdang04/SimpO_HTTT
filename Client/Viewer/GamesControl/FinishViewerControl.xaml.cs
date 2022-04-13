@@ -85,8 +85,9 @@ namespace Client.Viewer.GamesControl
 			Dispatcher.Invoke(() => {
 				ChangeScene("POINT");
 
+				mediaBegin.Visibility = Visibility.Visible;
 				backgroundPoint.Visibility = Visibility.Hidden;
-				mediaStart.Visibility = Visibility.Visible;
+				mediaStart.Visibility = Visibility.Hidden;
 				for (int i = 0; i < 4; i++) {
 					imgPlayer[i].Visibility = Visibility.Hidden;
 					rects[i].Visibility = Visibility.Hidden;
@@ -108,34 +109,34 @@ namespace Client.Viewer.GamesControl
 		{
 			media20s.Visibility = Visibility.Hidden;
 		}
-
-		bool donePlayChoosing;
 		public void Choosing(int player)
 		{
 			Reset();
 			donePlayChoosing = false;
 			currentPlayer = player;
 			Dispatcher.Invoke(() => {
-				mediaStart.Visibility = Visibility.Visible;
-				mediaStart.Source = new Uri(HelperClass.PathString("Effects", "VD_Begin.mp4"));
-				mediaStart.Position = TimeSpan.Zero; mediaStart.Play();
+				mediaStart.Source = new Uri(HelperClass.PathString("Effects", string.Format("VD_{0}_Start.mp4", currentPlayer + 1)));
+				mediaStart.Play(); mediaStart.Stop();
+
+				mediaBegin.Visibility = Visibility.Visible;
+				mediaBegin.Position = TimeSpan.Zero; mediaBegin.Play(); 
+				
 				imgPlayer[player].Visibility = Visibility.Visible;
 				questionBox.SetChosenOne(player);
+			});
+		}
+		private void mediaBegin_MediaEnded(object sender, RoutedEventArgs e)
+		{
+			Dispatcher.Invoke(() => {
+				backgroundPoint.Visibility = Visibility.Visible;
+				mediaBegin.Visibility = Visibility.Hidden;
 			});
 		}
 		private void mediaStart_MediaEnded(object sender, RoutedEventArgs e)
 		{
 			Dispatcher.Invoke(() => { 
-				if (donePlayChoosing == false) {
-					donePlayChoosing = true;
-					mediaStart.Source = new Uri(HelperClass.PathString("Effects", string.Format("VD_{0}_Start.mp4", currentPlayer + 1)));
-					mediaStart.Position = TimeSpan.Zero;
-					mediaStart.Play(); mediaStart.Stop();
-					backgroundPoint.Visibility = Visibility.Visible;
-				} else {
-					ChangeScene("QUES");
-					questionBox.Visibility = Visibility.Visible;
-				}
+				ChangeScene("QUES");
+				questionBox.Visibility = Visibility.Visible;
 			});
 		}
 		//
@@ -145,6 +146,7 @@ namespace Client.Viewer.GamesControl
 				mediaStart.Visibility = Visibility.Visible;
 				for (int i = 0; i < 3; i++) difficulty[i] = diff[i];
 				mediaStart.Play();
+				pointChoosing.Play(difficulty);
 			});
 		}
 
@@ -204,6 +206,7 @@ namespace Client.Viewer.GamesControl
 				rects[player].Visibility = Visibility.Visible;
 			});
 		}
+
 		public void Star()
 		{
 			//VD_Star.mp3

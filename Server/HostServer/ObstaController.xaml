@@ -9,18 +9,20 @@
              d:DesignHeight="600" d:DesignWidth="800">
     <Grid>
         <Grid>
-            <Button x:Name="btnReset" Content="BẮT ĐẦU!" HorizontalAlignment="Left" Margin="10,44,0,0" VerticalAlignment="Top" Click="btnReset_Click" Background="Red" Foreground="White" FontWeight="Bold"/>
-            <Button x:Name="btnVCNV" Content="VƯỢT CHƯỚNG NGẠI VẬT!" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Background="#FF00FF46" Click="btnVCNV_Click"/>
-            <Button x:Name="btnIntro" Content="Chạy Intro" HorizontalAlignment="Left" Margin="173,10,0,0" VerticalAlignment="Top" Click="btnIntro_Click"/>
-            <Button x:Name="btnOpening" Content="Chạy nhạc mở đầu" HorizontalAlignment="Left" Margin="245,10,0,0" VerticalAlignment="Top" Click="btnOpening_Click"/>
+            <Button x:Name="btnReset" Content="BẮT ĐẦU!" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top" Click="btnReset_Click" Background="Red" Foreground="White" FontWeight="Bold" Height="44"/>
+            <Button x:Name="btnVCNV" Content="VƯỢT CHƯỚNG NGẠI VẬT!" HorizontalAlignment="Left" Margin="150,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Background="#FF00FF46" Click="btnVCNV_Click"/>
+            <Button x:Name="btnIntro" Content="Chạy Intro" HorizontalAlignment="Left" Margin="313,10,0,0" VerticalAlignment="Top" Click="btnIntro_Click"/>
+            <Button x:Name="btnOpening" Content="Chạy nhạc mở đầu" HorizontalAlignment="Left" Margin="385,10,0,0" VerticalAlignment="Top" Click="btnOpening_Click"/>
             <Button x:Name="btnVCNVWord" Content="Scene Hàng ngang" HorizontalAlignment="Left" Margin="292,44,0,0" VerticalAlignment="Top" Height="44" Click="btnVCNVWord_Click"/>
             <Button x:Name="btnVCNVPic" Content="Scene Hình ảnh" HorizontalAlignment="Left" Margin="173,44,0,0" VerticalAlignment="Top" Height="44" Click="btnVCNVPic_Click"/>
             <Label Content="Mở hình ảnh:" HorizontalAlignment="Left" Margin="469,63,0,0" VerticalAlignment="Top"/>
             <Button x:Name="btnPic1" Content="1" HorizontalAlignment="Left" Height="35" Margin="561,18,0,0" VerticalAlignment="Top" Width="42" IsEnabled="False" Click="btnPic1_Click"/>
             <Button x:Name="btnPic2" Content="2" HorizontalAlignment="Left" Height="35" Margin="664,18,0,0" VerticalAlignment="Top" Width="42" IsEnabled="False" Click="btnPic2_Click"/>
-            <Button x:Name="btnPic3" Content="3" HorizontalAlignment="Left" Height="35" Margin="664,105,0,0" VerticalAlignment="Top" Width="42" IsEnabled="False" Click="btnPic3_Click"/>
-            <Button x:Name="btnPic4" Content="4" HorizontalAlignment="Left" Height="35" Margin="561,105,0,0" VerticalAlignment="Top" Width="42" IsEnabled="False" Click="btnPic4_Click"/>
+            <Button x:Name="btnPic3" Content="3" HorizontalAlignment="Left" Height="35" Margin="561,105,0,0" VerticalAlignment="Top" Width="42" IsEnabled="False" Click="btnPic3_Click"/>
+            <Button x:Name="btnPic4" Content="4" HorizontalAlignment="Left" Height="35" Margin="664,105,0,0" VerticalAlignment="Top" Width="42" IsEnabled="False" Click="btnPic4_Click"/>
             <Button x:Name="btnPicTT" Content="TT" HorizontalAlignment="Left" Height="35" Margin="614,63,0,0" VerticalAlignment="Top" Width="42" IsEnabled="False" Click="btnPicTT_Click"/>
+            <Button x:Name="btnAll" Content="Mở Tất cả" HorizontalAlignment="Left" Height="35" Margin="727,76,0,0" VerticalAlignment="Top" Width="63" IsEnabled="False" Click="btnAll_Click"/>
+            <Button x:Name="btnLast15s" Content="15s cuối" HorizontalAlignment="Left" Height="35" Margin="727,36,0,0" VerticalAlignment="Top" Width="63" IsEnabled="False" Click="btnLast15s_Click"/>
         </Grid>
         <Grid Margin="0, 150, 0, 0">
             <Grid Height="125" VerticalAlignment="Top" Margin="0,0,0,0">

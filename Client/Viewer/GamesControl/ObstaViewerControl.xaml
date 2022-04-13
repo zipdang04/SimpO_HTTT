@@ -49,8 +49,8 @@
                 <Image x:Name="image"/>
                 <Image x:Name="rectUL" Source="../../Resources/Effects/VCNV_Piece_1.png" Stretch="Fill"/>
                 <Image x:Name="rectUR" Source="../../Resources/Effects/VCNV_Piece_2.png" Stretch="Fill"/>
-                <Image x:Name="rectDR" Source="../../Resources/Effects/VCNV_Piece_3.png" Stretch="Fill"/>
-                <Image x:Name="rectDL" Source="../../Resources/Effects/VCNV_Piece_4.png" Stretch="Fill"/>
+                <Image x:Name="rectDL" Source="../../Resources/Effects/VCNV_Piece_3.png" Stretch="Fill"/>
+                <Image x:Name="rectDR" Source="../../Resources/Effects/VCNV_Piece_4.png" Stretch="Fill"/>
                 <Image x:Name="rectTT" Source="../../Resources/Effects/VCNV_Piece_TT.png" Stretch="Fill"/>
             </Grid>
         </Grid>
