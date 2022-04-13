@@ -57,15 +57,11 @@ namespace Client.PlayerClient.GamesControl
 		public void ShowQuestion(int turn, string question, string attach, int time)
 		{
 			timeLimit = time;
-			attach = Directory.GetCurrentDirectory() + @"\Resources\Media\" + attach;
-			//attach = "Resources/" + attach;
+			attach = HelperClass.PathString("Media", attach);
 			Dispatcher.Invoke(() => {
 				mediaPlayer.Source = new Uri(attach);
-				//mediaPlayer.Visibility = Visibility.Hidden;
 				lblTemp.Content = turn;
 				lblQuestion.Content = question;
-				//mediaPlayer.Play();
-				//mediaPlayer.Stop();
 			});
 		}
 

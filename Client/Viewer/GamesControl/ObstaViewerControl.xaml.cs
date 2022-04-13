@@ -32,7 +32,8 @@ namespace Client.Viewer.GamesControl
 					mediaOpenPiece = new MediaPlayer(),
 					mediaBell = new MediaPlayer(),
 					mediaBellCorrect = new MediaPlayer(),
-					mediaBellWrong = new MediaPlayer();
+					mediaBellWrong = new MediaPlayer(),
+					media = new MediaPlayer();
 		bool foundWinner = false;
 		public ObstaViewerControl()
 		{
@@ -107,6 +108,7 @@ namespace Client.Viewer.GamesControl
 
 		public void ShowQuestion(int index, string question, string attach)
 		{
+			bool loadOke = false;
 			Dispatcher.Invoke(() => {
 				mediaOpenQuestion.Position = TimeSpan.Zero;
 				mediaOpenQuestion.Play();
@@ -116,7 +118,13 @@ namespace Client.Viewer.GamesControl
 				mediaShow.Visibility = Visibility.Hidden;
 				if (index < 4) wordControls[index].SetChoosing();
 				this.curIndex = index;
+				try {
+					media.Open(new Uri(HelperClass.PathString("Media", attach)));
+					media.Position = TimeSpan.Zero;
+					loadOke = true;
+				} catch { }
 			});
+			Dispatcher.Invoke(() => { if (loadOke) media.Play(); })
 		}
 		private void mediaOpenQuestion_MediaEnded(object? sender, EventArgs e)
 		{

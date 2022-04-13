@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.Information;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -28,7 +29,10 @@ namespace Client.PlayerClient.GamesControl.Components
 		public void DisplayQuestion(string question, string attach = "")
 		{
 			txtQuestion.Text = question;
-			try { media.Source = new Uri(Directory.GetCurrentDirectory() + @"\Resources\Media\" + attach); }catch { }
+			try {
+				media.Source = new Uri(HelperClass.PathString("Media", attach));
+				media.Position = TimeSpan.Zero; media.Play();
+			} catch { }
 		}
 	}
 }

@@ -42,22 +42,6 @@ namespace Client.Viewer.GamesControl
             mediaRun.LoadedBehavior = MediaState.Manual;
             grid.Children.Add(mediaStart);
 			grid.Children.Add(mediaRun);
-			//for (int i = 0; i < 4; i++) {
-			//    mediaStart[i] = new MediaElement();
-			//    mediaStart[i].LoadedBehavior = MediaState.Manual;
-			//    mediaStart[i].Source = new Uri(HelperClass.PathString("Effects", string.Format("KD_{0}_Start.mp4", i + 1)));
-			//    mediaStart[i].Play(); mediaStart[i].Stop();
-			//    mediaStart[i].Visibility = Visibility.Collapsed;
-
-			//    mediaRun[i] = new MediaElement();
-			//    mediaRun[i].LoadedBehavior = MediaState.Manual;
-			//    mediaRun[i].Source = new Uri(HelperClass.PathString("Effects", string.Format("KD_{0}_Run.mp4", i + 1)));
-			//    mediaRun[i].Play(); mediaRun[i].Stop();
-			//    mediaRun[i].Visibility = Visibility.Collapsed;
-
-			//    grid.Children.Add(mediaStart[i]);
-			//    grid.Children.Add(mediaRun[i]);
-			//}
 
 			mediaOpening.Open(new Uri(HelperClass.PathString("Effects", "KD_Opening.mpeg")));
             mediaOpening.Play(); mediaOpening.Stop();
@@ -126,6 +110,17 @@ namespace Client.Viewer.GamesControl
         public void DisplayQuestion(string question, string attach)
 		{
             qnpBox.SetQuestion(question);
-		}
+            bool oke = false;
+            Dispatcher.Invoke(() => {
+				try {
+                    media.Source = new Uri(HelperClass.PathString("Media", attach));
+                    media.Position = TimeSpan.Zero;
+                    oke = true;
+				} catch { };
+			});
+            Dispatcher.Invoke(() => {
+                if (oke) media.Play();
+            });
+        }
     }
 }
