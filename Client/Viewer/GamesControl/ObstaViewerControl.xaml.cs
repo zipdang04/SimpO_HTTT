@@ -25,6 +25,7 @@ namespace Client.Viewer.GamesControl
 	{
 		List<Image> images;
 		WordControl[] wordControls = new WordControl[4];
+		MediaPlayer mediaOpening = new MediaPlayer();
 		public ObstaViewerControl()
 		{
 			InitializeComponent();
@@ -37,7 +38,7 @@ namespace Client.Viewer.GamesControl
 				Grid.SetColumn(wordControls[i], 1);
 				Grid.SetRow(wordControls[i], i * 2 + 1);
 			}
-			mediaOpening.Source = new Uri(HelperClass.PathString("Effects", "VCNV_Opening.mpeg")); mediaOpening.BeginInit();
+			mediaOpening.Open(new Uri(HelperClass.PathString("Effects", "VCNV_Opening.mpeg")));
 			mediaShow.Source = new Uri(HelperClass.PathString("Effects", "VCNV_ShowQuestion.mp4")); mediaShow.BeginInit();
 			media15s.Source = new Uri(HelperClass.PathString("Effects", "VCNV_15s.mp4")); media15s.BeginInit();
 		}
@@ -62,8 +63,6 @@ namespace Client.Viewer.GamesControl
 				qBox.Visibility = Visibility.Hidden;
 			});
 		}
-
-
 
 		public void Opening() { Dispatcher.Invoke(() => { mediaOpening.Position = TimeSpan.Zero; mediaOpening.Play(); }); }
 		public void ChangeScene(string s)

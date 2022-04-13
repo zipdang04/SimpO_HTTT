@@ -26,16 +26,17 @@ namespace Client.Viewer.GamesControl
 			InitializeComponent();
 			mediaStart.Source = new Uri(HelperClass.PathString("Effects", "TT_Start.mp4"));
 			mediaStart.BeginInit(); mediaStart.Play(); mediaStart.Stop();
-			mediaRun.Source = new Uri(HelperClass.PathString("Effects", "TT_Run.mp4"));
-			mediaRun.BeginInit(); mediaRun.Play(); mediaRun.Stop();
+			mediaRun.BeginInit();
 		}
 
-		public void Prepare(string question, string attach, int time)
+		public void Prepare(string question, string attach, int turn)
 		{
 			txtQuestion.Visibility = Visibility.Hidden;
 			media.Source = new Uri(HelperClass.PathString("Media", attach));
 			media.Play(); media.Stop();
 			media.Volume = 0;
+			mediaRun.Source = new Uri(HelperClass.PathString("Effects", String.Format("TT_{0}0s.mp4", turn + 1)));
+			mediaRun.Play(); mediaRun.Stop();
 
 			mediaStart.Position = TimeSpan.Zero; mediaStart.Play();
 		}
