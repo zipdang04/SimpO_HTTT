@@ -43,8 +43,10 @@ namespace Server.HostServer
 		int remainingPoint, cntRow;
 		int currentRow = NaN;
 
-		Simer timer;
+		Simer timer, timerLast15;
 		const int timeLimit = 1600;
+
+		bool stopAllow = false;
 
 		public ObstaController(SimpleSocketTcpListener listener, ObstacleClass obstaClass, PlayerClass playerClass, PlayerNetwork playerNetwork)
 		{
@@ -61,6 +63,8 @@ namespace Server.HostServer
 
 			timer = new Simer(timeLimit);
 			timer.Tick += timer_Tick;
+			timerLast15 = new Simer(timeLimit);
+			timerLast15.Tick += timerLast15_Tick;
 
 			labels.Add(lblHN1); labels.Add(lblHN2); labels.Add(lblHN3); labels.Add(lblHN4); labels.Add(lblTT);
 			buttons.Add(btnPic1); buttons.Add(btnPic2); buttons.Add(btnPic3); buttons.Add(btnPic4); buttons.Add(btnPicTT);
@@ -73,6 +77,12 @@ namespace Server.HostServer
 			}
 		}
 
+		void timerLast15_Tick(int time, bool done)
+		{
+			if (done) {
+				stopAllow = true;
+			}
+		}
 		void timer_Tick(int time, bool done)
 		{
 			lblTime.Content = string.Format("{0:0.00}", time / 100.0);
@@ -105,6 +115,7 @@ namespace Server.HostServer
 			playerWinner = NaN;
 			remainingPoint = 80; cntRow = 0;
 			currentRow = NaN;
+			stopAllow = false;
 			
 			string command = string.Format("OLPA VCNV START {0}", HelperClass.MakeString(obstaClass.attach));
 			for (int i = 0; i < 5; i++){
@@ -113,11 +124,13 @@ namespace Server.HostServer
 				command = String.Format(command + " {0}", cntLetter);
 			}
 			sendMessageToEveryone(command);
+			sendMessageToEveryone(string.Format("OLPA VCNV KEY {0}", HelperClass.VCNV_CountLetter(obstaClass.keyword)));
 		}
 
 		public void PlayerAnswering(int player, string answer, int time)
 		{
-			answersControl.SomeoneAnswering(player, answer, time);
+			if (stopAllow == false)
+				answersControl.SomeoneAnswering(player, answer, time);
 		}
 
 		void Prepare(int qIdx)
@@ -166,7 +179,7 @@ namespace Server.HostServer
 				sendMessageToEveryone(String.Format("OLPA VCNV DISROW {0}", currentRow));
 
 			btnConfirm.IsEnabled = false;
-			if (cntRow == 5) btnLast15s.IsEnabled = false;
+			if (cntRow == 5) btnLast15s.IsEnabled = true;
 		}
 		private void btnHN1_Click(object sender, RoutedEventArgs e)
 		{
@@ -280,10 +293,17 @@ namespace Server.HostServer
 				sendMessageToEveryone(String.Format("OLPA VCNV OPEN {0}", i));
 		}
 
+		private void btnVCNVEmpty_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA VCNV SCENE ahihihi");
+		}
+
 		private void btnLast15s_Click(object sender, RoutedEventArgs e)
 		{
 			sendMessageToEveryone("OLPA VCNV LAST15");
-			btnAll.IsEnabled = false;
+			btnLast15s.IsEnabled = false;
+			btnAll.IsEnabled = true;
+			timerLast15.Start();
 		}
 
 		private void btnPicTT_Click(object sender, RoutedEventArgs e)

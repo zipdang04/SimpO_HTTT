@@ -33,7 +33,8 @@ namespace Client.Viewer.GamesControl
 					mediaBell = new MediaPlayer(),
 					mediaBellCorrect = new MediaPlayer(),
 					mediaBellWrong = new MediaPlayer(),
-					media = new MediaPlayer();
+					media = new MediaPlayer(),
+					mediaLast15 = new MediaPlayer();
 		bool foundWinner = false;
 		public ObstaViewerControl()
 		{
@@ -65,6 +66,8 @@ namespace Client.Viewer.GamesControl
 			mediaShow.Play(); mediaShow.Stop();
 			media15s.Source = new Uri(HelperClass.PathString("Effects", "VCNV_15s.mp4")); media15s.BeginInit();
 			media15s.Play(); media15s.Stop();
+			mediaLast15.Open(new Uri(HelperClass.PathString("Effects", "VCNV_Last15s.mp4")));
+			mediaLast15.Play(); mediaLast15.Stop();
 
 			mediaOpenQuestion.MediaEnded += mediaOpenQuestion_MediaEnded;
 		}
@@ -115,7 +118,7 @@ namespace Client.Viewer.GamesControl
 				qBox.SetQuestion(question);
 				qBox.Visibility = Visibility.Hidden;
 				media15s.Visibility = Visibility.Hidden;
-				mediaShow.Visibility = Visibility.Hidden;
+				mediaShow.Visibility = Visibility.Hidden; mediaShow.Position = TimeSpan.Zero;
 				if (index < 4) wordControls[index].SetChoosing();
 				this.curIndex = index;
 				try {
@@ -129,7 +132,7 @@ namespace Client.Viewer.GamesControl
 		private void mediaOpenQuestion_MediaEnded(object? sender, EventArgs e)
 		{
 			mediaShow.Visibility = Visibility.Visible;
-			mediaShow.Position = TimeSpan.Zero; mediaShow.Play();
+			mediaShow.Play();
 		}
 		private void mediaShow_MediaEnded(object sender, RoutedEventArgs e)
 		{
@@ -198,6 +201,12 @@ namespace Client.Viewer.GamesControl
 						break;
 					}
 				}
+			});
+		}
+		public void Last15s()
+		{
+			Dispatcher.Invoke(() => {
+				mediaLast15.Position = TimeSpan.Zero; mediaLast15.Play();
 			});
 		}
 	}

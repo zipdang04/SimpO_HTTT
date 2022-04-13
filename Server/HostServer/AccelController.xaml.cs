@@ -171,5 +171,20 @@ namespace Server.HostServer
 		{
 			sendMessageToEveryone("OLPA SCENE TT");
 		}
+
+		private void btnIntro_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA TT INTRO");
+		}
+
+		private void btnOpening_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA TT OPENING");
+		}
+
+		private void btnSceneAnswer_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA SCENE ANSWER");
+		}
 	}
 }

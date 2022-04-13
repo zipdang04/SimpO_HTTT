@@ -194,6 +194,12 @@ namespace Server.HostServer
 			sendMessageToEveryone("OLPA KD DONE");
 		}
 
-		
+		private void Grid_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Q && btnCorrect.IsEnabled)
+				btnCorrect_Click(sender, new RoutedEventArgs());
+			else if (e.Key == Key.E && btnWrong.IsEnabled)
+				btnWrong_Click(sender, new RoutedEventArgs());
+		}
 	}
 }

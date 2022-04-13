@@ -22,6 +22,7 @@ namespace Client
 	{
 		PlayerClient.LogInWindow player;
 		Viewer.LogInWindow viewer;
+		MCClient.LogInWindow mcClient;
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -37,6 +38,12 @@ namespace Client
 		{
 			viewer = new Viewer.LogInWindow(this);
 			viewer.Show(); Hide();
+		}
+
+		private void btnMC_Click(object sender, RoutedEventArgs e)
+		{
+			mcClient = new MCClient.LogInWindow(this);
+			mcClient.Show(); Hide();
 		}
 	}
 }

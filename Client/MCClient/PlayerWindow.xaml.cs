@@ -15,13 +15,14 @@ using System.Windows.Shapes;
 using Server.Information;
 using SimpleSockets;
 using SimpleSockets.Client;
-using Client.PlayerClient.GamesControl;
-using Client.PlayerClient.GamesControl.Components;
+using Client.MCClient.GamesControl;
+using Client.MCClient.GamesControl.Components;
 using Server.QuestionClass;
 using System.IO;
 using System.IO.Compression;
 
-namespace Client.PlayerClient
+
+namespace Client.MCClient
 {
 	/// <summary>
 	/// Interaction logic for PlayerWindow.xaml
@@ -40,7 +41,7 @@ namespace Client.PlayerClient
 		public AccelPlayerControl accelPlayerControl;
 		public FinishPlayerControl finishPlayerControl;
 
-		public PlayerWindow(LogInWindow logInWindow, SimpleSocketClient client, int player)
+		public PlayerWindow(LogInWindow logInWindow, SimpleSocketClient client)
 		{
 			InitializeComponent();
 			this.logInWindow = logInWindow;
@@ -68,7 +69,6 @@ namespace Client.PlayerClient
 			finishPlayerControl.Visibility = Visibility.Collapsed;
 
 			pointsControl.Visibility = Visibility.Visible;
-			pointsControl.ChoosePlayer(player - 1);
 		}
 
 		private void Client_DisconnectedFromServer(SimpleSocketClient client)
@@ -152,8 +152,8 @@ namespace Client.PlayerClient
 							startPlayerControl.StartTimer();
 							break;
 						case "QUES":
-							string question = tokens[3], attach = tokens[4];
-							startPlayerControl.ShowQuestion(new OQuestion(question, "", attach));
+							string question = tokens[3], attach = tokens[4], answer = tokens[5];
+							startPlayerControl.ShowQuestion(new OQuestion(question, answer, attach));
 							break;
 					}
 					break;
@@ -166,11 +166,14 @@ namespace Client.PlayerClient
 							obstaPlayerControl.ResetGame(attach, cntLetter);
 							break;
 						case "KEY":
+							int lengg = Convert.ToInt32(tokens[3]);
+							obstaPlayerControl.Keyword(lengg);
 							break;
 						case "SHOW":
 							int label = Convert.ToInt32(tokens[3]);
 							string question = tokens[4];
-							obstaPlayerControl.ShowQuestion(label, question, tokens[5]);
+							string answer = tokens[6];
+							obstaPlayerControl.ShowQuestion(label, new OQuestion(question, answer, tokens[5]));
 							break;
 						case "TIME":
 							obstaPlayerControl.StartTimer();
@@ -186,8 +189,9 @@ namespace Client.PlayerClient
 							int turn = Convert.ToInt32(tokens[3]);
 							string question = tokens[4];
 							string attach = tokens[5];
+							string answer = tokens[6];
 							accelPlayerControl.ResetGame();
-							accelPlayerControl.ShowQuestion(turn, question, attach, turn * 1000);
+							accelPlayerControl.ShowQuestion(turn, question, attach, answer, turn * 1000);
 							break;
 						case "PLAY":
 							accelPlayerControl.StartTimer();
@@ -197,14 +201,8 @@ namespace Client.PlayerClient
 				case "VD":
 					switch (tokens[2]) {
 						case "QUES":
-							string question = tokens[3], attach = tokens[4];
-							finishPlayerControl.ShowQuestion(new OQuestion(question, "", attach));
-							break;
-						case "LOCK":
-							finishPlayerControl.LockButton();
-							break;
-						case "UNLOCK":
-							finishPlayerControl.UnlockButton();
+							string question = tokens[3], attach = tokens[4], answer = tokens[5];
+							finishPlayerControl.ShowQuestion(new OQuestion(question, answer, attach));
 							break;
 						case "TIME":
 							int timeLimit = Convert.ToInt32(tokens[3]);

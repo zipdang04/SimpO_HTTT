@@ -19,7 +19,7 @@ using Server.Information;
 using System.Windows.Threading;
 using Server.HostServer.Components;
 
-namespace Client.PlayerClient.GamesControl
+namespace Client.MCClient.GamesControl
 {
 	/// <summary>
 	/// Interaction logic for ObstaPlayerControl.xaml
@@ -54,40 +54,25 @@ namespace Client.PlayerClient.GamesControl
 		void timer_Tick(int time, bool done)
 		{
 			lblTime.Content = string.Format("{0:0.00}", time / 100.0);
-			if (done){
-				txtAnswer.Text = "";
-				txtAnswer.IsEnabled = false;
-			}
 		}
 
-		public void ShowQuestion(int label, string question, string attach)
+		public void ShowQuestion(int label, OQuestion question)
 		{
 			Dispatcher.Invoke(() => {
 				lblTemp.Content = "Hàng ngang " + (label + 1).ToString();
 				lblCC.Content = "Số Chữ cái: " + cntLetter[label].ToString();
-				questionBox.DisplayQuestion(question, attach);
+				questionBox.DisplayQuestion(question);
 			});
 		}
 
 		public void StartTimer()
 		{
-			Dispatcher.Invoke(() => {
-				txtAnswer.Text = "";
-				txtAnswer.IsEnabled = true;
-				txtAnswer.Focus();
-			});
 			timer.Start();
 		}
 		
 		public void ResetGame(string imagePath, int[] cntLetter)
 		{
 			this.cntLetter = cntLetter;
-			Dispatcher.Invoke(() => {
-				btnBell.IsEnabled = true;
-				txtAnswer.IsEnabled = false;
-				lblAnswer.Content = "";
-
-			});
 			timer.Stop();
 			this.imagePath = imagePath;
 			setImage();
@@ -95,21 +80,6 @@ namespace Client.PlayerClient.GamesControl
 		public void Keyword(int cnt)
 		{
 			Dispatcher.Invoke(() => { lblCNV.Content = string.Format("CNV có {0} ký tự", cnt); });
-		}
-
-		private void btnBell_Click(object sender, RoutedEventArgs e)
-		{
-			client.SendMessage("OLPA VCNV BELL");
-			btnBell.IsEnabled = false;
-		}
-
-		private void txtAnswer_KeyDown(object sender, KeyEventArgs e)
-		{
-			if (txtAnswer.IsEnabled == true && e.Key == Key.Enter) {
-				client.SendMessage(String.Format("OLPA VCNV ANSWER {0} {1}", timer.getTime(), HelperClass.MakeString(txtAnswer.Text)));
-				lblAnswer.Content = txtAnswer.Text;
-				txtAnswer.Text = "";
-			}
 		}
 	}
 }

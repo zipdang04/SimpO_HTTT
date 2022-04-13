@@ -11,6 +11,9 @@
         <StackPanel x:Name="stackPanel">
             <Grid Height="100">
                 <Button x:Name="btnTToc" Content="TĂNG TỐC" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Background="#FFFDFF00" FontWeight="Bold" Click="btnTToc_Click"/>
+                <Button x:Name="btnIntro" Content="Mở Intro" HorizontalAlignment="Left" Margin="88,10,0,0" VerticalAlignment="Top" Click="btnIntro_Click"/>
+                <Button x:Name="btnOpening" Content="Nhạc mở màn" HorizontalAlignment="Left" Margin="151,10,0,0" VerticalAlignment="Top" Click="btnOpening_Click"/>
+                <Button x:Name="btnSceneAnswer" Content="Scene Đáp án" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Height="40" Click="btnSceneAnswer_Click"/>
             </Grid>
             <Grid>
                 <Button x:Name="btnTT1" Content="Tăng tốc 1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="btnTT1_Click"/>

@@ -122,10 +122,12 @@ namespace Server.HostServer
 					int posi = Convert.ToInt32(tokens[2]) - 1;
 					if (playerNetwork.connect(posi, client)) {
 						listener.SendMessage(id, "OLPA CONFIRMED");
-						if (posi == 0) btnKick1.IsEnabled = true;
-						else if (posi == 1) btnKick2.IsEnabled = true;
-						else if (posi == 2) btnKick3.IsEnabled = true;
-						else if (posi == 3) btnKick4.IsEnabled = true;
+						Dispatcher.Invoke(() => {
+							if (posi == 0) btnKick1.IsEnabled = true;
+							else if (posi == 1) btnKick2.IsEnabled = true;
+							else if (posi == 2) btnKick3.IsEnabled = true;
+							else if (posi == 3) btnKick4.IsEnabled = true;
+						});
 					} else
 						listener.SendMessage(id, "OLPA FAILED");
 					break;

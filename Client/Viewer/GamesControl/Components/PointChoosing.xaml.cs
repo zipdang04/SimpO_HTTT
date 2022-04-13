@@ -40,15 +40,15 @@ namespace Client.Viewer.GamesControl.Components
 			for (int i = 0; i < 3; i++) for (int j = 0; j < 3; j++)
 				labels[i][j].Visibility = Visibility.Hidden;
 
-			timer = new Simer(5);
+			timer = new Simer(206);
 			timer.Tick += timer_Tick;
 		}
 
-		int[] times = { 30, 80, 130 };
+		int[] times = { 7, 73, 140 };
 		public void timer_Tick(int time, bool done)
 		{
 			int pos = 2;
-			for (int i = 0; i < 7; i++)
+			for (int i = 0; i < 3; i++)
 				if (time < times[i]) { pos = i - 1; break; }
 			if (pos == -1) return;
 			labels[pos][difficulty[pos]].Visibility = Visibility.Visible;

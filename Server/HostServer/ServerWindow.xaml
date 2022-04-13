@@ -39,10 +39,10 @@
                         <Label Grid.Row="1" Grid.Column="0" Content="S2"/>
                         <Label Grid.Row="2" Grid.Column="0" Content="S3"/>
                         <Label Grid.Row="3" Grid.Column="0" Content="S4"/>
-                        <Button x:Name="btnKick1" Grid.Row="0" Grid.Column="1" Content="Kick" Click="btnKick1_Click"/>
-                        <Button x:Name="btnKick2" Grid.Row="1" Grid.Column="1" Content="Kick" Click="btnKick2_Click"/>
-                        <Button x:Name="btnKick3" Grid.Row="2" Grid.Column="1" Content="Kick" Click="btnKick3_Click"/>
-                        <Button x:Name="btnKick4" Grid.Row="3" Grid.Column="1" Content="Kick" Click="btnKick4_Click"/>
+                        <Button x:Name="btnKick1" Grid.Row="0" Grid.Column="1" Content="Kick" Click="btnKick1_Click" IsEnabled="False"/>
+                        <Button x:Name="btnKick2" Grid.Row="1" Grid.Column="1" Content="Kick" Click="btnKick2_Click" IsEnabled="False"/>
+                        <Button x:Name="btnKick3" Grid.Row="2" Grid.Column="1" Content="Kick" Click="btnKick3_Click" IsEnabled="False"/>
+                        <Button x:Name="btnKick4" Grid.Row="3" Grid.Column="1" Content="Kick" Click="btnKick4_Click" IsEnabled="False"/>
                     </Grid>
                 </Grid>
             </TabItem>

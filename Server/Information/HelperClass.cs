@@ -95,7 +95,9 @@ namespace Server.Information
 		{
 			string question = "BEGBEGBEG " + ques.question + " ENDENDEND";
 			string attach = "BEGBEGBEG " + ques.attach + " ENDENDEND";
-			return question + " " + attach;
+			string answer = "BEGBEGBEG " + ques.answer + " ENDENDEND";
+			return question + " " + attach + ' ' + answer;
+			// TODO: sửa để chỉ cho MC bắt được đáp án
 		}
 		public static string MakeString(string s)
 		{

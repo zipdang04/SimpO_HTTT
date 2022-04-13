@@ -43,7 +43,7 @@ namespace Client.Viewer.GamesControl
 				media.Play(); media.Stop();
 				media.Volume = 0;
 
-				mediaRun.Source = new Uri(HelperClass.PathString("Effects", String.Format("TT_{0}0s.mp4", turn + 1)));
+				mediaRun.Source = new Uri(HelperClass.PathString("Effects", String.Format("TT_{0}0s.mp4", turn)));
 				mediaRun.Play(); mediaRun.Stop();
 
 				mediaStart.Visibility = Visibility.Visible;

@@ -7,7 +7,7 @@
              xmlns:Components="clr-namespace:Server.HostServer.Components" x:Class="Server.HostServer.StartController"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
-    <Grid>
+    <Grid KeyDown="Grid_KeyDown">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="2*"/>
@@ -29,8 +29,8 @@
         <Grid Grid.Row="1">
             <Components:QuestionShowing x:Name="questionBox" Margin="0,0,0,70" />
             <Button x:Name="btnBlank" Content="Âm thanh chỗ trống" HorizontalAlignment="Left" Margin="10,0,0,55" VerticalAlignment="Bottom" Click="btnBlank_Click"/>
-            <Button x:Name="btnCorrect" Content="Đúng" HorizontalAlignment="Left" Margin="10,0,0,7" VerticalAlignment="Bottom" Width="50" Background="Lime" Click="btnCorrect_Click"/>
-            <Button x:Name="btnWrong" Content="Sai" HorizontalAlignment="Left" Margin="71,0,0,7" VerticalAlignment="Bottom" Width="50" Background="Red" Click="btnWrong_Click"/>
+            <Button x:Name="btnCorrect" Content="Đúng" HorizontalAlignment="Left" Margin="10,0,0,7" VerticalAlignment="Bottom" Width="50" Background="Lime" Click="btnCorrect_Click" Height="36"/>
+            <Button x:Name="btnWrong" Content="Sai" HorizontalAlignment="Left" Margin="71,0,0,7" VerticalAlignment="Bottom" Width="50" Background="Red" Click="btnWrong_Click" Height="36"/>
             <Label x:Name="lblTime" Content="0" HorizontalAlignment="Left" Height="30" Margin="142,0,0,26" VerticalAlignment="Bottom" Width="48"/>
             <Button x:Name="btnEmergency" Content="KHẨN CẤP!!" HorizontalAlignment="Left" Height="49" Margin="546,0,0,17" VerticalAlignment="Bottom" Width="88" Background="Red" Foreground="White" FontWeight="Bold"/>
             <Button x:Name="btnDone" Content="Xong" HorizontalAlignment="Left" Height="49" Margin="287,0,0,17" VerticalAlignment="Bottom" Width="88" FontWeight="Bold" Click="btnDone_Click"/>
