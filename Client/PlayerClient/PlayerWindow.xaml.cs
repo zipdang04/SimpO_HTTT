@@ -49,6 +49,7 @@ namespace Client.PlayerClient
 			playersInfo = new PlayerClass();
 			this.client.MessageReceived += ServerMessageReceived;
 			this.client.BytesReceived += ServerBytesReceived;
+			this.client.DisconnectedFromServer += Client_DisconnectedFromServer;
 
 			pointsControl = new PointsControl(playersInfo);
 			startPlayerControl = new StartPlayerControl(client);
@@ -68,6 +69,24 @@ namespace Client.PlayerClient
 
 			pointsControl.Visibility = Visibility.Visible;
 			pointsControl.ChoosePlayer(player - 1);
+		}
+
+		private void Client_DisconnectedFromServer(SimpleSocketClient client)
+		{
+			if (MessageBox.Show("tạch", "", MessageBoxButton.OK) == MessageBoxResult.OK) {
+				try {
+					client.Close();
+					logInWindow.Show();
+				}
+				catch { }
+			} else {
+				try {
+					client.Close();
+					logInWindow.Show();
+				}
+				catch { }
+			}
+			
 		}
 
 		public void ServerBytesReceived(SimpleSocketClient client, byte[] messageBytes) {

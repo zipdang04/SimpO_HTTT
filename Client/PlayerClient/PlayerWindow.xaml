@@ -13,9 +13,11 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid x:Name="gridPoint"/>
-        <Grid x:Name="grid" Grid.Row="1">
+        <Grid Grid.Row="1">
             <Label Content="Tình hình chuyển file:" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top"/>
             <Label x:Name="lblStatus" Content="" HorizontalAlignment="Left" Margin="135,4,0,0" VerticalAlignment="Top"/>
+        </Grid>
+        <Grid x:Name="grid" Grid.Row="2">
         </Grid>
     </Grid>
 </Window>

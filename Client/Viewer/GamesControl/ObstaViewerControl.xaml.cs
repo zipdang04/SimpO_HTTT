@@ -124,7 +124,7 @@ namespace Client.Viewer.GamesControl
 					loadOke = true;
 				} catch { }
 			});
-			Dispatcher.Invoke(() => { if (loadOke) media.Play(); })
+			Dispatcher.Invoke(() => { if (loadOke) media.Play(); });
 		}
 		private void mediaOpenQuestion_MediaEnded(object? sender, EventArgs e)
 		{

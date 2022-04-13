@@ -120,9 +120,13 @@ namespace Server.HostServer
 			switch (tokens[1]) {
 				case "S":
 					int posi = Convert.ToInt32(tokens[2]) - 1;
-					if (playerNetwork.connect(posi, client))
+					if (playerNetwork.connect(posi, client)) {
 						listener.SendMessage(id, "OLPA CONFIRMED");
-					else
+						if (posi == 0) btnKick1.IsEnabled = true;
+						else if (posi == 1) btnKick2.IsEnabled = true;
+						else if (posi == 2) btnKick3.IsEnabled = true;
+						else if (posi == 3) btnKick4.IsEnabled = true;
+					} else
 						listener.SendMessage(id, "OLPA FAILED");
 					break;
 				case "VCNV":
@@ -191,5 +195,15 @@ namespace Server.HostServer
 		{
 			sendMessageToEveryone("OLPA POINTS");
 		}
+
+		void Kick(int position)
+		{
+			if (playerNetwork.clients[position] != null)
+				playerNetwork.disconnect(playerNetwork.clients[position]);
+		}
+		private void btnKick1_Click(object sender, RoutedEventArgs e) { Kick(0); btnKick1.IsEnabled = false; }
+		private void btnKick2_Click(object sender, RoutedEventArgs e) { Kick(1); btnKick2.IsEnabled = false; }
+		private void btnKick3_Click(object sender, RoutedEventArgs e) { Kick(2); btnKick3.IsEnabled = false; }
+		private void btnKick4_Click(object sender, RoutedEventArgs e) { Kick(3); btnKick4.IsEnabled = false; }
 	}
 }
