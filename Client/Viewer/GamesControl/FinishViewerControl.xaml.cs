@@ -11,9 +11,11 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfAnimatedGif;
 
 namespace Client.Viewer.GamesControl
 {
@@ -25,8 +27,9 @@ namespace Client.Viewer.GamesControl
 		PlayerClass playerClass;
 		Image[] imgPlayer = new Image[4];
 		Rectangle[] rects = new Rectangle[4];
-		MediaPlayer mediaStartTurn = new MediaPlayer(), //opening, startturn
-					mediaStar = new MediaPlayer(), //choosing, star
+		MediaPlayer mediaOpening = new MediaPlayer(),
+					mediaStartTurn = new MediaPlayer(),
+					mediaStar = new MediaPlayer(),
 					mediaPrac = new MediaPlayer(), // 4 file + 2 file mystery / prac
 					media5s = new MediaPlayer(),
 					mediaBell = new MediaPlayer(),
@@ -44,10 +47,12 @@ namespace Client.Viewer.GamesControl
 			mediaStar.Open(new Uri(HelperClass.PathString("Effects", "VD_Star.mp3")));
 			mediaEnding.Open(new Uri(HelperClass.PathString("Effects", "VD_Ending.mpeg")));
 			mediaStartTurn.Open(new Uri(HelperClass.PathString("Effects", "VD_StartTurn.mpeg")));
+			mediaOpening.Open(new Uri(HelperClass.PathString("Effects", "VD_Opening.mpeg")));
 			media10s.Source = new Uri(HelperClass.PathString("Effects", "VD_10_Run.mp4"));
 			media15s.Source = new Uri(HelperClass.PathString("Effects", "VD_20_Run.mp4"));
 			media20s.Source = new Uri(HelperClass.PathString("Effects", "VD_30_Run.mp4"));
 			mediaBegin.Source = new Uri(HelperClass.PathString("Effects", "VD_Begin.mp4")); mediaBegin.BeginInit();
+			//testStar.BeginAnimation();
 
 			imgPlayer[0] = imgP1; imgPlayer[1] = imgP2; imgPlayer[2] = imgP3; imgPlayer[3] = imgP4;
 			rects[0] = rectBell1; rects[1] = rectBell2; rects[2] = rectBell3; rects[3] = rectBell4;
@@ -118,6 +123,8 @@ namespace Client.Viewer.GamesControl
 				mediaStart.Source = new Uri(HelperClass.PathString("Effects", string.Format("VD_{0}_Start.mp4", currentPlayer + 1)));
 				mediaStart.Play(); mediaStart.Stop();
 				mediaBegin.Position = TimeSpan.Zero;
+				mediaBegin.Stop();
+				mediaStarAnimate.Visibility = Visibility.Hidden;
 
 				mediaStartTurn.Position = TimeSpan.Zero;
 				mediaStartTurn.Play();
@@ -161,9 +168,11 @@ namespace Client.Viewer.GamesControl
 					rects[i].Visibility = Visibility.Hidden;
 			});
 		}
+		bool choosingStar = false;
 		public void ShowQuestion(string question, string attach) {
 			Dispatcher.Invoke(() => {
-				mediaStarAnimate.Visibility = Visibility.Hidden;
+				if (choosingStar) choosingStar = false;
+				else mediaStarAnimate.Visibility = Visibility.Hidden;
 				questionBox.SetQuestion(question);
 				media.Source = new Uri(HelperClass.PathString("Media", attach));
 			});
@@ -217,11 +226,12 @@ namespace Client.Viewer.GamesControl
 
 		public void Star()
 		{
+			choosingStar = true;
 			Dispatcher.Invoke(() => {
 				mediaStarAnimate.Visibility = Visibility.Visible;
 				mediaStar.Position = TimeSpan.Zero;
-				mediaStarAnimate.Position = TimeSpan.Zero;
-				mediaStar.Play(); mediaStarAnimate.Play();
+				ImageBehavior.GetAnimationController(mediaStarAnimate).GotoFrame(0);
+				mediaStar.Play(); ImageBehavior.GetAnimationController(mediaStarAnimate).Play();
 			});
 		}
 		public void ResultMusic(bool isCorrect)
@@ -236,6 +246,14 @@ namespace Client.Viewer.GamesControl
 		}
 
 		int pracTime;
+		public void IntroPractice()
+		{
+			Dispatcher.Invoke(() => {
+				mediaPrac.Open(new Uri(HelperClass.PathString("Effects", "VD_Mystery.mpeg")));
+				mediaPrac.Position = TimeSpan.Zero;
+				mediaPrac.Play();
+			});
+		}
 		public void PracticeMode(bool main)
 		{
 			ChangeScene("PRAC");
@@ -259,10 +277,19 @@ namespace Client.Viewer.GamesControl
 			Dispatcher.Invoke(() => { lblTime.Content = pracTime - (time / 100); if (done) lblTime.Content = 0; });
 		}
 
+		public void Opening()
+		{
+			ChangeScene("");
+			Dispatcher.Invoke(() => {
+				mediaOpening.Position = TimeSpan.Zero;
+				mediaOpening.Play();
+			});
+		}
 		public void Ending()
 		{
 			ChangeScene("");
 			Dispatcher.Invoke(() => {
+				mediaEnding.Position = TimeSpan.Zero;
 				mediaEnding.Play();
 			});
 		}

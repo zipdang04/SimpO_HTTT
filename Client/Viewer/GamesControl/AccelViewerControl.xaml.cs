@@ -76,7 +76,6 @@ namespace Client.Viewer.GamesControl
 				mediaRun.Play(); media.Play();
 			});
 		}
-
 		
 	}
 }

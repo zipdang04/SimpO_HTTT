@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="SimpleSockets" Version="1.2.20" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>

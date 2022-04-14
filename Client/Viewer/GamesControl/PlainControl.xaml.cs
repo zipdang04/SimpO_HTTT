@@ -1,6 +1,7 @@
 ﻿using Server.Information;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,5 +34,13 @@ namespace Client.Viewer.GamesControl
                 media.Play();
             });
 		}
+        public void Media(string attach)
+		{
+            attach = Directory.GetCurrentDirectory() + @"\Resources\" + attach;
+            Dispatcher.Invoke(() => {
+                media.Source = new Uri(attach);
+                media.Play();
+            });
+        }
     }
 }

@@ -170,6 +170,7 @@ namespace Server.HostServer
 		private void btnTToc_Click(object sender, RoutedEventArgs e)
 		{
 			sendMessageToEveryone("OLPA SCENE TT");
+			sendMessageToEveryone("OLPA ANS SCENE TT");
 		}
 
 		private void btnIntro_Click(object sender, RoutedEventArgs e)

@@ -123,7 +123,7 @@ namespace Client.Viewer
 				case "PLAY":
 					string media = tokens[2];
 					ChangeScene("PLAIN");
-					plainControl.Play(media);
+					plainControl.Media(media);
 					break;
 				case "PLAIN":
 					switch (tokens[2]) { 
@@ -271,7 +271,7 @@ namespace Client.Viewer
 							plainControl.Play("VD_Intro.mp4");
 							break;
 						case "OPENING":
-							//finishViewerControl.Opening();
+							finishViewerControl.Opening();
 							break;
 						case "SCENE":
 							finishViewerControl.ChangeScene(tokens[3]);
@@ -341,7 +341,8 @@ namespace Client.Viewer
 						for (int i = 0; i < 4; i++) { correct[i] = Convert.ToInt32(tokens[3 + i]) == 1; }
 						ChangeScene("ANSWER");
 						answerViewerControl.Conclusion(correct);
-					}
+					} else if (tokens[2] == "SCENE")
+						answerViewerControl.Change(tokens[3]);
 					break;
 			}
 		}

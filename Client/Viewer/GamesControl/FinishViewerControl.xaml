@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Client.Viewer.GamesControl"
              xmlns:compo="clr-namespace:Client.Viewer.GamesControl.Components"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="1600">
     <Grid>
@@ -14,7 +15,7 @@
             <MediaElement x:Name="mediaStart" LoadedBehavior="Manual" MediaEnded="mediaStart_MediaEnded"/>
             <compo:PointChoosing x:Name="pointChoosing"/>
         </Grid>
-        <Grid x:Name="gridQuestion" Visibility="Hidden">
+        <Grid x:Name="gridQuestion" Visibility="Visible">
             <Grid.RowDefinitions>
                 <RowDefinition Height="641*"/>
                 <RowDefinition Height="260*"/>
@@ -34,7 +35,7 @@
             <Rectangle x:Name="rectBell2" HorizontalAlignment="Left" Height="40" Margin="403,553,0,0" VerticalAlignment="Top" Width="261" Fill="#59FF0000"/>
             <Rectangle x:Name="rectBell3" HorizontalAlignment="Left" Height="40" Margin="665,553,0,0" VerticalAlignment="Top" Width="261" Fill="#59FF0000"/>
             <Rectangle x:Name="rectBell4" HorizontalAlignment="Left" Height="40" Margin="927,553,0,0" VerticalAlignment="Top" Width="261" Fill="#59FF0000"/>
-            <MediaElement x:Name="mediaStarAnimate" Source="../../Resources/Effects/VD_Star.gif" Margin="10,432,1362,8" LoadedBehavior="Manual"/>
+            <Image x:Name="mediaStarAnimate" gif:ImageBehavior.AnimatedSource="../../Resources/Effects/VD_Star.gif" Margin="40,450,1330,154" Grid.RowSpan="2"/>
         </Grid>
         <Grid x:Name="gridPrac" Visibility="Hidden" Background="#FFF5EAD7">
             <Label x:Name="lblTime" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" FontSize="170">60</Label>

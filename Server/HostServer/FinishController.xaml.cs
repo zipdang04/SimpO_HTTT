@@ -264,6 +264,11 @@ namespace Server.HostServer
 		private void btnIntro_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD INTRO"); }
 		private void btnOpening_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD OPENING"); }
 
+		private void btnIntroPrac_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA VD INTROPRAC");
+		}
+
 		private void btnWrong_Click(object sender, RoutedEventArgs e)
 		{
 			if (starState == StarState.USING)

@@ -215,12 +215,12 @@ namespace Server.HostServer
 		private void btnKick4_Click(object sender, RoutedEventArgs e) { Kick(3); btnKick4.IsEnabled = false; }
 
 		private void btnOpenFile_Click(object sender, RoutedEventArgs e) {
-			if (openFileDialog.ShowDialog() == true) txtFile.Text = openFileDialog.FileName;
+			if (openFileDialog.ShowDialog() == true) txtFile.Text = System.IO.Path.GetRelativePath(Directory.GetCurrentDirectory() + @"\Resources", openFileDialog.FileName);
 		}
 
 		private void btnOpen_Click(object sender, RoutedEventArgs e)
 		{
-			sendMessageToEveryone(String.Format("OLPA PLAY {0}", txtFile.Text));
+			sendMessageToEveryone(String.Format("OLPA PLAY {0}", HelperClass.MakeString(txtFile.Text)));
 		}
 	}
 }

@@ -37,7 +37,7 @@ namespace Client.Viewer.GamesControl
 			mediaCorrect.BeginInit(); mediaCorrect.Play(); mediaCorrect.Stop();
 			mediaWrong.Source = new Uri(HelperClass.PathString("Effects", "PlayerAnswerWrong.mpeg"));
 			mediaWrong.BeginInit(); mediaWrong.Play(); mediaWrong.Stop();
-			media.Source = new Uri(HelperClass.PathString("Effects", "PlayerAnswers.mp4"));
+			media.Source = new Uri(HelperClass.PathString("Effects", "PlayerAnswers_TT.mp4"));
 			media.BeginInit(); media.Play(); media.Stop();
 
 			lblNames = new List<Label>();
@@ -119,6 +119,15 @@ namespace Client.Viewer.GamesControl
 				else {
 					mediaWrong.Position = TimeSpan.Zero; mediaWrong.Play();
 				}
+			});
+		}
+
+		public void Change(string phanthi)
+		{
+			Dispatcher.Invoke(() =>
+			{
+				media.Source = new Uri(HelperClass.PathString("Effects", string.Format("PlayerAnswers_{0}.mp4", phanthi)));
+				media.Play(); media.Stop();
 			});
 		}
 	}

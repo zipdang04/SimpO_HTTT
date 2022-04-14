@@ -116,7 +116,8 @@ namespace Server.HostServer
 			remainingPoint = 80; cntRow = 0;
 			currentRow = NaN;
 			stopAllow = false;
-			
+
+			sendMessageToEveryone("OLPA ANS SCENE VCNV");
 			string command = string.Format("OLPA VCNV START {0}", HelperClass.MakeString(obstaClass.attach));
 			for (int i = 0; i < 5; i++){
 				int cntLetter = HelperClass.VCNV_CountLetter(obstaClass.questions[i].answer);
