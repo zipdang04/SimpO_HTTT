@@ -40,9 +40,9 @@ namespace Client.Viewer.GamesControl
 		{
 			InitializeComponent();
 			images = new List<Image>();
+			image.BeginInit();
 			images.Add(rectUL); images.Add(rectUR); images.Add(rectDL); images.Add(rectDR); images.Add(rectTT);
-			for (int i = 0; i < 4; i++)
-			{
+			for (int i = 0; i < 4; i++) {
 				wordControls[i] = new WordControl();
 				grid4W.Children.Add(wordControls[i]);
 				Grid.SetColumn(wordControls[i], 1);
@@ -72,30 +72,38 @@ namespace Client.Viewer.GamesControl
 			mediaOpenQuestion.MediaEnded += mediaOpenQuestion_MediaEnded;
 		}
 
+		public void WTF()
+		{
+			Dispatcher.Invoke(() => {
+				double width = image.RenderSize.Width;
+				double height = image.RenderSize.Height;
+				for (int i = 0; i < 5; i++)
+				{
+					images[i].Visibility = Visibility.Visible;
+					images[i].Width = width;
+					images[i].Height = height;
+				}
+				
+			});
+		}
 		public void ResetGame(string attach, int[] cntLetter)
 		{
 			foundWinner = false;
 			Dispatcher.Invoke(() => { 
 				image.Source = new BitmapImage(new Uri(HelperClass.PathString("Media", attach)));
+				
 				media15s.Visibility = Visibility.Hidden;
 				mediaShow.Visibility = Visibility.Hidden;
 				gridWord.Visibility = Visibility.Visible;
 				gridPic.Visibility = Visibility.Hidden;
 				qBox.Visibility = Visibility.Hidden;
 				mediaStartGame.Position = TimeSpan.Zero; mediaStartGame.Play();
-			});
-			Dispatcher.Invoke(() => {
-				double width = image.RenderSize.Width;
-				double height = image.RenderSize.Height;
-				for (int i = 0; i < 5; i++) {
-					images[i].Visibility = Visibility.Visible;
-					images[i].Width = width;
-					images[i].Height = height;
-				}
+
 				for (int i = 0; i < 4; i++)
 					wordControls[i].SetWord(cntLetter[i]);
 			});
-
+			WTF();
+			WTF();
 		}
 
 		public void Opening() { Dispatcher.Invoke(() => { mediaOpening.Position = TimeSpan.Zero; mediaOpening.Play(); }); }

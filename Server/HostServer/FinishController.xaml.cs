@@ -144,6 +144,7 @@ namespace Server.HostServer
 				lstPoints[i].UnselectAll();
 				lstNos[i].SelectedIndex = i;
 			}
+
 			sendMessageToEveryone(String.Format("OLPA VD CHOOSING {0}", playerTurn));
 			pointsControl.ChoosePlayer(playerTurn);
 		}
@@ -161,7 +162,7 @@ namespace Server.HostServer
 			btnShowQuestion.IsEnabled = true; 
 			starState = StarState.NOPE; btnStar.IsEnabled = true;
 			btnStart.IsEnabled = btnPrac.IsEnabled = btnCorrect.IsEnabled = btnWrong.IsEnabled = true;
-			btn5s.IsEnabled = btnSuckPrac.IsEnabled = btnSuckCorrect.IsEnabled = btnSuckWrong.IsEnabled = true;
+			btnSuckPrac.IsEnabled = btnSuckCorrect.IsEnabled = btnSuckWrong.IsEnabled = true;
 
 			questionPtr = 0; currentPtr = NaN; 
 			practiceMode = false; isSucking = false; 
@@ -200,14 +201,14 @@ namespace Server.HostServer
 			
 			OQuestion question = finishClass.questions[playerTurn][difficulty][quesPosition[currentPtr]];
 			questionBox.displayQA(question.question, question.answer);
-			sendMessageToEveryone(String.Format("OLPA VD TURN {0}", currentPtr));
+			sendMessageToEveryone(string.Format("OLPA VD TURN {0}", currentPtr));
 			sendMessageToEveryone(string.Format("OLPA VD QUES {0}", HelperClass.ServerJoinQA(question)));
 			
 			btnStart.IsEnabled = true; 
 			
 			btnStar.IsEnabled = false;
 			btnPrac.IsEnabled = false; btnCorrect.IsEnabled = false; btnWrong.IsEnabled = false;
-			btn5s.IsEnabled = false; btnSuckCorrect.IsEnabled = false; btnSuckPrac.IsEnabled = false; btnSuckWrong.IsEnabled = false;
+			btnSuckCorrect.IsEnabled = false; btnSuckPrac.IsEnabled = false; btnSuckWrong.IsEnabled = false;
 			
 			practiceMode = false; isSucking = false;
 			playerSuck = NaN;
@@ -263,11 +264,7 @@ namespace Server.HostServer
 		private void btnSceneMedia_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD SCENE MEDIA"); }
 		private void btnIntro_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD INTRO"); }
 		private void btnOpening_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD OPENING"); }
-
-		private void btnIntroPrac_Click(object sender, RoutedEventArgs e)
-		{
-			sendMessageToEveryone("OLPA VD INTROPRAC");
-		}
+		private void btnIntroPrac_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD INTROPRAC"); }
 
 		private void btnWrong_Click(object sender, RoutedEventArgs e)
 		{
@@ -276,17 +273,12 @@ namespace Server.HostServer
 			btnCorrect.IsEnabled = false;
 			btnWrong.IsEnabled = false;
 
-			btn5s.IsEnabled = true;
 			sendMessageToEveryone("OLPA VD WRONG");
 			sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
-		}
 
-		private void btn5s_Click(object sender, RoutedEventArgs e)
-		{
 			sendMessageToEveryone("OLPA VD UNLOCK");
 			if (playerNetwork.clients[playerTurn] != null)
 				listener.SendMessage(playerNetwork.clients[playerTurn].Id, "OLPA VD LOCK");
-			btn5s.IsEnabled = false;
 			isSucking = true;
 			timer5s.Start();
 		}

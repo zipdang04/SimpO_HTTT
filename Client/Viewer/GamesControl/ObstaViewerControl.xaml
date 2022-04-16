@@ -38,7 +38,7 @@
                     <RowDefinition Height="475*"/>
                 </Grid.RowDefinitions>
             </Grid>
-            <MediaElement x:Name="media15s" LoadedBehavior="Manual"/>
+            <MediaElement x:Name="media15s" LoadedBehavior="Manual" Visibility="Hidden"/>
             <compo:QNPBox x:Name="qBox"/>
         </Grid>
         <Grid x:Name="gridPic" Visibility="Hidden">
@@ -54,6 +54,6 @@
                 <Image x:Name="rectTT" Source="../../Resources/Effects/VCNV_Piece_TT.png" Stretch="Fill"/>
             </Grid>
         </Grid>
-        <StackPanel x:Name="stackBell" Width="560" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="131,563,0,0"></StackPanel>
+        <StackPanel x:Name="stackBell" Width="560" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="131,563,0,0" Orientation="Horizontal"></StackPanel>
     </Grid>
 </UserControl>

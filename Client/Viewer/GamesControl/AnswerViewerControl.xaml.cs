@@ -79,11 +79,11 @@ namespace Client.Viewer.GamesControl
 			}
 			if (sort)
 				for (int i = 0; i < 4; i++) for (int j = i + 1; j < 4; j++)
-						if (times[i] > times[j]) {
-							string s = answers[i]; answers[i] = answers[j]; answers[j] = s;
-							int x = times[i]; times[i] = times[j]; times[j] = x;
-							x = positions[i]; positions[i] = positions[j]; positions[j] = x;
-						}
+					if (times[i] > times[j]) {
+						string s = answers[i]; answers[i] = answers[j]; answers[j] = s;
+						int x = times[i]; times[i] = times[j]; times[j] = x;
+						x = positions[i]; positions[i] = positions[j]; positions[j] = x;
+					}
 			for (int i = 0; i < 4; i++) {
 				names[i] = (playerClass == null) ? "" : playerClass.names[positions[i]];
 				timeString[i] = timeString[i] = string.Format("{0:00.00}", pTime[i] / 100.0);

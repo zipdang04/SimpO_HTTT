@@ -106,9 +106,11 @@ namespace Client.PlayerClient.GamesControl
 		private void txtAnswer_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (txtAnswer.IsEnabled == true && e.Key == Key.Enter) {
-				client.SendMessage(String.Format("OLPA VCNV ANSWER {0} {1}", timer.getTime(), HelperClass.MakeString(txtAnswer.Text)));
-				lblAnswer.Content = txtAnswer.Text;
-				txtAnswer.Text = "";
+				int time = timer.getTime();
+				string answer = txtAnswer.Text.ToUpper();
+				client.SendMessage(String.Format("OLPA VCNV ANSWER {0} {1}", time, HelperClass.MakeString(answer)));
+				txtAnswer.Text = ""; // để tính lại
+				lblAnswer.Content = string.Format("{0} ({1:0.00})", answer, time / 100.0);
 			}
 		}
 	}
