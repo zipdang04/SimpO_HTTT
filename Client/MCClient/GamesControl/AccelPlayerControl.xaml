@@ -9,7 +9,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="70"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -22,15 +22,21 @@
             <Label x:Name="lblQuestion" Content="Label" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="17"/>
             <Label x:Name="lblTime" Content="0" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14"/>
         </Grid>
-        <MediaElement x:Name="mediaPlayer" LoadedBehavior="Manual" Stretch="Uniform" Grid.Row="2"/>
-
-        <Grid Grid.Row="1">
+                <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="0" FontSize="15">Đáp án:</Label>
             <Label x:Name="lblAnswer" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" FontSize="20">Test</Label>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <MediaElement x:Name="mediaPlayer" LoadedBehavior="Manual" Stretch="Uniform"/>
+            
         </Grid>
     </Grid>
 </UserControl>

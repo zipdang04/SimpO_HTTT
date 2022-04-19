@@ -27,6 +27,7 @@ namespace Client.Viewer.GamesControl
 		List<Label> lblNames, lblAnswers, lblTimes;
 		ObservableCollection<string> names, answers, timeString;
 		ObservableCollection<int> times, positions;
+		bool willSort = false;
 		//int[] times = new int[4], positions = new int[4];
 		public AnswerViewerControl(PlayerClass playerClass)
 		{
@@ -89,9 +90,9 @@ namespace Client.Viewer.GamesControl
 				timeString[i] = timeString[i] = string.Format("{0:00.00}", pTime[i] / 100.0);
 			}
 		}
-		public void Run(string[] pAns, int[] pTime, bool sort = false)
+		public void Run(string[] pAns, int[] pTime)
 		{
-			SetPlayerAnswer(pAns, pTime, sort);
+			SetPlayerAnswer(pAns, pTime, willSort);
 			Dispatcher.Invoke(() => {
 				media.Position = TimeSpan.Zero;
 				gridAnswer.Visibility = Visibility.Hidden;
@@ -124,6 +125,7 @@ namespace Client.Viewer.GamesControl
 
 		public void Change(string phanthi)
 		{
+			willSort = phanthi == "TT";
 			Dispatcher.Invoke(() =>
 			{
 				media.Source = new Uri(HelperClass.PathString("Effects", string.Format("PlayerAnswers_{0}.mp4", phanthi)));

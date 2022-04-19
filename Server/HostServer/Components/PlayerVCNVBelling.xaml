@@ -16,8 +16,8 @@
         </Grid.ColumnDefinitions>
         <Label x:Name="lblPlayer" Grid.Column="0"/>
         <Label Content="Đúng" Grid.Column="1" Background="Lime"/>
-        <RadioButton x:FieldModifier="public"  x:Name="radioCorrect" GroupName="x" Grid.Column="2" HorizontalAlignment ="Center" VerticalAlignment ="Center"/>
-        <RadioButton x:FieldModifier="public" x:Name="radioWrong" GroupName="x" Grid.Column="3" HorizontalAlignment = "Center" VerticalAlignment ="Center"/>
+        <RadioButton x:FieldModifier="public"  x:Name="radioCorrect" Grid.Column="2" HorizontalAlignment ="Center" VerticalAlignment ="Center"/>
+        <RadioButton x:FieldModifier="public" x:Name="radioWrong" Grid.Column="3" HorizontalAlignment = "Center" VerticalAlignment ="Center"/>
         <Label Content="Sai" Grid.Column="4" Background="Red"/>
     </Grid>
 </UserControl>

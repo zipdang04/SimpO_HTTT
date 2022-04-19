@@ -94,12 +94,10 @@ namespace Client.PlayerClient.GamesControl
 			{
 				int time = timer.getTime();
 				string answer = txtAnswer.Text.ToUpper();
-				client.SendMessage(String.Format("OLPA VCNV ANSWER {0} {1}", time, HelperClass.MakeString(answer)));
+				client.SendMessage(String.Format("OLPA TT ANSWER {0} {1}", time, HelperClass.MakeString(answer)));
 				txtAnswer.Text = ""; // để tính lại
 				lblAnswer.Content = string.Format("{0} ({1:0.00})", answer, time / 100.0);
 			}
 		}
-
-		
 	}
 }

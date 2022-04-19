@@ -13,20 +13,25 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using SimpleSockets.Server;
+
 namespace Server.HostServer.Components
 {
 	/// <summary>
-	/// Interaction logic for PlayerVCNVBelling.xaml
+	/// Interaction logic for StackMedia.xaml
 	/// </summary>
-	public partial class PlayerVCNVBelling : UserControl
+	public partial class StackMedia : UserControl
 	{
-		public int playerIndex;
-		public PlayerVCNVBelling(int index, string name)
+		SimpleSocketTcpListener listener;
+		public StackMedia(SimpleSocketTcpListener listener)
 		{
 			InitializeComponent();
-			playerIndex = index;
-			lblPlayer.Content = name;
-			radioCorrect.GroupName = radioWrong.GroupName = name;
+			this.listener = listener;
+		}
+
+		private void btnAdd_Click(object sender, RoutedEventArgs e)
+		{
+			stack.Children.Add(new MediaSender(listener));
 		}
 	}
 }

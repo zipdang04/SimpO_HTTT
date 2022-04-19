@@ -15,12 +15,13 @@
             <TabItem x:Name="tabGeneral" Header="Stuffs">
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="160"/>
                         <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition Height="200"/>
                     </Grid.RowDefinitions>
                     <Button x:Name="btnIntro" Content="Intro" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="btnIntro_Click"/>
                     <Button x:Name="btnOpening" Content="Nhạc bắt đầu" HorizontalAlignment="Left" Margin="61,10,0,0" VerticalAlignment="Top" Click="btnOpening_Click"/>
-                    <Grid x:Name="gridGeneral" Grid.Row="1"/>
+                    <Grid x:Name="gridGeneral" Grid.Row="2"/>
                     <Button x:Name="btnPlayerIntro" Content="Giới thiệu thí sinh" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Click="btnPlayerIntro_Click"/>
                     <Button x:Name="btnPlain" Content="Màn hình video intro" HorizontalAlignment="Left" Margin="176,15,0,0" VerticalAlignment="Top" Click="btnPlain_Click"/>
                     <Button x:Name="btnPoints" Content="Tổng kết điểm" HorizontalAlignment="Left" Margin="176,39,0,0" VerticalAlignment="Top" Click="btnPoints_Click"/>
@@ -44,9 +45,14 @@
                         <Button x:Name="btnKick3" Grid.Row="2" Grid.Column="1" Content="Kick" Click="btnKick3_Click" IsEnabled="False"/>
                         <Button x:Name="btnKick4" Grid.Row="3" Grid.Column="1" Content="Kick" Click="btnKick4_Click" IsEnabled="False"/>
                     </Grid>
-                    <TextBox x:Name="txtFile" HorizontalAlignment="Left" Margin="10,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-                    <Button x:Name="btnOpenFile" Content="..." HorizontalAlignment="Left" Margin="135,148,0,0" VerticalAlignment="Top" Click="btnOpenFile_Click"/>
-                    <Button x:Name="btnOpen" Content="Chạy" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top" Height="23" Width="136" Click="btnOpen_Click"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btnAdd" Click="btnAdd_Click">Thêm nhóm</Button>
+                        <StackPanel Grid.Column="1" x:Name="stackMedia" Orientation="Horizontal"/>
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem x:Name="tabStart" Header="Khởi động">
