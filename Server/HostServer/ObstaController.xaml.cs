@@ -232,8 +232,7 @@ namespace Server.HostServer
 						playerClass.points[player] += remainingPoint;
 						sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
 						sendMessageToEveryone("OLPA VCNV WINNER");
-						for (int x = 0; x < 5; x++)
-							sendMessageToEveryone(String.Format("OLPA VCNV OPEN {0}", x));
+						btnAll_Click(this, null);
 					}
 					stackPlayerList.Children.Remove(control); i--;
 					sendMessageToEveryone(string.Format("OLPA VCNV REMOVESTACK {0}", player));
@@ -292,6 +291,8 @@ namespace Server.HostServer
 		{
 			for (int i = 0; i < 5; i++)
 				sendMessageToEveryone(String.Format("OLPA VCNV OPEN {0}", i));
+			for (int i = 0; i < 4; i++)
+				sendMessageToEveryone(String.Format("OLPA VCNV ENAROW {0} {1}", i, HelperClass.MakeString(obstaClass.questions[i].answer)));
 		}
 
 		private void btnVCNVEmpty_Click(object sender, RoutedEventArgs e)

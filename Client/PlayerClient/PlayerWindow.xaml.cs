@@ -75,14 +75,20 @@ namespace Client.PlayerClient
 		{
 			if (MessageBox.Show("tạch", "", MessageBoxButton.OK) == MessageBoxResult.OK) {
 				try {
-					client.Close();
-					logInWindow.Show();
+					Dispatcher.Invoke(() => {
+						lblStatus.Content = "Mất kết nối, hãy khởi động lại app";
+						client.Close();
+						logInWindow.Show();
+					});
 				}
 				catch { }
 			} else {
 				try {
-					client.Close();
-					logInWindow.Show();
+					Dispatcher.Invoke(() => {
+						lblStatus.Content = "Mất kết nối, hãy khởi động lại app";
+						client.Close();
+						logInWindow.Show();
+					});
 				}
 				catch { }
 			}
@@ -166,6 +172,8 @@ namespace Client.PlayerClient
 							obstaPlayerControl.ResetGame(attach, cntLetter);
 							break;
 						case "KEY":
+							int keyLen = Convert.ToInt32(tokens[3]);
+							obstaPlayerControl.Keyword(keyLen);
 							break;
 						case "SHOW":
 							int label = Convert.ToInt32(tokens[3]);

@@ -11,17 +11,21 @@
             <ColumnDefinition Width="3.5*"/>
             <ColumnDefinition Width="2.5*"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Column="0">
-            <TextBlock x:Name="txtQuestion" TextWrapping="Wrap" FontSize="20"/>
-        </Label>
+        <ScrollViewer>
+            <Label Grid.Column="0">
+                <TextBlock x:Name="txtQuestion" TextWrapping="Wrap" FontSize="20"/>
+            </Label>
+        </ScrollViewer>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Grid.Column="0">
-                <TextBlock x:Name="txtAnswer" TextWrapping="Wrap" FontSize="15"/>
-            </Label>
+            <ScrollViewer>
+                <Label Grid.Column="0">
+                    <TextBlock x:Name="txtAnswer" TextWrapping="Wrap" FontSize="15"/>
+                </Label>
+            </ScrollViewer>
             <MediaElement x:Name="media" Grid.Row="1"/>
         </Grid>
     </Grid>

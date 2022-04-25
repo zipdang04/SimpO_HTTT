@@ -16,7 +16,7 @@ using Server.Information;
 using SimpleSockets;
 using SimpleSockets.Client;
 using Client.MCClient.GamesControl;
-using Client.MCClient.GamesControl.Components;
+using Client.PlayerClient.GamesControl.Components;
 using Server.QuestionClass;
 using System.IO;
 using System.IO.Compression;

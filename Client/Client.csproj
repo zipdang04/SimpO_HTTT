@@ -27,16 +27,7 @@
     <Page Update="MCClient\GamesControl\AccelPlayerControl.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
-    <Page Update="MCClient\GamesControl\Components\PointsControl.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-    </Page>
-    <Page Update="MCClient\GamesControl\Components\QuestionControl.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-    </Page>
     <Page Update="MCClient\GamesControl\FinishPlayerControl.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-    </Page>
-    <Page Update="MCClient\GamesControl\ImageControl.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
     <Page Update="MCClient\GamesControl\ObstaPlayerControl.xaml">

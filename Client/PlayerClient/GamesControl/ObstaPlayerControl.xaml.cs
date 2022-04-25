@@ -33,6 +33,7 @@ namespace Client.PlayerClient.GamesControl
 		Simer timer;
 		const int timeLimit = 1500;
 		int[] cntLetter = new int[5];
+		bool daBam = false;
 
 		public ObstaPlayerControl(SimpleSocketClient client)
 		{
@@ -71,11 +72,13 @@ namespace Client.PlayerClient.GamesControl
 
 		public void StartTimer()
 		{
-			Dispatcher.Invoke(() => {
-				txtAnswer.Text = "";
-				txtAnswer.IsEnabled = true;
-				txtAnswer.Focus();
-			});
+			if (daBam == false)
+				Dispatcher.Invoke(() => {
+					txtAnswer.Text = "";
+					txtAnswer.IsEnabled = true;
+					txtAnswer.Focus();
+				});
+			daBam = false;
 			timer.Start();
 		}
 		
@@ -100,7 +103,11 @@ namespace Client.PlayerClient.GamesControl
 		private void btnBell_Click(object sender, RoutedEventArgs e)
 		{
 			client.SendMessage("OLPA VCNV BELL");
-			btnBell.IsEnabled = false;
+			daBam = true;
+			Dispatcher.Invoke(() => { 
+				btnBell.IsEnabled = false;
+				txtAnswer.IsEnabled = false;
+			});
 		}
 
 		private void txtAnswer_KeyDown(object sender, KeyEventArgs e)

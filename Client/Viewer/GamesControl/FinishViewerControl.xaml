@@ -9,15 +9,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="1600">
     <Grid>
+        <!--
+        -->
+        <Grid.Background>
+            <ImageBrush ImageSource="../../Resources/Effects/Background.png"/>
+        </Grid.Background>
         <Grid x:Name="gridPoint">
-            <Image x:Name="backgroundPoint" Source="../../Resources/Effects/VD_Choosing.png"/>
+            <Image x:Name="backgroundPoint" Source="../../Resources/Effects/VD_Choosing.png"/>  
             <MediaElement x:Name="mediaBegin" LoadedBehavior="Manual" MediaEnded="mediaBegin_MediaEnded"/>
             <MediaElement x:Name="mediaStart" LoadedBehavior="Manual" MediaEnded="mediaStart_MediaEnded"/>
-            <compo:PointChoosing x:Name="pointChoosing"/>
+            <compo:PointChoosing x:Name="pointChoosing"/> 
         </Grid>
-        <Grid x:Name="gridQuestion" Visibility="Visible">
+        <Grid x:Name="gridQuestion" Visibility="Hidden">
             <Grid.RowDefinitions>
-                <RowDefinition Height="641*"/>
+                <RowDefinition Height="640*"/>
                 <RowDefinition Height="260*"/>
             </Grid.RowDefinitions>
             <Grid.Background>

@@ -13,6 +13,7 @@
                 <ImageBrush ImageSource="../../Resources/Effects/VCNV_Background.png"/>
             </Grid.Background>
             <MediaElement x:Name="mediaShow" LoadedBehavior="Manual" Visibility="Hidden" MediaEnded="mediaShow_MediaEnded"/>
+            <MediaElement x:Name="media15s" LoadedBehavior="Manual" Visibility="Hidden"/>
             <Grid x:Name="grid4W">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="130*"/>
@@ -31,7 +32,6 @@
                     <RowDefinition Height="475*"/>
                 </Grid.RowDefinitions>
             </Grid>
-            <MediaElement x:Name="media15s" LoadedBehavior="Manual" Visibility="Hidden"/>
             <compo:QNPBox x:Name="qBox"/>
         </Grid>
         <Grid x:Name="gridPic" Visibility="Hidden">

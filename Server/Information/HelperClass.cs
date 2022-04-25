@@ -164,8 +164,14 @@ namespace Server.Information
 		}
 		public static void ClearDirectory(System.IO.DirectoryInfo directory)
 		{
-			foreach (System.IO.FileInfo file in directory.GetFiles()) file.Delete();
-			foreach (System.IO.DirectoryInfo subDirectory in directory.GetDirectories()) subDirectory.Delete(true);
+			try
+			{
+				foreach (System.IO.FileInfo file in directory.GetFiles()) file.Delete();
+				foreach (System.IO.DirectoryInfo subDirectory in directory.GetDirectories()) subDirectory.Delete(true);
+			}
+			catch
+			{
+			}
 		}
 	
 		public static string PathString(string attach)

@@ -40,7 +40,6 @@ namespace Client.Viewer.GamesControl
 
 				media.Source = new Uri(HelperClass.PathString("Media", attach));
 				media.Visibility = Visibility.Hidden;
-				media.Play(); media.Stop();
 				media.Volume = 0;
 
 				mediaRun.Source = new Uri(HelperClass.PathString("Effects", String.Format("TT_{0}0s.mp4", turn)));
@@ -76,6 +75,10 @@ namespace Client.Viewer.GamesControl
 				mediaRun.Play(); media.Play();
 			});
 		}
-		
+
+		private void media_Loaded(object sender, RoutedEventArgs e)
+		{
+			media.Play(); media.Pause(); media.Stop();
+		}
 	}
 }

@@ -15,7 +15,7 @@
         <MediaElement x:Name="mediaBlank" LoadedBehavior="Manual"/>
         <MediaElement x:Name="mediaDone" LoadedBehavior="Manual"/>
         -->
-        <MediaElement x:Name="media" LoadedBehavior="Manual" HorizontalAlignment="Left" Height="130" Margin="927,478,0,0" VerticalAlignment="Top" Width="250"/>
         <compo:QNPBox x:Name="qnpBox"/>
+        <MediaElement x:Name="media" LoadedBehavior="Manual" HorizontalAlignment="Left" Height="130" Margin="927,478,0,0" VerticalAlignment="Top" Width="250" ScrubbingEnabled="True" Loaded="media_Loaded"/>
     </Grid>
 </UserControl>

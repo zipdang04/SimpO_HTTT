@@ -99,5 +99,10 @@ namespace Client.PlayerClient.GamesControl
 				lblAnswer.Content = string.Format("{0} ({1:0.00})", answer, time / 100.0);
 			}
 		}
+
+		private void mediaPlayer_Loaded(object sender, RoutedEventArgs e)
+		{
+			mediaPlayer.Play(); mediaPlayer.Pause();
+		}
 	}
 }

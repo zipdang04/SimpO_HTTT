@@ -102,16 +102,23 @@ namespace Client.Viewer
 
 		public static void ServerBytesReceived(SimpleSocketClient client, byte[] messageBytes)
 		{
-			string zip = @"Resources/Media.zip";
-			if (File.Exists(zip)) File.Delete(zip);
-			FileStream file = File.Create(zip);
-			file.Write(messageBytes);
-			file.Close();
+			try
+			{
+				string zip = @"Resources/Media.zip";
+				if (File.Exists(zip)) File.Delete(zip);
+				FileStream file = File.Create(zip);
+				file.Write(messageBytes);
+				file.Close();
 
-			string dirPath = @"Resources/Media";
-			HelperClass.ClearDirectory(new DirectoryInfo(dirPath));
-			ZipFile.ExtractToDirectory(zip, dirPath);
-			MessageBox.Show("Đã chuyển xong file!", "Chuyển xong file", MessageBoxButton.OK);
+				string dirPath = @"Resources/Media";
+				HelperClass.ClearDirectory(new DirectoryInfo(dirPath));
+				ZipFile.ExtractToDirectory(zip, dirPath);
+				MessageBox.Show("Đã chuyển xong file!", "Chuyển xong file", MessageBoxButton.OK);
+			}
+			catch
+			{
+				MessageBox.Show("chuyển file bất thành");
+			}
 		}
 
 		private void ServerMessageReceived(SimpleSocket a, string msg)

@@ -44,7 +44,7 @@ namespace Client.Viewer.GamesControl
 			lblNames = new List<Label>();
 			lblNames.Add(lblName1); lblNames.Add(lblName2); lblNames.Add(lblName3); lblNames.Add(lblName4);
 			lblAnswers = new List<Label>();
-			lblAnswers.Add(lblAnswer1); lblAnswers.Add(lblAnswer2); lblAnswers.Add(lblAnswer3); lblAnswers.Add(lblName4);
+			lblAnswers.Add(lblAnswer1); lblAnswers.Add(lblAnswer2); lblAnswers.Add(lblAnswer3); lblAnswers.Add(lblAnswer4);
 			lblTimes = new List<Label>();
 			lblTimes.Add(lblTime1); lblTimes.Add(lblTime2); lblTimes.Add(lblTime3); lblTimes.Add(lblTime4);
 
@@ -87,7 +87,7 @@ namespace Client.Viewer.GamesControl
 					}
 			for (int i = 0; i < 4; i++) {
 				names[i] = (playerClass == null) ? "" : playerClass.names[positions[i]];
-				timeString[i] = timeString[i] = string.Format("{0:00.00}", pTime[i] / 100.0);
+				timeString[i] = string.Format("{0:00.00}", times[i] / 100.0);
 			}
 		}
 		public void Run(string[] pAns, int[] pTime)

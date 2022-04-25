@@ -273,7 +273,6 @@ namespace Server.HostServer
 			btnCorrect.IsEnabled = false;
 			btnWrong.IsEnabled = false;
 
-			sendMessageToEveryone("OLPA VD WRONG");
 			sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
 
 			sendMessageToEveryone("OLPA VD UNLOCK");

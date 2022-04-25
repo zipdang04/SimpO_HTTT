@@ -97,12 +97,23 @@ namespace Client.Viewer.GamesControl
             });
         }
         public void Opening() { Dispatcher.Invoke(() => { mediaOpening.Position = TimeSpan.Zero; mediaOpening.Play(); }); }
-        public void Correct() { Dispatcher.Invoke(() => { mediaCorrect.Position = TimeSpan.Zero; mediaCorrect.Play(); }); }
+
+		private void media_Loaded(object sender, RoutedEventArgs e)
+		{
+            Dispatcher.Invoke(() =>
+            {
+                media.Position = TimeSpan.Zero;
+                media.Play();
+            });
+		}
+
+		public void Correct() { Dispatcher.Invoke(() => { mediaCorrect.Position = TimeSpan.Zero; mediaCorrect.Play(); }); }
         public void Wrong() { Dispatcher.Invoke(() => { mediaWrong.Position = TimeSpan.Zero; mediaWrong.Play(); }); }
         public void Blank() { Dispatcher.Invoke(() => { mediaBlank.Position = TimeSpan.Zero; mediaBlank.Play(); }); }
         public void Done() { 
             Dispatcher.Invoke(() => { 
                 mediaDone.Position = TimeSpan.Zero; mediaDone.Play();
+                media.Source = null;
                 TurnOff(); qnpBox.SetHiddenAll();
             }); 
         }
@@ -116,11 +127,9 @@ namespace Client.Viewer.GamesControl
                     media.Source = new Uri(HelperClass.PathString("Media", attach));
                     media.Position = TimeSpan.Zero;
                     oke = true;
-				} catch { };
+				} catch { 
+                };
 			});
-            Dispatcher.Invoke(() => {
-                if (oke) media.Play();
-            });
         }
     }
 }
