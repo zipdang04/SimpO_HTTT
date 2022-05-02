@@ -136,7 +136,7 @@ namespace Server.HostServer
 		{
 			if (playerTurn == NaN) return;
 			if (questionPtr < StartClass.QUES_CNT) {
-				playerClass.points[playerTurn] += 10;
+				playerClass.ChangePoint(playerTurn, 10);
 				sendMessageToEveryone("OLPA KD CORRECT");
 				sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
 			}

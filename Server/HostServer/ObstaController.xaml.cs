@@ -168,7 +168,7 @@ namespace Server.HostServer
 			bool willOpen = false;
 			for (int i = 0; i < 4; i++){
 				if (answersControl.checkBoxes[i].IsChecked == true){
-					playerClass.points[i] += 10;
+					playerClass.ChangePoint(i, 10);
 					willOpen = true;
 				}
 			}
@@ -229,7 +229,7 @@ namespace Server.HostServer
 				if (control.radioCorrect.IsChecked == true){
 					if (playerWinner == NaN){
 						playerWinner = player;
-						playerClass.points[player] += remainingPoint;
+						playerClass.ChangePoint(player, remainingPoint);
 						sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
 						sendMessageToEveryone("OLPA VCNV WINNER");
 						btnAll_Click(this, null);

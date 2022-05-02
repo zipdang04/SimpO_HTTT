@@ -20,6 +20,11 @@ namespace Server.Information
 			//name = new string[4];
 			//pts = new int[] { 0, 0, 0, 0 };
 		}
+
+		public void ChangePoint(int player, int diff) { 
+			points[player] += diff; 
+			if (points[player] < 0) points[player] = 0;
+		}
 		//public int[] points {
 		//	get { return pts; }
 		//	set { pts = value; }

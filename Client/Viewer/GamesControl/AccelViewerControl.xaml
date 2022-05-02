@@ -40,7 +40,7 @@
                 <RowDefinition Height="620*"/>
                 <RowDefinition Height="120*"/>
             </Grid.RowDefinitions>
-            <MediaElement x:Name="media" Grid.Row="1" Grid.Column="1" LoadedBehavior="Manual" ScrubbingEnabled="True" Loaded="media_Loaded"/>
+            <MediaElement x:Name="media" Grid.Row="1" Grid.Column="1" LoadedBehavior="Manual" ScrubbingEnabled="True" Loaded="media_Loaded" MediaOpened="media_MediaOpened"/>
         </Grid>
         
     </Grid>

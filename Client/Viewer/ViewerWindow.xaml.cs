@@ -95,7 +95,7 @@ namespace Client.Viewer
 						break;
 					case "VD":
 						finishViewerControl.Visibility = Visibility.Visible;
-						break;
+						break; 
 				}
 			});
 		}

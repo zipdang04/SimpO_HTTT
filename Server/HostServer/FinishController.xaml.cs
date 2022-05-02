@@ -247,7 +247,7 @@ namespace Server.HostServer
 				add *= 2;
 				starState = StarState.USED;
 			}
-			playerClass.points[playerTurn] += add;
+			playerClass.ChangePoint(playerTurn, add);
 			
 			btnCorrect.IsEnabled = false;
 			btnWrong.IsEnabled = false;
@@ -269,7 +269,7 @@ namespace Server.HostServer
 		private void btnWrong_Click(object sender, RoutedEventArgs e)
 		{
 			if (starState == StarState.USING)
-				playerClass.points[playerTurn] -= FinishClass.QUES_POINT[difficulty];
+				playerClass.ChangePoint(playerTurn, -FinishClass.QUES_POINT[difficulty]);
 			btnCorrect.IsEnabled = false;
 			btnWrong.IsEnabled = false;
 
@@ -302,9 +302,9 @@ namespace Server.HostServer
 
 		private void btnSuckCorrect_Click(object sender, RoutedEventArgs e)
 		{
-			playerClass.points[playerSuck] += score;
+			playerClass.ChangePoint(playerSuck, score);
 			if (starState != StarState.USING)
-				playerClass.points[playerTurn] -= score;
+				playerClass.ChangePoint(playerTurn, -score);
 			if (starState == StarState.NOPE) btnStar.IsEnabled = true;
 			sendMessageToEveryone("OLPA VD CORRECT");
 			sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
@@ -313,7 +313,7 @@ namespace Server.HostServer
 
 		private void btnSuckWrong_Click(object sender, RoutedEventArgs e)
 		{
-			playerClass.points[playerSuck] -= score / 2;
+			playerClass.ChangePoint(playerSuck, score / 2);
 			btnSuckCorrect.IsEnabled = false;
 			btnSuckWrong.IsEnabled = false;
 			if (starState == StarState.NOPE) btnStar.IsEnabled = true;

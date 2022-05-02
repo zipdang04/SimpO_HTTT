@@ -146,7 +146,7 @@ namespace Server.HostServer
 				if (playerDeserved.Count == 0) break;
 				foreach (int player in playerDeserved){
 					visited[player] = true;
-					playerClass.points[player] += pts;
+					playerClass.ChangePoint(player, pts);
 				}
 			}
 			sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));
