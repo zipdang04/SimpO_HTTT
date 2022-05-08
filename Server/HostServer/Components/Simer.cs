@@ -14,7 +14,7 @@ namespace Server.HostServer.Components
 		DispatcherTimer timer;
 
 		DateTime timeBegin;
-		int timeLimit;
+		int timeLimit, curTime;
 		public bool IsEnabled;
 
 		public static int ToInt(TimeSpan span)
@@ -73,6 +73,14 @@ namespace Server.HostServer.Components
 		public void Start(TimeSpan span)
 		{
 			Start(ToInt(span));
+		}
+
+		public void Pause() {
+			curTime = getTime(); timer.Stop();
+		}
+		public void Resume() {
+			timeBegin = DateTime.Now - TimeSpan.FromMilliseconds(curTime * 10);
+			timer.Start();
 		}
 
 		public void Stop()

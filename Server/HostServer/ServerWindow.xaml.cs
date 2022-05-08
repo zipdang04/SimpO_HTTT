@@ -44,6 +44,7 @@ namespace Server.HostServer
 		ObstaController obstaController;
 		AccelController accelController;
 		FinishController finishController;
+		TieController tieController;
 
 		OpenFileDialog openFileDialog = new OpenFileDialog();
 		public void updatePoint()
@@ -87,6 +88,8 @@ namespace Server.HostServer
 			gridAccel.Children.Add(accelController);
 			finishController = new FinishController(listener, wholeExam.finish, playerInfo, playerNetwork);
 			gridFinish.Children.Add(finishController);
+			tieController = new TieController(listener, wholeExam.tieBreaker, playerInfo);
+			gridTie.Children.Add(tieController);
 		}
 
 		public void sendMessageToEveryone(string message)
@@ -162,6 +165,10 @@ namespace Server.HostServer
 					if (tokens[2] == "BELL") {
 						finishController.SomeoneSucking(player);
 					}
+					break;
+				case "CHP":
+					if (tokens[2] == "BELL")
+						tieController.SomeoneSucking(player);
 					break;
 			}
 		}

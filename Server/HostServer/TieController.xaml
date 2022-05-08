@@ -3,15 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:compo="clr-namespace:Server.HostServer.Components"
              xmlns:local="clr-namespace:Server.HostServer"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel>
             <Grid Height="50">
-                <Button x:Name="btnCHP" Content="CÂU HỎI PHỤ" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="25" Width="77" Background="#FFFF00FD" FontWeight="Bold" Foreground="White"/>
+                <Button x:Name="btnCHP" Content="CÂU HỎI PHỤ" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="25" Width="95" Background="#FFFF00FD" FontWeight="Bold" Foreground="White" Click="btnCHP_Click"/>
             </Grid>
-            <Grid Height="50">
+            <Grid x:Name="gridPlayerList" Height="60">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="50"/>
@@ -20,8 +21,28 @@
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0">Thí sinh tham gia:</Label>
-                <Button Grid.Column="6" Margin="5,5,5,5">Xác nhận</Button>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.RowSpan="2">Thí sinh tham gia:</Label>
+                <Label Grid.Row="0" Grid.Column="1">S1</Label>
+                <Label Grid.Row="0" Grid.Column="2">S2</Label>
+                <Label Grid.Row="0" Grid.Column="3">S3</Label>
+                <Label Grid.Row="0" Grid.Column="4">S4</Label>
+                <Button x:Name="btnConfirm" Grid.Column="6" Grid.RowSpan="2" Margin="5,5,5,5" Click="btnConfirm_Click">Xác nhận</Button>
+            </Grid>
+            <Grid x:Name="mainGrid" Height="240">
+                <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="44" Margin="76,10,0,0" VerticalAlignment="Top" Width="45"/>
+                <Button x:Name="btnShow" Content="Mở câu hỏi" HorizontalAlignment="Left" Margin="153,22,0,0" VerticalAlignment="Top" Click="btnShow_Click"/>
+                <compo:QuestionShowing x:Name="questionBox" VerticalAlignment="Top" Margin="0, 60, 0, 0" Height="100"/>
+                <Button x:Name="btnStart" Content="Bắt đầu" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" Click="btnStart_Click"/>
+                <Label Content="Thời gian:" HorizontalAlignment="Left" Margin="59,162,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lblTime" Content="0" HorizontalAlignment="Left" Margin="137,162,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="btnCorrect" Content="ĐÚNG" HorizontalAlignment="Left" Height="36" Margin="90,193,0,0" VerticalAlignment="Top" Width="71" FontWeight="Bold" Foreground="Black" Background="Lime" Click="btnCorrect_Click"/>
+                <Button x:Name="btnWrong" Content="SAI" HorizontalAlignment="Left" Height="36" Margin="208,193,0,0" VerticalAlignment="Top" Width="71" FontWeight="Bold" Background="Red" Foreground="White" Click="btnWrong_Click"/>
+                <Label Content="Câu hỏi số:" HorizontalAlignment="Left" Margin="9,19,0,0" VerticalAlignment="Top"/>
+
             </Grid>
         </StackPanel>
     </Grid>

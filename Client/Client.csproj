@@ -24,6 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="MCClient\GamesControl\TiePlayerControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <Page Update="MCClient\GamesControl\AccelPlayerControl.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
@@ -35,6 +41,10 @@
     </Page>
     <Page Update="MCClient\GamesControl\StartPlayerControl.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="MCClient\GamesControl\TiePlayerControl.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
     </Page>
     <Page Update="MCClient\LogInWindow.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>

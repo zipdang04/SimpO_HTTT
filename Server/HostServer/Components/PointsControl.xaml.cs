@@ -62,5 +62,10 @@ namespace Server.HostServer.Components
 				playersName[player].Background = NORMAL;
 			});
 		}
+		public void Reset() {
+			Dispatcher.Invoke(() => {
+				for (int player = 0; player < 4; player++) playersName[player].Background = NORMAL;
+			});
+		}
 	}
 }

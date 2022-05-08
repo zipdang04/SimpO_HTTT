@@ -5,13 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Server.HostServer"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="522.701" d:DesignWidth="863.927">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="160"/>
             <RowDefinition/>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="200"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Button x:Name="btnSendQues" Content="Chuyển đề" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Click="btnSendQues_Click" Height="50"/>

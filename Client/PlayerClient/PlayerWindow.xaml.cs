@@ -39,6 +39,8 @@ namespace Client.PlayerClient
 		public ObstaPlayerControl obstaPlayerControl;
 		public AccelPlayerControl accelPlayerControl;
 		public FinishPlayerControl finishPlayerControl;
+		public TiePlayerControl tiePlayerControl;
+		int player;
 
 		public PlayerWindow(LogInWindow logInWindow, SimpleSocketClient client, int player)
 		{
@@ -50,22 +52,26 @@ namespace Client.PlayerClient
 			this.client.MessageReceived += ServerMessageReceived;
 			this.client.BytesReceived += ServerBytesReceived;
 			this.client.DisconnectedFromServer += Client_DisconnectedFromServer;
+			this.player = player - 1;
 
 			pointsControl = new PointsControl(playersInfo);
 			startPlayerControl = new StartPlayerControl(client);
 			obstaPlayerControl = new ObstaPlayerControl(client);
 			accelPlayerControl = new AccelPlayerControl(client);
 			finishPlayerControl = new FinishPlayerControl(client);
+			tiePlayerControl = new TiePlayerControl(client);
 			gridPoint.Children.Add(pointsControl);
 			grid.Children.Add(startPlayerControl);
 			grid.Children.Add(obstaPlayerControl);
 			grid.Children.Add(accelPlayerControl);
 			grid.Children.Add(finishPlayerControl);
+			grid.Children.Add(tiePlayerControl);
 			pointsControl.Visibility = Visibility.Visible;
 			startPlayerControl.Visibility = Visibility.Collapsed;
 			obstaPlayerControl.Visibility = Visibility.Collapsed;
 			accelPlayerControl.Visibility = Visibility.Collapsed;
 			finishPlayerControl.Visibility = Visibility.Collapsed;
+			tiePlayerControl.Visibility = Visibility.Collapsed;
 
 			pointsControl.Visibility = Visibility.Visible;
 			pointsControl.ChoosePlayer(player - 1);
@@ -73,6 +79,9 @@ namespace Client.PlayerClient
 
 		private void Client_DisconnectedFromServer(SimpleSocketClient client)
 		{
+			Dispatcher.Invoke(() => {
+				lblStatus.Content = "MẤT KẾT NỐI. Vui lòng thông báo lỗi NGAY LẬP TỨC với người tổ chức trận đấu!";
+			});
 			if (MessageBox.Show("tạch", "", MessageBoxButton.OK) == MessageBoxResult.OK) {
 				try {
 					Dispatcher.Invoke(() => {
@@ -127,6 +136,7 @@ namespace Client.PlayerClient
 						obstaPlayerControl.Visibility = Visibility.Collapsed;
 						accelPlayerControl.Visibility = Visibility.Collapsed;
 						finishPlayerControl.Visibility = Visibility.Collapsed;
+						tiePlayerControl.Visibility = Visibility.Collapsed;
 						switch (tokens[2]) {
 							case "KD":
 								startPlayerControl.Visibility = Visibility.Visible;
@@ -139,6 +149,9 @@ namespace Client.PlayerClient
 								break;
 							case "VD":
 								finishPlayerControl.Visibility = Visibility.Visible;
+								break;
+							case "CHP":
+								tiePlayerControl.Visibility = Visibility.Visible;
 								break;
 						}
 					});
@@ -217,6 +230,30 @@ namespace Client.PlayerClient
 						case "TIME":
 							int timeLimit = Convert.ToInt32(tokens[3]);
 							finishPlayerControl.StartTimer(timeLimit);
+							break;
+					}
+					break;
+				case "CHP":
+					switch (tokens[2]) {
+						case "PAR":
+							bool haha = Convert.ToInt32(tokens[3 + player]) == 1;
+							if (haha) tiePlayerControl.Register(haha);
+							break;
+						case "SHOW":
+							string question = tokens[3], attach = tokens[4];
+							tiePlayerControl.ShowQuestion(new OQuestion(question, "", attach));
+							break;
+						case "START":
+							tiePlayerControl.Start();
+							break;
+						case "SUCKED":
+							tiePlayerControl.Pause();
+							break;
+						case "RESUME":
+							tiePlayerControl.Resume();
+							break;
+						case "STOP":
+							tiePlayerControl.Stop();
 							break;
 					}
 					break;
