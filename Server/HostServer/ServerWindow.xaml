@@ -13,47 +13,7 @@
         </Grid.RowDefinitions>
         <TabControl Grid.Row="1">
             <TabItem x:Name="tabGeneral" Header="Stuffs">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="160"/>
-                        <RowDefinition/>
-                        <RowDefinition Height="200"/>
-                    </Grid.RowDefinitions>
-                    <Button x:Name="btnIntro" Content="Intro" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="btnIntro_Click"/>
-                    <Button x:Name="btnOpening" Content="Nhạc bắt đầu" HorizontalAlignment="Left" Margin="61,10,0,0" VerticalAlignment="Top" Click="btnOpening_Click"/>
-                    <Grid x:Name="gridGeneral" Grid.Row="2"/>
-                    <Button x:Name="btnPlayerIntro" Content="Giới thiệu thí sinh" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Click="btnPlayerIntro_Click"/>
-                    <Button x:Name="btnPlain" Content="Màn hình video intro" HorizontalAlignment="Left" Margin="176,15,0,0" VerticalAlignment="Top" Click="btnPlain_Click"/>
-                    <Button x:Name="btnPoints" Content="Tổng kết điểm" HorizontalAlignment="Left" Margin="176,39,0,0" VerticalAlignment="Top" Click="btnPoints_Click"/>
-                    <Grid HorizontalAlignment="Left" Height="119" Margin="400,20,0,0" VerticalAlignment="Top" Width="370">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Content="S1"/>
-                        <Label Grid.Row="1" Grid.Column="0" Content="S2"/>
-                        <Label Grid.Row="2" Grid.Column="0" Content="S3"/>
-                        <Label Grid.Row="3" Grid.Column="0" Content="S4"/>
-                        <Button x:Name="btnKick1" Grid.Row="0" Grid.Column="1" Content="Kick" Click="btnKick1_Click" IsEnabled="False"/>
-                        <Button x:Name="btnKick2" Grid.Row="1" Grid.Column="1" Content="Kick" Click="btnKick2_Click" IsEnabled="False"/>
-                        <Button x:Name="btnKick3" Grid.Row="2" Grid.Column="1" Content="Kick" Click="btnKick3_Click" IsEnabled="False"/>
-                        <Button x:Name="btnKick4" Grid.Row="3" Grid.Column="1" Content="Kick" Click="btnKick4_Click" IsEnabled="False"/>
-                    </Grid>
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Button x:Name="btnAdd" Click="btnAdd_Click">Thêm nhóm</Button>
-                        <StackPanel Grid.Column="1" x:Name="stackMedia" Orientation="Horizontal"/>
-                    </Grid>
-                </Grid>
+                <Grid x:Name="gridGeneral"/>
             </TabItem>
             <TabItem x:Name="tabStart" Header="Khởi động">
                 <Grid x:Name="gridStart"/>
@@ -73,6 +33,5 @@
 
         <TextBox x:Name="txtPort" HorizontalAlignment="Left" Margin="59,45,0,0" TextWrapping="Wrap" Text="6996" VerticalAlignment="Top" Width="120" InputScope="Number"/>
         <Button x:Name="btnStart" Content="Khởi chạy server" HorizontalAlignment="Right" Height="80" Margin="0,0,10,0" VerticalAlignment="Center" Width="120" Click="btnStart_Click"/>
-        <Button x:Name="btnSend" Content="Gửi file" HorizontalAlignment="Right" Height="80" Margin="0,0,150,0" VerticalAlignment="Center" Width="120" Click="btnSend_Click"/>
     </Grid>
 </Window>

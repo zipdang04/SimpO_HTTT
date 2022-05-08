@@ -17,7 +17,7 @@ namespace Server.HostServer.Components
 		int timeLimit;
 		public bool IsEnabled;
 
-		int ToInt(TimeSpan span)
+		public static int ToInt(TimeSpan span)
 		{
 			return (span.Minutes * 60 * 1000 + span.Seconds * 1000 + span.Milliseconds) / 10;
 		}
@@ -33,6 +33,14 @@ namespace Server.HostServer.Components
 			timer.Tick += Timer_Tick;
 			IsEnabled = false;
 			SetTimeLimit(timeLimit);
+		}
+		public Simer(TimeSpan span)
+		{
+			timer = new DispatcherTimer();
+			timer.Interval = TimeSpan.FromMilliseconds(2);
+			timer.Tick += Timer_Tick;
+			IsEnabled = false;
+			SetTimeLimit(span);
 		}
 		public void SetTimeLimit(int timeLimit)
 		{

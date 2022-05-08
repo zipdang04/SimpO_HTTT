@@ -17,11 +17,15 @@
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0">Câu hỏi</Label>
         <Label Grid.Row="1" Grid.Column="0">Trả lời</Label>
-        <Label Grid.Row="0" Grid.Column="1">
-            <TextBlock x:Name="txtQuestion"  TextWrapping="Wrap" />
-        </Label>
-        <Label Grid.Row="1" Grid.Column="1">
-            <TextBlock x:Name="txtAnswer"  TextWrapping="Wrap" />
-        </Label>
+        <ScrollViewer Grid.Row="0" Grid.Column="1">
+            <Label>
+                <TextBlock x:Name="txtQuestion"  TextWrapping="Wrap" />
+            </Label>
+        </ScrollViewer>
+        <ScrollViewer Grid.Row="1" Grid.Column="1">
+            <Label >
+                <TextBlock x:Name="txtAnswer"  TextWrapping="Wrap" />
+            </Label>
+        </ScrollViewer>
     </Grid>
 </UserControl>

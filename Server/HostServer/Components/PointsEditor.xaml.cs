@@ -22,14 +22,14 @@ namespace Server.HostServer.Components
 	/// <summary>
 	/// Interaction logic for ScoreControl.xaml
 	/// </summary>
-	public partial class GeneralControl : UserControl
+	public partial class PointsEditor : UserControl
 	{
 		//public PlayerClass players { get; set; }
 		SimpleSocketListener listener;
 		List<TextBox> playersName;
 		List<TextBox> playersPoint;
 		PlayerClass players;
-		public GeneralControl(SimpleSocketListener listener, PlayerClass players)
+		public PointsEditor(SimpleSocketListener listener, PlayerClass players)
 		{
 			InitializeComponent();
 			this.listener = listener;

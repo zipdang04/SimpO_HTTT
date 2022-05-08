@@ -158,6 +158,12 @@ namespace Server.Information
 						ptr++;
 					}
 			}
+
+			// CHP
+			int tieRow = 103, tieCol = 2;
+			for (int ques = 0; ques < TieBreaker.QUES_CNT; ques++)
+				whole.tieBreaker.questions[ques] = process(tieRow + ques, tieCol);
+
 			xlWorkbook.Close();
 
 			return whole;
@@ -166,8 +172,8 @@ namespace Server.Information
 		{
 			try
 			{
-				foreach (System.IO.FileInfo file in directory.GetFiles()) file.Delete();
-				foreach (System.IO.DirectoryInfo subDirectory in directory.GetDirectories()) subDirectory.Delete(true);
+				foreach (FileInfo file in directory.GetFiles()) file.Delete();
+				foreach (DirectoryInfo subDirectory in directory.GetDirectories()) subDirectory.Delete(true);
 			}
 			catch
 			{

@@ -31,6 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Resources\PlayerImage\x">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\Media\x">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

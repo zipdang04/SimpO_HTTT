@@ -12,6 +12,7 @@ namespace Server.QuestionClass
 		ObstacleClass obstaClass = new ObstacleClass();
 		AccelClass accelClass = new AccelClass();
 		FinishClass finishClass = new FinishClass();
+		TieBreaker tieClass = new TieBreaker();
 
 		public StartClass startQuestions { 
 			get { return startClass; }
@@ -28,6 +29,10 @@ namespace Server.QuestionClass
 		public FinishClass finish {
 			get { return finishClass; }
 			set { finishClass = value; }
+		}
+		public TieBreaker tieBreaker {
+			get { return tieClass; }
+			set { tieClass = value; }
 		}
 	}
 }

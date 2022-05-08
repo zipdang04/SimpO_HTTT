@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -76,7 +77,7 @@ namespace Server.HostServer
 				Close();
 			}
 
-			generalControl = new GeneralControl(listener, playerInfo);
+			generalControl = new GeneralControl(listener, playerInfo, playerNetwork);
 			gridGeneral.Children.Add(generalControl);
 			startController = new StartController(listener, wholeExam.startQuestions, playerInfo, playerNetwork);
 			gridStart.Children.Add(startController);
@@ -98,7 +99,8 @@ namespace Server.HostServer
 		private void btnStart_Click(object sender, RoutedEventArgs e)
 		{
 			listener.StartListening(Convert.ToInt32(txtPort.Text));
-			lblIP.Content = "IP: cái này kiểu gì cũng ra" + listener.Ip;
+			IPAddress[] ip = Dns.GetHostEntry(Dns.GetHostName()).AddressList;
+			lblIP.Content = "IP: một trong số" + string.Join<IPAddress>(", ", ip);
 			txtPort.IsEnabled = false;
 		}
 
@@ -128,12 +130,7 @@ namespace Server.HostServer
 					int posi = Convert.ToInt32(tokens[2]) - 1;
 					if (playerNetwork.connect(posi, client)) {
 						listener.SendMessage(id, "OLPA CONFIRMED");
-						Dispatcher.Invoke(() => {
-							if (posi == 0) btnKick1.IsEnabled = true;
-							else if (posi == 1) btnKick2.IsEnabled = true;
-							else if (posi == 2) btnKick3.IsEnabled = true;
-							else if (posi == 3) btnKick4.IsEnabled = true;
-						});
+						generalControl.Connect(posi);
 					} else
 						listener.SendMessage(id, "OLPA FAILED");
 					break;
@@ -169,63 +166,6 @@ namespace Server.HostServer
 			}
 		}
 
-		private void btnSend_Click(object sender, RoutedEventArgs e)
-		{
-			string source = @"Resources/Media", dest = @"Resources/Media.zip";
-			if (File.Exists(dest)) File.Delete(dest);
-			ZipFile.CreateFromDirectory(source, dest);
-			byte[] goddamn = File.ReadAllBytes(dest);
-			foreach (KeyValuePair<int, IClientInfo> client in listener.GetConnectedClients())
-				listener.SendBytes(client.Value.Id, goddamn);
-		}
-
-		private void btnIntro_Click(object sender, RoutedEventArgs e)
-		{
-			sendMessageToEveryone("OLPA PLAIN INTRO");
-		}
-
-		private void btnOpening_Click(object sender, RoutedEventArgs e)
-		{
-			sendMessageToEveryone("OLPA PLAIN OPENING");
-		}
-
-		private void btnPlayerIntro_Click(object sender, RoutedEventArgs e)
-		{
-			sendMessageToEveryone("OLPA PLAIN PLINTRO");
-		}
-
-		private void btnPlain_Click(object sender, RoutedEventArgs e)
-		{
-			sendMessageToEveryone("OLPA SCENE PLAIN");
-		}
-
-		private void btnPoints_Click(object sender, RoutedEventArgs e)
-		{
-			sendMessageToEveryone("OLPA POINTS");
-		}
-
-		void Kick(int position)
-		{
-			if (playerNetwork.clients[position] != null)
-				playerNetwork.disconnect(playerNetwork.clients[position]);
-		}
-		private void btnKick1_Click(object sender, RoutedEventArgs e) { Kick(0); btnKick1.IsEnabled = false; }
-		private void btnKick2_Click(object sender, RoutedEventArgs e) { Kick(1); btnKick2.IsEnabled = false; }
-		private void btnKick3_Click(object sender, RoutedEventArgs e) { Kick(2); btnKick3.IsEnabled = false; }
-		private void btnKick4_Click(object sender, RoutedEventArgs e) { Kick(3); btnKick4.IsEnabled = false; }
-
-		private void btnOpenFile_Click(object sender, RoutedEventArgs e) {
-			//if (openFileDialog.ShowDialog() == true) txtFile.Text = System.IO.Path.GetRelativePath(Directory.GetCurrentDirectory() + @"\Resources", openFileDialog.FileName);
-		}
-
-		private void btnOpen_Click(object sender, RoutedEventArgs e)
-		{
-			//sendMessageToEveryone(String.Format("OLPA PLAY {0}", HelperClass.MakeString(txtFile.Text)));
-		}
-
-		private void btnAdd_Click(object sender, RoutedEventArgs e)
-		{
-			stackMedia.Children.Add(new StackMedia(listener));
-		}
+		
 	}
 }
