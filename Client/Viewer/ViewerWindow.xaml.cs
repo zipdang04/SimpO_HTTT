@@ -38,6 +38,7 @@ namespace Client.Viewer
 		AccelViewerControl accelViewerControl;
 		PointsViewerControl pointsViewerControl;
 		FinishViewerControl finishViewerControl;
+		TieViewerControl tieViewerControl;
 		public ViewerWindow(LogInWindow logInWindow, SimpleSocketClient client)
         {
             InitializeComponent();
@@ -54,6 +55,7 @@ namespace Client.Viewer
 			accelViewerControl = new AccelViewerControl();
 			pointsViewerControl = new PointsViewerControl();
 			finishViewerControl = new FinishViewerControl(playersInfo);
+			tieViewerControl = new TieViewerControl(playersInfo);
 			grid.Children.Add(plainControl);
 			grid.Children.Add(startViewerControl);
 			grid.Children.Add(obstaViewerControl);
@@ -61,6 +63,7 @@ namespace Client.Viewer
 			grid.Children.Add(accelViewerControl);
 			grid.Children.Add(pointsViewerControl);
 			grid.Children.Add(finishViewerControl);
+			grid.Children.Add(tieViewerControl);
 			ChangeScene("PLAIN");
 		}
 
@@ -74,6 +77,7 @@ namespace Client.Viewer
 				accelViewerControl.Visibility = Visibility.Collapsed;
 				pointsViewerControl.Visibility = Visibility.Collapsed;
 				finishViewerControl.Visibility = Visibility.Collapsed;
+				tieViewerControl.Visibility = Visibility.Collapsed;
 				switch (s) {
 					case "PLAIN":
 						plainControl.Visibility = Visibility.Visible;
@@ -95,7 +99,10 @@ namespace Client.Viewer
 						break;
 					case "VD":
 						finishViewerControl.Visibility = Visibility.Visible;
-						break; 
+						break;
+					case "CHP":
+						tieViewerControl.Visibility = Visibility.Visible;
+						break;	
 				}
 			});
 		}
@@ -350,6 +357,32 @@ namespace Client.Viewer
 						answerViewerControl.Conclusion(correct);
 					} else if (tokens[2] == "SCENE")
 						answerViewerControl.Change(tokens[3]);
+					break;
+				case "CHP":
+					switch (tokens[2]) {
+						case "PAR":
+							bool[] state = new bool[4];
+							for (int i = 0; i < 4; i++) state[i] = (Convert.ToInt32(tokens[3 + i]) == 1) ? true : false;
+							tieViewerControl.Register(state);
+							break;
+						case "SHOW":
+							string question = tokens[3], attach = tokens[4];
+							tieViewerControl.ShowQuestion(question, attach);
+							break;
+						case "START":
+							tieViewerControl.Start();
+							break;
+						case "SUCKED":
+							int player = Convert.ToInt32(tokens[3]);
+							tieViewerControl.SomeoneSucking(player);
+							break;
+						case "CORRECT":
+							tieViewerControl.Correct();
+							break;
+						case "RESUME":
+							tieViewerControl.Resume();
+							break;
+					};
 					break;
 			}
 		}

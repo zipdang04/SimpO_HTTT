@@ -132,7 +132,7 @@ namespace Server.HostServer
 		private void btnCorrect_Click(object sender, RoutedEventArgs e) {
 			timer.Stop();
 			btnCorrect.IsEnabled = btnWrong.IsEnabled = false;
-			sendMessageToEveryone("OLPA CHP STOP");
+			sendMessageToEveryone("OLPA CHP CORRECT");
 		}
 
 		private void btnWrong_Click(object sender, RoutedEventArgs e) {

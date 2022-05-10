@@ -40,6 +40,7 @@ namespace Client.MCClient
 		public ObstaPlayerControl obstaPlayerControl;
 		public AccelPlayerControl accelPlayerControl;
 		public FinishPlayerControl finishPlayerControl;
+		public TiePlayerControl tiePlayerControl;
 
 		public PlayerWindow(LogInWindow logInWindow, SimpleSocketClient client)
 		{
@@ -57,16 +58,19 @@ namespace Client.MCClient
 			obstaPlayerControl = new ObstaPlayerControl(client);
 			accelPlayerControl = new AccelPlayerControl(client);
 			finishPlayerControl = new FinishPlayerControl(client);
+			tiePlayerControl = new TiePlayerControl(client);
 			gridPoint.Children.Add(pointsControl);
 			grid.Children.Add(startPlayerControl);
 			grid.Children.Add(obstaPlayerControl);
 			grid.Children.Add(accelPlayerControl);
 			grid.Children.Add(finishPlayerControl);
+			grid.Children.Add(tiePlayerControl);
 			pointsControl.Visibility = Visibility.Visible;
 			startPlayerControl.Visibility = Visibility.Collapsed;
 			obstaPlayerControl.Visibility = Visibility.Collapsed;
 			accelPlayerControl.Visibility = Visibility.Collapsed;
 			finishPlayerControl.Visibility = Visibility.Collapsed;
+			tiePlayerControl.Visibility = Visibility.Collapsed;
 
 			pointsControl.Visibility = Visibility.Visible;
 		}
@@ -207,6 +211,31 @@ namespace Client.MCClient
 						case "TIME":
 							int timeLimit = Convert.ToInt32(tokens[3]);
 							finishPlayerControl.StartTimer(timeLimit);
+							break;
+					}
+					break;
+				case "CHP":
+					switch (tokens[2]) {
+						case "PAR":
+							//bool haha = Convert.ToInt32(tokens[3 + player]) == 1;
+							//if (haha) tiePlayerControl.Register(haha);
+							break;
+						case "SHOW":
+							string question = tokens[3], attach = tokens[4];
+							tiePlayerControl.ShowQuestion(new OQuestion(question, "", attach));
+							break;
+						case "START":
+							tiePlayerControl.Start();
+							break;
+						case "SUCKED":
+							tiePlayerControl.Pause();
+							break;
+						case "RESUME":
+							tiePlayerControl.Resume();
+							break;
+						case "CORRECT":
+						case "DONE":
+							tiePlayerControl.Stop();
 							break;
 					}
 					break;

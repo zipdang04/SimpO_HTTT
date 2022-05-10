@@ -47,7 +47,18 @@ namespace Client.Viewer.GamesControl.Components
 			this.playerClass = playerClass;
 			DataContext = playerClass;
 		}
-
+		public void SetPlayerHidden(int player) {
+			normalName[player].Visibility = Visibility.Hidden;
+			normalPoint[player].Visibility = Visibility.Hidden;
+			chosenName[player].Visibility = Visibility.Hidden;
+			chosenPoint[player].Visibility = Visibility.Hidden;
+		}
+		public void SetPlayerVisible(int player) {
+			normalName[player].Visibility = Visibility.Visible;
+			normalPoint[player].Visibility = Visibility.Visible;
+			chosenName[player].Visibility = Visibility.Visible;
+			chosenPoint[player].Visibility = Visibility.Visible;
+		}
 		public void SetHiddenAll()
 		{
 			for (int i = 0; i < 4; i++) {

@@ -252,7 +252,8 @@ namespace Client.PlayerClient
 						case "RESUME":
 							tiePlayerControl.Resume();
 							break;
-						case "STOP":
+						case "CORRECT":
+						case "DONE":
 							tiePlayerControl.Stop();
 							break;
 					}
