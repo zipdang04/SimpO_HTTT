@@ -88,6 +88,7 @@ namespace Server.HostServer
 
 			questionBox.displayQA(question.question, question.answer);
 			sendMessageToEveryone("OLPA KD QUES " + HelperClass.ServerJoinQA(question));
+			haha.Focus();
 		}
 
 		private void StartTurn(int player)
@@ -201,5 +202,9 @@ namespace Server.HostServer
 			else if (e.Key == Key.E && btnWrong.IsEnabled)
 				btnWrong_Click(sender, new RoutedEventArgs());
 		}
-	}
+
+        private void UserControl_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+    }
 }

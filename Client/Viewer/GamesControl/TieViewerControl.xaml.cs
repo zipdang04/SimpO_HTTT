@@ -27,11 +27,18 @@ namespace Client.Viewer.GamesControl {
 	public partial class TieViewerControl : UserControl {
 		Rectangle[] rects = new Rectangle[4];
 		bool[] state;
-		public TieViewerControl(PlayerClass playerClass) {
+		MediaPlayer mediaBell = new MediaPlayer(),
+					mediaCorrect = new MediaPlayer();
+
+        public TieViewerControl(PlayerClass playerClass) {
 			InitializeComponent();
 			rects[0] = rectBell1; rects[1] = rectBell2; rects[2] = rectBell3; rects[3] = rectBell4;
 			qBox.SetContext(playerClass);
-		}
+			mediaStart.Source = new Uri(HelperClass.PathString("Effects", "CHP_Start.mp4"));
+            mediaRun.Source = new Uri(HelperClass.PathString("Effects", "CHP_Run.mp4"));
+            mediaBell.Open(new Uri(HelperClass.PathString("Effects", "VD_Bell.m4a")));
+            mediaCorrect.Open(new Uri(HelperClass.PathString("Effects", "VCNV_BellCorrect.m4a")));
+        }
 
 		public void Register(bool[] state) {
 			this.state = state;
@@ -41,7 +48,7 @@ namespace Client.Viewer.GamesControl {
 				qBox.SetQuestion(question);
 				qBox.SetHiddenAll();
 				mediaStart.Position = TimeSpan.Zero;
-				mediaRun.Position = TimeSpan.Zero;
+				mediaRun.Position = TimeSpan.Zero; mediaRun.Stop();
 
 				mediaRun.Visibility = Visibility.Hidden;
 				for (int i = 0; i < 4; i++) rects[i].Visibility = Visibility.Hidden;
@@ -59,6 +66,7 @@ namespace Client.Viewer.GamesControl {
 		public void SomeoneSucking(int player) {
 			Dispatcher.Invoke(() => {
 				mediaRun.Pause(); rects[player].Visibility = Visibility.Visible;
+				mediaBell.Position = TimeSpan.Zero; mediaBell.Play();
 			});
 		}
 		public void Resume() {
@@ -70,7 +78,7 @@ namespace Client.Viewer.GamesControl {
 		public void Correct() {
 			Dispatcher.Invoke(() => {
 				mediaRun.Stop();
-				// correct
+				mediaCorrect.Position = TimeSpan.Zero; mediaCorrect.Play();
 			});
 		}
 

@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:Server.HostServer"
              xmlns:Components="clr-namespace:Server.HostServer.Components" x:Class="Server.HostServer.StartController"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800">
-    <Grid KeyDown="Grid_KeyDown">
+             d:DesignHeight="600" d:DesignWidth="800" KeyDown="UserControl_KeyDown">
+    <Grid x:Name="haha" KeyDown="Grid_KeyDown">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="2*"/>
