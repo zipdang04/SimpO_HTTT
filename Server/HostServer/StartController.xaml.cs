@@ -88,7 +88,7 @@ namespace Server.HostServer
 
 			questionBox.displayQA(question.question, question.answer);
 			sendMessageToEveryone("OLPA KD QUES " + HelperClass.ServerJoinQA(question));
-			haha.Focus();
+			gridMain.Focus();
 		}
 
 		private void StartTurn(int player)
@@ -111,6 +111,7 @@ namespace Server.HostServer
 			sendMessageToEveryone("OLPA KD TIME");
 			timer.Start();
 			showQuestion();
+			gridMain.Focus();
 		}
 
 		private void btnStartTurn1_Click(object sender, RoutedEventArgs e)
@@ -195,16 +196,17 @@ namespace Server.HostServer
 			sendMessageToEveryone("OLPA KD DONE");
 		}
 
-		private void Grid_KeyDown(object sender, KeyEventArgs e)
-		{
+		bool pressed = false;
+		private void gridMain_KeyDown(object sender, KeyEventArgs e) {
+			if (pressed) return; pressed = true;
 			if (e.Key == Key.Q && btnCorrect.IsEnabled)
 				btnCorrect_Click(sender, new RoutedEventArgs());
 			else if (e.Key == Key.E && btnWrong.IsEnabled)
 				btnWrong_Click(sender, new RoutedEventArgs());
 		}
 
-        private void UserControl_KeyDown(object sender, KeyEventArgs e)
-        {
-        }
-    }
+		private void gridMain_KeyUp(object sender, KeyEventArgs e) {
+			pressed = false;
+		}
+	}
 }

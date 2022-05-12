@@ -10,10 +10,10 @@
              d:DesignHeight="900" d:DesignWidth="1600">
     <Grid>
         <!--
-        -->
         <Grid.Background>
             <ImageBrush ImageSource="../../Resources/Effects/Background.png"/>
         </Grid.Background>
+        -->
         <Grid x:Name="gridPoint">
             <Image x:Name="backgroundPoint" Source="../../Resources/Effects/VD_Choosing.png"/>  
             <MediaElement x:Name="mediaBegin" LoadedBehavior="Manual" MediaEnded="mediaBegin_MediaEnded"/>
