@@ -71,6 +71,7 @@ namespace Client.Viewer.GamesControl
                 mediaStart.Source = new Uri(HelperClass.PathString("Effects", string.Format("KD_{0}_Start.mp4", player + 1)));
                 mediaRun.Source = new Uri(HelperClass.PathString("Effects", string.Format("KD_{0}_Run.mp4", player + 1)));
                 mediaRun.Play(); mediaRun.Stop();
+                media.Visibility = Visibility.Hidden;
                 TurnOff();
                 qnpBox.SetHiddenAll();
                 //media.Source = new Uri(attach);
@@ -91,6 +92,7 @@ namespace Client.Viewer.GamesControl
                 qnpBox.Visibility = Visibility.Visible;
                 //media.Source = new Uri(attach);
                 //media.Play();
+                media.Visibility = Visibility.Visible;
                 mediaRun.Position = TimeSpan.Zero;
                 mediaRun.Visibility = Visibility.Visible;
                 mediaRun.Play();
@@ -98,11 +100,11 @@ namespace Client.Viewer.GamesControl
         }
         public void Opening() { Dispatcher.Invoke(() => { mediaOpening.Position = TimeSpan.Zero; mediaOpening.Play(); }); }
 
-		private void media_Loaded(object sender, RoutedEventArgs e)
+		private void media_Opened(object sender, RoutedEventArgs e)
 		{
             Dispatcher.Invoke(() =>
             {
-                media.Position = TimeSpan.Zero;
+                // media.Position = TimeSpan.Zero;
                 media.Play();
             });
 		}
@@ -121,13 +123,11 @@ namespace Client.Viewer.GamesControl
         public void DisplayQuestion(string question, string attach)
 		{
             qnpBox.SetQuestion(question);
-            bool oke = false;
             Dispatcher.Invoke(() => {
 				try {
                     media.Source = new Uri(HelperClass.PathString("Media", attach));
-                    media.Position = TimeSpan.Zero;
-                    oke = true;
-				} catch { 
+                    media.Play();
+                } catch { 
                 };
 			});
         }

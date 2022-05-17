@@ -329,8 +329,6 @@ namespace Client.Viewer
 						case "CORRECT":
 							finishViewerControl.ResultMusic(true);
 							break;
-						case "LAST15":
-							break;
 						case "WRONG":
 							finishViewerControl.ResultMusic(false);
 							break;
