@@ -14,8 +14,13 @@
         <MediaElement x:Name="mediaWrong" LoadedBehavior="Manual"/>
         <MediaElement x:Name="mediaBlank" LoadedBehavior="Manual"/>
         <MediaElement x:Name="mediaDone" LoadedBehavior="Manual"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="../../Resources/Effects/test.png"/>
+        </Grid.Background>
         -->
+        <MediaElement x:Name="mediaStart" LoadedBehavior="Manual"/>
+        <MediaElement x:Name="mediaRun" LoadedBehavior="Manual"/>
         <compo:QNPBox x:Name="qnpBox"/>
-        <MediaElement x:Name="media" LoadedBehavior="Manual" HorizontalAlignment="Left" Height="130" Margin="927,478,0,0" VerticalAlignment="Top" Width="250" ScrubbingEnabled="True" MediaOpened="media_Opened"/>
+        <MediaElement x:Name="media" LoadedBehavior="Play" HorizontalAlignment="Left" Height="130" Margin="931,471,0,0" VerticalAlignment="Top" Width="250" ScrubbingEnabled="True"/>
     </Grid>
 </UserControl>

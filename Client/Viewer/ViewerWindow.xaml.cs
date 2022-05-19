@@ -46,25 +46,33 @@ namespace Client.Viewer
             this.client.MessageReceived += ServerMessageReceived;
             this.client.BytesReceived += ServerBytesReceived;
 
-			playersInfo = new PlayerClass();
+			try
+			{
 
-			plainControl = new PlainControl();
-            startViewerControl = new StartViewerControl(playersInfo);
-			obstaViewerControl = new ObstaViewerControl();
-			answerViewerControl = new AnswerViewerControl(playersInfo);
-			accelViewerControl = new AccelViewerControl();
-			pointsViewerControl = new PointsViewerControl();
-			finishViewerControl = new FinishViewerControl(playersInfo);
-			tieViewerControl = new TieViewerControl(playersInfo);
-			grid.Children.Add(plainControl);
-			grid.Children.Add(startViewerControl);
-			grid.Children.Add(obstaViewerControl);
-			grid.Children.Add(answerViewerControl);
-			grid.Children.Add(accelViewerControl);
-			grid.Children.Add(pointsViewerControl);
-			grid.Children.Add(finishViewerControl);
-			grid.Children.Add(tieViewerControl);
-			ChangeScene("PLAIN");
+				playersInfo = new PlayerClass();
+
+				plainControl = new PlainControl();
+				startViewerControl = new StartViewerControl(playersInfo);
+				obstaViewerControl = new ObstaViewerControl();
+				answerViewerControl = new AnswerViewerControl(playersInfo);
+				accelViewerControl = new AccelViewerControl();
+				pointsViewerControl = new PointsViewerControl();
+				finishViewerControl = new FinishViewerControl(playersInfo);
+				tieViewerControl = new TieViewerControl(playersInfo);
+				grid.Children.Add(plainControl);
+				grid.Children.Add(startViewerControl);
+				grid.Children.Add(obstaViewerControl);
+				grid.Children.Add(answerViewerControl);
+				grid.Children.Add(accelViewerControl);
+				grid.Children.Add(pointsViewerControl);
+				grid.Children.Add(finishViewerControl);
+				grid.Children.Add(tieViewerControl);
+				ChangeScene("PLAIN");
+			} catch(Exception e)
+			{
+				MessageBox.Show(e.ToString());
+			}
+
 		}
 
 		void ChangeScene(string s)

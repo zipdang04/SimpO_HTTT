@@ -137,7 +137,7 @@ namespace Server.HostServer
 		private void btnCorrect_Click(object sender, RoutedEventArgs e)
 		{
 			if (playerTurn == NaN) return;
-			if (questionPtr < StartClass.QUES_CNT) {
+			if (questionPtr <= StartClass.QUES_CNT) {
 				playerClass.ChangePoint(playerTurn, 10);
 				sendMessageToEveryone("OLPA KD CORRECT");
 				sendMessageToEveryone(HelperClass.ServerPointCommand(playerClass.points));

@@ -76,10 +76,6 @@ namespace Client.Viewer.GamesControl
 			});
 		}
 
-		private void media_Loaded(object sender, RoutedEventArgs e)
-		{
-		}
-
 		private void media_MediaOpened(object sender, RoutedEventArgs e)
 		{
 			media.Play(); media.Pause();

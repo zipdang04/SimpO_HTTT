@@ -11,10 +11,14 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Button x:Name="btnClient" Grid.Row="0" Click="btnClient_Click">Client</Button>
         <Button x:Name="btnViewer" Grid.Row="1" Click="btnViewer_Click">Viewer</Button>
         <Button x:Name="btnMC" Grid.Row="2" Click="btnMC_Click">MC</Button>
+        <Button x:Name="btnScore" Grid.Row="3" Click="btnScore_Click">Điểm</Button>
     </Grid>
 </Window>
+
+    

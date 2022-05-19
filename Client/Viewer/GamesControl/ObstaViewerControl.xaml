@@ -39,7 +39,7 @@
                 <SolidColorBrush Color="#FFF5EAD7"/>
             </Grid.Background>
             <Grid Margin="100, 100, 100, 100">
-                <Image x:Name="image"/>
+                <Image x:Name="image" SourceUpdated="image_SourceUpdated"/>
                 <Image x:Name="rectUL" Source="../../Resources/Effects/VCNV_Piece_1.png" Stretch="Fill"/>
                 <Image x:Name="rectUR" Source="../../Resources/Effects/VCNV_Piece_2.png" Stretch="Fill"/>
                 <Image x:Name="rectDL" Source="../../Resources/Effects/VCNV_Piece_3.png" Stretch="Fill"/>

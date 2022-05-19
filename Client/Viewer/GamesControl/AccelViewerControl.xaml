@@ -8,36 +8,39 @@
              d:DesignHeight="900" d:DesignWidth="1600">
     <Grid>
         <!--
+        <Grid.Background>
+            <ImageBrush ImageSource="D:/dmcs.png"/>
+        </Grid.Background>
         -->
         <MediaElement x:Name="mediaStart" LoadedBehavior="Manual" MediaEnded="mediaStart_MediaEnded"/>
         <MediaElement x:Name="mediaRun" LoadedBehavior="Manual"/>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="436*"/>
-                <ColumnDefinition Width="1019*"/>
-                <ColumnDefinition Width="145*"/>
+                <ColumnDefinition Width="217*"/>
+                <ColumnDefinition Width="510*"/>
+                <ColumnDefinition Width="73*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="49*"/>
                 <RowDefinition Height="69*"/>
                 <RowDefinition Height="782*"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Height="38" Width="10">
+            <Label Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Height="37" Width="10">
                 <TextBlock x:Name="txtQuestion" TextWrapping="Wrap" TextAlignment="Center"/>
             </Label>
         </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="435*"/>
-                <ColumnDefinition Width="1021*"/>
-                <ColumnDefinition Width="144*"/>
+                <ColumnDefinition Width="1017*"/>
+                <ColumnDefinition Width="148*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="16*"/>
-                <RowDefinition Height="65*"/>
-                <RowDefinition Height="9*"/>
+                <RowDefinition Height="32*"/>
+                <RowDefinition Height="129*"/>
+                <RowDefinition Height="19*"/>
             </Grid.RowDefinitions>
-            <MediaElement x:Name="media" Grid.Row="1" Grid.Column="1" LoadedBehavior="Manual" ScrubbingEnabled="True" Loaded="media_Loaded" MediaOpened="media_MediaOpened"/>
+            <MediaElement x:Name="media" Grid.Row="1" Grid.Column="1" LoadedBehavior="Manual" ScrubbingEnabled="True" MediaOpened="media_MediaOpened"/>
         </Grid>
 
     </Grid>

@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:Client.Viewer"
         mc:Ignorable="d"
         Title="ViewerWindow" Height="900" Width="1600" ResizeMode="NoResize" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown" Unloaded="Window_Unloaded">
-    <Grid x:Name="grid" Background="Cyan">
+    <Grid x:Name="grid" Background="#00FF00">
+        <!--
+    <Grid x:Name="grid" Background="#FFF4DF">
+        -->
         
     </Grid>
 </Window>

@@ -22,23 +22,19 @@ namespace Client.Viewer.GamesControl.Components
 	/// </summary>
 	public partial class QNPBox : UserControl
 	{
-		List<Label> normalName, normalPoint;
-		List<Label> chosenName, chosenPoint;
+		List<Label> lblNames, lblPoints;
+		int[] playerRemain = new int[3] {1, 2, 3};
 
 		PlayerClass? playerClass;
 
 		public QNPBox()
 		{
 			InitializeComponent();
-			normalName = new List<Label>(); normalName.Add(lblNormalName1); normalName.Add(lblNormalName2); normalName.Add(lblNormalName3); normalName.Add(lblNormalName4);
-			chosenName = new List<Label>(); chosenName.Add(lblChosenName1); chosenName.Add(lblChosenName2); chosenName.Add(lblChosenName3); chosenName.Add(lblChosenName4);
-			normalPoint = new List<Label>(); normalPoint.Add(lblNormalPoint1); normalPoint.Add(lblNormalPoint2); normalPoint.Add(lblNormalPoint3); normalPoint.Add(lblNormalPoint4);
-			chosenPoint = new List<Label>(); chosenPoint.Add(lblChosenPoint1); chosenPoint.Add(lblChosenPoint2); chosenPoint.Add(lblChosenPoint3); chosenPoint.Add(lblChosenPoint4);
+			lblNames = new List<Label>(); lblNames.Add(lblName1); lblNames.Add(lblName2); lblNames.Add(lblName3); 
+			lblPoints = new List<Label>(); lblPoints.Add(lblPoint1); lblPoints.Add(lblPoint2); lblPoints.Add(lblPoint3);
 
-			SetHiddenAll();
 			txtblQuestion.Text = "";
-			lblPoint.Content = 0;
-			label.Content = "";
+			lblLabel.Content = "";
 
 			DataContext = playerClass;
 		}
@@ -47,57 +43,34 @@ namespace Client.Viewer.GamesControl.Components
 			this.playerClass = playerClass;
 			DataContext = playerClass;
 		}
-		public void SetPlayerHidden(int player) {
-			normalName[player].Visibility = Visibility.Hidden;
-			normalPoint[player].Visibility = Visibility.Hidden;
-			chosenName[player].Visibility = Visibility.Hidden;
-			chosenPoint[player].Visibility = Visibility.Hidden;
-		}
-		public void SetPlayerVisible(int player) {
-			normalName[player].Visibility = Visibility.Visible;
-			normalPoint[player].Visibility = Visibility.Visible;
-			chosenName[player].Visibility = Visibility.Visible;
-			chosenPoint[player].Visibility = Visibility.Visible;
-		}
-		public void SetHiddenAll()
-		{
-			for (int i = 0; i < 4; i++) {
-				normalName[i].Visibility = Visibility.Hidden;
-				normalPoint[i].Visibility = Visibility.Hidden;
-				chosenName[i].Visibility = Visibility.Hidden;
-				chosenPoint[i].Visibility = Visibility.Hidden;
-			}
-			txtblQuestion.Text = ""; 
-			lblPoint.Visibility = Visibility.Hidden;
-			label.Visibility = Visibility.Hidden;
-		}
-		public void SetVisibleAll()
-		{
-			for (int i = 0; i < 4; i++) {
-				normalName[i].Visibility = Visibility.Visible;
-				normalPoint[i].Visibility = Visibility.Visible;
-				chosenName[i].Visibility = Visibility.Hidden;
-				chosenPoint[i].Visibility = Visibility.Hidden;
-			}
-			txtblQuestion.Text = "";
-			lblPoint.Visibility = Visibility.Visible;
-			label.Visibility = Visibility.Visible;
-		}
 		public void SetChosenOne(int player)
 		{
 			Dispatcher.Invoke(() => {
-				for (int i = 0; i < 4; i++) {
-					normalName[i].Visibility = (i == player) ? Visibility.Hidden : Visibility.Visible;
-					normalPoint[i].Visibility = (i == player) ? Visibility.Hidden : Visibility.Visible;
-					chosenName[i].Visibility = (i == player) ? Visibility.Visible : Visibility.Hidden;
-					chosenPoint[i].Visibility = (i == player) ? Visibility.Visible : Visibility.Hidden;
-				}
 				txtblQuestion.Text = "";
-				lblPoint.Visibility = Visibility.Visible;
-				label.Visibility = Visibility.Visible;
-				Binding binding = new Binding(string.Format("points[{0}]", player));
-				binding.Source = playerClass;
-				lblPoint.SetBinding(Label.ContentProperty, binding);
+				lblLabel.Content = "";
+
+				Binding bindName= new Binding(string.Format("names[{0}]", player));
+				bindName.Source = playerClass;
+				lblName.SetBinding(Label.ContentProperty, bindName);
+				Binding bindPoint = new Binding(string.Format("points[{0}]", player));
+				bindPoint.Source = playerClass;
+				lblPoint.SetBinding(Label.ContentProperty, bindPoint);
+
+				int ptr = 0;
+				for (int i = 0; i < 4; i++)
+				{
+					if (i == player) continue;
+					
+					playerRemain[ptr] = i;
+					Binding bExtraName = new Binding(string.Format("names[{0}]", i));
+					bExtraName.Source = playerClass;
+					lblNames[ptr].SetBinding(Label.ContentProperty, bExtraName);
+					Binding bExtraPoint = new Binding(string.Format("points[{0}]", i));
+					bExtraPoint.Source = playerClass;
+					lblPoints[ptr].SetBinding(Label.ContentProperty, bExtraPoint);
+
+					ptr++;
+				}
 			});
 		}
 
@@ -108,7 +81,7 @@ namespace Client.Viewer.GamesControl.Components
 		}
 		public void SetLabel(string str) {
 			Dispatcher.Invoke(() => { 
-				label.Content = str; 
+				lblLabel.Content = str; 
 			});
 		}
 	}

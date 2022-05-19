@@ -23,6 +23,7 @@ namespace Client
 		PlayerClient.LogInWindow player;
 		Viewer.LogInWindow viewer;
 		MCClient.LogInWindow mcClient;
+		Pointer.LogInWindow pointer;
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -44,6 +45,12 @@ namespace Client
 		{
 			mcClient = new MCClient.LogInWindow(this);
 			mcClient.Show(); Hide();
+		}
+
+		private void btnScore_Click(object sender, RoutedEventArgs e)
+		{
+			pointer = new Pointer.LogInWindow(this);
+			pointer.Show(); Hide();
 		}
 	}
 }

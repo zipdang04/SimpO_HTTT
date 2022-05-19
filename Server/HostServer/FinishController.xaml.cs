@@ -313,7 +313,7 @@ namespace Server.HostServer
 
 		private void btnSuckWrong_Click(object sender, RoutedEventArgs e)
 		{
-			playerClass.ChangePoint(playerSuck, score / 2);
+			playerClass.ChangePoint(playerSuck, -score / 2);
 			btnSuckCorrect.IsEnabled = false;
 			btnSuckWrong.IsEnabled = false;
 			if (starState == StarState.NOPE) btnStar.IsEnabled = true;

@@ -157,7 +157,12 @@ namespace Client.Viewer.GamesControl
 				media15s.Position = TimeSpan.Zero; media15s.Play();
 			});
 		}
-	
+
+		private void image_SourceUpdated(object sender, DataTransferEventArgs e)
+		{
+			WTF();
+		}
+
 		public void Open(int index) {
 			// media Mở
 			Dispatcher.Invoke(() => { 
