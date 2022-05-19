@@ -22,7 +22,8 @@ namespace Client.Viewer.GamesControl.Components
 	/// </summary>
 	public partial class QNPBox : UserControl
 	{
-		List<Label> lblNames, lblPoints;
+		List<Label> lblNames, lblPoints, lblGroups;
+		List<Image> imgCurrs, imgSucks;
 		int[] playerRemain = new int[3] {1, 2, 3};
 
 		PlayerClass? playerClass;
@@ -32,6 +33,13 @@ namespace Client.Viewer.GamesControl.Components
 			InitializeComponent();
 			lblNames = new List<Label>(); lblNames.Add(lblName1); lblNames.Add(lblName2); lblNames.Add(lblName3); 
 			lblPoints = new List<Label>(); lblPoints.Add(lblPoint1); lblPoints.Add(lblPoint2); lblPoints.Add(lblPoint3);
+			lblGroups = new List<Label>(); lblGroups.Add(lblGroup1); lblGroups.Add(lblGroup2); lblGroups.Add(lblGroup3);
+			imgCurrs = new List<Image>(); imgCurrs.Add(imgCurr1); imgCurrs.Add(imgCurr2); imgCurrs.Add(imgCurr3);
+			imgSucks = new List<Image>(); imgSucks.Add(imgSuck1); imgSucks.Add(imgSuck2); imgSucks.Add(imgSuck3);
+			for (int i = 0; i < 3; i++) {
+				imgCurrs[i].Visibility = Visibility.Hidden;
+				imgSucks[i].Visibility = Visibility.Hidden;
+			}
 
 			txtblQuestion.Text = "";
 			lblLabel.Content = "";
@@ -83,6 +91,28 @@ namespace Client.Viewer.GamesControl.Components
 			Dispatcher.Invoke(() => { 
 				lblLabel.Content = str; 
 			});
+		}
+		public void SetGroup(int[] diff)
+		{
+			Dispatcher.Invoke(() => {
+				for (int i = 0; i < 3; i++)
+					lblGroups[i].Content = (diff[i] + 1) * 10;
+			});
+		}
+		public void SetSuck(int player)
+		{
+			for (int i = 0; i < 3; i++)
+				imgSucks[i].Visibility = Visibility.Hidden;
+			if (player >= 0 && player < 3)
+				for (int i = 0; i < 3; i++)
+					if (player == playerRemain[i])
+						imgSucks[i].Visibility = Visibility.Visible;
+		}
+		public void SetCurr(int player)
+		{
+			for (int i = 0; i < 3; i++)
+				imgCurrs[i].Visibility = Visibility.Hidden;
+			imgCurrs[player].Visibility = Visibility.Visible;
 		}
 	}
 }

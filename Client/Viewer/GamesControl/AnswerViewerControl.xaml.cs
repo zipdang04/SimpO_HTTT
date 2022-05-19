@@ -25,6 +25,7 @@ namespace Client.Viewer.GamesControl
 	{
 		PlayerClass? playerClass;
 		List<Label> lblNames, lblAnswers, lblTimes;
+		List<Image> imgWrongs;
 		ObservableCollection<string> names, answers, timeString;
 		ObservableCollection<int> times, positions;
 		bool willSort = false;
@@ -47,6 +48,9 @@ namespace Client.Viewer.GamesControl
 			lblAnswers.Add(lblAnswer1); lblAnswers.Add(lblAnswer2); lblAnswers.Add(lblAnswer3); lblAnswers.Add(lblAnswer4);
 			lblTimes = new List<Label>();
 			lblTimes.Add(lblTime1); lblTimes.Add(lblTime2); lblTimes.Add(lblTime3); lblTimes.Add(lblTime4);
+			imgWrongs = new List<Image>();
+			imgWrongs.Add(imgW1); imgWrongs.Add(imgW2); imgWrongs.Add(imgW3); imgWrongs.Add(imgW4);
+			
 
 			names = new ObservableCollection<string> { "", "", "", "" };
 			answers = new ObservableCollection<string> { "", "", "", "" };
@@ -68,6 +72,7 @@ namespace Client.Viewer.GamesControl
 					lblAnswers[i].Visibility = Visibility.Visible;
 					lblNames[i].Visibility = Visibility.Visible;
 					lblTimes[i].Visibility = Visibility.Visible;
+					for (int j = 0; j < 4; j++) imgWrongs[j].Visibility = Visibility.Hidden;
 				}
 			});
 		}
@@ -109,6 +114,7 @@ namespace Client.Viewer.GamesControl
 				bool haveWinner = false;
 				for (int i = 0; i < 4; i++)
 					if (correct[positions[i]] == false) {
+						imgWrongs[i].Visibility = Visibility.Visible;
 						lblAnswers[i].Visibility = Visibility.Hidden;
 						lblNames[i].Visibility = Visibility.Hidden;
 						lblTimes[i].Visibility = Visibility.Hidden;

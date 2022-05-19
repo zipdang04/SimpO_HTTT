@@ -9,7 +9,11 @@
     <Grid>
         <MediaElement x:Name="mediaPoint" Source="../../Resources/Effects/PlayerPoints.mp4" LoadedBehavior="Manual"/>
         <MediaElement Source="../../Resources/Effects/PlayerPoints.mp4"/>
-        <Label x:Name="lblPoint" Content="" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="124" Margin="217,600,0,0" VerticalAlignment="Top" Width="212" Foreground="White" FontWeight="Bold" FontSize="75"/>
-        <Label x:Name="lblName" Content="" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="126" Margin="438,662,0,0" VerticalAlignment="Top" Width="576" Foreground="White" FontWeight="Bold" FontSize="57"/>
+        <Label x:Name="lblPoint" Content="360" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="100" Margin="301,611,0,0" VerticalAlignment="Top" Width="144" Foreground="Black" FontWeight="Bold" FontSize="60"/>
+        <Label x:Name="lblName" Content="Tạch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="145" Margin="272,681,0,0" VerticalAlignment="Top" Width="733" Foreground="White" FontWeight="Bold" FontSize="57"/>
+        <Label x:Name="lblName_Copy" Content="Tạch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="49" Margin="1195,554,0,0" VerticalAlignment="Top" Width="294" Foreground="White" FontWeight="Bold" FontSize="24"/>
+        <Label x:Name="lblName_Copy1" Content="Tạch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="49" Margin="1195,488,0,0" VerticalAlignment="Top" Width="294" Foreground="White" FontWeight="Bold" FontSize="24"/>
+        <Label x:Name="lblName_Copy2" Content="Tạch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="49" Margin="1195,421,0,0" VerticalAlignment="Top" Width="294" Foreground="White" FontWeight="Bold" FontSize="24"/>
+        <Label x:Name="lblName_Copy3" Content="Tạch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="49" Margin="1195,355,0,0" VerticalAlignment="Top" Width="294" Foreground="White" FontWeight="Bold" FontSize="24"/>
     </Grid>
 </UserControl>

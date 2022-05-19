@@ -123,6 +123,12 @@
                 Đây là một câu hỏi rất là dàiiiiiii
             </TextBlock>
         </Label>
+        <Image x:Name="imgSuck1" Source="../../../Resources/Effects/Suck1.png"/>
+        <Image x:Name="imgSuck2" Source="../../../Resources/Effects/Suck2.png"/>
+        <Image x:Name="imgSuck3" Source="../../../Resources/Effects/Suck3.png"/>
+        <Image x:Name="imgCurr1" Source="../../../Resources/Effects/Current1.png"/>
+        <Image x:Name="imgCurr2" Source="../../../Resources/Effects/Current2.png"/>
+        <Image x:Name="imgCurr3" Source="../../../Resources/Effects/Current3.png"/>
         <Label x:Name="lblPoint"  HorizontalAlignment="Left" Height="228" Margin="1289,613,0,0" VerticalAlignment="Top" Width="227" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="100"></Label>
         <Label x:Name="lblName"  HorizontalAlignment="Left" Height="43" Margin="158,570,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Width="402"  Grid.Column="0" FontSize="22" FontWeight="Bold"></Label>
         <Label x:Name="lblLabel"  HorizontalAlignment="Left" Height="43" Margin="560,570,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Width="90"  Grid.Column="0" FontSize="24" Content="12/13" FontWeight="Bold"/>
@@ -132,5 +138,8 @@
         <Label x:Name="lblPoint1"  HorizontalAlignment="Left" Height="48" Margin="1478,331,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Width="56"  Grid.Column="0" FontSize="26" FontWeight="Bold" Content=""/>
         <Label x:Name="lblPoint2"  HorizontalAlignment="Left" Height="48" Margin="1478,386,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Width="56"  Grid.Column="0" FontSize="26" FontWeight="Bold" Content=""/>
         <Label x:Name="lblPoint3"  HorizontalAlignment="Left" Height="48" Margin="1478,440,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Width="56"  Grid.Column="0" FontSize="26" FontWeight="Bold" Content=""/>
+        <Label x:Name="lblGroup1"  HorizontalAlignment="Left" Height="69" Margin="1267,506,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Width="68"  Grid.Column="0" FontSize="26" FontWeight="Bold" Content=""/>
+        <Label x:Name="lblGroup2"  HorizontalAlignment="Left" Height="69" Margin="1365,506,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Width="68"  Grid.Column="0" FontSize="26" FontWeight="Bold" Content=""/>
+        <Label x:Name="lblGroup3"  HorizontalAlignment="Left" Height="69" Margin="1465,506,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Width="68"  Grid.Column="0" FontSize="26" FontWeight="Bold" Content=""/>
     </Grid>
 </UserControl>

@@ -233,6 +233,10 @@ namespace Client.Viewer
 								cntLetter[i] = Convert.ToInt32(tokens[4 + i]);
 							obstaViewerControl.ResetGame(attach, cntLetter);
 							break;
+						case "KEY":
+							int keyLength = Convert.ToInt32(tokens[3]);
+							obstaViewerControl.GetKey(keyLength);
+							break;
 						case "SHOW":
 							string question = tokens[4];
 							obstaViewerControl.ShowQuestion(Convert.ToInt32(tokens[3]), question, tokens[5]);
@@ -262,6 +266,9 @@ namespace Client.Viewer
 							int index = Convert.ToInt32(tokens[3]);
 							obstaViewerControl.CloseWord(index);
 						}
+							break;
+						case "LAST15":
+							obstaViewerControl.Last15s();
 							break;
 					}
 					break;

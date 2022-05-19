@@ -25,6 +25,7 @@ namespace Client.Viewer.GamesControl
 	{
 		List<Image> images;
 		WordControl[] wordControls = new WordControl[4];
+		int keyLength = 0;
 		int curIndex;
 		MediaPlayer mediaStartGame = new MediaPlayer(),
 					mediaOpenQuestion = new MediaPlayer(),
@@ -48,6 +49,7 @@ namespace Client.Viewer.GamesControl
 				Grid.SetColumn(wordControls[i], 1);
 				Grid.SetRow(wordControls[i], i * 2 + 1);
 			}
+			lblKey.Visibility = Visibility.Hidden;
 			mediaStartGame.Open(new Uri(HelperClass.PathString("Effects", "VCNV_StartGame.mp3")));
 			mediaStartGame.Play(); mediaStartGame.Stop();
 			mediaOpenQuestion.Open(new Uri(HelperClass.PathString("Effects", "VCNV_OpenQuestion.m4a")));
@@ -86,6 +88,7 @@ namespace Client.Viewer.GamesControl
 				
 			});
 		}
+		public void GetKey(int length) { keyLength = length; }
 		public void ResetGame(string attach, int[] cntLetter)
 		{
 			foundWinner = false;
@@ -101,6 +104,8 @@ namespace Client.Viewer.GamesControl
 
 				for (int i = 0; i < 4; i++)
 					wordControls[i].SetWord(cntLetter[i]);
+				lblKey.Content = string.Format("CNV có {0} chữ cái", keyLength);
+				lblKey.Visibility = Visibility.Visible;
 			});
 			WTF();
 			WTF();

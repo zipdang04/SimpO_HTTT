@@ -8,10 +8,10 @@
              d:DesignHeight="900" d:DesignWidth="1600">
     <Grid>
         <!--
+        -->
         <Grid.Background>
             <ImageBrush ImageSource="D:/dmcs.png"/>
         </Grid.Background>
-        -->
         <MediaElement x:Name="mediaStart" LoadedBehavior="Manual" MediaEnded="mediaStart_MediaEnded"/>
         <MediaElement x:Name="mediaRun" LoadedBehavior="Manual"/>
         <Grid>
@@ -25,15 +25,15 @@
                 <RowDefinition Height="69*"/>
                 <RowDefinition Height="782*"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Height="37" Width="10">
+            <Label Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock x:Name="txtQuestion" TextWrapping="Wrap" TextAlignment="Center"/>
             </Label>
         </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="435*"/>
-                <ColumnDefinition Width="1017*"/>
-                <ColumnDefinition Width="148*"/>
+                <ColumnDefinition Width="1018*"/>
+                <ColumnDefinition Width="147*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="32*"/>

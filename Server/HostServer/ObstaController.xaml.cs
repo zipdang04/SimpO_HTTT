@@ -96,7 +96,7 @@ namespace Server.HostServer
 
 		public void SomeoneBelling(int player)
 		{
-			if (hasBelled[player]) return;
+			if (hasBelled[player] || stopAllow) return;
 			sendMessageToEveryone(String.Format("OLPA VCNV BELLING {0}", player));
 			Dispatcher.Invoke(() =>{
 				stackPlayerList.Children.Add(new PlayerVCNVBelling(player, playerClass.names[player]));
@@ -118,6 +118,7 @@ namespace Server.HostServer
 			stopAllow = false;
 
 			sendMessageToEveryone("OLPA ANS SCENE VCNV");
+			sendMessageToEveryone(string.Format("OLPA VCNV KEY {0}", HelperClass.VCNV_CountLetter(obstaClass.keyword)));
 			string command = string.Format("OLPA VCNV START {0}", HelperClass.MakeString(obstaClass.attach));
 			for (int i = 0; i < 5; i++){
 				int cntLetter = HelperClass.VCNV_CountLetter(obstaClass.questions[i].answer);
@@ -125,7 +126,6 @@ namespace Server.HostServer
 				command = String.Format(command + " {0}", cntLetter);
 			}
 			sendMessageToEveryone(command);
-			sendMessageToEveryone(string.Format("OLPA VCNV KEY {0}", HelperClass.VCNV_CountLetter(obstaClass.keyword)));
 		}
 
 		public void PlayerAnswering(int player, string answer, int time)

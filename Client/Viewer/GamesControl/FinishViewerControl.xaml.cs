@@ -25,8 +25,6 @@ namespace Client.Viewer.GamesControl
 	public partial class FinishViewerControl : UserControl
 	{
 		PlayerClass playerClass;
-		Image[] imgPlayer = new Image[4];
-		Rectangle[] rects = new Rectangle[4];
 		MediaPlayer mediaOpening = new MediaPlayer(),
 					mediaStartTurn = new MediaPlayer(),
 					mediaStar = new MediaPlayer(),
@@ -54,9 +52,6 @@ namespace Client.Viewer.GamesControl
 			mediaBegin.Source = new Uri(HelperClass.PathString("Effects", "VD_Begin.mp4")); mediaBegin.BeginInit();
 			//testStar.BeginAnimation();
 
-			imgPlayer[0] = imgP1; imgPlayer[1] = imgP2; imgPlayer[2] = imgP3; imgPlayer[3] = imgP4;
-			rects[0] = rectBell1; rects[1] = rectBell2; rects[2] = rectBell3; rects[3] = rectBell4;
-			for (int i = 0; i < 4; i++) imgPlayer[i].Visibility = Visibility.Hidden;
 			mediaStart.Visibility = Visibility.Visible;
 			
 			this.playerClass = playerClass;
@@ -100,10 +95,8 @@ namespace Client.Viewer.GamesControl
 				mediaBegin.Visibility = Visibility.Hidden;
 				backgroundPoint.Visibility = Visibility.Hidden;
 				mediaStart.Visibility = Visibility.Hidden;
-				for (int i = 0; i < 4; i++) {
-					imgPlayer[i].Visibility = Visibility.Hidden;
-					rects[i].Visibility = Visibility.Hidden;
-				}
+				// questionBox.Visibility = Visibility.Hidden;
+				questionBox.SetSuck(-1);
 			});
 		}
 		private void MediaStartTurn_MediaEnded(object? sender, EventArgs e)
@@ -120,7 +113,7 @@ namespace Client.Viewer.GamesControl
 			Reset();
 			currentPlayer = player;
 			Dispatcher.Invoke(() => {
-				mediaStart.Source = new Uri(HelperClass.PathString("Effects", string.Format("VD_{0}_Start.mp4", currentPlayer + 1)));
+				mediaStart.Source = new Uri(HelperClass.PathString("Effects", "VD_Start.mp4"));
 				mediaStart.Play(); mediaStart.Stop();
 				mediaBegin.Position = TimeSpan.Zero;
 				mediaBegin.Stop();
@@ -129,7 +122,6 @@ namespace Client.Viewer.GamesControl
 				mediaStartTurn.Position = TimeSpan.Zero;
 				mediaStartTurn.Play();
 
-				imgPlayer[player].Visibility = Visibility.Visible;
 				questionBox.SetChosenOne(player);
 			});
 		}
@@ -151,8 +143,9 @@ namespace Client.Viewer.GamesControl
 		public void Chosen(int[] diff)
 		{
 			Dispatcher.Invoke(() => {
-				mediaStart.Visibility = Visibility.Visible;
 				for (int i = 0; i < 3; i++) difficulty[i] = diff[i];
+				mediaStart.Visibility = Visibility.Visible;
+				questionBox.SetGroup(difficulty);
 				mediaStart.Play();
 				pointChoosing.Play(difficulty);
 			});
@@ -162,10 +155,9 @@ namespace Client.Viewer.GamesControl
 		{
 			this.turn = turn;
 			Dispatcher.Invoke(() => {
-				questionBox.SetLabel((difficulty[turn] + 1).ToString() + "0 điểm");
+				questionBox.SetCurr(turn);
 				questionBox.SetQuestion("");
-				for (int i = 0; i < 4; i++)
-					rects[i].Visibility = Visibility.Hidden;
+				questionBox.SetSuck(-1);
 			});
 		}
 		bool choosingStar = false;
@@ -220,7 +212,7 @@ namespace Client.Viewer.GamesControl
 			Dispatcher.Invoke(() => {
 				mediaBell.Position = TimeSpan.Zero;
 				mediaBell.Play();
-				rects[player].Visibility = Visibility.Visible;
+				questionBox.SetSuck(player);
 			});
 		}
 

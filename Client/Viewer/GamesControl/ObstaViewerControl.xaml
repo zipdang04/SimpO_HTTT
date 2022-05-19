@@ -33,6 +33,7 @@
             </Grid>
             <MediaElement x:Name="media15s" LoadedBehavior="Manual" Visibility="Hidden"/>
             <compo:QNPBox x:Name="qBox"/>
+            <Label x:Name="lblKey" Content="CNV có 100 chữ cái" HorizontalAlignment="Left" Margin="158,569,0,0" VerticalAlignment="Top" Height="46" Width="401" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" FontSize="24" Background="#FF1F6553" Foreground="White"/>
         </Grid>
         <Grid x:Name="gridPic" Visibility="Hidden">
             <Grid.Background>

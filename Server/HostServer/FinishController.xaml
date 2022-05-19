@@ -130,6 +130,7 @@
                 <Button x:Name="btnSuckWrong" Content="Hút sai" HorizontalAlignment="Left" Margin="351,269,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Red" Click="btnSuckWrong_Click"/>
                 <Button x:Name="btnMedia" Content="Mở Clip/Ảnh" HorizontalAlignment="Left" Height="38" Margin="12,178,0,0" VerticalAlignment="Top" Width="84" Click="btnMedia_Click"/>
                 <Button x:Name="btnIntroPrac" Content="Nhạc thực hành" HorizontalAlignment="Left" Height="38" Margin="111,178,0,0" VerticalAlignment="Top" Width="93" Click="btnIntroPrac_Click"/>
+                <Button x:Name="btnEndWrong" Content="SAI" HorizontalAlignment="Left" Margin="536,269,0,0" VerticalAlignment="Top" Height="37" Width="54" Background="Red" Click="btnEndWrong_Click"/>
             </Grid>
         </StackPanel>
 
