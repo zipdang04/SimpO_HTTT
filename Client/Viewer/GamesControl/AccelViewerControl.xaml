@@ -8,10 +8,10 @@
              d:DesignHeight="900" d:DesignWidth="1600">
     <Grid>
         <!--
-        -->
         <Grid.Background>
             <ImageBrush ImageSource="D:/dmcs.png"/>
         </Grid.Background>
+        -->
         <MediaElement x:Name="mediaStart" LoadedBehavior="Manual" MediaEnded="mediaStart_MediaEnded"/>
         <MediaElement x:Name="mediaRun" LoadedBehavior="Manual"/>
         <Grid>

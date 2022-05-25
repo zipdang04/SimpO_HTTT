@@ -12,6 +12,8 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Button x:Name="btnAdd" Click="btnAdd_Click">Thêm media</Button>
-        <StackPanel Grid.Row="1" x:Name="stack" CanVerticallyScroll="True"/>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Grid.Row="1" x:Name="stack"/>
+        </ScrollViewer>
     </Grid>
 </UserControl>

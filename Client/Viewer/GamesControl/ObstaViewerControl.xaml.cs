@@ -92,7 +92,8 @@ namespace Client.Viewer.GamesControl
 		public void ResetGame(string attach, int[] cntLetter)
 		{
 			foundWinner = false;
-			Dispatcher.Invoke(() => { 
+			Dispatcher.Invoke(() => {
+				SceneReset();
 				image.Source = new BitmapImage(new Uri(HelperClass.PathString("Media", attach)));
 				
 				media15s.Visibility = Visibility.Hidden;
@@ -130,7 +131,7 @@ namespace Client.Viewer.GamesControl
 				mediaOpenQuestion.Play();
 				qBox.SetQuestion(question);
 				qBox.Visibility = Visibility.Hidden;
-				media15s.Visibility = Visibility.Hidden;
+				media15s.Visibility = Visibility.Hidden; 
 				mediaShow.Visibility = Visibility.Hidden; mediaShow.Position = TimeSpan.Zero;
 				mediaShow.Stop();
 				if (index < 4) wordControls[index].SetChoosing();
@@ -158,8 +159,8 @@ namespace Client.Viewer.GamesControl
 		{
 			Dispatcher.Invoke(() => { 
 				mediaShow.Visibility = Visibility.Hidden;
+				media15s.Play();
 				media15s.Visibility = Visibility.Visible;
-				media15s.Position = TimeSpan.Zero; media15s.Play();
 			});
 		}
 
@@ -186,9 +187,10 @@ namespace Client.Viewer.GamesControl
 
 		public void SceneReset()
 		{
-			Dispatcher.Invoke(() => {
+			Dispatcher.Invoke(() => {	
 				mediaShow.Visibility = Visibility.Hidden;
 				media15s.Visibility = Visibility.Hidden;
+				media15s.Position = TimeSpan.FromMilliseconds(2); media15s.Play();  media15s.Pause();
 				qBox.Visibility = Visibility.Hidden;
 			});
 		}

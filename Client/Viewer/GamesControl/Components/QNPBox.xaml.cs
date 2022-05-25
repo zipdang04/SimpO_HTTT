@@ -103,7 +103,7 @@ namespace Client.Viewer.GamesControl.Components
 		{
 			for (int i = 0; i < 3; i++)
 				imgSucks[i].Visibility = Visibility.Hidden;
-			if (player >= 0 && player < 3)
+			if (player >= 0 && player < 4)
 				for (int i = 0; i < 3; i++)
 					if (player == playerRemain[i])
 						imgSucks[i].Visibility = Visibility.Visible;

@@ -26,17 +26,19 @@ namespace Client.Viewer.GamesControl
 		Simer timer;
 		string[] names = new string[4];
 		int[] points = new int[4];
+		List<Label> lblNames;
 		public PointsViewerControl()
 		{
 			InitializeComponent();
 			timer = new Simer();
-			timer.SetTimeLimit(TimeSpan.FromSeconds(11));
+			timer.SetTimeLimit(TimeSpan.FromSeconds(15));
 			mediaPoint.Source = new Uri(HelperClass.PathString("Effects", "PlayerPoints.mp4"));
 			mediaPoint.BeginInit(); mediaPoint.Play(); mediaPoint.Stop();
+			lblNames = new List<Label>(); lblNames.Add(lblP1); lblNames.Add(lblP2); lblNames.Add(lblP3); lblNames.Add(lblP4);
 			timer.Tick += timer_Tick;
 		}
 
-		int[] times = new int[7] { 100, 360, 410, 700, 750, 995, 1020 };
+		int[] times = new int[7] { 167, 400, 522, 750, 875, 1150, 1225 };
 		private void timer_Tick(int time, bool done)
 		{
 			int pos = 6;
@@ -51,6 +53,7 @@ namespace Client.Viewer.GamesControl
 					pos /= 2;
 					lblName.Visibility = Visibility.Visible;
 					lblPoint.Visibility = Visibility.Visible;
+					lblNames[pos].Visibility = Visibility.Visible;
 					lblName.Content = names[pos];
 					lblPoint.Content = points[pos];
 				}
@@ -68,6 +71,10 @@ namespace Client.Viewer.GamesControl
 			Dispatcher.Invoke(() => { 
 				lblName.Visibility = Visibility.Hidden;
 				lblPoint.Visibility = Visibility.Hidden;
+				for (int i = 0; i < 4; i++) {
+					lblNames[i].Content = names[i];
+					lblNames[i].Visibility = Visibility.Hidden;
+				}
 				mediaPoint.Position = TimeSpan.Zero; mediaPoint.Play();
 				timer.Start();
 			});
