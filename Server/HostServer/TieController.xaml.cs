@@ -45,7 +45,9 @@ namespace Server.HostServer
 			this.tieClass = tieBreaker;
 			this.listener = listener;
 			this.playerClass = playerClass;
+			
 			pointsControl = new PointsControl(playerClass);
+			stack.Children.Add(pointsControl);
 
 			timer = new Simer(TimeSpan.FromSeconds(15));
 			timer.Tick += timer_Tick;
@@ -119,12 +121,12 @@ namespace Server.HostServer
 
 		public void SomeoneSucking(int player) {
 			if (timer.IsEnabled == false || curPlayer != NaN) return;
+			curPlayer = player;
 			Dispatcher.Invoke(() => { 
 				pointsControl.ChoosePlayer(player);
 				btnCorrect.IsEnabled = btnWrong.IsEnabled = true;
 			});
 			timer.Pause();
-			curPlayer = player;
 
 			sendMessageToEveryone(String.Format("OLPA CHP SUCKED {0}", player));
 		}

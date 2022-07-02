@@ -51,13 +51,17 @@ namespace Client.PlayerClient.GamesControl {
 			sucked = false;
 			if (state) Dispatcher.Invoke(() => { button.IsEnabled = true; });
 		}
-		public void Pause() {
+		public void Pause(int player) {
 			timer.Pause();
-			Dispatcher.Invoke(() => { button.IsEnabled = false; });
+			Dispatcher.Invoke(() => { 
+				txtSuck.Text = (player + 1).ToString();
+				button.IsEnabled = false; 
+			});
 		}
 		public void Resume() {
 			timer.Resume();
 			if (state && !sucked) Dispatcher.Invoke(() => { button.IsEnabled = true; });
+			txtSuck.Text = "0";
 		}
 		public void Stop() {
 			timer.Stop();

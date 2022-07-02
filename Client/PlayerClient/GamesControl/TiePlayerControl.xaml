@@ -20,8 +20,14 @@
             <Label HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="100,0,0,0">
                 <TextBlock x:Name="txtTime" FontSize="18">0</TextBlock>
             </Label>
+            <Label HorizontalAlignment="Right" VerticalContentAlignment="Center" Margin="0,0,0,0">
+                <TextBlock x:Name="txtSuck" FontSize="18">0</TextBlock>
+            </Label>
+            <Label HorizontalAlignment="Right" VerticalContentAlignment="Center" Margin="0,0,50,0">
+                <TextBlock FontSize="13">Giành quyền</TextBlock>
+            </Label>
         </Grid>
         <compo:QuestionControl x:Name="quesControl" Grid.Row="1"></compo:QuestionControl>
-        <Button x:Name="button" Grid.Row="2" Background="Red" Foreground="White" FontWeight="Bold" FontSize="16" Click="button_Click">Giành quyền trả lời</Button>
+        <Button x:Name="button" Grid.Row="2" Background="Red" Foreground="White" FontWeight="Bold" FontSize="16" Click="button_Click" IsEnabled="False">Giành quyền trả lời</Button>
     </Grid>
 </UserControl>

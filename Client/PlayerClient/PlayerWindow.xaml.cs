@@ -20,6 +20,7 @@ using Client.PlayerClient.GamesControl.Components;
 using Server.QuestionClass;
 using System.IO;
 using System.IO.Compression;
+using Client.Viewer.GamesControl;
 
 namespace Client.PlayerClient
 {
@@ -247,7 +248,9 @@ namespace Client.PlayerClient
 							tiePlayerControl.Start();
 							break;
 						case "SUCKED":
-							tiePlayerControl.Pause();
+							int pl = Convert.ToInt32(tokens[3]);
+							tiePlayerControl.Pause(pl);
+							//tieViewerControl.SomeoneSucking(player);
 							break;
 						case "RESUME":
 							tiePlayerControl.Resume();

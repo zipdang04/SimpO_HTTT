@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <StackPanel>
+        <StackPanel x:Name="stack">
             <Grid Height="50">
                 <Button x:Name="btnCHP" Content="CÂU HỎI PHỤ" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="25" Width="95" Background="#FFFF00FD" FontWeight="Bold" Foreground="White" Click="btnCHP_Click"/>
             </Grid>

@@ -58,7 +58,7 @@ namespace Client.Viewer.GamesControl.Components
 				chosenName[i].Visibility = Visibility.Hidden;
 				chosenPoint[i].Visibility = Visibility.Hidden;
 			}
-			txtblQuestion.Text = "";
+			txtblQuestion.Visibility = Visibility.Hidden;
 			lblPoint.Visibility = Visibility.Hidden;
 			label.Visibility = Visibility.Hidden;
 		}
@@ -71,7 +71,7 @@ namespace Client.Viewer.GamesControl.Components
 				chosenName[i].Visibility = Visibility.Hidden;
 				chosenPoint[i].Visibility = Visibility.Hidden;
 			}
-			txtblQuestion.Text = "";
+			txtblQuestion.Visibility = Visibility.Visible;
 			lblPoint.Visibility = Visibility.Visible;
 			label.Visibility = Visibility.Visible;
 		}
