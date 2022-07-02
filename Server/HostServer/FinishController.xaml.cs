@@ -264,6 +264,12 @@ namespace Server.HostServer
 		private void btnSceneMedia_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD SCENE MEDIA"); }
 		private void btnIntro_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD INTRO"); }
 		private void btnOpening_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD OPENING"); }
+
+		private void btnEndWrong_Click(object sender, RoutedEventArgs e)
+		{
+			sendMessageToEveryone("OLPA VD WRONG");
+		}
+
 		private void btnIntroPrac_Click(object sender, RoutedEventArgs e) { sendMessageToEveryone("OLPA VD INTROPRAC"); }
 
 		private void btnWrong_Click(object sender, RoutedEventArgs e)
@@ -313,7 +319,7 @@ namespace Server.HostServer
 
 		private void btnSuckWrong_Click(object sender, RoutedEventArgs e)
 		{
-			playerClass.ChangePoint(playerSuck, score / 2);
+			playerClass.ChangePoint(playerSuck, -score / 2);
 			btnSuckCorrect.IsEnabled = false;
 			btnSuckWrong.IsEnabled = false;
 			if (starState == StarState.NOPE) btnStar.IsEnabled = true;

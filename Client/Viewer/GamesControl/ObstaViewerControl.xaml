@@ -13,7 +13,6 @@
                 <ImageBrush ImageSource="../../Resources/Effects/VCNV_Background.png"/>
             </Grid.Background>
             <MediaElement x:Name="mediaShow" LoadedBehavior="Manual" Visibility="Hidden" MediaEnded="mediaShow_MediaEnded"/>
-            <MediaElement x:Name="media15s" LoadedBehavior="Manual" Visibility="Hidden"/>
             <Grid x:Name="grid4W">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="130*"/>
@@ -32,14 +31,16 @@
                     <RowDefinition Height="475*"/>
                 </Grid.RowDefinitions>
             </Grid>
+            <MediaElement x:Name="media15s" LoadedBehavior="Manual" Visibility="Hidden"/>
             <compo:QNPBox x:Name="qBox"/>
+            <Label x:Name="lblKey" Content="CNV có 100 chữ cái" HorizontalAlignment="Left" Margin="158,569,0,0" VerticalAlignment="Top" Height="46" Width="401" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" FontSize="24" Background="#FF1F6553" Foreground="White"/>
         </Grid>
         <Grid x:Name="gridPic" Visibility="Hidden">
             <Grid.Background>
                 <SolidColorBrush Color="#FFF5EAD7"/>
             </Grid.Background>
             <Grid Margin="100, 100, 100, 100">
-                <Image x:Name="image"/>
+                <Image x:Name="image" SourceUpdated="image_SourceUpdated"/>
                 <Image x:Name="rectUL" Source="../../Resources/Effects/VCNV_Piece_1.png" Stretch="Fill"/>
                 <Image x:Name="rectUR" Source="../../Resources/Effects/VCNV_Piece_2.png" Stretch="Fill"/>
                 <Image x:Name="rectDL" Source="../../Resources/Effects/VCNV_Piece_3.png" Stretch="Fill"/>

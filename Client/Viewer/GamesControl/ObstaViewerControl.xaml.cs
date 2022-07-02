@@ -25,6 +25,7 @@ namespace Client.Viewer.GamesControl
 	{
 		List<Image> images;
 		WordControl[] wordControls = new WordControl[4];
+		int keyLength = 0;
 		int curIndex;
 		MediaPlayer mediaStartGame = new MediaPlayer(),
 					mediaOpenQuestion = new MediaPlayer(),
@@ -48,6 +49,7 @@ namespace Client.Viewer.GamesControl
 				Grid.SetColumn(wordControls[i], 1);
 				Grid.SetRow(wordControls[i], i * 2 + 1);
 			}
+			lblKey.Visibility = Visibility.Hidden;
 			mediaStartGame.Open(new Uri(HelperClass.PathString("Effects", "VCNV_StartGame.mp3")));
 			mediaStartGame.Play(); mediaStartGame.Stop();
 			mediaOpenQuestion.Open(new Uri(HelperClass.PathString("Effects", "VCNV_OpenQuestion.m4a")));
@@ -86,10 +88,12 @@ namespace Client.Viewer.GamesControl
 				
 			});
 		}
+		public void GetKey(int length) { keyLength = length; }
 		public void ResetGame(string attach, int[] cntLetter)
 		{
 			foundWinner = false;
-			Dispatcher.Invoke(() => { 
+			Dispatcher.Invoke(() => {
+				SceneReset();
 				image.Source = new BitmapImage(new Uri(HelperClass.PathString("Media", attach)));
 				
 				media15s.Visibility = Visibility.Hidden;
@@ -101,6 +105,8 @@ namespace Client.Viewer.GamesControl
 
 				for (int i = 0; i < 4; i++)
 					wordControls[i].SetWord(cntLetter[i]);
+				lblKey.Content = string.Format("CNV có {0} chữ cái", keyLength);
+				lblKey.Visibility = Visibility.Visible;
 			});
 			WTF();
 			WTF();
@@ -125,7 +131,7 @@ namespace Client.Viewer.GamesControl
 				mediaOpenQuestion.Play();
 				qBox.SetQuestion(question);
 				qBox.Visibility = Visibility.Hidden;
-				media15s.Visibility = Visibility.Hidden;
+				media15s.Visibility = Visibility.Hidden; 
 				mediaShow.Visibility = Visibility.Hidden; mediaShow.Position = TimeSpan.Zero;
 				mediaShow.Stop();
 				if (index < 4) wordControls[index].SetChoosing();
@@ -153,11 +159,16 @@ namespace Client.Viewer.GamesControl
 		{
 			Dispatcher.Invoke(() => { 
 				mediaShow.Visibility = Visibility.Hidden;
+				media15s.Play();
 				media15s.Visibility = Visibility.Visible;
-				media15s.Position = TimeSpan.Zero; media15s.Play();
 			});
 		}
-	
+
+		private void image_SourceUpdated(object sender, DataTransferEventArgs e)
+		{
+			WTF();
+		}
+
 		public void Open(int index) {
 			// media Mở
 			Dispatcher.Invoke(() => { 
@@ -176,9 +187,10 @@ namespace Client.Viewer.GamesControl
 
 		public void SceneReset()
 		{
-			Dispatcher.Invoke(() => {
+			Dispatcher.Invoke(() => {	
 				mediaShow.Visibility = Visibility.Hidden;
 				media15s.Visibility = Visibility.Hidden;
+				media15s.Position = TimeSpan.FromMilliseconds(2); media15s.Play();  media15s.Pause();
 				qBox.Visibility = Visibility.Hidden;
 			});
 		}

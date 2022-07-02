@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:Server.HostServer"
              xmlns:Components="clr-namespace:Server.HostServer.Components" x:Class="Server.HostServer.StartController"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800" KeyDown="UserControl_KeyDown">
-    <Grid x:Name="haha" KeyDown="Grid_KeyDown">
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Grid x:Name="haha">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="2*"/>
@@ -26,7 +26,7 @@
 
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid x:Name="gridMain" Grid.Row="1" KeyDown="gridMain_KeyDown" KeyUp="gridMain_KeyUp" Focusable="True">
             <Components:QuestionShowing x:Name="questionBox" Margin="0,0,0,70" />
             <Button x:Name="btnBlank" Content="Âm thanh chỗ trống" HorizontalAlignment="Left" Margin="10,0,0,55" VerticalAlignment="Bottom" Click="btnBlank_Click"/>
             <Button x:Name="btnCorrect" Content="Đúng" HorizontalAlignment="Left" Margin="10,0,0,7" VerticalAlignment="Bottom" Width="50" Background="Lime" Click="btnCorrect_Click" Height="36"/>

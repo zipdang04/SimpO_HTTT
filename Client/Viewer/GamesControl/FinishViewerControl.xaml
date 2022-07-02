@@ -10,10 +10,10 @@
              d:DesignHeight="900" d:DesignWidth="1600">
     <Grid>
         <!--
-        -->
         <Grid.Background>
             <ImageBrush ImageSource="../../Resources/Effects/Background.png"/>
         </Grid.Background>
+        -->
         <Grid x:Name="gridPoint">
             <Image x:Name="backgroundPoint" Source="../../Resources/Effects/VD_Choosing.png"/>  
             <MediaElement x:Name="mediaBegin" LoadedBehavior="Manual" MediaEnded="mediaBegin_MediaEnded"/>
@@ -31,15 +31,7 @@
             <MediaElement x:Name="media10s" LoadedBehavior="Manual" Grid.RowSpan="2" MediaEnded="media10s_MediaEnded"/>
             <MediaElement x:Name="media15s" LoadedBehavior="Manual" Grid.RowSpan="2" MediaEnded="media15s_MediaEnded"/>
             <MediaElement x:Name="media20s" LoadedBehavior="Manual" Grid.RowSpan="2" MediaEnded="media20s_MediaEnded"/>
-            <Image x:Name="imgP1" Source="../../Resources/Effects/P1.png" Visibility="Hidden" Grid.RowSpan="2"/>
-            <Image x:Name="imgP2" Source="../../Resources/Effects/P2.png" Visibility="Hidden" Grid.RowSpan="2"/>
-            <Image x:Name="imgP3" Source="../../Resources/Effects/P3.png" Visibility="Hidden" Grid.RowSpan="2"/>
-            <Image x:Name="imgP4" Source="../../Resources/Effects/P4.png" Visibility="Hidden" Grid.RowSpan="2"/>
-            <compo:QNPBoxV2 x:Name="questionBox" Grid.RowSpan="2"/>
-            <Rectangle x:Name="rectBell1" HorizontalAlignment="Left" Height="40" Margin="141,553,0,0" VerticalAlignment="Top" Width="261" Fill="#59FF0000"/>
-            <Rectangle x:Name="rectBell2" HorizontalAlignment="Left" Height="40" Margin="403,553,0,0" VerticalAlignment="Top" Width="261" Fill="#59FF0000"/>
-            <Rectangle x:Name="rectBell3" HorizontalAlignment="Left" Height="40" Margin="665,553,0,0" VerticalAlignment="Top" Width="261" Fill="#59FF0000"/>
-            <Rectangle x:Name="rectBell4" HorizontalAlignment="Left" Height="40" Margin="927,553,0,0" VerticalAlignment="Top" Width="261" Fill="#59FF0000"/>
+            <compo:QNPBox x:Name="questionBox" Grid.RowSpan="2"/>
             <Image x:Name="mediaStarAnimate" gif:ImageBehavior.AnimatedSource="../../Resources/Effects/VD_Star.gif" Margin="40,450,1330,154" Grid.RowSpan="2"/>
         </Grid>
         <Grid x:Name="gridPrac" Visibility="Hidden" Background="#FFF5EAD7">

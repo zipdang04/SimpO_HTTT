@@ -33,12 +33,11 @@ namespace Client.Viewer
 
             client.ConnectedToServer += ConnectedToServer;
         }
-
 		private void ConnectedToServer(SimpleSocket a)
 		{
 			client.ConnectedToServer -= ConnectedToServer;
-			MessageBox.Show("Đã kết nối", "đã nối", MessageBoxButton.OK);
 			Dispatcher.Invoke(() => {
+				MessageBox.Show("Đã kết nối", "đã nối", MessageBoxButton.OK);
 				viewerWindow = new ViewerWindow(this, client);
 				viewerWindow.Show(); Hide();
 			});

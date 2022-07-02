@@ -46,25 +46,33 @@ namespace Client.Viewer
             this.client.MessageReceived += ServerMessageReceived;
             this.client.BytesReceived += ServerBytesReceived;
 
-			playersInfo = new PlayerClass();
+			try
+			{
 
-			plainControl = new PlainControl();
-            startViewerControl = new StartViewerControl(playersInfo);
-			obstaViewerControl = new ObstaViewerControl();
-			answerViewerControl = new AnswerViewerControl(playersInfo);
-			accelViewerControl = new AccelViewerControl();
-			pointsViewerControl = new PointsViewerControl();
-			finishViewerControl = new FinishViewerControl(playersInfo);
-			tieViewerControl = new TieViewerControl(playersInfo);
-			grid.Children.Add(plainControl);
-			grid.Children.Add(startViewerControl);
-			grid.Children.Add(obstaViewerControl);
-			grid.Children.Add(answerViewerControl);
-			grid.Children.Add(accelViewerControl);
-			grid.Children.Add(pointsViewerControl);
-			grid.Children.Add(finishViewerControl);
-			grid.Children.Add(tieViewerControl);
-			ChangeScene("PLAIN");
+				playersInfo = new PlayerClass();
+
+				plainControl = new PlainControl();
+				startViewerControl = new StartViewerControl(playersInfo);
+				obstaViewerControl = new ObstaViewerControl();
+				answerViewerControl = new AnswerViewerControl(playersInfo);
+				accelViewerControl = new AccelViewerControl();
+				pointsViewerControl = new PointsViewerControl();
+				finishViewerControl = new FinishViewerControl(playersInfo);
+				tieViewerControl = new TieViewerControl(playersInfo);
+				grid.Children.Add(plainControl);
+				grid.Children.Add(startViewerControl);
+				grid.Children.Add(obstaViewerControl);
+				grid.Children.Add(answerViewerControl);
+				grid.Children.Add(accelViewerControl);
+				grid.Children.Add(pointsViewerControl);
+				grid.Children.Add(finishViewerControl);
+				grid.Children.Add(tieViewerControl);
+				ChangeScene("PLAIN");
+			} catch(Exception e)
+			{
+				MessageBox.Show(e.ToString());
+			}
+
 		}
 
 		void ChangeScene(string s)
@@ -225,6 +233,10 @@ namespace Client.Viewer
 								cntLetter[i] = Convert.ToInt32(tokens[4 + i]);
 							obstaViewerControl.ResetGame(attach, cntLetter);
 							break;
+						case "KEY":
+							int keyLength = Convert.ToInt32(tokens[3]);
+							obstaViewerControl.GetKey(keyLength);
+							break;
 						case "SHOW":
 							string question = tokens[4];
 							obstaViewerControl.ShowQuestion(Convert.ToInt32(tokens[3]), question, tokens[5]);
@@ -254,6 +266,9 @@ namespace Client.Viewer
 							int index = Convert.ToInt32(tokens[3]);
 							obstaViewerControl.CloseWord(index);
 						}
+							break;
+						case "LAST15":
+							obstaViewerControl.Last15s();
 							break;
 					}
 					break;
@@ -328,8 +343,6 @@ namespace Client.Viewer
 							break;
 						case "CORRECT":
 							finishViewerControl.ResultMusic(true);
-							break;
-						case "LAST15":
 							break;
 						case "WRONG":
 							finishViewerControl.ResultMusic(false);
