@@ -18,6 +18,7 @@ using Server.QuestionClass;
 using SimpleSockets.Messaging.Metadata;
 using Server.Information;
 using Server.HostServer.Components;
+using System.Numerics;
 
 namespace Server.HostServer
 {
@@ -35,6 +36,7 @@ namespace Server.HostServer
 
 		CheckBox[] chkBoxes = new CheckBox[4];
 		bool[] participating = new bool[4];
+		bool[] curState = new bool[4];
 
 		const int NaN = -1;
 		int curPlayer = NaN;
@@ -116,19 +118,21 @@ namespace Server.HostServer
 		private void btnStart_Click(object sender, RoutedEventArgs e) {
 			btnStart.IsEnabled = false;
 			sendMessageToEveryone("OLPA CHP START");
+			for (int i = 0; i < 4; i++) curState[i] = participating[i];
 			timer.Start(); 
 		}
 
 		public void SomeoneSucking(int player) {
-			if (timer.IsEnabled == false || curPlayer != NaN) return;
-			curPlayer = player;
-			Dispatcher.Invoke(() => { 
-				pointsControl.ChoosePlayer(player);
-				btnCorrect.IsEnabled = btnWrong.IsEnabled = true;
-			});
-			timer.Pause();
-
-			sendMessageToEveryone(String.Format("OLPA CHP SUCKED {0}", player));
+			if (timer.IsEnabled == true && curPlayer == NaN) {
+				curPlayer = player;
+				Dispatcher.Invoke(() => { 
+					pointsControl.ChoosePlayer(player);
+					btnCorrect.IsEnabled = btnWrong.IsEnabled = true;
+				});
+				timer.Pause();
+				curState[player] = false;
+				sendMessageToEveryone(String.Format("OLPA CHP SUCKED {0}", player));
+			}
 		}
 
 		private void btnCorrect_Click(object sender, RoutedEventArgs e) {
@@ -139,8 +143,18 @@ namespace Server.HostServer
 
 		private void btnWrong_Click(object sender, RoutedEventArgs e) {
 			timer.Resume();
-			btnCorrect.IsEnabled = btnWrong.IsEnabled = false;
-			sendMessageToEveryone("OLPA CHP RESUME");
+			int old = curPlayer;
+			curPlayer = NaN;
+			Dispatcher.Invoke(() => {
+				pointsControl.DisablePlayer(old);
+				btnCorrect.IsEnabled = btnWrong.IsEnabled = false;
+			});
+			string command = "OLPA CHP RESUME";
+			for (int i = 0; i < 4; i++) {
+				int num = curState[i] ? 1 : 0;
+				command += " " + num.ToString();
+			}
+			sendMessageToEveryone(command);
 		}
 
 		private void btnCHP_Click(object sender, RoutedEventArgs e) {

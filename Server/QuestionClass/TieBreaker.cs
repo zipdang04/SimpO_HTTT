@@ -8,7 +8,7 @@ namespace Server.QuestionClass
 {
 	public class TieBreaker
 	{
-		public const int QUES_CNT = 13;
+		public const int QUES_CNT = 310;
 		public OQuestion[] questions { get; set; }
 		public TieBreaker()
 		{

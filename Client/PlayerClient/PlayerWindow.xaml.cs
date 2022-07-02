@@ -253,7 +253,8 @@ namespace Client.PlayerClient
 							//tieViewerControl.SomeoneSucking(player);
 							break;
 						case "RESUME":
-							tiePlayerControl.Resume();
+							bool allow = Convert.ToInt32(tokens[3 + player]) == 1;
+							tiePlayerControl.Resume(allow);
 							break;
 						case "CORRECT":
 						case "DONE":

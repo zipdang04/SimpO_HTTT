@@ -58,10 +58,12 @@ namespace Client.PlayerClient.GamesControl {
 				button.IsEnabled = false; 
 			});
 		}
-		public void Resume() {
+		public void Resume(bool allow) {
 			timer.Resume();
-			if (state && !sucked) Dispatcher.Invoke(() => { button.IsEnabled = true; });
-			txtSuck.Text = "0";
+			Dispatcher.Invoke(() => { 
+				txtSuck.Text = "0"; 
+				if (allow) button.IsEnabled = true;
+			});
 		}
 		public void Stop() {
 			timer.Stop();
